@@ -1,0 +1,67 @@
+---
+
+interface Props {
+    title: string;
+    subtitle?: string;
+    color?: string;
+    videoUrl?: ImageMetadata | string;
+}
+
+const { title, subtitle, color = "rgba(20, 11, 58, 1)", videoUrl = "../assets/shake-head-shaking-head.gif"} = Astro.props as Props;
+
+import Cow from "../assets/shake-head-shaking-head.gif"
+---
+
+
+<div class="hero-container">
+     
+    <div class="hero-content">
+        <h1>{title}</h1>
+        <hr />
+        <p>{subtitle}</p>
+        <span style="position: absolute; top:95vh; transform: rotateZ(180deg);">^</span>
+        
+    </div>
+</div>
+
+<style lang="less" define:vars={{color}}>
+    .hero-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background-color: var(--color);
+        display: grid;
+        grid-template-columns: 100vw;
+    }
+
+    .hero-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: 999;
+        pointer-events: none;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+    }
+
+    .hero-content hr {
+        width: 90%;
+    }
+
+    .hero-content h1 {
+        color: white;
+        font-size: 3rem;
+    }
+</style>

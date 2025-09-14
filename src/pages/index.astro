@@ -1,11 +1,17 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Image from 'astro/components/Image.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// images & videos
+import Darker_shoes from '../assets/Darker-Shoes.png';
+import Cow from "../assets/shake-head-shaking-head.gif";
+// NOTE: Vibe Code ts until we get the original webstie back 
 ---
 
-<Layout>
-	<Welcome />
+<Layout title='Home' subtitle="Honor | Courage | Commitment">
+    
+<Image src={Darker_shoes} width={400} height={300} alt="Darker Shoes - Alexander" />
+<blockquote>Darker Shoes  <pre>—Alexander, Fri 8:35 PM, Instragram "NS III" Group Chat</pre></blockquote>
+
 </Layout>
