@@ -14,7 +14,7 @@ import Cow from "../assets/shake-head-shaking-head.gif"
 
 
 <div class="hero-container">
-     
+    <img id="hero-video" src={Cow.src}>
     <div class="hero-content">
         <h1>{title}</h1>
         <hr />
@@ -25,6 +25,12 @@ import Cow from "../assets/shake-head-shaking-head.gif"
 </div>
 
 <style lang="less" define:vars={{color}}>
+    #hero-video{
+        position: absolute;
+        opacity: 0.2;
+        width: 100vmax;
+        height: 100vmax;
+    }
     .hero-container {
         position: relative;
         width: 100vw;
