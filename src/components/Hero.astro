@@ -7,71 +7,210 @@ interface Props {
     videoUrl?: ImageMetadata | string;
 }
 
-const { title, subtitle, color = "rgba(20, 11, 58, 1)", videoUrl = "../assets/shake-head-shaking-head.gif"} = Astro.props as Props;
-
-import Cow from "../assets/shake-head-shaking-head.gif"
 ---
 
+<section class="hero">
+    <div class="parallax-bg"></div>
 
-<div class="hero-container">
-    <img id="hero-video" src={Cow.src}>
     <div class="hero-content">
-        <h1>{title}</h1>
-        <hr />
-        <p>{subtitle}</p>
-        <span style="position: absolute; top:95vh; transform: rotateZ(180deg);">^</span>
-        
+
+        <h1 class="hero-title">
+            <span class="title-line1">Parlier Unified</span>
+            <span class="title-line2">NJROTC</span>
+            <div class="underline-container">
+                <svg
+                    class="underline-svg"
+                    viewBox="0 0 600 100"
+                    preserveAspectRatio="xMidYMid meet"
+                >
+                    <path
+                        class="underline-path"
+                        d="M 0,40 c 29.17,-0.96 136.15,-7.06 194.5,-6.42 c 58.35,0.64 188.67,10.7 194.5,10.7 c 5.83,0 -103.09,-12.3 -155.6,-10.7 c -52.51,1.6 -188.66,18.83 -194.5,21.4 c -5.83,2.57 114.76,-4.28 155.6,-4.28 c 40.85,0 116.7,2.03 116.7,4.28 c 0,2.25 -87.53,9.09 -116.7,10.7 c -29.17,1.61 -66.13,0 -77.8,0"
+                        vector-effect="non-scaling-stroke"></path>
+                </svg>
+            </div>
+        </h1>
     </div>
-</div>
 
-<style lang="less" define:vars={{color}}>
-    #hero-video{
-        position: absolute;
-        opacity: 0.1;
-        width: 100vmax;
-        height: 100vmax;
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-    .hero-container {
-        position: relative;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        background-color: var(--color);
-        display: grid;
-        grid-template-columns: 100vw;
-    }
+        body {
+            font-family: "Roboto Condensed", sans-serif;
+            overflow-x: hidden;
+            color: #fafaf5;
+            background: #000;
+        }
 
-    .hero-video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
-        z-index: 999;
-        pointer-events: none;
-    }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
 
-    .hero-content {
-        position: relative;
-        z-index: 1;
-        width: 100vw;
-        height: 100vh;
-        display: grid;
-        align-content: center;
-        justify-items: center;
-    }
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("Photo/Front.jpg");
 
-    .hero-content hr {
-        width: 90%;
-    }
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -2;
+            opacity: 0.7;
+        }
 
-    .hero-content h1 {
-        color: white;
-        font-size: 3rem;
-    }
-</style>
+        .parallax-bg::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(2, 60, 113, 0.7),
+                rgba(0, 0, 0, 0.9)
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-family: "Montserrat", sans-serif;
+            font-size: 5.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            padding: 0 1rem;
+        }
+
+        .title-line1 {
+            color: #e6b220;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .title-line2 {
+            color: #fafaf5;
+            display: block;
+            letter-spacing: 2px;
+        }
+
+        .underline-container {
+            position: absolute;
+            bottom: 65px;
+            left: 0;
+            width: 153%;
+            height: 85px;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .underline-svg {
+            position: absolute;
+            left: -10%;
+            width: 100%;
+            animation: slideIn 200ms forwards;
+        }
+
+        .underline-path {
+            fill: none;
+            stroke: #e6b220;
+            stroke-width: 6;
+            stroke-dasharray: 1200;
+            stroke-dashoffset: 1100;
+            animation: draw 3.5s ease-in-out forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                left: 0;
+            }
+        }
+
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: #fafaf5;
+            margin-top: 3.5rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 4.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .underline-container {
+                bottom: -15px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+
+    <script lang="js">
+        document.addEventListener("scroll", function () {
+            const scrollPosition = window.scrollY;
+            const parallaxBg = document.querySelector(".parallax-bg");
+            parallaxBg.style.transform = `translateY(${scrollPosition * 0.4}px) scale(1.1)`;
+        });
+
+        setTimeout(function () {
+            document.querySelector(".hero-title").style.textShadow =
+                "2px 2px 4px rgba(0, 0, 0, 0.7), 0 0 15px rgba(230, 178, 32, 0.4)";
+            document.querySelector(".hero-subtitle").style.textShadow =
+                "1px 1px 2px rgba(0, 0, 0, 0.8), 0 0 10px rgba(230, 178, 32, 0.3)";
+        }, 5000);
+    </script>
+</section>
