@@ -1,0 +1,16 @@
+---
+import DepartmentLayout from "../../layouts/DepartmentLayout.astro";
+
+import { getCollection } from 'astro:content';
+const departments = await getCollection('departments');
+    
+---
+
+<DepartmentLayout>
+    <h1>departments</h1>
+    <ul>
+    {departments.map(department => (
+        <li><a href={`/departments/${department.id}`}>{department.id}</a></li>
+    ))}
+    </ul>
+</DepartmentLayout>

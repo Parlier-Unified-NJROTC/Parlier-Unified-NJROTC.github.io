@@ -1,25 +1,16 @@
 // copying items from the astro docs
 
-import { defineCollection, reference, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+// "Monopoly Money" is a good song.
+// 1. Import utilities from `astro:content`
+import { defineCollection, z } from 'astro:content';
 
-const blog = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: "./src/data/blog" }),
-  schema: z.object({
-    title: z.string(),
-    // Reference a single author from the `authors` collection by `id`
-    author: reference('authors'),
-    // Reference an array of related posts from the `blog` collection by `slug`
-    relatedPosts: z.array(reference('blog')),
-  })
+// 2. Import loader(s)
+import { glob, file } from 'astro/loaders';
+
+// 3. Define your collection(s)
+const departments = defineCollection({ 
+  loader: glob({ pattern: "**/*.md", base: "./src/data/departments" }),
 });
 
-const authors = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.json', base: "./src/data/authors" }),
-  schema: z.object({
-    name: z.string(),
-    portfolio: z.string().url(),
-  })
-});
-
-export const collections = { blog, authors };
+// 4. Export a single `collections` object to register your collection(s)
+export const collections = { departments };
