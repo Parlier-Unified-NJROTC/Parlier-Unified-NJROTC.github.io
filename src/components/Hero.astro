@@ -6,7 +6,7 @@ interface Props {
     color?: string;
     videoUrl?: ImageMetadata | string;
 }
-
+const { title, subtitle } = Astro.props;
 ---
 
 <section class="hero">
@@ -15,20 +15,12 @@ interface Props {
     <div class="hero-content">
 
         <h1 class="hero-title">
-            <span class="title-line1">Parlier Unified</span>
-            <span class="title-line2">NJROTC</span>
-            <div class="underline-container">
-                <svg
-                    class="underline-svg"
-                    viewBox="0 0 600 100"
-                    preserveAspectRatio="xMidYMid meet"
-                >
-                    <path
-                        class="underline-path"
-                        d="M 0,40 c 29.17,-0.96 136.15,-7.06 194.5,-6.42 c 58.35,0.64 188.67,10.7 194.5,10.7 c 5.83,0 -103.09,-12.3 -155.6,-10.7 c -52.51,1.6 -188.66,18.83 -194.5,21.4 c -5.83,2.57 114.76,-4.28 155.6,-4.28 c 40.85,0 116.7,2.03 116.7,4.28 c 0,2.25 -87.53,9.09 -116.7,10.7 c -29.17,1.61 -66.13,0 -77.8,0"
-                        vector-effect="non-scaling-stroke"></path>
-                </svg>
+            <span class="title-line1">{title}</span>
+            <!-- NOTE: DO NOT TOUCH, AT ALL. We are still figuring out how it works. Goodman, is this clanker generated? -->
+            <div style="">
+                <div class="underline-container"><svg class="underline-svg" viewBox="0 0 600 100" preserveAspectRatio="xMidYMid meet"><path class="underline-path" d="M 0,40 c 29.17,-0.96 136.15,-7.06 194.5,-6.42 c 58.35,0.64 188.67,10.7 194.5,10.7 c 5.83,0 -103.09,-12.3 -155.6,-10.7 c -52.51,1.6 -188.66,18.83 -194.5,21.4 c -5.83,2.57 114.76,-4.28 155.6,-4.28 c 40.85,0 116.7,2.03 116.7,4.28 c 0,2.25 -87.53,9.09 -116.7,10.7 c -29.17,1.61 -66.13,0 -77.8,0" vector-effect="non-scaling-stroke"></path></svg></div>                
             </div>
+            { subtitle ? <span class="title-line2" style="margin-top: 20px;">{subtitle}</span> : ''}
         </h1>
     </div>
 
@@ -116,10 +108,13 @@ interface Props {
             color: #fafaf5;
             display: block;
             letter-spacing: 2px;
+
+            position: relative;
+            bottom: 35px;
         }
 
         .underline-container {
-            position: absolute;
+            position: relative;
             bottom: 65px;
             left: 0;
             width: 153%;
@@ -130,7 +125,7 @@ interface Props {
 
         .underline-svg {
             position: absolute;
-            left: -10%;
+            
             width: 100%;
             animation: slideIn 650ms forwards;
         }
@@ -171,6 +166,10 @@ interface Props {
             .hero-title {
                 font-size: 4.5rem;
             }
+            .title-line2{
+                position: relative;
+                bottom: 75px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -186,6 +185,10 @@ interface Props {
                 bottom: -15px;
                 height: 60px;
             }
+            .title-line2{
+                position: relative;
+                bottom: 0px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -195,6 +198,10 @@ interface Props {
 
             .hero-subtitle {
                 font-size: 1.3rem;
+            }
+            .title-line2{
+                position: relative;
+                bottom: 0px;
             }
         }
     </style>

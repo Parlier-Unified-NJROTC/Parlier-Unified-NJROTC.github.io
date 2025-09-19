@@ -7,10 +7,11 @@ import Header from "../components/Header.astro";
 
 interface Props {
 	title:string;
+	heroTitle?:string;
 	subtitle?:string;
 	heroVideo?:ImageMetadata | string;
 }
-const { title, subtitle, heroVideo } = Astro.props;
+const { title, heroTitle, subtitle, heroVideo } = Astro.props;
 ---
 
 <!doctype html>
@@ -26,7 +27,7 @@ const { title, subtitle, heroVideo } = Astro.props;
 	</head>
 	<body>
 		<Header />
-		<Hero title="PHS NJROTC" subtitle={ subtitle || title } videoUrl={ heroVideo }/>
+		<Hero title={heroTitle || title} subtitle={ subtitle } videoUrl={ heroVideo }/>
 		<main>
 			<slot />
 		</main>
