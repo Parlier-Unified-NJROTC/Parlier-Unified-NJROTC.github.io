@@ -16,11 +16,10 @@ const { title, subtitle } = Astro.props;
 
         <h1 class="hero-title">
             <span class="title-line1">{title}</span>
-            <!-- NOTE: DO NOT TOUCH, AT ALL. We are still figuring out how it works. Goodman, is this clanker generated? -->
             <div style="">
-                <div class="underline-container"><svg class="underline-svg" viewBox="0 0 600 100" preserveAspectRatio="xMidYMid meet"><path class="underline-path" d="M 0,40 c 29.17,-0.96 136.15,-7.06 194.5,-6.42 c 58.35,0.64 188.67,10.7 194.5,10.7 c 5.83,0 -103.09,-12.3 -155.6,-10.7 c -52.51,1.6 -188.66,18.83 -194.5,21.4 c -5.83,2.57 114.76,-4.28 155.6,-4.28 c 40.85,0 116.7,2.03 116.7,4.28 c 0,2.25 -87.53,9.09 -116.7,10.7 c -29.17,1.61 -66.13,0 -77.8,0" vector-effect="non-scaling-stroke"></path></svg></div>                
+                <div class="underline-container"><svg class="underline-svg" viewBox="0 0 600 100" preserveAspectRatio="xMidYMid meet"><path class="underline-path" d="m 0,40 c 29.17,-0.96 136.15,-7.06 194.5,-6.42 58.35,0.64 188.67,10.7 194.5,10.7 5.83,0 -103.09,-12.3 -155.6,-10.7 -52.51,1.6 -188.66,20.519189 -194.5,21.4"vector-effect="non-scaling-stroke"data-astro-cid-bbe6dxrz=""id="path1"style="fill: none; stroke: #e6b220; stroke-width: 6; stroke-dasharray: 1200; stroke-dashoffset: 1150;stroke-linecap:round;stroke-linejoin:round"/></svg></div>                
             </div>
-            { subtitle ? <span class="title-line2" style="margin-top: 20px;">{subtitle}</span> : ''}
+            { subtitle ? <span class="title-line2" >{subtitle}</span> : ''}
         </h1>
     </div>
 
@@ -55,7 +54,7 @@ const { title, subtitle } = Astro.props;
             width: 100%;
             height: 100%;
             background-image: url("Photo/Front.jpg");
-
+            transform: scale(1.1);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -84,6 +83,8 @@ const { title, subtitle } = Astro.props;
             padding: 2rem;
             max-width: 1000px;
             width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .hero-title {
@@ -125,18 +126,12 @@ const { title, subtitle } = Astro.props;
 
         .underline-svg {
             position: absolute;
-            
             width: 100%;
-            animation: slideIn 650ms forwards;
+            left: 0px;
         }
 
         .underline-path {
-            fill: none;
-            stroke: #e6b220;
-            stroke-width: 6;
-            stroke-dasharray: 1200;
-            stroke-dashoffset: 1100;
-            animation: draw 3.5s ease-in-out forwards;
+            animation: draw 2.5s ease-in-out forwards;
         }
 
         @keyframes slideIn {
@@ -150,29 +145,7 @@ const { title, subtitle } = Astro.props;
                 stroke-dashoffset: 0;
             }
         }
-
-        .hero-subtitle {
-            font-size: 1.8rem;
-            color: #fafaf5;
-            margin-top: 3.5rem;
-            margin-bottom: 3rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.4;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 4.5rem;
-            }
-            .title-line2{
-                position: relative;
-                bottom: 75px;
-            }
-        }
-
-        @media (max-width: 768px) {
+        @media (orientation: portrait)  {
             .hero-title {
                 font-size: 3.5rem;
             }
@@ -182,28 +155,22 @@ const { title, subtitle } = Astro.props;
             }
 
             .underline-container {
-                bottom: -15px;
-                height: 60px;
+                bottom: 0px;
+                height: 35px;
+                display: flex;
+                align-items: center;
             }
             .title-line2{
                 position: relative;
                 bottom: 0px;
+                padding-left: 0px;
+                margin-top: 0px;
+            }
+            ,.underline-svg {
+                height: 50px;
             }
         }
-
-        @media (max-width: 576px) {
-            .hero-title {
-                font-size: 2.8rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.3rem;
-            }
-            .title-line2{
-                position: relative;
-                bottom: 0px;
-            }
-        }
+        
     </style>
 
     <script lang="js">

@@ -1,13 +1,18 @@
 ---
 // Footer.astro
 ---
-<footer style="background: #222; color: #fff; padding: 2rem 0; text-align: center;">
+<footer style="display: flex; justify-content: center; align-items: center; background: #000000; color: #fff; padding: 2rem 0; text-align: center;">
   <div>
     <p>&copy; {new Date().getFullYear()} | Parlier Unified NJROTC</p>
     <nav style="margin-top: 1rem;">
-      <a href="/" style="color: #fff; margin: 0 1rem; text-decoration: underline;">Home</a>
-      <a href="https://github.com/Parlier-Unified-NJROTC" style="color: #fff; margin: 0 1rem; text-decoration: underline;">Github</a>
-
+      <div id="socials" style="justify-self:center;width: min-content;display: flex; justify-content: center; align-items: center;">
+        <a href="https://www.instagram.com/njrotc_parlier/" class="icon" style="color: #fff; margin: 0 1rem; text-decoration: none;">
+          <img src="icons/instagram.svg" alt="instagram" style="height: 40px;"/>
+        </a>
+        <a href="https://github.com/Parlier-Unified-NJROTC" style="color: #fff; margin: 0 1rem; text-decoration: underline;">
+          <img src="icons/github.svg" alt="instagram" style="height: 40px;"/>
+        </a>
+      </div>
     </nav>
   </div>
 </footer>

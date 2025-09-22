@@ -1,0 +1,194 @@
+
+    <div class="container1">
+        <div class="banner-track">
+            <span class="star">★</span>
+            <div class="word">Honor</div>
+            <span class="star">★</span>
+            <div class="word">Pride</div>
+            <span class="star">★</span>
+            <div class="word">Resilience</div>
+            <span class="star">★</span>
+            <div class="word">Family</div>
+            <span class="star">★</span>
+            <div class="word">Togetherness</div>
+            <span class="star">★</span>
+            <div class="word">Strength</div>
+            <span class="star">★</span>
+            <div class="word">Success</div>
+            <span class="star">★</span>
+            <div class="word">Commitment</div>
+            <span class="star">★</span>
+            <div class="word">Courage</div>
+            <span class="star">★</span>
+            <div class="word">Community</div>
+            <span class="star">★</span>
+            <div class="word">Focus</div>
+            <span class="star">★</span>
+            <div class="word">Confidence</div>
+            <span class="star">★</span>
+            <div class="word">Leadership</div>
+            <span class="star">★</span>
+            <div class="word">Service</div>
+
+            <span class="star">★</span>
+            <div class="word">Honor</div>
+            <span class="star">★</span>
+            <div class="word">Pride</div>
+            <span class="star">★</span>
+            <div class="word">Resilience</div>
+            <span class="star">★</span>
+            <div class="word">Family</div>
+            <span class="star">★</span>
+            <div class="word">Togetherness</div>
+            <span class="star">★</span>
+            <div class="word">Strength</div>
+            <span class="star">★</span>
+            <div class="word">Success</div>
+            <span class="star">★</span>
+            <div class="word">Commitment</div>
+            <span class="star">★</span>
+            <div class="word">Courage</div>
+            <span class="star">★</span>
+            <div class="word">Community</div>
+            <span class="star">★</span>
+            <div class="word">Focus</div>
+            <span class="star">★</span>
+            <div class="word">Confidence</div>
+            <span class="star">★</span>
+            <div class="word">Leadership</div>
+            <span class="star">★</span>
+            <div class="word">Service</div>
+    </div>
+
+    <style>
+        
+        .container1 {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 30px 0;
+            border-bottom: white solid 5px;
+            border-top: white solid 5px;
+            margin-top:2%;
+            margin-bottom: 2%;
+        }
+        
+        .banner-track {
+            display: flex;
+            width: max-content;
+            animation: roll 50s linear infinite;
+        }
+        
+        .word {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            margin: 0 25px;
+            color: #e6e6e6;
+            font-size: 32px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 8px 0;
+        }
+        
+        .star {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            margin: 0 25px;
+            color: #e6e6e6;
+            font-size: 32px;
+            font-weight: 600;
+            padding: 8px 0;
+        }
+
+        
+        .word:hover {
+            color: #ffffff;
+            transform: skew(-15deg);
+        }
+        
+        .container1::before,
+        .container1::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 150px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .container1::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.9) 15%, transparent 100%);
+        }
+        
+        .container1::after {
+            right: 0;
+            background: linear-gradient(to left,rgba(0, 0, 0, 0.9), transparent 100%);
+        }
+        
+        /* Title and instructions */
+        .title {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+        
+        .title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .title p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        @keyframes roll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Responsive design */
+        @media (orientation: portrait) {
+            .word {
+                font-size: 24px;
+                margin: 0 15px;
+            }
+            
+            .star {
+                font-size: 18px;
+            }
+            
+            .title h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+
+    <script lang="js">
+        // This ensures the animation is smooth and continues correctly
+        document.addEventListener('DOMContentLoaded', function() {
+            const banner = document.querySelector('.banner-track');
+            const words = document.querySelectorAll('.banner-track .word');
+
+            words.forEach(word => {
+                word.addEventListener('mouseenter', () => {
+                banner.style.animationPlayState = 'paused';
+                });
+                word.addEventListener('mouseleave', () => {
+                banner.style.animationPlayState = 'running';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

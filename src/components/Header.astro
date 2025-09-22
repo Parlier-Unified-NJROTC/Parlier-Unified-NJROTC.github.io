@@ -1,17 +1,147 @@
 ---
 // Header.astro
 ---
-<header style="background: #1a237e; color: #fff; padding: 1.5rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-  <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-    <a href="/" style="font-size: 1.7rem; font-weight: bold; color: #fff; text-decoration: none; letter-spacing: 1px;">
-      <img src="/Parlier-Unified_NJROTC.svg" alt="PHS NJROTC Logo" style="height: 80px; vertical-align: middle; margin-right: 10px;" />
-    </a>
-    <nav>
-      <a href="/" style="color: #fff; margin: 0 1rem; text-decoration: underline;">Home</a>
-      <a href="/about" style="color: #fff; margin: 0 1rem; text-decoration: underline;">About</a>
-      <a href="/departments" style="color: #fff; margin: 0 1rem; text-decoration: underline;">Departments</a>
-      <a href="/cadets" style="color: #fff; margin: 0 1rem; text-decoration: underline;">Cadets</a>
 
+<header
+  style="background: #1a237e; color: #fff; padding: 1.5rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"
+>
+  <div
+    style="max-width: 1200px;height:85px; margin-left: 15%; display: flex ; align-items: center; justify-content: flex-start;"
+  >
+    <a
+      href="/"
+      style="font-size: 1.7rem; font-weight: bold; color: #fff; text-decoration: none; letter-spacing: 1px;"
+    >
+      <img
+        src="/Parlier-Unified_NJROTC.svg"
+        alt="PHS NJROTC Logo"
+        style="height: 60px; vertical-align: middle; margin-right: 10px;"
+      />
+    </a>
+    <nav style='font-family: "Sanchez", serif;'>
+      <a href="/" style="color: #fff; margin: 0 1rem; ">Home</a>
+      <a href="/about" style="color: #fff; margin: 0 1rem; ">About</a>
+      <div class="dropdown">
+        <a href="/departments">Departments</a>
+        <div class="dropdown-content">
+          <a href="/departments/">Admin</a>
+          <a href="/departments/">Pulic</a>
+          <a href="/departments/">OPS</a>
+          <a href="/departments/">Supply</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a class="dropdown" href="/teams">Teams</a>
+        <div class="dropdown-content">
+          <a href="/teams/">Academic Team</a>
+          <a href="/teams/">Color Guard</a>
+          <a href="/teams/">Drill Team</a>
+          <a href="/teams/">Marksmanship</a>
+          <a href="/teams/">Physical Fitness</a>
+        </div>
+      </div>
+      <a href="/Parents" style="color: #fff; margin: 0 1rem; ">Parents</a>
+      <a href="/cadets" style="color: #fff; margin: 0 1rem; ">Cadets</a>
     </nav>
+    <!-- Social Media Icons -->
+    <div
+      id="socials"
+      style=";justify-self:right;width: min-content;display: flex; justify-content: center; align-items: center;margin-left:auto;"
+    >
+      <a
+        href="/"
+        class="icon"
+        style="color: #fff; margin: 0 1rem; text-decoration: none;"
+      >
+        <img src="icons/instagram.svg" alt="instagram" style="height: 40px;" />
+      </a>
+      <a
+        href="https://github.com/Parlier-Unified-NJROTC"
+        style="color: #fff; margin: 0 1rem; "
+      >
+        <img src="icons/github.svg" alt="instagram" style="height: 40px;" />
+      </a>
+    </div>
   </div>
 </header>
+
+<style>
+  nav {
+    display: flex;
+    margin-left: 2rem;
+  }
+
+  nav a {
+    color: #fff;
+    margin: 0 1rem;
+    text-decoration: none;
+    display: flex;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.3s;
+  }
+
+  nav a:hover {
+    color: #ffcc00;
+  }
+
+  nav a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #ffcc00;
+    transition: width 0.3s;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  /* Dropdown Styles */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #1a237e;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 4px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0.3s;
+  }
+
+  .dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-content a {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+    margin: 0;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #283593;
+    color: #ffcc00;
+  }
+</style>
