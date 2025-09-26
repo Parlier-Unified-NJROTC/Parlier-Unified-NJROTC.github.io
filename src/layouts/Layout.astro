@@ -1,5 +1,5 @@
 ---
-import { ClientRouter } from "astro:transitions";
+
 
 import Hero from "../components/Hero.astro";
 import Footer from "../components/Footer.astro";
@@ -27,17 +27,17 @@ const { title, heroTitle, subtitle, heroVideo, disableHero = false } = Astro.pro
 		<meta name="generator" content={Astro.generator} />
 		<title>PHS NJROTC - {title}</title>
 
-		<ClientRouter></ClientRouter>
+		
 	</head>
 	<body>
-		<Header transition:persist/>
+		<Header />
 		<!-- transition:persist is required, else switching pages messes it up -->
 		<!-- Also I wanna disable it for department layout -->
-		{disableHero ? null : <Hero title={heroTitle || title} subtitle={ subtitle } videoUrl={ heroVideo } transition:persist/>}
-		<main transition:animate="slide">
+		{disableHero ? null : <Hero title={heroTitle || title} subtitle={ subtitle } videoUrl={ heroVideo } />}
+		<main>
 			<slot />
 		</main>
-		<Footer transition:persist/>
+		<Footer />
 	</body>
 </html>
 

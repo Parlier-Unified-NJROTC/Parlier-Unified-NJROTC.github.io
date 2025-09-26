@@ -17,7 +17,7 @@ const { title, subtitle } = Astro.props;
         <h1 class="hero-title">
             <span class="title-line1">{title}</span>
             <div style="">
-                <div class="underline-container"><svg class="underline-svg" viewBox="0 0 600 100" preserveAspectRatio="xMidYMid meet"><path class="underline-path" d="m 0,40 c 29.17,-0.96 136.15,-7.06 194.5,-6.42 58.35,0.64 188.67,10.7 194.5,10.7 5.83,0 -103.09,-12.3 -155.6,-10.7 -52.51,1.6 -188.66,20.519189 -194.5,21.4"vector-effect="non-scaling-stroke"data-astro-cid-bbe6dxrz=""id="path1"style="fill: none; stroke: #e6b220; stroke-width: 6; stroke-dasharray: 1200; stroke-dashoffset: 1150;stroke-linecap:round;stroke-linejoin:round"/></svg></div>                
+                <div class="underline-container"><svg class="underline-svg" viewBox="0 0 600 100" preserveAspectRatio="xMidYMid meet"><path class="underline-path" d="M 3.3783784,40 C 32.548378,39.04 139.52838,32.94 197.87838,33.58 c 58.35,0.64 188.67,10.7 194.5,10.7 5.83,0 -103.09,-12.3 -155.6,-10.7 -52.51,1.6 -141.838067,15.263666 -152.93359,17.100026" vector-effect="non-scaling-stroke"data-astro-cid-bbe6dxrz=""id="path1"style="fill: none; stroke: #e6b220; stroke-width: 6; stroke-dasharray: 1200; stroke-dashoffset: 1150;stroke-linecap:round;stroke-linejoin:round"/></svg></div>                
             </div>
             { subtitle ? <span class="title-line2" >{subtitle}</span> : ''}
         </h1>
@@ -53,7 +53,7 @@ const { title, subtitle } = Astro.props;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("Photo/Front.jpg");
+            background-image: url("/Photo/Front.jpg");
             transform: scale(1.1);
             background-size: cover;
             background-position: center;
@@ -72,7 +72,7 @@ const { title, subtitle } = Astro.props;
             background: linear-gradient(
                 to bottom,
                 rgba(2, 60, 113, 0.7),
-                rgba(0, 0, 0, 0.9)
+                rgba(0, 0, 0)
             );
             z-index: 1;
         }
