@@ -88,4 +88,19 @@ import Rolling from "../components/Rolling.astro";
     .Photo:hover h3 {
         transform: translateY(0);
     }
+    @media (orientation: portrait) {
+        .Photo h3 {
+        transform: translateY(0);
+    }
+        
+    }
 </style>
+<script lang="js">
+    document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' // Optional: adds smooth scrolling
+  });
+});
+
+</script>
