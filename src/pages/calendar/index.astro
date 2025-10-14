@@ -1,0 +1,51 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Rolling from "../../components/Rolling.astro";
+---
+
+<Layout title="Parlier Unified" subtitle="NJROTC" disableHero>
+<div id="Main-Container">
+    <h1 id="title">Calendar</h1>
+    <div id="container">
+        <div>
+            <iframe id="calendar-frame" src="https://calendar.google.com/calendar/embed?src=njrotcparlier%40gmail.com&ctz=America%2FLos_Angeles" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div>
+            <h2>Annoucements:</h2>
+            <p>
+                No current annoucements
+            </p>
+        </div>
+    </div>
+    <style>
+        #Main-Container{
+            padding: 25px;
+            background-color: rgb(9, 8, 17);
+        }
+        #title{
+            position: relative;
+            left:-25px;
+            width:100vw;
+            margin-block: 50px;
+            padding: 25px;
+            background-color: rgb(11, 9, 43);
+            border-block: 1px rgb(248, 248, 248) solid;
+        }
+        #container{
+            display: flex;
+            gap:5vw;
+        }
+
+        #calendar-frame{
+            border: 5px solid rgb(117, 108, 20);
+            border-radius: 10px;
+        }
+    </style>
+
+    <style is:inline>
+        iframe #yDmH0d{
+            background-color: cyan;
+        }
+    </style>
+</div>
+</Layout>
