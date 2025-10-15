@@ -1,5 +1,7 @@
 ---
 name: Supply
+description: Lovely words goes here
+img: ./NA.png
 ---
 
 
