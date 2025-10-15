@@ -2,7 +2,7 @@
 import DepartmentLayout from "../../layouts/DepartmentLayout.astro";
 
 import { getCollection } from 'astro:content';
-const departments = await getCollection('departments');
+const teams = await getCollection('teams');
 
 const {frontmatter} = Astro.props;
     
@@ -17,8 +17,8 @@ const {frontmatter} = Astro.props;
         <hr>
         <ul>
         <hr>
-        {departments.map(department => (
-            <span>| <a href={`/departments/${department.id}`}>{department.data.name}</a></span> <hr></hr>
+        {teams.map(teams => (
+            <span>| <a href={`/teams/${teams.id}`}>{teams.data.name}</a></span> <hr></hr>
         ))}
         </ul>
         <hr>
