@@ -1,7 +1,7 @@
 ---
 name: Admin
 description: Lovely words goes here
-img: ./NA.png
+img: ../../NA.png
 ---
 
 
