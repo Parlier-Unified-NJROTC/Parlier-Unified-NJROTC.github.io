@@ -117,8 +117,8 @@ declare module 'astro:content' {
 		id: E,
 	): E extends keyof DataEntryMap[C]
 		? string extends keyof DataEntryMap[C]
-		? Promise<DataEntryMap[C][E]> | undefined
-		: Promise<DataEntryMap[C][E]>
+			? Promise<DataEntryMap[C][E]> | undefined
+			: Promise<DataEntryMap[C][E]>
 		: Promise<CollectionEntry<C> | undefined>;
 	export function getLiveEntry<C extends keyof LiveContentConfig['collections']>(
 		collection: C,
@@ -142,8 +142,8 @@ declare module 'astro:content' {
 	): import('astro/zod').ZodEffects<
 		import('astro/zod').ZodString,
 		C extends keyof ContentEntryMap
-		? ReferenceContentEntry<C, ValidContentEntrySlug<C>>
-		: ReferenceDataEntry<C, keyof DataEntryMap[C]>
+			? ReferenceContentEntry<C, ValidContentEntrySlug<C>>
+			: ReferenceDataEntry<C, keyof DataEntryMap[C]>
 	>;
 	// Allow generic `string` to avoid excessive type errors in the config
 	// if `dev` is not running to update as you edit.
@@ -158,21 +158,28 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-
+		
 	};
 
 	type DataEntryMap = {
 		"departments": Record<string, {
-			id: string;
-			body?: string;
-			collection: "departments";
-			data: any;
-			rendered?: RenderedContent;
-			filePath?: string;
-		}>;
+  id: string;
+  body?: string;
+  collection: "departments";
+  data: any;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
+"teams": Record<string, {
+  id: string;
+  body?: string;
+  collection: "teams";
+  data: any;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
 
 	};
-	
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
@@ -191,10 +198,10 @@ declare module 'astro:content' {
 
 	type LiveLoaderDataType<C extends keyof LiveContentConfig['collections']> =
 		LiveContentConfig['collections'][C]['schema'] extends undefined
-		? ExtractDataType<LiveContentConfig['collections'][C]['loader']>
-		: import('astro/zod').infer<
-			Exclude<LiveContentConfig['collections'][C]['schema'], undefined>
-		>;
+			? ExtractDataType<LiveContentConfig['collections'][C]['loader']>
+			: import('astro/zod').infer<
+					Exclude<LiveContentConfig['collections'][C]['schema'], undefined>
+				>;
 	type LiveLoaderEntryFilterType<C extends keyof LiveContentConfig['collections']> =
 		ExtractEntryFilterType<LiveContentConfig['collections'][C]['loader']>;
 	type LiveLoaderCollectionFilterType<C extends keyof LiveContentConfig['collections']> =
@@ -203,6 +210,6 @@ declare module 'astro:content' {
 		LiveContentConfig['collections'][C]['loader']
 	>;
 
-	export type ContentConfig = typeof import("./../src/content.config.js");
+	export type ContentConfig = typeof import("../src/content.config.js");
 	export type LiveContentConfig = never;
 }

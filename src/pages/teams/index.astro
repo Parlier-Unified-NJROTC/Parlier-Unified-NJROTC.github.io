@@ -11,29 +11,29 @@ const {frontmatter} = Astro.props;
 
 <!-- PLACEHOLDER FOR NOWWWWWWWWWWw -->
 
-<DepartmentLayout>
-    <section class="departments">
-    <div class="departments-container">
+<teamLayout>
+    <section class="teams">
+    <div class="teams-container">
         <div class="section-header">
             <h2 class="section-title">Our Teams</h2>
             <p class="section-subtitle">Discover our teams dedicated to excellence</p>
         </div>
-        <div class="departments-grid">
-            {departments.map(department => (
-                <div class="department-card">
-                    <a href={`/departments/${department.id}`} class="department-link">
+        <div class="teams-grid">
+            {teams.map(team => (
+                <div class="team-card">
+                    <a href={`/teams/${team.id}`} class="team-link">
                         <div class="card-overlay"></div>
-                        <div class="department-icon" style={{ backgroundImage: `url(${department.data.img})` }}>
+                        <div class="team-icon" style={{ backgroundImage: `url(${team.data.img})` }}>
                             <div class="icon-overlay"></div>
                         </div>
-                        <div class="department-content">
+                        <div class="team-content">
                             <div class="content-wrapper">
-                                <h3 class="department-name">{department.data.name}</h3>
-                                <p class="department-description">
-                                    {department.data.description}
+                                <h3 class="team-name">{team.data.name}</h3>
+                                <p class="team-description">
+                                    {team.data.description}
                                 </p>
-                                <div class="department-footer">
-                                    <span class="department-button">
+                                <div class="team-footer">
+                                    <span class="team-button">
                                         LEARN MORE
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -50,8 +50,8 @@ const {frontmatter} = Astro.props;
 </section>
 
 <style lang="less">
-    /* Departments Section */
-    .departments {
+    /* teams Section */
+    .teams {
         padding: 6rem 2rem;
         background: #000000;
         position: relative;
@@ -59,7 +59,7 @@ const {frontmatter} = Astro.props;
         overflow: hidden;
     }
     
-    .departments::before {
+    .teams::before {
         content: "";
         position: absolute;
         top: 0;
@@ -72,7 +72,7 @@ const {frontmatter} = Astro.props;
         z-index: -1;
     }
 
-    .departments-container {
+    .teams-container {
         max-width: 1200px;
         margin: 0 auto;
     }
@@ -113,14 +113,14 @@ const {frontmatter} = Astro.props;
         line-height: 1.6;
     }
 
-    .departments-grid {
+    .teams-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 2.5rem;
         justify-items: center;
     }
 
-    .department-card {
+    .team-card {
         background: rgba(0, 0, 0, 0.7);
         border-radius: 16px;
         overflow: hidden;
@@ -144,18 +144,18 @@ const {frontmatter} = Astro.props;
         z-index: 1;
     }
 
-    .department-card:hover {
+    .team-card:hover {
         transform: translateY(-12px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(230, 178, 32, 0.4);
         border-color: rgba(230, 178, 32, 0.6);
         background: rgba(10, 10, 15, 0.8);
     }
     
-    .department-card:hover .card-overlay {
+    .team-card:hover .card-overlay {
         opacity: 1;
     }
 
-    .department-link {
+    .team-link {
         text-decoration: none;
         color: inherit;
         display: block;
@@ -164,7 +164,7 @@ const {frontmatter} = Astro.props;
         z-index: 2;
     }
 
-    .department-icon {
+    .team-icon {
         height: 220px;
         background-size: cover;
         background-position: center;
@@ -182,11 +182,11 @@ const {frontmatter} = Astro.props;
         transition: transform 0.5s ease;
     }
     
-    .department-card:hover .icon-overlay {
+    .team-card:hover .icon-overlay {
         transform: scale(1.05);
     }
 
-    .department-content {
+    .team-content {
         padding: 2.5rem 2rem;
         position: relative;
         z-index: 2;
@@ -198,7 +198,7 @@ const {frontmatter} = Astro.props;
         height: 100%;
     }
 
-    .department-name {
+    .team-name {
         font-family: "Montserrat", sans-serif;
         font-size: 1.8rem;
         font-weight: 700;
@@ -208,7 +208,7 @@ const {frontmatter} = Astro.props;
         padding-bottom: 0.5rem;
     }
     
-    .department-name::after {
+    .team-name::after {
         content: "";
         position: absolute;
         bottom: 0;
@@ -219,7 +219,7 @@ const {frontmatter} = Astro.props;
         border-radius: 2px;
     }
 
-    .department-description {
+    .team-description {
         font-size: 1rem;
         line-height: 1.7;
         margin-bottom: 2rem;
@@ -227,11 +227,11 @@ const {frontmatter} = Astro.props;
         flex-grow: 1;
     }
     
-    .department-footer {
+    .team-footer {
         margin-top: auto;
     }
 
-    .department-button {
+    .team-button {
         display: inline-flex;
         align-items: center;
         gap: 8px;
@@ -247,24 +247,24 @@ const {frontmatter} = Astro.props;
         cursor: pointer;
     }
     
-    .department-button svg {
+    .team-button svg {
         transition: transform 0.3s ease;
     }
 
-    .department-button:hover {
+    .team-button:hover {
         background: #e6b220;
         color: #000000;
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(230, 178, 32, 0.4);
     }
     
-    .department-button:hover svg {
+    .team-button:hover svg {
         transform: translateX(4px);
     }
 
     /* Responsive Design */
     @media (max-width: 768px) {
-        .departments {
+        .teams {
             padding: 4rem 1.5rem;
         }
         
@@ -281,22 +281,22 @@ const {frontmatter} = Astro.props;
             padding: 0 1rem;
         }
         
-        .departments-grid {
+        .teams-grid {
             grid-template-columns: 1fr;
             gap: 2rem;
         }
         
-        .department-card {
+        .team-card {
             max-width: 100%;
         }
         
-        .department-content {
+        .team-content {
             padding: 2rem 1.5rem;
         }
     }
     
     @media (max-width: 480px) {
-        .departments {
+        .teams {
             padding: 3rem 1rem;
         }
         
@@ -304,13 +304,13 @@ const {frontmatter} = Astro.props;
             font-size: 2rem;
         }
         
-        .department-content {
+        .team-content {
             padding: 1.5rem 1.25rem;
         }
         
-        .department-name {
+        .team-name {
             font-size: 1.6rem;
         }
     }
 </style>
-</DepartmentLayout>
+</teamLayout>
