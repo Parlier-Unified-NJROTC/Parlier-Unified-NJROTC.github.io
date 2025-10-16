@@ -1,0 +1,288 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="404" disableHero>
+    <div class="container">
+        <div class="error-content">
+            <div class="card-overlay"></div>
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Page Not Found</h2>
+            <p class="error-description">
+                The page you are looking for might have been removed, had its name changed, 
+                or is temporarily unavailable.
+            </p>
+            
+            <img src="/Photo/Chicken-Nugget.png" 
+                 alt="Chicken Nugget" 
+                 class="error-image">
+                <p>Maowa <br> - Chicken Nugget, Head Developer</p>
+            
+            <div class="button-container">
+                <a href="/" class="button home-button">Return to Homepage</a>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #000000;
+            color: #fafaf5;
+            z-index: 1;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 3rem auto;
+            text-align: center;
+        }
+        
+        .error-content {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(2, 60, 113, 0.7);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            padding: 1rem 1rem;
+            margin-bottom: 3rem;
+            transition: all 0.4s ease;
+        }
+        
+        .error-content:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(230, 178, 32, 0.4);
+            border-color: rgba(230, 178, 32, 0.6);
+            background: rgba(10, 10, 15, 0.8);
+        }
+        
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(2, 60, 113, 0.3), rgba(230, 178, 32, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .error-content:hover .card-overlay {
+            opacity: 1;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            color: #fafaf5;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 0rem;
+            line-height: 1;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .error-code::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 6px;
+            background: #e6b220;
+            border-radius: 3px;
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fafaf5;
+        }
+        
+        .error-description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: rgba(250, 250, 245, 0.9);
+            max-width: 500px;
+            margin: 0 auto 0px
+        }
+        
+        .error-image {
+            max-width: 160px;
+            height: auto;
+            border-radius: 12px;
+            margin: 1rem 0 0rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(2, 60, 113, 0.5);
+            transition: all 0.4s ease;
+        }
+        p{
+            margin-bottom: 2rem;
+        }
+        
+        .error-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+            border-color: rgba(230, 178, 32, 0.5);
+        }
+        
+        .button-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .button {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 5;
+        }
+        
+        .button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .button:hover::before {
+            left: 100%;
+        }
+        
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .home-button {
+            background-color: #023c71;
+            color: white;
+            border: 2px solid #023c71;
+        }
+        
+        .home-button:hover {
+            background-color: transparent;
+            color: #023c71;
+        }
+        
+        .contact-button {
+            background-color: #e6b220;
+            color: black;
+            border: 2px solid #e6b220;
+        }
+        
+        .contact-button:hover {
+            background-color: transparent;
+            color: #e6b220;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem;
+            }
+            
+            .error-content {
+                padding: 3rem 2rem;
+            }
+            
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-description {
+                font-size: 1.1rem;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .button {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .error-content {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .error-code {
+                font-size: 5rem;
+            }
+            
+            .error-title {
+                font-size: 1.8rem;
+            }
+            
+            .error-description {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <script lang="js">
+        document.addEventListener('DOMContentLoaded', function() {
+            const image = document.querySelector('.error-image');
+            image.style.opacity = '0';
+            image.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                image.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                image.style.opacity = '1';
+                image.style.transform = 'translateY(0)';
+            }, 300);
+        });
+    </script>
+</Layout>

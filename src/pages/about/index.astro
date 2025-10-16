@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
     
 ---
 
-<Layout title="About" disableHero>
+<Layout title="About" disableHero >
     <div class="container">
         <div class="section-header">
             <h1 class="section-title">Contact Information</h1>
@@ -79,16 +79,10 @@ import Layout from "../../layouts/Layout.astro";
     </div>
 
 <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         
         body {
             background: #000000;
             color: #fafaf5;
-            min-height: 100vh;
             position: relative;
             z-index: 1;
             overflow-x: hidden;
@@ -360,9 +354,6 @@ import Layout from "../../layouts/Layout.astro";
         }
         
         @media (max-width: 768px) {
-            body {
-                padding: 1.5rem;
-            }
             
             .section-header {
                 margin-bottom: 3rem;
@@ -402,9 +393,6 @@ import Layout from "../../layouts/Layout.astro";
         }
         
         @media (max-width: 480px) {
-            body {
-                padding: 1rem;
-            }
             
             .section-title {
                 font-size: 2rem;

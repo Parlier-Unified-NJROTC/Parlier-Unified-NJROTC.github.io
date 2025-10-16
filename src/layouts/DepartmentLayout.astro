@@ -1,9 +1,17 @@
 ---
     import Layout from "./Layout.astro";
+    import Work from "../components/Work.astro";
+
+    interface Props {
+        maintain?:boolean;
+    }
+    const { maintain = false } = Astro.props;
 ---
+{maintain ? <Work /> : null}
 
 <Layout title="Department" disableHero>
     <slot></slot>
+    
 
     <style>
         

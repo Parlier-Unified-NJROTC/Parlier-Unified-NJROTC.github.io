@@ -2,6 +2,7 @@
 
 
 import Hero from "../components/Hero.astro";
+import Work from "../components/Work.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 
@@ -11,8 +12,9 @@ interface Props {
 	subtitle?:string;
 	heroVideo?:ImageMetadata | string;
 	disableHero?:boolean
+	maintain?:boolean;
 }
-const { title, heroTitle, subtitle, heroVideo, disableHero = false } = Astro.props;
+const { title, heroTitle, subtitle, heroVideo, disableHero = false, maintain = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -34,6 +36,7 @@ const { title, heroTitle, subtitle, heroVideo, disableHero = false } = Astro.pro
 		<!-- transition:persist is required, else switching pages messes it up -->
 		<!-- Also I wanna disable it for department layout -->
 		{disableHero ? null : <Hero title={heroTitle || title} subtitle={ subtitle } videoUrl={ heroVideo } />}
+		{maintain ? <Work /> : null}
 		<main>
 			<slot />
 		</main>
