@@ -1,0 +1,387 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+---
+
+<Layout title="General Orders" disableHero >
+<div class="BG555">
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="section-header">
+            <h1 class="section-title">United States Navy</h1>
+            <p class="section-subtitle">General Orders</p>
+        </div>
+
+        <!-- Study Options Section -->
+        <div class="study-options-section">
+            <div class="section-header">
+                <h2 class="section-title">Study Options</h2>
+            </div>
+            <div class="options-grid">
+                <a href="https://play.blooket.com/solo?id=65d4f8a78a408800b644aea8" class="study-option">
+                    <div class="option-icon">
+                        <img src="https://1000logos.net/wp-content/uploads/2022/05/Blooket-Emblem.png" alt="Blooket">
+                    </div>
+                    <div class="option-content">
+                        <h3 class="option-title">Blooket</h3>
+                        <p class="option-desc">By Cadet Espinoza</p>
+                    </div>
+                </a>
+                
+                <a href="https://quizlet.com/886688400/11-navy-general-orders-ns1-flash-cards/?i=5p81a4&x=1qqt" class="study-option">
+                    <div class="option-icon">
+                        <img src="https://logovectorseek.com/wp-content/uploads/2019/08/quizlet-inc-logo-vector.png" alt="Quizlet">
+                    </div>
+                    <div class="option-content">
+                        <h3 class="option-title">Quizlet</h3>
+                        <p class="option-desc">By Cadet Ibarra</p>
+                    </div>
+                </a>
+                
+                <a href="https://youtube.com/playlist?list=PLjMD4fR1UJNcsiiVBZpgIvna71vVloQGB&si=jAwMHLYszYWqBH3r" class="study-option">
+                    <div class="option-icon">
+                        <img src="https://www.svgrepo.com/show/303271/youtube-2-logo.svg" alt="YouTube">
+                    </div>
+                    <div class="option-content">
+                        <h3 class="option-title">YouTube Videos</h3>
+                        <p class="option-desc">Study Playlist</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- General Orders Section -->
+        <div class="orders-section">
+            <div class="orders-grid">
+                <!-- Official General Orders -->
+                <div class="orders-card">
+                    <div class="orders-header">
+                        <h2 class="orders-title">11 Navy General Orders</h2>
+                    </div>
+                    <ol class="orders-list">
+                        <li>To take charge of this post and all government property in view.</li>
+                        <li>To walk my post in a military manner, always on the alert and observing everything that takes place within sight or hearing.</li>
+                        <li>To report all violations of orders I am instructed to enforce.</li>
+                        <li>To repeat all calls more distant from the guard house than my own.</li>
+                        <li>To quit my post only when properly relieved</li>
+                        <li>To receive obey and pass on the sentry who relives me, all orders from the commanding officer, command duty officer, officer of the deck, and officers, and petty officers of the watch only.</li>
+                        <li>To talk to no one except in the line of duty.</li>
+                        <li>To give the alarm in case of fire or disorder.</li>
+                        <li>To call the officer of the deck in any case not covered by instruction.</li>
+                        <li>To salute all officer and colors and standards not cased.</li>
+                        <li>To be especially watchful at night and during times of challenging to challenge all people on or near my post, and to allow no one to pass without proper authority</li>
+                    </ol>
+                </div>
+
+                <!-- Simplified Orders -->
+                <div class="orders-card">
+                    <div class="orders-header">
+                        <h2 class="orders-title">Simplified Orders</h2>
+                    </div>
+                    <ol class="orders-list">
+                        <li>Guard the building and everything around it.</li>
+                        <li>Look around the place and keep your guard up.</li>
+                        <li>Report broken rules.</li>
+                        <li>Relay all messages from other cadets.</li>
+                        <li>Leave when allowed.</li>
+                        <li>Follow and pass on orders from higher ranks.</li>
+                        <li>No talking during drill.</li>
+                        <li>Alert everyone in emergencies.</li>
+                        <li>Ask when lost.</li>
+                        <li>Respect and Salute military.</li>
+                        <li>Protect during night or danger, don't allow anyone to pass unless permitted.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .BG555 {
+            background: #000000;
+            color: #fafaf5;
+            position: relative;
+            z-index: 1;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .BG555::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-family: "Montserrat", sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #fafaf5;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #e6b220;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 2rem;
+            color: #e6b220;
+            font-weight: 600;
+            margin-top: 0rem;
+        }
+        
+        /* Study Options Section */
+        .study-options-section {
+            margin-bottom: 5rem;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .study-option {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(2, 60, 113, 0.7);
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .study-option:hover {
+            background: rgba(10, 10, 15, 0.8);
+            border-color: rgba(230, 178, 32, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+        }
+        
+        .option-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(2, 60, 113, 0.3);
+            flex-shrink: 0;
+        }
+        
+        .option-icon img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+        
+        .study-option:nth-child(3) .option-icon {
+            background: rgba(255, 0, 0, 0.3);
+        }
+        
+        .study-option:nth-child(3) .option-icon img {
+            background: white;
+            border-radius: 8px;
+            padding: 5px;
+        }
+        
+        .option-content {
+            flex-grow: 1;
+        }
+        
+        .option-title {
+            color: #e6b220;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .option-desc {
+            color: rgba(250, 250, 245, 0.8);
+            font-size: 1rem;
+            margin: 0;
+        }
+        
+        /* General Orders Section */
+        .orders-section {
+            margin-top: 3rem;
+        }
+        
+        .orders-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .orders-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(2, 60, 113, 0.7);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+        
+        .orders-card:hover {
+            border-color: rgba(230, 178, 32, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            transform: translateY(-5px);
+        }
+        
+        .orders-header {
+            background: rgba(2, 60, 113, 0.3);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(2, 60, 113, 0.5);
+        }
+        
+        .orders-title {
+            color: #e6b220;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .orders-list {
+            padding: 2rem;
+            margin: 0;
+            color: #fafaf5;
+            margin: 0px 10px;
+        }
+        
+        .orders-list li {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            padding-left: 0.5rem;
+        }
+        
+        .orders-list li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .orders-list li::marker {
+            color: #e6b220;
+            font-weight: bold;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .orders-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 3rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .study-option {
+                padding: 1.5rem;
+            }
+            
+            .option-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .option-icon img {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .option-title {
+                font-size: 1.3rem;
+            }
+            
+            .orders-header {
+                padding: 1.25rem 1.5rem;
+            }
+            
+            .orders-title {
+                font-size: 1.5rem;
+            }
+            
+            .orders-list {
+                padding: 1.5rem;
+            }
+            
+            .orders-list li {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .study-option {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .orders-list {
+                padding: 1.25rem;
+            }
+            
+            .orders-list li {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</div>
+</Layout>

@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout title="About" disableHero >
+<div class="BG555">
     <div class="container">
         <div class="section-header">
             <h1 class="section-title">Contact Information</h1>
@@ -73,14 +74,13 @@ import Layout from "../../layouts/Layout.astro";
         </div>
         
         <div class="button-container">
-            <button class="button about-unit">About the Unit</button>
-            <button class="button about-instructor">About The Instructor</button>
+            <a href="/about/unit" class="button about-unit">About the Unit</a>
+            <a href="/about/instructor" class="button about-instructor">About The Instructor</a>
         </div>
     </div>
-
 <style>
         
-        body {
+        .BG555 {
             background: #000000;
             color: #fafaf5;
             position: relative;
@@ -88,7 +88,7 @@ import Layout from "../../layouts/Layout.astro";
             overflow-x: hidden;
         }
         
-        body::before {
+        .BG555::before {
             content: "";
             position: absolute;
             top: 0;
@@ -114,8 +114,9 @@ import Layout from "../../layouts/Layout.astro";
         }
         
         .section-title {
+            font-family: "Montserrat", sans-serif;
             padding: 2rem;
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
             color: #fafaf5;
@@ -127,7 +128,7 @@ import Layout from "../../layouts/Layout.astro";
         .section-title::after {
             content: "";
             position: absolute;
-            bottom: -10px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             width: 100px;
@@ -411,6 +412,11 @@ import Layout from "../../layouts/Layout.astro";
             .social-icon {
                 width: 45px;
                 height: 45px;
+            }
+        }
+        @media (orientation: portrait) {
+            .container {
+                width: 100%;
             }
         }
     </style>

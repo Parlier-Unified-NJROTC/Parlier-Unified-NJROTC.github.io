@@ -1,0 +1,334 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+---
+
+<Layout title="Unit" subtitle="Parlier High School NJROTC" disableHero>
+<div class="BG555">
+        <div class="section-header">
+            <h1 class="section-title">About Our Unit</h1>
+            <p class="section-subtitle">Leadership Through Service, Excellence Through Commitment</p>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-overlay"></div>
+            <div class="content-wrapper">
+                <div class="text-content">
+                    <p class="intro-text">
+                        At Parlier High School NJROTC, we believe leadership begins with service to our community, 
+                        to our nation, and to one another. Our program is more than a class; it's a family built on 
+                        respect, discipline, and teamwork. Every cadet learns that true leadership is measured not 
+                        by rank or title, but by the courage to lead with integrity and the commitment to do what 
+                        is right, even when no one is watching.
+                    </p>
+                    
+                    <div class="core-values">
+                        <h3 class="values-title">Our Core Values</h3>
+                        <p class="values-intro">
+                            Rooted in the Navy's core values of Honor, Courage, and Commitment, we strive to develop 
+                            young men and women who exemplify these principles in their daily lives.
+                        </p>
+                        
+                        <div class="value-item">
+                            <div class="value-icon honor">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#e6b220">
+                                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                                </svg>
+                            </div>
+                            <div class="value-details">
+                                <h4 class="value-name">Honor</h4>
+                                <p class="value-description">Reminds us to live with honesty, respect, and accountability.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon courage">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#e6b220">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </div>
+                            <div class="value-details">
+                                <h4 class="value-name">Courage</h4>
+                                <p class="value-description">Drives us to face challenges head on and stand up for what is right.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon commitment">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#e6b220">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <div class="value-details">
+                                <h4 class="value-name">Commitment</h4>
+                                <p class="value-description">Inspires us to give our best effort in everything we do in school, at home, and in our community.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="program-text">
+                        Through drill, academics, community service, and leadership training, our cadets grow into 
+                        confident citizens ready to take on any challenge. We take pride in giving back whether it 
+                        is honoring veterans, supporting school events, or mentoring younger students because 
+                        community is at the heart of everything we do.
+                    </p>
+                    
+                    <p class="conclusion-text">
+                        Together, we lead with purpose, serve with pride, and build a legacy of excellence that 
+                        reflects the spirit of Parlier's community that drives Parlier High School and the Navy 
+                        tradition we represent.
+                    </p>
+                </div>
+            </div>
+    </div>
+
+    <style>
+        .BG555 {
+            background: #000000;
+            color: #fafaf5;
+            position: relative;
+            z-index: 1;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .BG555::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding:6rem 0rem;
+        }
+        
+        .section-title {
+            font-family: "Montserrat", sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #fafaf5;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #e6b220;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: rgba(250, 250, 245, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        
+        .content-card {
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        
+        
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(2, 60, 113, 0.3), rgba(230, 178, 32, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .content-wrapper {
+            padding: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .text-content {
+            color: #fafaf5;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .intro-text {
+            margin-bottom: 2.5rem;
+            font-size: 1.15rem;
+            font-weight: 500;
+        }
+        
+        .core-values {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(2, 60, 113, 0.1);
+            border-radius: 12px;
+            border-left: 4px solid #e6b220;
+        }
+        
+        .values-title {
+            color: #e6b220;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .values-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: rgba(250, 250, 245, 0.9);
+        }
+        
+        .value-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .value-item:hover {
+            background: rgba(230, 178, 32, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .value-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            background: rgba(2, 60, 113, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .value-item:hover .value-icon {
+            background: rgba(230, 178, 32, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .value-details {
+            flex-grow: 1;
+        }
+        
+        .value-name {
+            color: #e6b220;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .value-description {
+            color: rgba(250, 250, 245, 0.9);
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .program-text, .conclusion-text {
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
+        .conclusion-text {
+            font-style: italic;
+            color: rgba(250, 250, 245, 0.95);
+            border-left: 3px solid #e6b220;
+            padding-left: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 3rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .content-wrapper {
+                padding: 2rem 1.5rem;
+            }
+            
+            .core-values {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+            
+            .value-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem 1rem;
+            }
+            
+            .value-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .content-wrapper {
+                padding: 1.5rem 1.25rem;
+            }
+            
+            .text-content {
+                font-size: 1rem;
+            }
+            
+            .core-values {
+                padding: 1rem;
+            }
+            
+            .values-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</div>
+</Layout>

@@ -1,0 +1,307 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+---
+
+<Layout title="Instructors" subtitle="Parlier High School NJROTC" disableHero>
+<div class="BG555">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-title">Our Instructors</h1>
+            <p class="section-subtitle">Dedicated Leaders Shaping Future Leaders</p>
+        </div>
+
+        <!-- Chief Killian Section -->
+        <div class="instructor-section">
+            <div class="instructor-content">
+                <div class="instructor-text">
+                    <h2 class="instructor-name">Chief Killian</h2>
+                    <p class="instructor-bio">
+                        Chief Killian has been our Naval Science Instructor for five years and has proudly served 
+                        twenty years in the United States Navy. Chief has taught us countless skills, lessons, and 
+                        leadership principles that continue to guide us every day. Her dedication and expertise 
+                        inspire every cadet to lead with confidence, discipline, and pride.
+                    </p>
+                </div>
+                <div class="instructor-image">
+                    <div class="image-placeholder">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="#e6b220">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <span>Chief Killian Photo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Petty Officer Lowry Section -->
+        <div class="instructor-section">
+            <div class="instructor-content reverse">
+                <div class="instructor-text">
+                    <h2 class="instructor-name">Petty Officer Lowry</h2>
+                    <p class="instructor-bio">
+                        Petty Officer Lowry serves as an Instructor for the Parlier High School NJROTC Program. 
+                        A proud U.S. Navy veteran, Petty Officer Lowry served as a Master at Arms, where he developed 
+                        expertise in leadership, security, and mentorship. His time in the Navy instilled in him the 
+                        values of Honor, Courage, and Commitment, which continue to guide his teaching and leadership today.
+                    </p>
+                    <p class="instructor-bio">
+                        With years of experience in both education and coaching, Petty Officer Lowry is dedicated to 
+                        shaping young men and women into confident, disciplined, and service minded citizens. He believes 
+                        that true leadership begins with character and is measured by one's willingness to serve others.
+                    </p>
+                    <p class="instructor-bio">
+                        At Parlier High School, Petty Officer Lowry combines his military experience and passion for 
+                        education to build a culture of excellence within the NJROTC program. He is proud to represent 
+                        both the Navy tradition and the Panther pride of Parlier High School, inspiring cadets to lead 
+                        with integrity and purpose in everything they do.
+                    </p>
+                </div>
+                <div class="instructor-image">
+                    <div class="image-placeholder">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="#e6b220">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <span>Petty Officer Lowry Photo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .BG555 {
+            background: #000000;
+            color: #fafaf5;
+            position: relative;
+            z-index: 1;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .BG555::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-family: "Montserrat", sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #fafaf5;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #e6b220;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: rgba(250, 250, 245, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        
+        .instructor-section {
+            margin-bottom: 5rem;
+            position: relative;
+        }
+        
+        .instructor-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .instructor-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .instructor-content.reverse {
+            grid-template-columns: 1fr 2fr;
+        }
+        
+        .instructor-content.reverse .instructor-text {
+            order: 2;
+        }
+        
+        .instructor-content.reverse .instructor-image {
+            order: 1;
+        }
+        
+        .instructor-text {
+            color: #fafaf5;
+        }
+        
+        .instructor-name {
+            color: #e6b220;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .instructor-name::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #023c71;
+            border-radius: 2px;
+        }
+        
+        .instructor-bio {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: rgba(250, 250, 245, 0.9);
+        }
+        
+        .instructor-bio:last-child {
+            margin-bottom: 0;
+        }
+        
+        .instructor-image {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .image-placeholder {
+            width: 280px;
+            height: 320px;
+            background: rgba(2, 60, 113, 0.2);
+            border: 2px solid rgba(230, 178, 32, 0.3);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .image-placeholder:hover {
+            border-color: rgba(230, 178, 32, 0.6);
+            background: rgba(2, 60, 113, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .image-placeholder span {
+            color: rgba(250, 250, 245, 0.7);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .instructor-content,
+            .instructor-content.reverse {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .instructor-content.reverse .instructor-text,
+            .instructor-content.reverse .instructor-image {
+                order: unset;
+            }
+            
+            .instructor-image {
+                justify-content: center;
+            }
+            
+            .image-placeholder {
+                width: 250px;
+                height: 280px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 3rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .instructor-section {
+                margin-bottom: 4rem;
+            }
+            
+            .instructor-name {
+                font-size: 1.8rem;
+            }
+            
+            .instructor-bio {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .instructor-name {
+                font-size: 1.6rem;
+            }
+            
+            .image-placeholder {
+                width: 220px;
+                height: 250px;
+            }
+            
+            .image-placeholder svg {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</div>
+</Layout>
