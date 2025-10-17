@@ -93,7 +93,7 @@ const {frontmatter} = Astro.props;
 				}
 
 				/* make headings inside cards white (anchors inherit color, so h4 became link color earlier) */
-				.team-card h4 { color: #ffffff; }
+				.team-card h4 { color: #e6b220; }
 
 				/* keyboard focus indicator for accessibility */
 				.team-card:focus {
@@ -129,7 +129,7 @@ const {frontmatter} = Astro.props;
 				padding: 40px;
 			}
 
-			.team-card h4 { margin: 0 0 8px; font-size: 1.05rem; }
+			.team-card h4 { margin: 0 0 8px; font-size: 1.05rem; color:#e6b220; }
 			.team-card p { margin: 0; color: rgba(255,255,255,0.9); }
 
 			@media (max-width: 980px) {
@@ -141,6 +141,10 @@ const {frontmatter} = Astro.props;
 				.selector-grid { grid-template-columns: 1fr; padding: 8px; }
 				.team-card { transform: none; border-radius: 8px; min-height: auto; }
 				.team-card .card-inner { transform: none; padding: 14px; }
+			}
+
+			h4{
+				color:#e6b220;
 			}
 		</style>
 	</section>

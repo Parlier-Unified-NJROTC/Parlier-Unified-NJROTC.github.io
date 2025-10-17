@@ -10,10 +10,56 @@
 {maintain ? <Work /> : null}
 
 <Layout title="Department" disableHero>
-    <slot></slot>
-    
+    <!-- Two-image hero (side-by-side on wide screens, stacked on small screens) -->
+    <section class="department-hero" aria-hidden="false">
+        <div class="hero-grid">
+            <div class="hero-item placeholder">
+                <div class="hero-placeholder">Hero placeholder — image or content goes here</div>
+            </div>
+            <div class="hero-item placeholder">
+                <div class="hero-placeholder">Secondary placeholder — highlight events or calls to action</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content area with markdown-friendly styles -->
+    <main class="department-content">
+        <div class="markdown-body">
+            <slot></slot>
+        </div>
+    </main>
 
     <style>
-        
+        /* Hero grid */
+        .department-hero { margin-bottom: 2.5rem; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 0 2rem; }
+    .hero-item { position: relative; border-radius: 12px; min-height: 300px; overflow: hidden; background: linear-gradient(180deg, rgba(2,60,113,0.06), rgba(0,0,0,0.12)); display:flex; align-items:center; justify-content:center; }
+    .hero-item.placeholder { border: 2px dashed rgba(255,255,255,0.06); }
+    .hero-placeholder { color: rgba(255,255,255,0.9); font-weight: 700; font-family: "Montserrat", sans-serif; text-align: center; padding: 20px; }
+
+        /* Markdown-friendly content */
+        .department-content { max-width: 1080px; margin: 0 auto 6rem; padding: 0 20px; }
+    .markdown-body { background: transparent; color: rgba(255,255,255,0.95); line-height: 1.7; text-align: center; }
+
+    .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 { font-family: "Montserrat", sans-serif; color: #fafaf5; margin-top: 1.25rem; margin-bottom: 0.75rem; text-align: center; }
+    .markdown-body h1 { font-size: 2.25rem; }
+    .markdown-body h2 { font-size: 1.75rem; }
+    .markdown-body p { margin: 0 0 1rem; color: rgba(255,255,255,0.92); text-align: center; }
+
+    .markdown-body a { color: #e6b220; text-decoration: underline; }
+    .markdown-body ul, .markdown-body ol { margin: 0 auto 1rem; display: inline-block; text-align: left; }
+    .markdown-body blockquote { border-left: 4px solid rgba(230,178,32,0.25); padding: 12px 16px; background: rgba(230,178,32,0.02); color: rgba(255,255,255,0.9); margin: 0 auto 1rem; max-width: 760px; text-align: left; }
+    .markdown-body pre { background: rgba(0,0,0,0.6); padding: 12px; border-radius: 8px; overflow: auto; max-width: 760px; margin: 0 auto 1rem; text-align: left; }
+    .markdown-body code { background: rgba(0,0,0,0.6); padding: 2px 6px; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace; }
+    .markdown-body table { margin: 0 auto 1rem; border-collapse: collapse; }
+    .markdown-body th, .markdown-body td { border: 1px solid rgba(255,255,255,0.06); padding: 8px 10px; }
+    .markdown-body img { max-width: 100%; height: auto; border-radius: 8px; display: block; margin: 0 auto; }
+
+        /* Utility */
+        @media (max-width: 880px) {
+            .hero-grid { grid-template-columns: 1fr; padding: 0 14px; }
+            .hero-item { min-height: 200px; }
+            .department-content { margin-bottom: 3rem; }
+        }
     </style>
 </Layout>

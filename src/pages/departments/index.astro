@@ -1,14 +1,14 @@
 ---
-import DepartmentLayout from "../../layouts/DepartmentLayout.astro";
 
 import { getCollection } from 'astro:content';
+import Layout from "../../layouts/Layout.astro";
 const departments = await getCollection('departments');
 
 const {frontmatter} = Astro.props;
     
 ---
 
-<DepartmentLayout>
+<Layout disableHero title="Departments" fancyBackground>
 <section class="departments">
     <div class="departments-container">
         <div class="section-header">

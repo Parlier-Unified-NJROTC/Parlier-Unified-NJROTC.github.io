@@ -1,0 +1,43 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+---
+
+<Layout title="Fundraising" disableHero fancyBackground>
+
+	<main class="container">
+		<article class="fundraising">
+			<h1>Fundraising & Donations</h1>
+
+			<section class="donate">
+				<p>If you would like to make a donation to the Unit simply write a check payable to <strong>Parlier NJROTC</strong> and mail it to:</p>
+
+				<address class="donation-address">
+					Parlier HS NJROTC<br />
+					603 3rd St<br />
+					Parlier, CA 93648
+				</address>
+
+				<p class="note">Please include your cadet's name (if applicable) and a short note so we can apply funds appropriately.</p>
+			</section>
+
+			<section class="thanks">
+				<h2>Thank you</h2>
+				<p>Your support helps provide training, equipment, and opportunities for our cadets. Every contribution — big or small — makes a real difference in their development and success. We deeply appreciate your generosity and involvement in our program.</p>
+			</section>
+		</article>
+	</main>
+
+	<style>
+		.container { max-width: 920px; margin: 36px auto; padding: 0 20px; }
+		.fundraising h1 { font-family: "Montserrat", sans-serif; color: #e6b220; margin-bottom: 12px; }
+		.donate p { color: rgba(255,255,255,0.9); font-size: 1.05rem; }
+		.donation-address { margin: 12px 0 8px; color: rgba(255,255,255,0.95); font-weight: 700; }
+		.note { color: rgba(255,255,255,0.8); font-size: 0.95rem; }
+		.thanks h2 { color: #fafaf5; margin-top: 24px; }
+		.thanks p { color: rgba(255,255,255,0.9); line-height: 1.6; }
+		@media (max-width: 640px) { .container { padding: 0 14px; } }
+	</style>
+
+</Layout>
+
