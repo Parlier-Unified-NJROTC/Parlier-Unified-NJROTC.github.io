@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+---
+
+<Layout title="Parents" disableHero fancyBackground>
+	<section class="parents-hero" aria-hidden="true"></section>
+
+	<main class="container">
+		<article class="placeholder">
+			<h1>Parents</h1>
+			<p class="lead">Welcome! This page is a placeholder for parent resources, schedules, and contact information. We'll add meeting dates, volunteer info, and links to forms here soon.</p>
+
+			<section class="quick-links">
+				<h2>Quick links</h2>
+				<ul>
+					<li><a href="/calendar">Calendar & Events</a></li>
+					<li><a href="/about">About the Unit</a></li>
+					<li><a href="/contact">Contact Staff</a></li>
+				</ul>
+			</section>
+
+			<section class="notes">
+				<h2>Notes for parents</h2>
+				<p>If you'd like to contribute resources or suggest content for this page, please open an issue in the repository or contact the unit directly.</p>
+			</section>
+		</article>
+	</main>
+
+	<style>
+		.container { max-width: 920px; margin: 36px auto; padding: 0 20px; }
+		.parents-hero { height: 180px; border-radius: 8px; background: linear-gradient(90deg, rgba(2,60,113,0.9), rgba(230,178,32,0.9)); box-shadow: 0 6px 18px rgba(2,6,23,0.35); margin: 20px auto; }
+		.placeholder h1 { margin: 0 0 12px; }
+		.lead { color: rgba(255,255,255,0.9); font-size: 1.05rem; }
+		.quick-links ul { list-style: disc; margin-left: 1.25rem; }
+		.quick-links a { color: #e6b220; text-decoration: underline; }
+		.notes p { color: rgba(255,255,255,0.8); }
+
+		@media (max-width: 640px) {
+			.parents-hero { height: 120px; }
+		}
+	</style>
+
+</Layout>

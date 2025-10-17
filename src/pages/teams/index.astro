@@ -1,5 +1,5 @@
 ---
-import DepartmentLayout from "../../layouts/DepartmentLayout.astro";
+import Layout from '../../layouts/Layout.astro';
 
 import { getCollection } from 'astro:content';
 const teams = await getCollection('teams');
@@ -11,306 +11,137 @@ const {frontmatter} = Astro.props;
 
 <!-- PLACEHOLDER FOR NOWWWWWWWWWWw -->
 
-<DepartmentLayout maintain>
-    <section class="teams">
-    <div class="teams-container">
-        <div class="section-header">
-            <h2 class="section-title">Our Teams</h2>
-            <p class="section-subtitle">Discover our teams dedicated to excellence</p>
-        </div>
-        <div class="teams-grid">
-            {teams.map(team => (
-                <div class="team-card">
-                    <a href={`/teams/${team.id}`} class="team-link">
-                        <div class="card-overlay"></div>
-                        <div class="team-icon" style={{ backgroundImage: `url(${team.data.img})` }}>
-                            <div class="icon-overlay"></div>
-                        </div>
-                        <div class="team-content">
-                            <div class="content-wrapper">
-                                <h3 class="team-name">{team.data.name}</h3>
-                                <p class="team-description">
-                                    {team.data.description}
-                                </p>
-                                <div class="team-footer">
-                                    <span class="team-button">
-                                        LEARN MORE
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            ))}
-        </div>
-    </div>
-</section>
+<Layout disableHero title='Teams' fancyBackground>
 
-<style lang="less">
-    /* teams Section */
-    .teams {
-        padding: 6rem 2rem;
-        background: #000000;
-        position: relative;
-        z-index: 1;
-        overflow: hidden;
-    }
-    
-    .teams::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: 
-            radial-gradient(circle at 20% 50%, rgba(2, 60, 113, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(2, 60, 113, 0.15) 0%, transparent 50%);
-        z-index: -1;
-    }
+	<section class="teams-selector">
+		<!-- Full-width hero image for teams page -->
 
-    .teams-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
+		<div class="selector-bleed">
+			<div class="selector-wrap">
+				<div class="selector-grid">
+				<a class="team-card" href="/teams/academic">
+					<div class="card-bg" style="background-image:url('/Photo/Front.jpg')"></div>
+					<div class="card-overlay"></div>
+					<div class="card-inner"><h4>Academic Team</h4><p>Competition and knowledge-based team focusing on academics and STEM.</p></div>
+				</a>
+				<a class="team-card" href="/teams/color-guard">
+					<div class="card-bg" style="background-image:url('/Photo/IMG_1.jpeg')"></div>
+					<div class="card-overlay"></div>
+					<div class="card-inner"><h4>Color Guard</h4><p>Honoring traditions and presenting the colors at events and competitions.</p><hr>Leader: Cadet Voldovinos</div>
+				</a>
+				<a class="team-card" href="/teams/cyber">
+					<div class="card-bg" style="background-image:url('/Photo/IMG_2.jpeg')"></div>
+					<div class="card-overlay"></div>
+					<div class="card-inner"><h4>Cyberpatriot Team</h4><p>Competitive cybersecurity and networking challenges to develop technical skills. Website Developers and maintainers.</p><hr>Leader: Cadet Ibarra</div>
+				</a>
+				<a class="team-card" href="/teams/drill">
+					<div class="card-bg" style="background-image:url('/Photo/IMG_3.jpeg')"></div>
+					<div class="card-overlay"></div>
+					<div class="card-inner"><h4>Drill Team</h4><p>Precision marching and drill routines practiced for competitions and parades.</p><hr>Leader: Cadet Pena</div>
+				</a>
+				</div>
+			</div>
+		</div>
 
-    .section-header {
-        text-align: center;
-        margin-bottom: 5rem;
-    }
+		<style>
+			.teams-selector { padding: 40px 0; background: transparent; }
+			/* full-bleed wrapper: extends to viewport edges */
+			.selector-bleed { position: relative; width: 100vw; left: 50%; margin-left: -50vw; margin-right: -50vw; }
+			.selector-wrap { overflow: hidden; padding: 20px 0; max-width: 100%; }
 
-    .section-title {
-        font-family: "Montserrat", sans-serif;
-        font-size: 3.5rem;
-        font-weight: 800;
-        margin-bottom: 1rem;
-        color: #fafaf5;
-        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        position: relative;
-        display: inline-block;
-    }
-    
-    .section-title::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100px;
-        height: 4px;
-        background: #e6b220;
-        border-radius: 2px;
-    }
+			/* Hero image area */
+			.teams-hero {
+				width: 100%;
+				height: auto;
+				aspect-ratio: 16 / 5; /* reserved space */
+				background-image: linear-gradient(90deg, rgba(2,60,113,0.6), rgba(230,178,32,0.12));
+				background-size: cover;
+				background-position: center;
+				border-bottom: 1px solid rgba(255,255,255,0.03);
+			}
 
-    .section-subtitle {
-        font-size: 1.2rem;
-        color: rgba(250, 250, 245, 0.8);
-        max-width: 600px;
-        margin: 0 auto;
-        line-height: 1.6;
-    }
+			/* slant each column (card) instead of the whole band */
+			.selector-grid {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 18px;
+				padding: 0 6vw; /* padding moved to inner for full-bleed height */
+				height: 100vh; /* make grid fill viewport height */
+				align-items: stretch;
+				box-sizing: border-box;
+            }
 
-    .teams-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2.5rem;
-        justify-items: center;
-    }
+			/* Full-height slanted columns */
+			.team-card {
+				display: block;
+				position: relative;
+				background: linear-gradient(180deg,#0f1723, rgba(15,23,35,0.85));
+				border-radius: 10px;
+				overflow: hidden;
+				box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+				border: 1px solid rgba(255,255,255,0.04);
+				transform: skewY(-6deg) scale(1);
+				transform-origin: center;
+				height: 100%;
+				transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms ease;
+			}
 
-    .team-card {
-        background: rgba(0, 0, 0, 0.7);
-        border-radius: 16px;
-        overflow: hidden;
-        transition: all 0.4s ease;
-        position: relative;
-        border: 1px solid rgba(2, 60, 113, 0.7);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-        width: 100%;
-        max-width: 380px;
-    }
-    
-    .card-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, rgba(2, 60, 113, 0.3), rgba(230, 178, 32, 0.1));
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        z-index: 1;
-    }
+				/* anchors shouldn't show underlines; preserve card visuals */
+				.team-card {
+					text-decoration: none;
+					color: inherit;
+				}
 
-    .team-card:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(230, 178, 32, 0.4);
-        border-color: rgba(230, 178, 32, 0.6);
-        background: rgba(10, 10, 15, 0.8);
-    }
-    
-    .team-card:hover .card-overlay {
-        opacity: 1;
-    }
+				/* make headings inside cards white (anchors inherit color, so h4 became link color earlier) */
+				.team-card h4 { color: #ffffff; }
 
-    .team-link {
-        text-decoration: none;
-        color: inherit;
-        display: block;
-        height: 100%;
-        position: relative;
-        z-index: 2;
-    }
+				/* keyboard focus indicator for accessibility */
+				.team-card:focus {
+					outline: 3px solid rgba(230,178,32,0.14);
+					outline-offset: 6px;
+				}
 
-    .team-icon {
-        height: 220px;
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .icon-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom, rgba(2, 60, 113, 0.7), rgba(0, 0, 0, 0.9));
-        transition: transform 0.5s ease;
-    }
-    
-    .team-card:hover .icon-overlay {
-        transform: scale(1.05);
-    }
+			/* background image behind content */
+			.team-card .card-bg {
+				position: absolute;
+				inset: 0;
+				background-size: cover;
+				background-position: center;
+				filter: saturate(0.95) contrast(0.9);
+				z-index: 0;
+			}
+			.team-card .card-overlay {
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
+				z-index: 1;
+			}
+			.team-card .card-inner { z-index: 2; position: relative; }
 
-    .team-content {
-        padding: 2.5rem 2rem;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .content-wrapper {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
+			.team-card:hover { transform: skewY(-6deg) scale(1.04); z-index: 3; box-shadow: 0 14px 36px rgba(2,6,23,0.7); }
 
-    .team-name {
-        font-family: "Montserrat", sans-serif;
-        font-size: 1.8rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: #fafaf5;
-        position: relative;
-        padding-bottom: 0.5rem;
-    }
-    
-    .team-name::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 40px;
-        height: 3px;
-        background: #e6b220;
-        border-radius: 2px;
-    }
+			.team-card .card-inner {
+				transform: skewY(6deg);
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				height: 100%;
+				padding: 40px;
+			}
 
-    .team-description {
-        font-size: 1rem;
-        line-height: 1.7;
-        margin-bottom: 2rem;
-        color: rgba(250, 250, 245, 0.9);
-        flex-grow: 1;
-    }
-    
-    .team-footer {
-        margin-top: auto;
-    }
+			.team-card h4 { margin: 0 0 8px; font-size: 1.05rem; }
+			.team-card p { margin: 0; color: rgba(255,255,255,0.9); }
 
-    .team-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 0.9rem 1.8rem;
-        background: transparent;
-        color: #e6b220;
-        border: 2px solid #e6b220;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: 700;
-        transition: all 0.3s ease;
-        text-align: center;
-        cursor: pointer;
-    }
-    
-    .team-button svg {
-        transition: transform 0.3s ease;
-    }
-
-    .team-button:hover {
-        background: #e6b220;
-        color: #000000;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(230, 178, 32, 0.4);
-    }
-    
-    .team-button:hover svg {
-        transform: translateX(4px);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .teams {
-            padding: 4rem 1.5rem;
-        }
-        
-        .section-header {
-            margin-bottom: 3rem;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-        }
-        
-        .section-subtitle {
-            font-size: 1.1rem;
-            padding: 0 1rem;
-        }
-        
-        .teams-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        
-        .team-card {
-            max-width: 100%;
-        }
-        
-        .team-content {
-            padding: 2rem 1.5rem;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .teams {
-            padding: 3rem 1rem;
-        }
-        
-        .section-title {
-            font-size: 2rem;
-        }
-        
-        .team-content {
-            padding: 1.5rem 1.25rem;
-        }
-        
-        .team-name {
-            font-size: 1.6rem;
-        }
-    }
-</style>
-</DepartmentLayout>
+			@media (max-width: 980px) {
+				.selector-grid { grid-template-columns: repeat(2, 1fr); padding: 20px; height: auto; }
+				.team-card .card-inner { padding: 20px; height: auto; transform: none; }
+				.team-card { transform: none; height: auto; border-radius: 10px; }
+			}
+			@media (max-width: 640px) {
+				.selector-grid { grid-template-columns: 1fr; padding: 8px; }
+				.team-card { transform: none; border-radius: 8px; min-height: auto; }
+				.team-card .card-inner { transform: none; padding: 14px; }
+			}
+		</style>
+	</section>
+</Layout>
