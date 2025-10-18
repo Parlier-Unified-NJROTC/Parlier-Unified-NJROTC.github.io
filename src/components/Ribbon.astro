@@ -1,0 +1,97 @@
+---
+interface Props {
+  rlink: string;
+  namelink: string;
+  numberR: string;
+}
+const { rlink, namelink, numberR } = Astro.props;
+---
+
+<div class="ribbon-option" id="ribbon-option">
+  <img src={rlink} alt={numberR} />
+  <label for={numberR}>{namelink}</label>
+  <input type="checkbox" class="checkSwitch" id={numberR} name={numberR} />
+  <select name="cool" class="ribbonSelect" style="background: none;border-radius: 25px;">
+    <option value="star-none">NONE</option>
+    <option value="star-1bronze">Single Bronze</option>
+    <option value="star-2bronze">Double Bronze</option>
+    <option value="star-3bronze">Triple Bronze</option>
+    <option value="star-4bronze">Quadruple Bronze</option>
+    <option value="star-1sliver">Single Sliver</option>
+    <option value="star-2sliver">Double Sliver</option>
+    <option value="star-3sliver">Triple Sliver</option>
+    <option value="star-4sliver">Quadruple Sliver</option>
+    <option value="star-1gold">Single Gold</option>
+    <option value="star-2gold">Double Gold</option>
+    <option value="star-3gold">Triple Gold</option>
+    <option value="star-4gold">Quadruple Gold</option>
+  </select>
+</div>
+
+<style>
+  body * {
+    color: #ffffff;
+    text-align: center;
+    font-size: 15px;
+}
+  }
+  .ribbonSelect {
+    background: none;
+    border-radius: 25px;
+  }
+  .select-awards{
+    margin-top: 5px;
+    border: 1px rgba(0, 0, 0, 0.40) solid;
+  }
+  .ribbon-selection {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+    width: 100%;
+    margin: 0;
+    height: 100vw;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    background-color: var(--body-color);
+  }
+  .ribbon-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(33.333% - 20px);
+    margin: 10px;
+    padding: 10px;
+    background-color: none;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+  @media (orientation: portrait) {
+    .ribbon-option {
+      width: 39%;
+    }
+  }
+  .ribbon-option img {
+    width: 100%;
+    min-width: 120px;
+  }
+  .ribbon-option button {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .ribbon-option:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  .ribbon-option input[type="checkbox"] {
+    margin-bottom: 10px;
+    display: none;
+  }
+</style>
