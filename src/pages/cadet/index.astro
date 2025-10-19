@@ -1,67 +1,406 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-
 ---
 
-<Layout title="Cadets" disableHero fancyBackground>
-	<section class="cadets-hero" aria-hidden="true"></section>
+<Layout title="Cadets" disableHero>
+<div class="BG555">
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="section-header">
+            <h1 class="section-title">Cadet Resources</h1>
+            <p class="section-subtitle">Training schedules, drill practice times, and leadership information</p>
+        </div>
 
-	<main class="container">
-		<article class="placeholder">
-			<h1>Cadets</h1>
-			<p class="lead">This is a placeholder page for cadet resources — training schedules, drill practice times, and leadership info will go here.</p>
+        <!-- Resource Cards -->
+        <div class="resources-section">
+            <div class="card-grid">
+                <a class="res-card" href="/cadet/tool">
+                    <div class="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#e6b220">
+                            <path d="M21.71 20.29L18.83 17.41A8.93 8.93 0 0 0 20 11a9 9 0 1 0-9 9 8.93 8.93 0 0 0 6.41-2.17l2.88 2.89a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.43zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"/>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Tools</h3>
+                        <p class="card-desc">Useful utilities and links for training (timers, score sheets, practice tools).</p>
+                    </div>
+                </a>
 
-			<section class="resources">
-				<h2>Cadet resources</h2>
-				<div class="card-grid">
-					<a class="res-card" href="/cadets/tools">
-						<h3>Tools</h3>
-						<p>Useful utilities and links for training (timers, score sheets, practice tools).</p>
-					</a>
-					<a class="res-card" href="/cadet/PQS">
-						<h3>PQS</h3>
-						<p>Progress Qualification Sheets and tracking resources to help you advance.</p>
-					</a>
-					<a class="res-card" href="/cadet/manuals">
-						<h3>Manuals</h3>
-						<p>Important reference manuals and study materials for standards and procedures.</p>
-					</a>
-					<a class="res-card" href="/cadet/knowledge">
-						<h3>Knowledge</h3>
-						<p>Study guides, flashcards, and knowledge-base articles for competitions and tests.</p>
-					</a>
-				</div>
-			</section>
-		</article>
-	</main>
+                <a class="res-card" href="/cadet/PQS">
+                    <div class="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#e6b220">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">PQS</h3>
+                        <p class="card-desc">Progress Qualification Sheets and tracking resources to help you advance.</p>
+                    </div>
+                </a>
 
-	<style>
-		.container { max-width: 920px; margin: 36px auto; padding: 0 20px; }
-		.cadets-hero { height: 180px; border-radius: 8px; background: linear-gradient(90deg, rgba(0,92,179,0.9), rgba(16,185,129,0.9)); box-shadow: 0 6px 18px rgba(2,6,23,0.35); margin: 20px auto; }
-		.placeholder h1 { margin: 0 0 12px; }
-		.lead { color: rgba(255,255,255,0.9); font-size: 1.05rem; }
-		.quick-links ul { list-style: disc; margin-left: 1.25rem; }
-		.quick-links a { color: #68d391; text-decoration: underline; }
-		.signup p { color: rgba(255,255,255,0.8); }
+                <a class="res-card" href="/cadet/manuals">
+                    <div class="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#e6b220">
+                            <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Manuals</h3>
+                        <p class="card-desc">Important reference manuals and study materials for standards and procedures.</p>
+                    </div>
+                </a>
+				<!-- Useless for the looks -->
+				<div></div>
 
-		/* resource cards */
-		.resources { margin-top: 28px; }
-		.card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 12px; }
-		.res-card { display: block; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding: 18px; border-radius: 10px; text-decoration: none; color: inherit; border: 1px solid rgba(255,255,255,0.04); box-shadow: 0 6px 18px rgba(2,6,23,0.35); transition: transform .16s ease, box-shadow .16s ease; }
-		.res-card h3 { margin: 0 0 8px; color: #ffffff; }
-		.res-card p { margin: 0; color: rgba(255,255,255,0.85); font-size: 0.95rem; }
-		.res-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(2,6,23,0.45); }
+                <a class="res-card" href="/cadet/knowledge">
+                    <div class="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#e6b220">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Knowledge</h3>
+                        <p class="card-desc">Study guides, flashcards, and knowledge-base articles for competitions and tests.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
 
-		@media (max-width: 980px) {
-			.card-grid { grid-template-columns: repeat(2, 1fr); }
-		}
-		@media (max-width: 640px) {
-			.card-grid { grid-template-columns: 1fr; }
-		}
+	</div>
+</div>
 
-		@media (max-width: 640px) {
-			.cadets-hero { height: 120px; }
-		}
-	</style>
-
+    <style>
+        .BG555 {
+            background: #000000;
+            color: #fafaf5;
+            position: relative;
+            z-index: 1;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .BG555::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #fafaf5;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #e6b220;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: rgba(250, 250, 245, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .resources-section {
+            margin-bottom: 5rem;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .res-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(2, 60, 113, 0.7);
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .res-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .res-card:hover::before {
+            left: 100%;
+        }
+        
+        .res-card:hover {
+            background: rgba(10, 10, 15, 0.8);
+            border-color: rgba(230, 178, 32, 0.6);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+        }
+        
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(2, 60, 113, 0.3);
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .res-card:hover .card-icon {
+            background: rgba(230, 178, 32, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .card-title {
+            color: #e6b220;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .card-desc {
+            color: rgba(250, 250, 245, 0.9);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .info-section {
+            margin-top: 3rem;
+        }
+        
+        .info-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(2, 60, 113, 0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            transition: all 0.4s ease;
+        }
+        
+        .info-card:hover {
+            border-color: rgba(230, 178, 32, 0.6);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            transform: translateY(-5px);
+        }
+        
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(2, 60, 113, 0.3), rgba(230, 178, 32, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .info-card:hover .card-overlay {
+            opacity: 1;
+        }
+        
+        .info-content {
+            padding: 3rem;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .info-title {
+            color: #e6b220;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-text {
+            color: rgba(250, 250, 245, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .info-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(2, 60, 113, 0.2);
+            border-radius: 10px;
+            border: 1px solid rgba(2, 60, 113, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            background: rgba(230, 178, 32, 0.1);
+            border-color: rgba(230, 178, 32, 0.6);
+            transform: translateY(-3px);
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+        }
+        
+        .feature span:last-child {
+            color: #fafaf5;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .info-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 3rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .res-card {
+                padding: 1.5rem;
+            }
+            
+            .card-icon {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+            
+            .info-content {
+                padding: 2rem;
+            }
+            
+            .info-title {
+                font-size: 1.8rem;
+            }
+            
+            .info-text {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .res-card {
+                padding: 1.25rem;
+            }
+            
+            .info-content {
+                padding: 1.5rem;
+            }
+            
+            .info-title {
+                font-size: 1.5rem;
+            }
+            
+            .feature {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</div>
 </Layout>
