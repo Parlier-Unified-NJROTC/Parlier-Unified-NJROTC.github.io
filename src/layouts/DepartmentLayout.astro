@@ -30,6 +30,45 @@
     </main>
 
     <style>
+        /* Decorative bubbles to match site BG visuals */
+        .department-hero { position: relative; overflow: visible; }
+        .department-hero::before,
+        .department-hero::after {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(18px);
+            opacity: 0.55;
+        }
+        .department-hero::before {
+            width: 320px; height: 320px; left: -6%; top: -10%;
+            background: radial-gradient(circle at 30% 30%, rgba(2,60,113,0.9), rgba(2,60,113,0.05) 60%);
+            border-radius: 50%;
+            transform: translateZ(0);
+        }
+        .department-hero::after {
+            width: 260px; height: 260px; right: -4%; bottom: -8%;
+            background: radial-gradient(circle at 60% 40%, rgba(230,178,32,0.9), rgba(230,178,32,0.03) 60%);
+            border-radius: 50%;
+            transform: translateZ(0);
+        }
+
+        /* Small bubbles inside content area for subtle depth */
+        .markdown-body { position: relative; }
+        .markdown-body::before,
+        .markdown-body::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            pointer-events: none;
+            border-radius: 50%;
+            filter: blur(14px);
+            opacity: 0.32;
+        }
+        .markdown-body::before { width: 180px; height: 180px; left: -4%; top: 10%; background: radial-gradient(circle at 30% 30%, rgba(2,60,113,0.7), transparent 60%); }
+        .markdown-body::after { width: 140px; height: 140px; right: -3%; bottom: 6%; background: radial-gradient(circle at 60% 40%, rgba(230,178,32,0.7), transparent 60%); }
+
         /* Hero grid */
         .department-hero { margin-bottom: 2.5rem; }
         .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 0 2rem; }
