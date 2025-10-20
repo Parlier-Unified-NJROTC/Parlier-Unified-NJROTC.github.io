@@ -1,6 +1,380 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
+import Layout from '../../../layouts/Layout.astro';
 ---
-<Layout title="Tools" disableHero maintain>
 
+<Layout title="Cadets" disableHero>
+<div class="BG555">
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="section-header">
+            <h1 class="section-title">Cadet Resources</h1>
+            <p class="section-subtitle">Training schedules, drill practice times, and leadership information</p>
+        </div>
+
+        <!-- Resource Cards -->
+        <div class="resources-section">
+            <div class="card-grid">
+                <a class="res-card" href="/cadet/tool/ribbon">
+                    <div class="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#e6b220">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v12h16V6H4zm2 "/>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Ribbon Builder</h3>
+                        <p class="card-desc">Build and visualize your ribbon rack with our interactive ribbon builder tool.</p>
+                    </div>
+                </a>
+
+                <a class="res-card" href="/tool/flashcards">
+                    <div class="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#e6b220">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 2v12h16V6H4zm2 2h12v2H6V8zm0 4h12v2H6v-2z"/>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Flashcards</h3>
+                        <p class="card-desc">Interactive flashcards to help you study and memorize important information.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+	</div>
+</div>
+
+    <style>
+        .BG555 {
+            background: #000000;
+            color: #fafaf5;
+            position: relative;
+            z-index: 1;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .BG555::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #fafaf5;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #e6b220;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: rgba(250, 250, 245, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .resources-section {
+            margin-bottom: 5rem;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .res-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(2, 60, 113, 0.7);
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .res-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .res-card:hover::before {
+            left: 100%;
+        }
+        
+        .res-card:hover {
+            background: rgba(10, 10, 15, 0.8);
+            border-color: rgba(230, 178, 32, 0.6);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+        }
+        
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(2, 60, 113, 0.3);
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .res-card:hover .card-icon {
+            background: rgba(230, 178, 32, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .card-title {
+            color: #e6b220;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .card-desc {
+            color: rgba(250, 250, 245, 0.9);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .info-section {
+            margin-top: 3rem;
+        }
+        
+        .info-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(2, 60, 113, 0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            transition: all 0.4s ease;
+        }
+        
+        .info-card:hover {
+            border-color: rgba(230, 178, 32, 0.6);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            transform: translateY(-5px);
+        }
+        
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(2, 60, 113, 0.3), rgba(230, 178, 32, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .info-card:hover .card-overlay {
+            opacity: 1;
+        }
+        
+        .info-content {
+            padding: 3rem;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .info-title {
+            color: #e6b220;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-text {
+            color: rgba(250, 250, 245, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .info-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(2, 60, 113, 0.2);
+            border-radius: 10px;
+            border: 1px solid rgba(2, 60, 113, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            background: rgba(230, 178, 32, 0.1);
+            border-color: rgba(230, 178, 32, 0.6);
+            transform: translateY(-3px);
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+        }
+        
+        .feature span:last-child {
+            color: #fafaf5;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .info-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 3rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .res-card {
+                padding: 1.5rem;
+            }
+            
+            .card-icon {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+            
+            .info-content {
+                padding: 2rem;
+            }
+            
+            .info-title {
+                font-size: 1.8rem;
+            }
+            
+            .info-text {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .res-card {
+                padding: 1.25rem;
+            }
+            
+            .info-content {
+                padding: 1.5rem;
+            }
+            
+            .info-title {
+                font-size: 1.5rem;
+            }
+            
+            .feature {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</div>
 </Layout>

@@ -1,574 +1,61 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
+import Layout from "../../../layouts/Layout.astro";
 ---
 
-<Layout title="PQS - Personal Qualification Standards" disableHero>
-<div class="BG555">
-    <div class="container">
-        <!-- Hero Section -->
-        <div class="section-header">
-            <h1 class="section-title">Personal Qualification Standards</h1>
-            <p class="section-subtitle">Rank Advancement Requirements and Progress Tracking</p>
-        </div>
+<Layout title="PQS" disableHero>
+    <div class="BG555">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="section-header">
+                <h1 class="section-title">Personal Qualification Standards</h1>
+                <p class="section-subtitle">
+                    Rank Advancement Requirements and Progress Tracking
+                </p>
+            </div>
 
-        <!-- PDF Document Section -->
-        <div class="pdf-section">
-            <div class="pdf-card">
-                <div class="pdf-header">
-                    <h2 class="pdf-title">PQS Manual</h2>
-                    <p class="pdf-subtitle">Official Personal Qualification Standards Document</p>
-                </div>
-                <div class="pdf-preview">
-                    <div class="pdf-placeholder">
-                        <iframe src="/PDFs/NJROTC-New-Cadet-Unit-Handbook-Draft.pdf#toolbar=0" scrolling="no" width="370px" height="200px"></iframe>
-                        <div class="pdf-overlay">
-                            <a class="pdf-button" target="_blank" href="/PDFs/NJROTC-New-Cadet-Unit-Handbook-Draft.pdf">Fullscreen</a>
-                            <a class="pdf-button" href="/PDFs/NJROTC-New-Cadet-Unit-Handbook-Draft.pdf" download>Download</a>
+            <!-- PDF Document Section -->
+            <div class="pdf-section">
+                <div class="pdf-card">
+                    <div class="pdf-header">
+                        <h2 class="pdf-title">PQS Manual</h2>
+                        <p class="pdf-subtitle">
+                            Official Personal Qualification Standards Document
+                        </p>
+                    </div>
+                    <div class="pdf-preview">
+                        <div class="pdf-placeholder">
+                            <iframe
+                                src="/PDFs/NJROTC-New-Cadet-Unit-Handbook-Draft.pdf#toolbar=0"
+                                scrolling="no"
+                                width="370px"
+                                height="200px"></iframe>
+                            <div class="pdf-overlay">
+                                <a
+                                    class="pdf-button"
+                                    target="_blank"
+                                    href="/PDFs/NJROTC-New-Cadet-Unit-Handbook-Draft.pdf"
+                                    >Fullscreen</a
+                                >
+                                <a
+                                    class="pdf-button"
+                                    href="/PDFs/NJROTC-New-Cadet-Unit-Handbook-Draft.pdf"
+                                    download>Download</a
+                                >
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-         <!-- Rank Advancement Progress -->
+            <!-- Rank Advancement Progress -->
             <div class="progress-section">
                 <h2 class="progress-title">Rank Advancement Progress</h2>
-                <p class="progress-subtitle">Complete all requirements for your current rank to advance</p>
+                <p class="progress-subtitle">
+                    Complete all requirements for your current rank to advance
+                </p>
 
-                <!-- Cadet Seaman Apprentice -->
-                <div class="rank-card" data-rank="csa">
-                    <div class="rank-header">
-                        <h3 class="rank-name">Cadet Seaman Apprentice (C/SA)</h3>
-                        <div class="rank-status">
-                            <span class="status-badge">Current Rank</span>
-                        </div>
-                    </div>
-                    <div class="requirements-list">
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csa-1" class="requirement-checkbox">
-                            <label for="csa-1" class="requirement-label">
-                                <span class="requirement-text">4 weeks Time In Grade (TIG) as C/SR</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csa-2" class="requirement-checkbox">
-                            <label for="csa-2" class="requirement-label">
-                                <span class="requirement-text">4 weeks Time In Program (TIP)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csa-3" class="requirement-checkbox">
-                            <label for="csa-3" class="requirement-label">
-                                <span class="requirement-text">Have all required NJROTC Program forms on file in the Admin Department</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csa-4" class="requirement-checkbox">
-                            <label for="csa-4" class="requirement-label">
-                                <span class="requirement-text">Cadet Seaman Apprentice physical fitness requirements (1 minute plank, 3 push-ups, ¼ mile in 2:30 male & 3:15 female)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csa-5" class="requirement-checkbox">
-                            <label for="csa-5" class="requirement-label">
-                                <span class="requirement-text">11 General Orders (fill in blank test)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csa-6" class="requirement-checkbox">
-                            <label for="csa-6" class="requirement-label">
-                                <span class="requirement-text">Knowledge of basic stationary drill (Entering Classroom, Dismissal, Right/Left Face, About Face, Parade Rest, Hand Salute)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csa-7" class="requirement-checkbox">
-                            <label for="csa-7" class="requirement-label">
-                                <span class="requirement-text">Recommended by platoon commander and approved by Cadet Advancement Review Board and/or SNIS/NSI</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="rank-actions">
-                        <button class="advance-btn" disabled>Advance to Next Rank</button>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-text">0% Complete</span>
-                    </div>
-                </div>
-
-                <!-- Cadet Seaman -->
-                <div class="rank-card hidden" data-rank="csn">
-                    <div class="rank-header">
-                        <h3 class="rank-name">Cadet Seaman (C/SN)</h3>
-                        <div class="rank-status">
-                            <span class="status-badge locked">Locked</span>
-                        </div>
-                    </div>
-                    <div class="requirements-list">
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csn-1" class="requirement-checkbox" disabled>
-                            <label for="csn-1" class="requirement-label">
-                                <span class="requirement-text">4 weeks TIG as Cadet Seaman Apprentice</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csn-2" class="requirement-checkbox" disabled>
-                            <label for="csn-2" class="requirement-label">
-                                <span class="requirement-text">8 weeks TIP</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csn-3" class="requirement-checkbox" disabled>
-                            <label for="csn-3" class="requirement-label">
-                                <span class="requirement-text">Participated in 3 NJ events (eligible for participation ribbon)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csn-4" class="requirement-checkbox" disabled>
-                            <label for="csn-4" class="requirement-label">
-                                <span class="requirement-text">Complete 1 hour of community service</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csn-5" class="requirement-checkbox" disabled>
-                            <label for="csn-5" class="requirement-label">
-                                <span class="requirement-text">Complete the required practical factors for C/SN (1:15 plank, 8 push-ups, ½ mile in 5:15 male & 6:45 female)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csn-6" class="requirement-checkbox" disabled>
-                            <label for="csn-6" class="requirement-label">
-                                <span class="requirement-text">Knowledge of Squad drill (Open/Close Ranks, Dress Right, Cover/Uncover, Mark Time March, Left/Right Step)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csn-7" class="requirement-checkbox" disabled>
-                            <label for="csn-7" class="requirement-label">
-                                <span class="requirement-text">Knowledge of 11 general orders (tested written and verbally)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="csn-8" class="requirement-checkbox" disabled>
-                            <label for="csn-8" class="requirement-label">
-                                <span class="requirement-text">Recommended by platoon commander and approved by Cadet Advancement Review Board and/or SNIS/NSI</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="rank-actions">
-                        <button class="advance-btn" disabled>Advance to Next Rank</button>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-text">0% Complete</span>
-                    </div>
-                </div>
-
-                <!-- Cadet Petty Officer 3rd Class -->
-                <div class="rank-card hidden" data-rank="cpo3">
-                    <div class="rank-header">
-                        <h3 class="rank-name">Cadet Petty Officer 3rd Class (C/PO3)</h3>
-                        <div class="rank-status">
-                            <span class="status-badge locked">Locked</span>
-                        </div>
-                    </div>
-                    <div class="requirements-list">
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo3-1" class="requirement-checkbox" disabled>
-                            <label for="cpo3-1" class="requirement-label">
-                                <span class="requirement-text">6 weeks as TIG as cadet Seaman</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo3-2" class="requirement-checkbox" disabled>
-                            <label for="cpo3-2" class="requirement-label">
-                                <span class="requirement-text">14 weeks TIP</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo3-3" class="requirement-checkbox" disabled>
-                            <label for="cpo3-3" class="requirement-label">
-                                <span class="requirement-text">Pass rank knowledge test</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo3-4" class="requirement-checkbox" disabled>
-                            <label for="cpo3-4" class="requirement-label">
-                                <span class="requirement-text">Pass Chain Of Command test</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo3-5" class="requirement-checkbox" disabled>
-                            <label for="cpo3-5" class="requirement-label">
-                                <span class="requirement-text">Pass military alphabet test</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo3-6" class="requirement-checkbox" disabled>
-                            <label for="cpo3-6" class="requirement-label">
-                                <span class="requirement-text">5 hours community service</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo3-7" class="requirement-checkbox" disabled>
-                            <label for="cpo3-7" class="requirement-label">
-                                <span class="requirement-text">6 NJ events attended</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo3-8" class="requirement-checkbox" disabled>
-                            <label for="cpo3-8" class="requirement-label">
-                                <span class="requirement-text">Proficient in basic marching drill (Left/Right Flank, To the rear, Column Left/Right, Oblique Left/Right, Extend/Close March)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo3-9" class="requirement-checkbox" disabled>
-                            <label for="cpo3-9" class="requirement-label">
-                                <span class="requirement-text">Knowledge of AMI questions defined in the CFM & CRM</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo3-10" class="requirement-checkbox" disabled>
-                            <label for="cpo3-10" class="requirement-label">
-                                <span class="requirement-text">Recommended by platoon commander or staff and approved by Cadet Advancement Review Board and/or SNIS/NSI</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="rank-actions">
-                        <button class="advance-btn" disabled>Advance to Next Rank</button>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-text">0% Complete</span>
-                    </div>
-                </div>
-
-                <!-- Cadet Petty Officer 2nd Class -->
-                <div class="rank-card hidden" data-rank="cpo2">
-                    <div class="rank-header">
-                        <h3 class="rank-name">Cadet Petty Officer 2nd Class (C/PO2)</h3>
-                        <div class="rank-status">
-                            <span class="status-badge locked">Locked</span>
-                        </div>
-                    </div>
-                    <div class="requirements-list">
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo2-1" class="requirement-checkbox" disabled>
-                            <label for="cpo2-1" class="requirement-label">
-                                <span class="requirement-text">Successfully completed 1 year of NJROTC or be an outstanding freshman. Minimum 22-weeks TIP</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo2-2" class="requirement-checkbox" disabled>
-                            <label for="cpo2-2" class="requirement-label">
-                                <span class="requirement-text">8 weeks as Petty Officer 3rd class</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo2-3" class="requirement-checkbox" disabled>
-                            <label for="cpo2-3" class="requirement-label">
-                                <span class="requirement-text">Participated in 9 NJ events</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo2-4" class="requirement-checkbox" disabled>
-                            <label for="cpo2-4" class="requirement-label">
-                                <span class="requirement-text">10 hours of community service</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo2-5" class="requirement-checkbox" disabled>
-                            <label for="cpo2-5" class="requirement-label">
-                                <span class="requirement-text">Pass Marine rank test</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo2-6" class="requirement-checkbox" disabled>
-                            <label for="cpo2-6" class="requirement-label">
-                                <span class="requirement-text">Knowledge of AMI questions defined in the CFM & CRM</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo2-7" class="requirement-checkbox" disabled>
-                            <label for="cpo2-7" class="requirement-label">
-                                <span class="requirement-text">15 push-ups in 2 minutes (females) 32 push-ups, 2 minutes (males)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo2-8" class="requirement-checkbox" disabled>
-                            <label for="cpo2-8" class="requirement-label">
-                                <span class="requirement-text">1-mile run in 13:30 (females), 10:30 (males)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo2-9" class="requirement-checkbox" disabled>
-                            <label for="cpo2-9" class="requirement-label">
-                                <span class="requirement-text">1 minute, 30 seconds plank for both genders</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo2-10" class="requirement-checkbox" disabled>
-                            <label for="cpo2-10" class="requirement-label">
-                                <span class="requirement-text">Proficient in all basic drill enough to teach another cadet</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo2-11" class="requirement-checkbox" disabled>
-                            <label for="cpo2-11" class="requirement-label">
-                                <span class="requirement-text">Recommended by platoon commander, self-recommendation, or staff recommendation and cadet is approved by Cadet Advancement Review Board and the SNIS/NSI</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="rank-actions">
-                        <button class="advance-btn" disabled>Advance to Next Rank</button>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-text">0% Complete</span>
-                    </div>
-                </div>
-
-                <!-- Cadet Petty Officer 1st Class -->
-                <div class="rank-card hidden" data-rank="cpo1">
-                    <div class="rank-header">
-                        <h3 class="rank-name">Cadet Petty Officer 1st Class (C/PO1)</h3>
-                        <div class="rank-status">
-                            <span class="status-badge locked">Locked</span>
-                        </div>
-                    </div>
-                    <div class="requirements-list">
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo1-1" class="requirement-checkbox" disabled>
-                            <label for="cpo1-1" class="requirement-label">
-                                <span class="requirement-text">12 weeks as Petty Officer 2nd class (if done in a year sometime in May or awards ceremony)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo1-2" class="requirement-checkbox" disabled>
-                            <label for="cpo1-2" class="requirement-label">
-                                <span class="requirement-text">Usually is assigned some sort of responsibility or position of leadership</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo1-3" class="requirement-checkbox" disabled>
-                            <label for="cpo1-3" class="requirement-label">
-                                <span class="requirement-text">Participated in 12 NJ events</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo1-4" class="requirement-checkbox" disabled>
-                            <label for="cpo1-4" class="requirement-label">
-                                <span class="requirement-text">15 hours of community service</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo1-5" class="requirement-checkbox" disabled>
-                            <label for="cpo1-5" class="requirement-label">
-                                <span class="requirement-text">Proficient in Honor Color guard and armed drill</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo1-6" class="requirement-checkbox" disabled>
-                            <label for="cpo1-6" class="requirement-label">
-                                <span class="requirement-text">Proficient guide-on</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo1-7" class="requirement-checkbox" disabled>
-                            <label for="cpo1-7" class="requirement-label">
-                                <span class="requirement-text">Wear uniform whenever asked and have exemplary personal appearance</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cpo1-8" class="requirement-checkbox" disabled>
-                            <label for="cpo1-8" class="requirement-label">
-                                <span class="requirement-text">Recommended by platoon commander, self-recommendation, or staff recommendation and cadet is approved by Cadet Advancement Review Board and the SNIS/NSI</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="rank-actions">
-                        <button class="advance-btn" disabled>Advance to Next Rank</button>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-text">0% Complete</span>
-                    </div>
-                </div>
-
-                <!-- Cadet Chief Petty Officer -->
-                <div class="rank-card hidden" data-rank="ccpo">
-                    <div class="rank-header">
-                        <h3 class="rank-name">Cadet Chief Petty Officer (C/CPO)</h3>
-                        <div class="rank-status">
-                            <span class="status-badge locked">Locked</span>
-                        </div>
-                    </div>
-                    <div class="requirements-list">
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-1" class="requirement-checkbox" disabled>
-                            <label for="ccpo-1" class="requirement-label">
-                                <span class="requirement-text">Successfully completed 2 years or NJROTC or be an exceptional sophomore</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-2" class="requirement-checkbox" disabled>
-                            <label for="ccpo-2" class="requirement-label">
-                                <span class="requirement-text">12 weeks as Petty Officer 1st class</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-3" class="requirement-checkbox" disabled>
-                            <label for="ccpo-3" class="requirement-label">
-                                <span class="requirement-text">Cadet Chief must be in a staff/leadership position</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-4" class="requirement-checkbox" disabled>
-                            <label for="ccpo-4" class="requirement-label">
-                                <span class="requirement-text">Recommended advancement from peers and pass the cadet chief review board</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-5" class="requirement-checkbox" disabled>
-                            <label for="ccpo-5" class="requirement-label">
-                                <span class="requirement-text">25 hours of community service (eligible for community service ribbon)</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-6" class="requirement-checkbox" disabled>
-                            <label for="ccpo-6" class="requirement-label">
-                                <span class="requirement-text">Must be eligible for the exemplary conduct ribbon and the exemplary personal appearance ribbon</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-7" class="requirement-checkbox" disabled>
-                            <label for="ccpo-7" class="requirement-label">
-                                <span class="requirement-text">Knowledge of all drill (armed and unarmed) well enough to teach cadets</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-8" class="requirement-checkbox" disabled>
-                            <label for="ccpo-8" class="requirement-label">
-                                <span class="requirement-text">Knowledge of colorguard well enough to teach cadets</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-9" class="requirement-checkbox" disabled>
-                            <label for="ccpo-9" class="requirement-label">
-                                <span class="requirement-text">Knowledge of guide-on manual</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-10" class="requirement-checkbox" disabled>
-                            <label for="ccpo-10" class="requirement-label">
-                                <span class="requirement-text">Knowledge of swords manual</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-11" class="requirement-checkbox" disabled>
-                            <label for="ccpo-11" class="requirement-label">
-                                <span class="requirement-text">Knowledge of general orders, ranks, alphabet, chain of command, and navy terminology</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-12" class="requirement-checkbox" disabled>
-                            <label for="ccpo-12" class="requirement-label">
-                                <span class="requirement-text">PFA requirements Males are as follows: 10:30 minimum, 1:30 forearm plank minimum, and 32 push-ups minimum</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="ccpo-13" class="requirement-checkbox" disabled>
-                            <label for="ccpo-13" class="requirement-label">
-                                <span class="requirement-text">PFA requirements Females are as follows: 13:30 minimum, 1:30 forearm plank minimum, 15 push-ups minimum</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="rank-actions">
-                        <button class="advance-btn" disabled>Advance to Next Rank</button>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-text">0% Complete</span>
-                    </div>
-                </div>
-
-                <!-- Cadet Senior Chief Petty Officer -->
-                <div class="rank-card hidden" data-rank="cscpo">
-                    <div class="rank-header">
-                        <h3 class="rank-name">Cadet Senior Chief Petty Officer (C/SCPO)</h3>
-                        <div class="rank-status">
-                            <span class="status-badge locked">Locked</span>
-                        </div>
-                    </div>
-                    <div class="requirements-list">
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cscpo-1" class="requirement-checkbox" disabled>
-                            <label for="cscpo-1" class="requirement-label">
-                                <span class="requirement-text">All CPO requirements</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cscpo-2" class="requirement-checkbox" disabled>
-                            <label for="cscpo-2" class="requirement-label">
-                                <span class="requirement-text">TIG as Cadet Chief Petty Officer for 16 weeks</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cscpo-3" class="requirement-checkbox" disabled>
-                            <label for="cscpo-3" class="requirement-label">
-                                <span class="requirement-text">Selected by SNSI/NSI, but recommendations could be made</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="rank-actions">
-                        <button class="advance-btn" disabled>Advance to Next Rank</button>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-text">0% Complete</span>
-                    </div>
-                </div>
-
-                <!-- Cadet Master Chief Petty Officer -->
-                <div class="rank-card hidden" data-rank="cmcpo">
-                    <div class="rank-header">
-                        <h3 class="rank-name">Cadet Master Chief Petty Officer (C/MCPO)</h3>
-                        <div class="rank-status">
-                            <span class="status-badge locked">Locked</span>
-                        </div>
-                    </div>
-                    <div class="requirements-list">
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cmcpo-1" class="requirement-checkbox" disabled>
-                            <label for="cmcpo-1" class="requirement-label">
-                                <span class="requirement-text">All CPO requirements</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cmcpo-2" class="requirement-checkbox" disabled>
-                            <label for="cmcpo-2" class="requirement-label">
-                                <span class="requirement-text">TIG as Cadet Chief Petty Officer for 16 weeks</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cmcpo-3" class="requirement-checkbox" disabled>
-                            <label for="cmcpo-3" class="requirement-label">
-                                <span class="requirement-text">Selected by SNSI/NSI, but recommendations could be made</span>
-                            </label>
-                        </div>
-                        <div class="requirement-item">
-                            <input type="checkbox" id="cmcpo-4" class="requirement-checkbox" disabled>
-                            <label for="cmcpo-4" class="requirement-label">
-                                <span class="requirement-text">Selected by seniority and experience</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="rank-actions">
-                        <button class="advance-btn" disabled>Advance to Next Rank</button>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-text">0% Complete</span>
-                    </div>
+                <div id="rank-cards-container">
+                    <!-- Rank cards will be generated here -->
                 </div>
             </div>
 
@@ -576,7 +63,10 @@ import Layout from '../../../layouts/Layout.astro';
             <div class="resources-section">
                 <h2 class="resources-title">Additional Resources</h2>
                 <div class="resources-grid">
-                    <a href="/Resources/Knowledge/Orders/" class="resource-card">
+                    <a
+                        href="/Resources/Knowledge/Orders/"
+                        class="resource-card"
+                    >
                         <h3>General Orders</h3>
                         <p>Study and practice the 11 General Orders</p>
                     </a>
@@ -588,16 +78,20 @@ import Layout from '../../../layouts/Layout.astro';
                         <h3>Rank Structure</h3>
                         <p>Study Navy and Marine Corps ranks</p>
                     </a>
-                    <a href="/Resources/Knowledge/Alphabet/" class="resource-card">
+                    <a
+                        href="/Resources/Knowledge/Alphabet/"
+                        class="resource-card"
+                    >
                         <h3>Military Alphabet</h3>
                         <p>Learn phonetic alphabet for communications</p>
                     </a>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 
-    <style>
+    <style is:global>
+        /* Your existing CSS remains exactly the same */
         .BG555 {
             background: #000000;
             color: #fafaf5;
@@ -606,7 +100,6 @@ import Layout from '../../../layouts/Layout.astro';
             overflow-x: hidden;
             min-height: 100vh;
         }
-        
         .BG555::before {
             content: "";
             position: absolute;
@@ -614,49 +107,51 @@ import Layout from '../../../layouts/Layout.astro';
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
+            background: radial-gradient(
+                    circle at 20% 50%,
+                    rgb(2 60 113 / 40%) 0%,
+                    transparent 50%
+                ),
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgb(2 60 113 / 40%) 0%,
+                    transparent 50%
+                );
             z-index: -1;
         }
         .pdf-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 0.9rem 1.8rem;
-        background: transparent;
-        color: #e6b220;
-        border: 2px solid #e6b220;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: 700;
-        transition: all 0.3s ease;
-        text-align: center;
-        cursor: pointer;
-    }
-    
-    .pdf-button svg {
-        transition: transform 0.3s ease;
-    }
-
-    .pdf-button:hover {
-        background: #e6b220;
-        color: #000000;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(230, 178, 32, 0.4);
-    }
-        
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.9rem 1.8rem;
+            background: transparent;
+            color: #e6b220;
+            border: 2px solid #e6b220;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+        .pdf-button svg {
+            transition: transform 0.3s ease;
+        }
+        .pdf-button:hover {
+            background: #e6b220;
+            color: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 178, 32, 0.4);
+        }
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 4rem 2rem;
         }
-        
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
         }
-        
         .section-title {
             font-size: 3rem;
             font-weight: 800;
@@ -666,7 +161,6 @@ import Layout from '../../../layouts/Layout.astro';
             position: relative;
             display: inline-block;
         }
-        
         .section-title::after {
             content: "";
             position: absolute;
@@ -678,7 +172,6 @@ import Layout from '../../../layouts/Layout.astro';
             background: #e6b220;
             border-radius: 2px;
         }
-        
         .section-subtitle {
             font-size: 1.3rem;
             color: rgba(250, 250, 245, 0.9);
@@ -686,11 +179,9 @@ import Layout from '../../../layouts/Layout.astro';
             margin: 0 auto;
             line-height: 1.6;
         }
-        
         .pdf-section {
             margin-bottom: 4rem;
         }
-        
         .pdf-card {
             background: rgba(0, 0, 0, 0.7);
             border: 1px solid rgba(2, 60, 113, 0.7);
@@ -699,38 +190,32 @@ import Layout from '../../../layouts/Layout.astro';
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             transition: all 0.4s ease;
         }
-        
         .pdf-card:hover {
             border-color: rgba(230, 178, 32, 0.6);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
             transform: translateY(-5px);
         }
-        
         .pdf-header {
             background: rgba(2, 60, 113, 0.3);
             padding: 1.5rem 2rem;
             border-bottom: 1px solid rgba(2, 60, 113, 0.5);
         }
-        
         .pdf-title {
             color: #e6b220;
             font-size: 1.8rem;
             font-weight: 700;
             margin: 0 0 0.5rem 0;
         }
-        
         .pdf-subtitle {
             color: rgba(250, 250, 245, 0.8);
             margin: 0;
         }
-        
         .pdf-preview {
             padding: 3rem 2rem;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
         .pdf-placeholder {
             display: flex;
             flex-direction: column;
@@ -738,13 +223,11 @@ import Layout from '../../../layouts/Layout.astro';
             gap: 1rem;
             text-align: center;
         }
-        
         .pdf-placeholder span {
             color: rgba(250, 250, 245, 0.9);
             font-size: 1.1rem;
             font-weight: 600;
         }
-        
         .download-btn {
             background: #e6b220;
             color: #000;
@@ -755,28 +238,23 @@ import Layout from '../../../layouts/Layout.astro';
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
         .download-btn:hover {
             background: #f5c542;
             transform: translateY(-2px);
         }
-        
         .progress-section {
             margin-bottom: 4rem;
         }
-        
         .progress-title {
             color: #fafaf5;
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
-        
         .progress-subtitle {
             color: rgba(250, 250, 245, 0.8);
             margin-bottom: 2rem;
         }
-        
         .rank-card {
             background: rgba(0, 0, 0, 0.7);
             border: 1px solid rgba(2, 60, 113, 0.7);
@@ -786,15 +264,12 @@ import Layout from '../../../layouts/Layout.astro';
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             transition: all 0.4s ease;
         }
-        
         .rank-card:hover {
             border-color: rgba(230, 178, 32, 0.4);
         }
-        
         .rank-card.hidden {
             display: none;
         }
-        
         .rank-header {
             display: flex;
             justify-content: space-between;
@@ -803,14 +278,12 @@ import Layout from '../../../layouts/Layout.astro';
             padding-bottom: 1rem;
             border-bottom: 1px solid rgba(2, 60, 113, 0.5);
         }
-        
         .rank-name {
             color: #e6b220;
             font-size: 1.5rem;
             font-weight: 700;
             margin: 0;
         }
-        
         .status-badge {
             background: #e6b220;
             color: #000;
@@ -819,16 +292,13 @@ import Layout from '../../../layouts/Layout.astro';
             font-size: 0.8rem;
             font-weight: 600;
         }
-        
         .status-badge.locked {
             background: rgba(250, 250, 245, 0.2);
             color: rgba(250, 250, 245, 0.7);
         }
-        
         .requirements-list {
             margin-bottom: 2rem;
         }
-        
         .requirement-item {
             display: flex;
             align-items: flex-start;
@@ -837,11 +307,9 @@ import Layout from '../../../layouts/Layout.astro';
             border-radius: 8px;
             transition: background 0.3s ease;
         }
-        
         .requirement-item:hover {
             background: rgba(2, 60, 113, 0.2);
         }
-        
         .requirement-checkbox {
             margin-right: 1rem;
             margin-top: 0.25rem;
@@ -849,29 +317,24 @@ import Layout from '../../../layouts/Layout.astro';
             height: 20px;
             cursor: pointer;
         }
-        
         .requirement-label {
             flex: 1;
             cursor: pointer;
         }
-        
         .requirement-text {
             color: rgba(250, 250, 245, 0.9);
             line-height: 1.5;
         }
-        
         .requirement-checkbox:checked + .requirement-label .requirement-text {
             color: #e6b220;
             text-decoration: line-through;
         }
-        
         .rank-actions {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             align-items: center;
         }
-        
         .advance-btn {
             background: #023c71;
             color: #fafaf5;
@@ -882,19 +345,16 @@ import Layout from '../../../layouts/Layout.astro';
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
         .advance-btn:not(:disabled):hover {
             background: transparent;
             color: #023c71;
         }
-        
         .advance-btn:disabled {
             background: rgba(2, 60, 113, 0.3);
             border-color: rgba(2, 60, 113, 0.5);
             color: rgba(250, 250, 245, 0.5);
             cursor: not-allowed;
         }
-        
         .progress-bar {
             width: 100%;
             height: 8px;
@@ -902,24 +362,20 @@ import Layout from '../../../layouts/Layout.astro';
             border-radius: 4px;
             overflow: hidden;
         }
-        
         .progress-fill {
             height: 100%;
             background: #e6b220;
             border-radius: 4px;
             transition: width 0.3s ease;
         }
-        
         .progress-text {
             color: rgba(250, 250, 245, 0.8);
             font-size: 0.9rem;
             font-weight: 600;
         }
-        
         .resources-section {
             margin-top: 4rem;
         }
-        
         .resources-title {
             color: #fafaf5;
             font-size: 2rem;
@@ -927,13 +383,11 @@ import Layout from '../../../layouts/Layout.astro';
             margin-bottom: 2rem;
             text-align: center;
         }
-        
         .resources-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
         }
-        
         .resource-card {
             background: rgba(0, 0, 0, 0.7);
             border: 1px solid rgba(2, 60, 113, 0.7);
@@ -943,122 +397,300 @@ import Layout from '../../../layouts/Layout.astro';
             color: inherit;
             transition: all 0.3s ease;
         }
-        
         .resource-card:hover {
             border-color: rgba(230, 178, 32, 0.6);
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
         }
-        
         .resource-card h3 {
             color: #e6b220;
             font-size: 1.2rem;
             font-weight: 600;
             margin: 0 0 0.5rem 0;
         }
-        
         .resource-card p {
             color: rgba(250, 250, 245, 0.8);
             margin: 0;
             font-size: 0.9rem;
             line-height: 1.5;
         }
-        
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 padding: 3rem 1.5rem;
             }
-            
             .section-title {
                 font-size: 2.5rem;
             }
-            
             .rank-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
             }
-            
             .pdf-header,
             .pdf-preview {
                 padding: 1.5rem;
             }
-            
             .rank-card {
                 padding: 1.5rem;
             }
         }
-        
         @media (max-width: 480px) {
             .container {
                 padding: 2rem 1rem;
             }
-            
             .section-title {
                 font-size: 2rem;
             }
-            
             .resources-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 
-
     <script lang="js">
-        // Progress tracking functionality with localStorage
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize or load progress from localStorage
+        // Rank data - easily maintainable and extensible
+        const ranks = [
+            {
+                id: "csa",
+                name: "Cadet Seaman Apprentice (C/SA)",
+                status: "current",
+                requirements: [
+                    "4 weeks Time In Grade (TIG) as C/SR",
+                    "4 weeks Time In Program (TIP)",
+                    "Have all required NJROTC Program forms on file in the Admin Department",
+                    "Cadet Seaman Apprentice physical fitness requirements (1 minute plank, 3 push-ups, ¼ mile in 2:30 male & 3:15 female)",
+                    "11 General Orders (fill in blank test)",
+                    "Knowledge of basic stationary drill (Entering Classroom, Dismissal, Right/Left Face, About Face, Parade Rest, Hand Salute)",
+                    "Recommended by platoon commander and approved by Cadet Advancement Review Board and/or SNIS/NSI",
+                ],
+            },
+            {
+                id: "csn",
+                name: "Cadet Seaman (C/SN)",
+                status: "locked",
+                requirements: [
+                    "4 weeks TIG as Cadet Seaman Apprentice",
+                    "8 weeks TIP",
+                    "Participated in 3 NJ events (eligible for participation ribbon)",
+                    "Complete 1 hour of community service",
+                    "Complete the required practical factors for C/SN (1:15 plank, 8 push-ups, ½ mile in 5:15 male & 6:45 female)",
+                    "Knowledge of Squad drill (Open/Close Ranks, Dress Right, Cover/Uncover, Mark Time March, Left/Right Step)",
+                    "Knowledge of 11 general orders (tested written and verbally)",
+                    "Recommended by platoon commander and approved by Cadet Advancement Review Board and/or SNIS/NSI",
+                ],
+            },
+            {
+                id: "cpo3",
+                name: "Cadet Petty Officer 3rd Class (C/PO3)",
+                status: "locked",
+                requirements: [
+                    "6 weeks as TIG as cadet Seaman",
+                    "14 weeks TIP",
+                    "Pass rank knowledge test",
+                    "Pass Chain Of Command test",
+                    "Pass military alphabet test",
+                    "5 hours community service",
+                    "6 NJ events attended",
+                    "Proficient in basic marching drill (Left/Right Flank, To the rear, Column Left/Right, Oblique Left/Right, Extend/Close March)",
+                    "Knowledge of AMI questions defined in the CFM & CRM",
+                    "Recommended by platoon commander or staff and approved by Cadet Advancement Review Board and/or SNIS/NSI",
+                ],
+            },
+            {
+                id: "cpo2",
+                name: "Cadet Petty Officer 2nd Class (C/PO2)",
+                status: "locked",
+                requirements: [
+                    "Successfully completed 1 year of NJROTC or be an outstanding freshman. Minimum 22-weeks TIP",
+                    "8 weeks as Petty Officer 3rd class",
+                    "Participated in 9 NJ events",
+                    "10 hours of community service",
+                    "Pass Marine rank test",
+                    "Knowledge of AMI questions defined in the CFM & CRM",
+                    "15 push-ups in 2 minutes (females) 32 push-ups, 2 minutes (males)",
+                    "1-mile run in 13:30 (females), 10:30 (males)",
+                    "1 minute, 30 seconds plank for both genders",
+                    "Proficient in all basic drill enough to teach another cadet",
+                    "Recommended by platoon commander, self-recommendation, or staff recommendation and cadet is approved by Cadet Advancement Review Board and the SNIS/NSI",
+                ],
+            },
+            {
+                id: "cpo1",
+                name: "Cadet Petty Officer 1st Class (C/PO1)",
+                status: "locked",
+                requirements: [
+                    "12 weeks as Petty Officer 2nd class (if done in a year sometime in May or awards ceremony)",
+                    "Usually is assigned some sort of responsibility or position of leadership",
+                    "Participated in 12 NJ events",
+                    "15 hours of community service",
+                    "Proficient in Honor Color guard and armed drill",
+                    "Proficient guide-on",
+                    "Wear uniform whenever asked and have exemplary personal appearance",
+                    "Recommended by platoon commander, self-recommendation, or staff recommendation and cadet is approved by Cadet Advancement Review Board and the SNIS/NSI",
+                ],
+            },
+            {
+                id: "ccpo",
+                name: "Cadet Chief Petty Officer (C/CPO)",
+                status: "locked",
+                requirements: [
+                    "Successfully completed 2 years or NJROTC or be an exceptional sophomore",
+                    "12 weeks as Petty Officer 1st class",
+                    "Cadet Chief must be in a staff/leadership position",
+                    "Recommended advancement from peers and pass the cadet chief review board",
+                    "25 hours of community service (eligible for community service ribbon)",
+                    "Must be eligible for the exemplary conduct ribbon and the exemplary personal appearance ribbon",
+                    "Knowledge of all drill (armed and unarmed) well enough to teach cadets",
+                    "Knowledge of colorguard well enough to teach cadets",
+                    "Knowledge of guide-on manual",
+                    "Knowledge of swords manual",
+                    "Knowledge of general orders, ranks, alphabet, chain of command, and navy terminology",
+                    "PFA requirements Males are as follows: 10:30 minimum, 1:30 forearm plank minimum, and 32 push-ups minimum",
+                    "PFA requirements Females are as follows: 13:30 minimum, 1:30 forearm plank minimum, 15 push-ups minimum",
+                ],
+            },
+            {
+                id: "cscpo",
+                name: "Cadet Senior Chief Petty Officer (C/SCPO)",
+                status: "locked",
+                requirements: [
+                    "All CPO requirements",
+                    "TIG as Cadet Chief Petty Officer for 16 weeks",
+                    "Selected by SNSI/NSI, but recommendations could be made",
+                ],
+            },
+            {
+                id: "cmcpo",
+                name: "Cadet Master Chief Petty Officer (C/MCPO)",
+                status: "locked",
+                requirements: [
+                    "All CPO requirements",
+                    "TIG as Cadet Chief Petty Officer for 16 weeks",
+                    "Selected by SNSI/NSI, but recommendations could be made",
+                    "Selected by seniority and experience",
+                ],
+            },
+        ];
+
+        // Function to generate rank cards
+        function generateRankCards() {
+            const container = document.getElementById("rank-cards-container");
+
+            ranks.forEach((rank) => {
+                const isCurrent = rank.status === "current";
+                const isLocked = rank.status === "locked";
+
+                const rankCard = document.createElement("div");
+                rankCard.className = `rank-card ${isLocked ? "hidden" : ""}`;
+                rankCard.setAttribute("data-rank", rank.id);
+
+                rankCard.innerHTML = `
+      <div class="rank-header">
+        <h3 class="rank-name">${rank.name}</h3>
+        <div class="rank-status">
+          <span class="status-badge ${isLocked ? "locked" : ""}">${isCurrent ? "Next Rank" : "Locked"}</span>
+        </div>
+      </div>
+      <div class="requirements-list">
+        ${rank.requirements
+            .map(
+                (requirement, index) => `
+          <div class="requirement-item">
+            <input type="checkbox" id="${rank.id}-${index + 1}" class="requirement-checkbox" ${isLocked ? "disabled" : ""}>
+            <label for="${rank.id}-${index + 1}" class="requirement-label">
+              <span class="requirement-text">${requirement}</span>
+            </label>
+          </div>
+        `,
+            )
+            .join("")}
+      </div>
+      <div class="rank-actions">
+        <button class="advance-btn" disabled>Advanced to Next Rank</button>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 0%"></div>
+        </div>
+        <span class="progress-text">0% Complete</span>
+      </div>
+    `;
+
+                container.appendChild(rankCard);
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            generateRankCards();
+
+            // Your existing progress tracking functionality remains the same
             function initializeProgress() {
-                const savedProgress = localStorage.getItem('pqsProgress');
+                const savedProgress = localStorage.getItem("pqsProgress");
                 if (savedProgress) {
                     const progressData = JSON.parse(savedProgress);
-                    
-                    // Restore checkbox states
-                    Object.keys(progressData.checkboxes).forEach(checkboxId => {
-                        const checkbox = document.getElementById(checkboxId);
-                        if (checkbox) {
-                            checkbox.checked = progressData.checkboxes[checkboxId];
-                        }
-                    });
-                    
-                    // Restore current rank visibility
-                    if (progressData.currentRank) {
-                        document.querySelectorAll('.rank-card').forEach(card => {
-                            card.classList.add('hidden');
-                        });
-                        
-                        const currentRankCard = document.querySelector(`[data-rank="${progressData.currentRank}"]`);
-                        if (currentRankCard) {
-                            currentRankCard.classList.remove('hidden');
-                            
-                            // Update status badges for all completed ranks
-                            document.querySelectorAll('.rank-card').forEach(card => {
-                                const rank = card.getAttribute('data-rank');
-                                const badge = card.querySelector('.status-badge');
-                                if (rank !== progressData.currentRank && progressData.completedRanks && progressData.completedRanks.includes(rank)) {
-                                    badge.textContent = 'Completed';
-                                    badge.classList.add('locked');
-                                    
-                                    // Enable checkboxes for completed ranks (they should remain checked)
-                                    const checkboxes = card.querySelectorAll('.requirement-checkbox');
-                                    checkboxes.forEach(checkbox => {
-                                        checkbox.disabled = false;
-                                    });
-                                }
-                            });
-                            
-                            // Update current rank badge
-                            const currentBadge = currentRankCard.querySelector('.status-badge');
-                            if (currentBadge) {
-                                currentBadge.textContent = 'Current Rank';
-                                currentBadge.classList.remove('locked');
+
+                    Object.keys(progressData.checkboxes).forEach(
+                        (checkboxId) => {
+                            const checkbox =
+                                document.getElementById(checkboxId);
+                            if (checkbox) {
+                                checkbox.checked =
+                                    progressData.checkboxes[checkboxId];
                             }
-                            
-                            // Enable checkboxes for current rank
-                            const currentCheckboxes = currentRankCard.querySelectorAll('.requirement-checkbox');
-                            currentCheckboxes.forEach(checkbox => {
+                        },
+                    );
+
+                    if (progressData.currentRank) {
+                        document
+                            .querySelectorAll(".rank-card")
+                            .forEach((card) => {
+                                card.classList.add("hidden");
+                            });
+
+                        const currentRankCard = document.querySelector(
+                            `[data-rank="${progressData.currentRank}"]`,
+                        );
+                        if (currentRankCard) {
+                            currentRankCard.classList.remove("hidden");
+
+                            document
+                                .querySelectorAll(".rank-card")
+                                .forEach((card) => {
+                                    const rank = card.getAttribute("data-rank");
+                                    const badge =
+                                        card.querySelector(".status-badge");
+                                    if (
+                                        rank !== progressData.currentRank &&
+                                        progressData.completedRanks &&
+                                        progressData.completedRanks.includes(
+                                            rank,
+                                        )
+                                    ) {
+                                        badge.textContent = "Completed";
+                                        badge.classList.add("locked");
+
+                                        const checkboxes =
+                                            card.querySelectorAll(
+                                                ".requirement-checkbox",
+                                            );
+                                        checkboxes.forEach((checkbox) => {
+                                            checkbox.disabled = false;
+                                        });
+                                    }
+                                });
+
+                            const currentBadge =
+                                currentRankCard.querySelector(".status-badge");
+                            if (currentBadge) {
+                                currentBadge.textContent = "Current Rank";
+                                currentBadge.classList.remove("locked");
+                            }
+
+                            const currentCheckboxes =
+                                currentRankCard.querySelectorAll(
+                                    ".requirement-checkbox",
+                                );
+                            currentCheckboxes.forEach((checkbox) => {
                                 checkbox.disabled = false;
                             });
                         }
@@ -1066,107 +698,123 @@ import Layout from '../../../layouts/Layout.astro';
                 }
             }
 
-            // Save progress to localStorage
             function saveProgress() {
                 const progressData = {
                     checkboxes: {},
                     currentRank: null,
-                    completedRanks: []
+                    completedRanks: [],
                 };
-                
-                // Save all checkbox states
-                document.querySelectorAll('.requirement-checkbox').forEach(checkbox => {
-                    progressData.checkboxes[checkbox.id] = checkbox.checked;
-                });
-                
-                // Save current rank and completed ranks
-                const rankCards = document.querySelectorAll('.rank-card');
-                rankCards.forEach(card => {
-                    const rank = card.getAttribute('data-rank');
-                    if (!card.classList.contains('hidden')) {
+
+                document
+                    .querySelectorAll(".requirement-checkbox")
+                    .forEach((checkbox) => {
+                        progressData.checkboxes[checkbox.id] = checkbox.checked;
+                    });
+
+                const rankCards = document.querySelectorAll(".rank-card");
+                rankCards.forEach((card) => {
+                    const rank = card.getAttribute("data-rank");
+                    if (!card.classList.contains("hidden")) {
                         progressData.currentRank = rank;
                     } else {
-                        // Check if this rank is completed (all checkboxes checked)
-                        const checkboxes = card.querySelectorAll('.requirement-checkbox');
-                        const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+                        const checkboxes = card.querySelectorAll(
+                            ".requirement-checkbox",
+                        );
+                        const allChecked = Array.from(checkboxes).every(
+                            (checkbox) => checkbox.checked,
+                        );
                         if (allChecked) {
                             progressData.completedRanks.push(rank);
                         }
                     }
                 });
-                
-                localStorage.setItem('pqsProgress', JSON.stringify(progressData));
+
+                localStorage.setItem(
+                    "pqsProgress",
+                    JSON.stringify(progressData),
+                );
             }
 
-            // Calculate progress for current rank
             function updateProgress() {
-                const currentRankCard = document.querySelector('.rank-card:not(.hidden)');
+                const currentRankCard = document.querySelector(
+                    ".rank-card:not(.hidden)",
+                );
                 if (!currentRankCard) return;
-                
-                const checkboxes = currentRankCard.querySelectorAll('.requirement-checkbox:not(:disabled)');
-                const checked = currentRankCard.querySelectorAll('.requirement-checkbox:not(:disabled):checked');
+
+                const checkboxes = currentRankCard.querySelectorAll(
+                    ".requirement-checkbox:not(:disabled)",
+                );
+                const checked = currentRankCard.querySelectorAll(
+                    ".requirement-checkbox:not(:disabled):checked",
+                );
                 const progress = (checked.length / checkboxes.length) * 100;
-                
-                const progressFill = currentRankCard.querySelector('.progress-fill');
-                const progressText = currentRankCard.querySelector('.progress-text');
-                
+
+                const progressFill =
+                    currentRankCard.querySelector(".progress-fill");
+                const progressText =
+                    currentRankCard.querySelector(".progress-text");
+
                 if (progressFill && progressText) {
                     progressFill.style.width = `${progress}%`;
                     progressText.textContent = `${Math.round(progress)}% Complete`;
                 }
-                
-                // Enable advance button if all requirements are complete
-                const advanceBtn = currentRankCard.querySelector('.advance-btn');
+
+                const advanceBtn =
+                    currentRankCard.querySelector(".advance-btn");
                 if (advanceBtn) {
-                    if (checked.length === checkboxes.length) {
-                        advanceBtn.disabled = false;
-                    } else {
-                        advanceBtn.disabled = true;
-                    }
+                    advanceBtn.disabled = checked.length !== checkboxes.length;
                 }
-                
-                // Save progress whenever it changes
+
                 saveProgress();
             }
-            
-            // Add event listeners to all checkboxes
-            document.querySelectorAll('.requirement-checkbox').forEach(checkbox => {
-                checkbox.addEventListener('change', updateProgress);
-            });
-            
-            // Advance to next rank functionality
-            document.querySelectorAll('.advance-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const currentRankCard = this.closest('.rank-card');
+
+            document
+                .querySelectorAll(".requirement-checkbox")
+                .forEach((checkbox) => {
+                    checkbox.addEventListener("change", updateProgress);
+                });
+
+            document.querySelectorAll(".advance-btn").forEach((btn) => {
+                btn.addEventListener("click", function () {
+                    const currentRankCard = this.closest(".rank-card");
                     const nextRankCard = currentRankCard.nextElementSibling;
-                    
-                    if (nextRankCard && nextRankCard.classList.contains('rank-card')) {
-                        currentRankCard.classList.add('hidden');
-                        nextRankCard.classList.remove('hidden');
-                        
-                        // Update status badges
-                        currentRankCard.querySelector('.status-badge').textContent = 'Completed';
-                        currentRankCard.querySelector('.status-badge').classList.add('locked');
-                        nextRankCard.querySelector('.status-badge').textContent = 'Current Rank';
-                        nextRankCard.querySelector('.status-badge').classList.remove('locked');
-                        
-                        // Enable checkboxes for next rank
-                        const nextCheckboxes = nextRankCard.querySelectorAll('.requirement-checkbox');
-                        nextCheckboxes.forEach(checkbox => {
+
+                    if (
+                        nextRankCard &&
+                        nextRankCard.classList.contains("rank-card")
+                    ) {
+                        currentRankCard.classList.add("hidden");
+                        nextRankCard.classList.remove("hidden");
+
+                        currentRankCard.querySelector(
+                            ".status-badge",
+                        ).textContent = "Completed";
+                        currentRankCard
+                            .querySelector(".status-badge")
+                            .classList.add("locked");
+
+                        nextRankCard.querySelector(
+                            ".status-badge",
+                        ).textContent = "Current Rank";
+                        nextRankCard
+                            .querySelector(".status-badge")
+                            .classList.remove("locked");
+
+                        const nextCheckboxes = nextRankCard.querySelectorAll(
+                            ".requirement-checkbox",
+                        );
+                        nextCheckboxes.forEach((checkbox) => {
                             checkbox.disabled = false;
                         });
-                        
-                        // Reset progress for new rank and save
+
                         updateProgress();
                         saveProgress();
                     }
                 });
             });
-            
-            // Initialize the progress from localStorage
+
             initializeProgress();
-            updateProgress(); // Update progress bars after initialization
+            updateProgress();
         });
     </script>
-</div>
 </Layout>
