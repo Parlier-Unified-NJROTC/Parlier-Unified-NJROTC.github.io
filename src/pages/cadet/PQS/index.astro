@@ -2,6 +2,12 @@
 import Layout from "../../../layouts/Layout.astro";
 ---
 
+
+
+<!-- This would be so much better as a compotent, mabye sevlte or react -->
+
+<!-- TODO: Refactor this once the crisis is over -->
+
 <Layout title="PQS" disableHero>
     <div class="BG555">
         <div class="container">
@@ -49,11 +55,12 @@ import Layout from "../../../layouts/Layout.astro";
 
             <!-- Rank Advancement Progress -->
             <div class="progress-section">
-                <h2 class="progress-title">Rank Advancement Progress</h2>
+                <h2 class="progress-title">Rank Advancement Progress
+                    <button id="edit-progress-toggle" class="pdf-button" style="margin-left:1rem;padding:0.35rem 0.9rem;font-size:0.9rem;">Edit Progress</button>
+                </h2>
                 <p class="progress-subtitle">
                     Complete all requirements for your current rank to advance
                 </p>
-
                 <div id="rank-cards-container">
                     <!-- Rank cards will be generated here -->
                 </div>
@@ -414,6 +421,20 @@ import Layout from "../../../layouts/Layout.astro";
             font-size: 0.9rem;
             line-height: 1.5;
         }
+        .switcharoo-btn{
+            background: #023c71;
+            color: #fafaf5;
+            border: 2px solid #023c71;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .switcharoo-btn:hover {
+            background: transparent;
+            color: #023c71;
+        }
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
@@ -592,22 +613,26 @@ import Layout from "../../../layouts/Layout.astro";
           <span class="status-badge ${isLocked ? "locked" : ""}">${isCurrent ? "Next Rank" : "Locked"}</span>
         </div>
       </div>
-      <div class="requirements-list">
-        ${rank.requirements
-            .map(
-                (requirement, index) => `
-          <div class="requirement-item">
-            <input type="checkbox" id="${rank.id}-${index + 1}" class="requirement-checkbox" ${isLocked ? "disabled" : ""}>
-            <label for="${rank.id}-${index + 1}" class="requirement-label">
-              <span class="requirement-text">${requirement}</span>
-            </label>
-          </div>
-        `,
-            )
-            .join("")}
-      </div>
-      <div class="rank-actions">
-        <button class="advance-btn" disabled>Advanced to Next Rank</button>
+            <div class="requirements-list">
+                ${rank.requirements
+                        .map(
+                                (requirement, index) => `
+                    <div class="requirement-item">
+                        <input type="checkbox" id="${rank.id}-${index + 1}" class="requirement-checkbox" ${isLocked ? "disabled" : ""} data-original-disabled="${isLocked ? 'true' : 'false'}">
+                        <label for="${rank.id}-${index + 1}" class="requirement-label">
+                            <span class="requirement-text">${requirement}</span>
+                        </label>
+                    </div>
+                `,
+                        )
+                        .join("")}
+            </div>
+            <div class="rank-actions">
+                <div>
+                        <button class="back-btn switcharoo-btn">&lt; Back</button>
+                        <button class="advance-btn" disabled>Advance to Next Rank</button>
+                        <button class="fake-it-till-you-make-it switcharoo-btn">Skip ></button>
+                </div>
         <div class="progress-bar">
           <div class="progress-fill" style="width: 0%"></div>
         </div>
@@ -620,6 +645,8 @@ import Layout from "../../../layouts/Layout.astro";
         }
 
         // Initialize when DOM is loaded
+
+        // NOTE: IF YOU TRY TO ADD CODE OUTSIDE OF THIS FUNCTION IT WILL NOT WORK
         document.addEventListener("DOMContentLoaded", function () {
             generateRankCards();
 
@@ -774,38 +801,54 @@ import Layout from "../../../layouts/Layout.astro";
                     checkbox.addEventListener("change", updateProgress);
                 });
 
+            // Wire advance buttons to use a shared helper
             document.querySelectorAll(".advance-btn").forEach((btn) => {
-                btn.addEventListener("click", function () {
-                    const currentRankCard = this.closest(".rank-card");
-                    const nextRankCard = currentRankCard.nextElementSibling;
+                btn.addEventListener("click", function (e) {
+                    const currentRankCard = e.currentTarget.closest(".rank-card");
+                    advanceToNext(currentRankCard, true);
+                });
+            });
 
-                    if (
-                        nextRankCard &&
-                        nextRankCard.classList.contains("rank-card")
-                    ) {
+            initializeProgress();
+            updateProgress();
+
+
+
+
+
+
+            // Skip button: skip current rank and make next the current (don't necessarily save progress)
+            document.querySelectorAll(".fake-it-till-you-make-it").forEach((btn) => {
+                btn.addEventListener("click", function (e) {
+                    const currentRankCard = e.currentTarget.closest(".rank-card");
+                    advanceToNext(currentRankCard, false);
+                });
+            });
+
+            // Back button: go to previous rank if available
+            document.querySelectorAll(".back-btn").forEach((btn) => {
+                btn.addEventListener("click", function (e) {
+                    const currentRankCard = e.currentTarget.closest(".rank-card");
+                    const prevRankCard = currentRankCard.previousElementSibling;
+                    if (prevRankCard && prevRankCard.classList.contains("rank-card")) {
+                        // Hide current and show previous
                         currentRankCard.classList.add("hidden");
-                        nextRankCard.classList.remove("hidden");
+                        prevRankCard.classList.remove("hidden");
 
-                        currentRankCard.querySelector(
-                            ".status-badge",
-                        ).textContent = "Completed";
-                        currentRankCard
-                            .querySelector(".status-badge")
-                            .classList.add("locked");
+                        // Update badges
+                        const curBadge = currentRankCard.querySelector(".status-badge");
+                        const prevBadge = prevRankCard.querySelector(".status-badge");
+                        if (curBadge) {
+                            curBadge.textContent = "Locked";
+                            curBadge.classList.add("locked");
+                        }
+                        if (prevBadge) {
+                            prevBadge.textContent = "Current Rank";
+                            prevBadge.classList.remove("locked");
+                        }
 
-                        nextRankCard.querySelector(
-                            ".status-badge",
-                        ).textContent = "Current Rank";
-                        nextRankCard
-                            .querySelector(".status-badge")
-                            .classList.remove("locked");
-
-                        const nextCheckboxes = nextRankCard.querySelectorAll(
-                            ".requirement-checkbox",
-                        );
-                        nextCheckboxes.forEach((checkbox) => {
-                            checkbox.disabled = false;
-                        });
+                        // Ensure the previous rank checkboxes are enabled for interaction
+                        prevRankCard.querySelectorAll(".requirement-checkbox").forEach((c) => (c.disabled = false));
 
                         updateProgress();
                         saveProgress();
@@ -813,8 +856,39 @@ import Layout from "../../../layouts/Layout.astro";
                 });
             });
 
-            initializeProgress();
-            updateProgress();
+            // Helper to advance from the given card to the next rank
+            function advanceToNext(currentRankCard, save) {
+                if (!currentRankCard) return;
+                const nextRankCard = currentRankCard.nextElementSibling;
+                if (!nextRankCard || !nextRankCard.classList.contains("rank-card")) return;
+
+                // Mark current as completed and locked
+                currentRankCard.classList.add("hidden");
+                const curBadge = currentRankCard.querySelector(".status-badge");
+                if (curBadge) {
+                    curBadge.textContent = "Completed";
+                    curBadge.classList.add("locked");
+                }
+
+                // Make next available and current
+                nextRankCard.classList.remove("hidden");
+                const nextBadge = nextRankCard.querySelector(".status-badge");
+                if (nextBadge) {
+                    nextBadge.textContent = "Current Rank";
+                    nextBadge.classList.remove("locked");
+                }
+
+                // Enable checkboxes for the next rank
+                nextRankCard.querySelectorAll(".requirement-checkbox").forEach((checkbox) => (checkbox.disabled = false));
+
+                if (save) {
+                    updateProgress();
+                    saveProgress();
+                } else {
+                    // Even if not saving, update UI progress display
+                    updateProgress();
+                }
+            }
         });
     </script>
 </Layout>
