@@ -9,7 +9,7 @@
 ---
 {maintain ? <Work /> : null}
 
-<Layout title="Department" disableHero>
+<Layout title="Department" disableHero fancyBackground>
     <!-- Two-image hero (side-by-side on wide screens, stacked on small screens) -->
     <section class="department-hero" aria-hidden="false">
         <div class="hero-grid">
@@ -29,7 +29,7 @@
         </div>
     </main>
 
-    <style>
+    <style is:inline>
         /* Decorative bubbles to match site BG visuals */
         .department-hero { position: relative; overflow: visible; }
         .department-hero::before,
@@ -51,7 +51,7 @@
             width: 260px; height: 260px; right: -4%; bottom: -8%;
             background: radial-gradient(circle at 60% 40%, rgba(230,178,32,0.9), rgba(230,178,32,0.03) 60%);
             border-radius: 50%;
-            transform: translateZ(0);
+            transform: translateZ(0);rgba(2, 60, 113, 0.1)
         }
 
         /* Small bubbles inside content area for subtle depth */
@@ -83,22 +83,78 @@
     .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 { font-family: "Montserrat", sans-serif; color: #fafaf5; margin-top: 1.25rem; margin-bottom: 0.75rem; text-align: center; }
     .markdown-body h1 { font-size: 2.25rem; }
     .markdown-body h2 { font-size: 1.75rem; }
-    .markdown-body p { margin: 0 0 1.25rem;
-        color: rgba(255,255,255,0.95);
-        font-size: 1.02rem;
+    /* Paragraphs styled as cards (adapted from the Unit page's content-card) */
+    .markdown-body p {
+        margin: 0 auto 1.6rem; /* center the card within the content area */
+        color: rgba(255,255,255,0.96);
+        font-size: 1.03rem;
         line-height: 1.8;
-        max-width: 68ch;              /* optimal measure for comfortable reading */
-        margin-left: auto;
-        margin-right: auto;
-        text-align: left;             /* left-align paragraphs for better flow */
+        max-width: 900px;              /* limit card width for readability */
+        padding: 20px 22px;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        background: rgba(2,60,113,0.06);
+        border-left: 4px solid rgba(230,178,32,0.14);
+        box-shadow: 0 8px 22px rgba(2,6,23,0.35);
+        text-align: left;             /* left-align paragraph text */
         hyphens: auto;
         -webkit-font-smoothing: antialiased;
         word-break: break-word;
- }
+    }
+
+    /* overlay similar to .card-overlay in unit page */
+    .markdown-body p::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: linear-gradient(45deg, rgba(2,60,113,0.12), rgba(230,178,32,0.04));
+        opacity: 0;
+        transition: opacity 0.36s ease;
+        pointer-events: none;
+    }
+
+    .markdown-body p:hover::before {
+        opacity: 1;
+    }
+
+    .markdown-body p > * { position: relative; z-index: 1; }
+
+    /* Slightly stronger 'lead' paragraph treatment inside cards */
+    .markdown-body p.lead {
+        font-size: 1.08rem;
+        font-weight: 600;
+        color: rgba(255,255,255,0.97);
+        background: rgba(230,178,32,0.03);
+        border-left-color: rgba(230,178,32,0.35);
+    }
+
+    /* Exception: don't render paragraphs inside blockquotes as cards */
+    .markdown-body blockquote p {
+        background: transparent !important;
+        border-left: none !important;
+        padding: 0 !important;
+        margin: 0 0 1rem !important;
+        box-shadow: none !important;
+    }
+
+    .markdown-body blockquote p::before { display: none !important; }
 
     .markdown-body a { color: #e6b220; text-decoration: underline; }
     .markdown-body ul, .markdown-body ol { margin: 0 auto 1rem; display: inline-block; text-align: left; }
-    .markdown-body blockquote { border-left: 4px solid rgba(230,178,32,0.25); padding: 12px 16px; background: rgba(230,178,32,0.02); color: rgba(255,255,255,0.9); margin: 0 auto 1rem; max-width: 760px; text-align: left; }
+    .markdown-body blockquote {
+        border-left: 4px solid rgba(230,178,32,0.25);
+        padding: 18px 22px;
+        background: rgba(230,178,32,0.02);
+        color: rgba(255,255,255,0.9);
+        margin: 0 auto 1.6rem;
+        max-width: 900px; /* match paragraph card width */
+        text-align: left;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(2,6,23,0.22);
+    }
+    .blockquote-attrib { display: block; margin-top: 0.8rem; color: rgba(255,255,255,0.75); font-weight: 600; text-align: right; font-style: normal; }
     .markdown-body pre { background: rgba(0,0,0,0.6); padding: 12px; border-radius: 8px; overflow: auto; max-width: 760px; margin: 0 auto 1rem; text-align: left; }
     .markdown-body code { background: rgba(0,0,0,0.6); padding: 2px 6px; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace; }
     .markdown-body table { margin: 0 auto 1rem; border-collapse: collapse; }
