@@ -815,6 +815,14 @@ import Layout from "../../../../layouts/Layout.astro";
                 radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
             z-index: -1;
         }
+        .table-cell img{
+            transition: transform 0.3s ease;
+        }
+        .table-cell img:hover{
+            transform: scale(5);
+            background: rgba(10, 10, 15, 0.454);
+            border-radius: 1px;
+        }
         
         .container {
             max-width: 1400px;
