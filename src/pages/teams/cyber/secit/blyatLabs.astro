@@ -136,12 +136,16 @@
                 const cleanedSentence = cleanText(sentenceElement.textContent.toLowerCase());
 
                 if (event.results[event.results.length - 1].isFinal) {
+                    console.log("yay")
                     if (cleanedTranscript === cleanedSentence) {
                         updateUserFeedback(true, 'Correct! You spoke the sentence correctly.');
                         currentQuestion++
                         currentQuestion = generalorders[currentQuestion] ? currentQuestion : 0;
                         sentenceElement.innerText = generalorders[currentQuestion];
+
+                        console.log("yay")
                     } else {
+                        console.log("yay")
                         updateUserFeedback(false, `Incorrect. You said: "${transcript}". Try again.`);
                     }
                 }
