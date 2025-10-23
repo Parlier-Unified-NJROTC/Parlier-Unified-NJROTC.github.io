@@ -503,6 +503,12 @@ import Layout from "../../../layouts/Layout.astro";
         }
         
         /* Responsive Design */
+        @media (orientation: portrait) {
+            .pdf-card {
+                width: auto;
+            }
+            
+        }
         @media (max-width: 968px) {
             .pdf-grid {
                 grid-template-columns: 1fr;

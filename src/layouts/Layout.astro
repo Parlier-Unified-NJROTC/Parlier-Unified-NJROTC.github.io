@@ -1,21 +1,27 @@
 ---
-
-
 import Hero from "../components/Hero.astro";
 import Work from "../components/Work.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 
 interface Props {
-	title:string;
-	heroTitle?:string;
-	subtitle?:string;
-	heroVideo?:ImageMetadata | string;
-	disableHero?:boolean
-	maintain?:boolean;
-	fancyBackground?:boolean;
+	title: string;
+	heroTitle?: string;
+	subtitle?: string;
+	heroVideo?: ImageMetadata | string;
+	disableHero?: boolean;
+	maintain?: boolean;
+	fancyBackground?: boolean;
 }
-const { title, heroTitle, subtitle, heroVideo, disableHero = false, maintain = false, fancyBackground = false } = Astro.props;
+const {
+	title,
+	heroTitle,
+	subtitle,
+	heroVideo,
+	disableHero = false,
+	maintain = false,
+	fancyBackground = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -23,43 +29,87 @@ const { title, heroTitle, subtitle, heroVideo, disableHero = false, maintain = f
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/Parlier-Unified_NJROTC.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Sanchez:ital@0;1&display=swap" rel="stylesheet">
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="/Parlier-Unified_NJROTC.svg"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Sanchez:ital@0;1&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<title>PHS NJROTC - {title}</title>
 		<!-- Open Graph/Twitter Cards (for better social sharing) -->
-        <meta property="og:title" content="Parlier NJROTC" />
-        <meta
-            property="og:description"
-            content="Parlier NJROTC - Developing leaders through naval science education."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://parlier-unified-njrotc.github.io/" />
-        <meta
-            property="og:image"
-            content="https://parlier-unified-njrotc.github.io/images/njrotc-social-preview.png"
-        />
-        <meta
-            property="twitter:description"
-            content="Parlier NJROTC - Developing leaders through naval science education."
-        />
-        <meta property="twitter:title" content="Parlier NJROTC" />
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta
-            property="twitter:image"
-            content="https://parlier-unified-njrotc.github.io/images/njrotc-social-preview.png"
-        />
-		
+		<meta
+			name="description"
+			content="Parlier Unified NJROTC - Developing leaders through naval science education."
+		/>
+
+		<!-- Facebook Meta Tags -->
+		<meta
+			property="og:url"
+			content="https://parlier-unified-njrotc.github.io/"
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Parlier Unified NJROTC" />
+		<meta
+			property="og:description"
+			content="Parlier Unified NJROTC - Developing leaders through naval science education."
+		/>
+		<meta
+			property="og:image"
+			content="https://opengraph.b-cdn.net/production/images/aca28fb3-e13e-4495-b1a9-2975ac4d773d.png?token=kj6Fb7_FGDnOehMvhLLAFdROjf_Zw27-ZeSTmQh29io&height=595&width=1200&expires=33297253218"
+		/>
+
+		<!-- Twitter Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta
+			property="twitter:domain"
+			content="parlier-unified-njrotc.github.io"
+		/>
+		<meta
+			property="twitter:url"
+			content="https://parlier-unified-njrotc.github.io/"
+		/>
+		<meta name="twitter:title" content="Parlier Unified NJROTC" />
+		<meta
+			name="twitter:description"
+			content="Parlier Unified NJROTC - Developing leaders through naval science education."
+		/>
+		<meta
+			name="twitter:image"
+			content="https://opengraph.b-cdn.net/production/images/aca28fb3-e13e-4495-b1a9-2975ac4d773d.png?token=kj6Fb7_FGDnOehMvhLLAFdROjf_Zw27-ZeSTmQh29io&height=595&width=1200&expires=33297253218"
+		/>
 	</head>
 	<body>
 		<Header />
 		<!-- transition:persist is required, else switching pages messes it up -->
 		<!-- Also I wanna disable it for department layout -->
-		{disableHero ? null : <Hero title={heroTitle || title} subtitle={ subtitle } videoUrl={ heroVideo } />}
+		{
+			disableHero ? null : (
+				<Hero
+					title={heroTitle || title}
+					subtitle={subtitle}
+					videoUrl={heroVideo}
+				/>
+			)
+		}
 		{maintain ? <Work /> : null}
-		{fancyBackground ? <main class="BG555"><slot/></main> : <main> <slot/> </main>}
+		{
+			fancyBackground ? (
+				<main class="BG555">
+					<slot />
+				</main>
+			) : (
+				<main>
+					{" "}
+					<slot />{" "}
+				</main>
+			)
+		}
 		<Footer />
 	</body>
 </html>
@@ -71,23 +121,21 @@ const { title, heroTitle, subtitle, heroVideo, disableHero = false, maintain = f
 		margin: 0;
 		width: 100%;
 		height: 100%;
-		font-family:
-			ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono',
-			monospace;
+		font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
+			Consolas, "DejaVu Sans Mono", monospace;
 		overscroll-behavior: none;
-
 	}
 
 	main {
-		
 	}
 
-	blockquote,pre{
+	blockquote,
+	pre {
 		margin: 0;
 		padding: 0;
 	}
 
-	h1{
+	h1 {
 		font-size: 4em;
 	}
 	.BG555 {
@@ -98,7 +146,7 @@ const { title, heroTitle, subtitle, heroVideo, disableHero = false, maintain = f
 		overflow-x: hidden;
 		min-height: 100vh;
 	}
-	
+
 	.BG555::before {
 		content: "";
 		position: absolute;
@@ -106,21 +154,26 @@ const { title, heroTitle, subtitle, heroVideo, disableHero = false, maintain = f
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: 
-			radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
-			radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
+		background: radial-gradient(
+				circle at 20% 50%,
+				rgb(2 60 113 / 40%) 0%,
+				transparent 50%
+			),
+			radial-gradient(
+				circle at 80% 20%,
+				rgb(2 60 113 / 40%) 0%,
+				transparent 50%
+			);
 		z-index: -1;
 	}
 </style>
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Parlier Unified NJROTC",
-            "alternateName": "Parlier-Unified-NJROTC",
-            "url": "https://parlier-unified-njrotc.github.io/",
-            "sameAs": [
-                "https://github.com/Parlier-NJROTC/website",
-            ]
-        }
-    </script>
+<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"name": "Parlier Unified NJROTC",
+		"alternateName": "Parlier-Unified-NJROTC",
+		"url": "https://parlier-unified-njrotc.github.io/",
+		"sameAs": ["https://github.com/Parlier-NJROTC/website"]
+	}
+</script>
