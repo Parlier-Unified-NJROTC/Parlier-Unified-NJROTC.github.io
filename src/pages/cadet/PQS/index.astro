@@ -59,7 +59,7 @@ import Layout from "../../../layouts/Layout.astro";
                     <button id="edit-progress-toggle" class="pdf-button" style="margin-left:1rem;padding:0.35rem 0.9rem;font-size:0.9rem;">Edit Progress</button>
                 </h2>
                 <p class="progress-subtitle">
-                    Complete all requirements for your current rank to advance
+                    Complete all requirements for next rank to advance
                 </p>
                 <div id="rank-cards-container">
                     <!-- Rank cards will be generated here -->
@@ -98,7 +98,6 @@ import Layout from "../../../layouts/Layout.astro";
     </div>
 
     <style is:global>
-        /* Your existing CSS remains exactly the same */
         .BG555 {
             background: #000000;
             color: #fafaf5;
@@ -709,7 +708,7 @@ import Layout from "../../../layouts/Layout.astro";
                             const currentBadge =
                                 currentRankCard.querySelector(".status-badge");
                             if (currentBadge) {
-                                currentBadge.textContent = "Current Rank";
+                                currentBadge.textContent = "Advancing Rank";
                                 currentBadge.classList.remove("locked");
                             }
 
@@ -814,10 +813,11 @@ import Layout from "../../../layouts/Layout.astro";
 
 
 
+            document.getElementById("edit-progress-toggle").addEventListener("click", function () {
+            // Show the progress editing UI (if needed)
+            document.querySelectorAll(".rank-card").forEach(card => card.classList.remove("hidden"));
 
-
-
-            // Skip button: skip current rank and make next the current (don't necessarily save progress)
+            // Forward button: advance to next rank
             document.querySelectorAll(".fake-it-till-you-make-it").forEach((btn) => {
                 btn.addEventListener("click", function (e) {
                     const currentRankCard = e.currentTarget.closest(".rank-card");
@@ -831,11 +831,9 @@ import Layout from "../../../layouts/Layout.astro";
                     const currentRankCard = e.currentTarget.closest(".rank-card");
                     const prevRankCard = currentRankCard.previousElementSibling;
                     if (prevRankCard && prevRankCard.classList.contains("rank-card")) {
-                        // Hide current and show previous
                         currentRankCard.classList.add("hidden");
                         prevRankCard.classList.remove("hidden");
 
-                        // Update badges
                         const curBadge = currentRankCard.querySelector(".status-badge");
                         const prevBadge = prevRankCard.querySelector(".status-badge");
                         if (curBadge) {
@@ -847,7 +845,6 @@ import Layout from "../../../layouts/Layout.astro";
                             prevBadge.classList.remove("locked");
                         }
 
-                        // Ensure the previous rank checkboxes are enabled for interaction
                         prevRankCard.querySelectorAll(".requirement-checkbox").forEach((c) => (c.disabled = false));
 
                         updateProgress();
@@ -855,6 +852,8 @@ import Layout from "../../../layouts/Layout.astro";
                     }
                 });
             });
+        });
+
 
             // Helper to advance from the given card to the next rank
             function advanceToNext(currentRankCard, save) {

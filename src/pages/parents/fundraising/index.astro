@@ -1,43 +1,351 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-
 ---
 
-<Layout title="Fundraising" disableHero fancyBackground>
+<Layout title="Fundraising" disableHero>
+<div class="BG555">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-title">Fundraising & Donations</h1>
+            <p class="section-subtitle">Supporting Our Cadets' Success</p>
+        </div>
 
-	<main class="container">
-		<article class="fundraising">
-			<h1>Fundraising & Donations</h1>
+        <div class="content-card">
+            <div class="card-overlay"></div>
+            <div class="content-wrapper">
+                <section class="donate-section">
+                    <div class="donate-content">
+                        <p>If you would like to make a donation to the Unit simply write a check payable to <strong>Parlier NJROTC</strong> and mail it to:</p>
+                        
+                        <div class="address-card">
+                            <div class="address-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#e6b220">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                            </div>
+                            <address class="donation-address">
+                                <strong>Parlier HS NJROTC</strong><br />
+                                603 3rd St<br />
+                                Parlier, CA 93648
+                            </address>
+                        </div>
 
-			<section class="donate">
-				<p>If you would like to make a donation to the Unit simply write a check payable to <strong>Parlier NJROTC</strong> and mail it to:</p>
+                        <div class="note-box">
+                            <div class="note-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#e6b220">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                                </svg>
+                            </div>
+                            <p class="note" style="text-align: left;">Please include your cadet's name (if applicable) and a short note so we can apply funds appropriately.</p>
+                        </div>
+                    </div>
+                </section>
 
-				<address class="donation-address">
-					Parlier HS NJROTC<br />
-					603 3rd St<br />
-					Parlier, CA 93648
-				</address>
+                <section class="thanks-section">
+                    <div class="thanks-header">
+                        <h2 class="thanks-title">Thank You</h2>
+                        <div class="heart-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#e6b220">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="thanks-message">Your support helps provide fleidtrips, equipment, and opportunities for our cadets. Every contribution — big or small — makes a real difference in their development and success. We deeply appreciate your generosity and involvement in our program.</p>
+                </section>
+            </div>
+        </div>
+    </div>
 
-				<p class="note">Please include your cadet's name (if applicable) and a short note so we can apply funds appropriately.</p>
-			</section>
-
-			<section class="thanks">
-				<h2>Thank you</h2>
-				<p>Your support helps provide training, equipment, and opportunities for our cadets. Every contribution — big or small — makes a real difference in their development and success. We deeply appreciate your generosity and involvement in our program.</p>
-			</section>
-		</article>
-	</main>
-
-	<style>
-		.container { max-width: 920px; margin: 36px auto; padding: 0 20px; }
-		.fundraising h1 { font-family: "Montserrat", sans-serif; color: #e6b220; margin-bottom: 12px; }
-		.donate p { color: rgba(255,255,255,0.9); font-size: 1.05rem; }
-		.donation-address { margin: 12px 0 8px; color: rgba(255,255,255,0.95); font-weight: 700; }
-		.note { color: rgba(255,255,255,0.8); font-size: 0.95rem; }
-		.thanks h2 { color: #fafaf5; margin-top: 24px; }
-		.thanks p { color: rgba(255,255,255,0.9); line-height: 1.6; }
-		@media (max-width: 640px) { .container { padding: 0 14px; } }
-	</style>
-
+    <style>
+        .BG555 {
+            background: #000000;
+            color: #fafaf5;
+            position: relative;
+            z-index: 1;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .BG555::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #fafaf5;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #e6b220;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: rgba(250, 250, 245, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .content-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(2, 60, 113, 0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            transition: all 0.4s ease;
+        }
+        
+        .content-card:hover {
+            border-color: rgba(230, 178, 32, 0.6);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            background: rgba(10, 10, 15, 0.8);
+            transform: translateY(-5px);
+        }
+        
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(2, 60, 113, 0.3), rgba(230, 178, 32, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .content-card:hover .card-overlay {
+            opacity: 1;
+        }
+        
+        .content-wrapper {
+            padding: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .donate-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .donate-content p {
+            color: rgba(250, 250, 245, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .donate-content strong {
+            color: #e6b220;
+            font-weight: 700;
+        }
+        
+        .address-card {
+            background: rgba(2, 60, 113, 0.2);
+            border: 1px solid rgba(2, 60, 113, 0.5);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .address-card:hover {
+            border-color: rgba(230, 178, 32, 0.6);
+            background: rgba(2, 60, 113, 0.3);
+            transform: translateX(5px);
+        }
+        
+        .address-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(230, 178, 32, 0.1);
+            flex-shrink: 0;
+        }
+        
+        .donation-address {
+            color: #fafaf5;
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1.6;
+            font-style: normal;
+            margin: 0;
+        }
+        
+        .donation-address strong {
+            color: #e6b220;
+            font-size: 1.3rem;
+        }
+        
+        .note-box {
+            background: rgba(230, 178, 32, 0.1);
+            border: 1px solid rgba(230, 178, 32, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .note-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(230, 178, 32, 0.2);
+            flex-shrink: 0;
+        }
+        
+        .note {
+            color: rgba(250, 250, 245, 0.9);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+            font-style: italic;
+        }
+        
+        .thanks-section {
+            border-top: 2px solid rgba(2, 60, 113, 0.5);
+            padding-top: 2rem;
+        }
+        
+        .thanks-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .thanks-title {
+            color: #e6b220;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .heart-icon {
+            animation: heartbeat 2s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 50%, 100% { transform: scale(1); }
+            25%, 75% { transform: scale(1.1); }
+        }
+        
+        .thanks-message {
+            color: rgba(250, 250, 245, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-align: center;
+            margin: 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 3rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .content-wrapper {
+                padding: 2rem 1.5rem;
+            }
+            
+            .address-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.25rem;
+            }
+            
+            .note-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.25rem;
+            }
+            
+            .thanks-title {
+                font-size: 1.8rem;
+            }
+            
+            .donation-address {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .content-wrapper {
+                padding: 1.5rem 1.25rem;
+            }
+            
+            .donate-content p {
+                font-size: 1rem;
+            }
+            
+            .thanks-message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</div>
 </Layout>
-

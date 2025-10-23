@@ -12,7 +12,7 @@ img: ../../NA.png
 Samantha Basurto, a Cadet Petty Officer First Class, has been assigned the job of OPS for the 2025-2026 school year. For this school year she hopes to help the unit improve and stay organized with the help of her assistant.  
 
 ## Department Assistants
-Assistant - Jose Valdovinos
+Jose Valdovinos - Operation Assistant
 
 
 # Description
