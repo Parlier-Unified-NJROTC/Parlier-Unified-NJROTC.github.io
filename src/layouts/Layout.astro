@@ -29,7 +29,28 @@ const { title, heroTitle, subtitle, heroVideo, disableHero = false, maintain = f
 		<link href="https://fonts.googleapis.com/css2?family=Sanchez:ital@0;1&display=swap" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
 		<title>PHS NJROTC - {title}</title>
-
+		<!-- Open Graph/Twitter Cards (for better social sharing) -->
+        <meta property="og:title" content="Parlier NJROTC" />
+        <meta
+            property="og:description"
+            content="Parlier NJROTC - Developing leaders through naval science education."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://parlier-unified-njrotc.github.io/" />
+        <meta
+            property="og:image"
+            content="https://parlier-unified-njrotc.github.io/images/njrotc-social-preview.png"
+        />
+        <meta
+            property="twitter:description"
+            content="Parlier NJROTC - Developing leaders through naval science education."
+        />
+        <meta property="twitter:title" content="Parlier NJROTC" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+            property="twitter:image"
+            content="https://parlier-unified-njrotc.github.io/images/njrotc-social-preview.png"
+        />
 		
 	</head>
 	<body>
@@ -91,3 +112,15 @@ const { title, heroTitle, subtitle, heroVideo, disableHero = false, maintain = f
 		z-index: -1;
 	}
 </style>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Parlier Unified NJROTC",
+            "alternateName": "Parlier-Unified-NJROTC",
+            "url": "https://parlier-unified-njrotc.github.io/",
+            "sameAs": [
+                "https://github.com/Parlier-NJROTC/website",
+            ]
+        }
+    </script>
