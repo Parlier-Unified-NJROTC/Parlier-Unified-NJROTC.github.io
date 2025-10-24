@@ -1,6 +1,6 @@
 ---
 name: Public Affairs
-description: managing the unit's public image and communications, ensuring NJROTC stays promoted and connected to the community.
+description: Managing the unit's public image and communications, ensuring NJROTC stays promoted and connected to the community.
 img: ../../NA.png
 ---
 
