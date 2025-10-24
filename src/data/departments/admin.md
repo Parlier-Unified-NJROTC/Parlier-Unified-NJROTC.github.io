@@ -5,7 +5,7 @@ img: ../../NA.png
 ---
 
 # Department Head
-## Saul Sanchez
+## Tulia Mata
 
 Tulia Mata, a Cadet Seaman Recruit, has helped with setting up with cadet ball and has been a part of drill for a year. She has participated in the christmas parade, Ami, cadet ball, red ribbon, and other events
 
