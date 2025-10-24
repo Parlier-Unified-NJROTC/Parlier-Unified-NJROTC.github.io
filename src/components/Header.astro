@@ -1,3 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+const teams = await getCollection('teams');
+const departments = await getCollection('departments');
+---
+
 <header>
   <div class="header-container">
     <a href="/" class="logo-link">
@@ -20,19 +26,19 @@
       <div class="dropdown">
         <a href="/departments">Departments</a>
         <div class="dropdown-content">
-          <a href="/departments/admin">Admin</a>
-          <a href="/departments/ops">Operations</a>
-          <a href="/departments/public-affairs">Public Affairs</a>
-          <a href="/departments/supply">Supply</a>
+          {
+          departments.map(department => (
+            <a href={"/departments/"+department.id}>{department.data.name}</a>
+          ))}
         </div>
       </div>
       <div class="dropdown">
         <a href="/teams">Teams</a>
         <div class="dropdown-content">
-          <a href="/teams/academic">Academic Team</a>
-          <a href="/teams/color">Color Guard</a>
-          <a href="/teams/drill">Drill Team</a>
-          <a href="/teams/cyber">Cyberpatriot Team</a>
+          {
+          teams.map(team => (
+            <a href={"/teams/"+team.id}>{team.data.name}</a>
+          ))}
         </div>
       </div>
       <a href="/parents">Parents</a>

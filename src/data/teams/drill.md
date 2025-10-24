@@ -1,3 +1,8 @@
+---
+name: Drill Team
+description: NA
+img: ../../NA.png
+---
 
 # Drill Team
 
