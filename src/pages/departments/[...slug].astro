@@ -10,6 +10,7 @@ export async function getStaticPaths() {
 }
 // 2. For your template, you can get the entry directly from the prop
 const { department } = Astro.props;
+console.log("huh")
 const { Content } = await render(department);
 
 import DepartmentLayout from '../../layouts/DepartmentLayout.astro';

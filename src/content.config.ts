@@ -12,7 +12,7 @@ const departments = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/data/departments" }),
 });
 const teams = defineCollection({ 
-  loader: glob({ pattern: "**/*.md", base: "./src/data/teams" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/data/teams" }),
 });
 
 // 4. Export a single `collections` object to register your collection(s)
