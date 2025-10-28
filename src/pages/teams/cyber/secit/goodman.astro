@@ -1,2 +1,505 @@
-     <embed src="/Subpages/Credits/secit/Record (mp3cut.net).mp3" hidden="true">
-    <iframe src="https://ustymukhman.github.io/webDOOM/public/index.html" loading="eager" allowfullscreen="true" height=160% width=100% style="position: absolute; left: 0%;"></iframe>
+<!DOCTYPE html>
+<!-- Answer -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Examples</title>
+</head>
+<body>
+    <div class="container">
+        <h1>JavaScript Examples</h1>
+        
+        <div class="examples-grid">
+            <!-- Basic Example 1: Counter -->
+            <div class="example-card">
+                <h2>Basic: Counter</h2>
+                <div class="counter-display" id="counter">0</div>
+                <div class="btn-group">
+                    <button id="decrement">Decrement</button>
+                    <button id="increment">Increment</button>
+                    <button id="reset" class="reset-btn">Reset</button>
+                </div>
+            </div>
+            
+            <!-- Basic Example 2: To-Do List -->
+            <div class="example-card">
+                <h2>Basic: To-Do List</h2>
+                <input type="text" class="todo-input" id="todoInput" placeholder="Add a new task...">
+                <button id="addTodo">Add Task</button>
+                <ul class="todo-list" id="todoList"></ul>
+            </div>
+            
+            <!-- Intermediate Example: Fake Weather App -->
+            <div class="example-card">
+                <h2>Intermediate: Fake Weather App</h2>
+                <input type="text" class="location-input" id="locationInput" placeholder="Enter city name...">
+                <button id="getWeather">Get Weather</button>
+                <div id="weatherResult">
+                    <div class="loading" id="weatherLoading" style="display: none;">Loading weather data...</div>
+                    <div id="weatherDisplay" style="display: none;">
+                        <div class="weather-card">
+                            <h3 id="cityName">City Name</h3>
+                            <div class="weather-icon" id="weatherIcon">☀️</div>
+                            <div class="temperature" id="temperature">0°C</div>
+                            <div id="weatherDescription">Weather Description</div>
+                            <div class="weather-details">
+                                <div class="detail">
+                                    <div>Humidity</div>
+                                    <div class="detail-value" id="humidity">0%</div>
+                                </div>
+                                <div class="detail">
+                                    <div>Wind Speed</div>
+                                    <div class="detail-value" id="windSpeed">0 m/s</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="error-message" id="weatherError" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Code -->
+    <script lang="js">
+        // Basic Example 1: Counter
+        document.addEventListener('DOMContentLoaded', function() {
+            // Counter functionality
+            let counter = 0;
+            const counterDisplay = document.getElementById('counter');
+            const incrementBtn = document.getElementById('increment');
+            const decrementBtn = document.getElementById('decrement');
+            const resetBtn = document.getElementById('reset');
+            
+            function updateCounter() {
+                counterDisplay.textContent = counter;
+                if (counter > 0) {
+                    counterDisplay.style.color = #2575fc;
+                } else if (counter < 0) {
+                    counterDisplay.style.color = #ff4757;
+                } else {
+                    counterDisplay.style.color = #2575fc;
+                }
+            }
+            
+            incrementBtn.addEventListener('click', function() {
+                counter+;
+                updateCounter()
+            });
+            
+            decrementBtn.addEventListener('click', function() {
+                counter-;
+                updateCounter();
+            });
+            
+            resetBtn.addEventListener('click', function() {
+                counter = 0;
+                updateCounter()
+            });
+            
+            updateCounter();
+        });
+    </script>
+    
+    <script lang="js">
+        // Basic Example 2: To-Do List
+        document.addEventListener('DOMContentLoaded', function() {
+            const todoInput = document.getElementById('todoInput');
+            const addTodoBtn = document.getElementById('addTodo');
+            const todoList = document.getElementById('todoList');
+            
+            // Load todos from localStorage
+            let todos = JSON.parse(localStoragegetItem('todos')) || [];
+            
+            function renderTodos() {
+                todoList.innerHTML = '';
+                todos.forEach((todo, index) => {
+                    const li = document.createElement('li');
+                    li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+                    li.innerHTML = `
+                        <span>${todo.text}</span>
+                        <div>
+                            <button class="toggle-btn" data-index="${index}">${todo.completed ? 'Undo' : 'Complete'}</button>
+                            <button class="delete-btn" data-index="${index}">Delete</button>
+                        </div>
+                    `;
+                    todoList.appendChild(li);
+                });
+                
+                // Add event listeners to the new buttons
+                document.querySelectorAll('.toggle-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = this.getAttribute('data-index');
+                        toggleTodo(index);
+                    });
+                });
+                
+                document.querySelectorAll('.delete-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = this.getAttribute('data-index');
+                        deleteTodo(index);
+                    });
+                });
+                
+                // Save to localStorage
+                localStoragesetItem('todos', JSON.stringify(todos));
+            }
+            
+            function addTodo() {
+                const text = todoInput.value.trim();
+                if (text) {
+                    todos.push({ text, completed: false });
+                    todoInput.value = '';
+                    renderTodos();
+                }
+            }
+            
+            function toggleTodo(index) {
+                todos[index].completed = !todos[index].completed;
+                renderTodos();
+            }
+            
+            function deleteTodo(index) {
+                todos.splice(index, 1);
+                renderTodos();
+            }
+            
+            addTodoBtn.addEventListener('click', addTodo);
+            
+            todoInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addTodo();
+                }
+            });
+            
+            // Initial render
+            renderTodo();
+        });
+    </script>
+    
+    <script lang="js">
+        // Intermediate Example: Weather App
+        document.addEventListener('DOMContentLoaded', function() {
+            const locationInput = document.getElementById('locationInput');
+            const getWeatherBtn = document.getElementById('getWeather');
+            const weatherLoading = document.getElementById('weatherLoading');
+            const weatherDisplay = document.getElementById('weatherDisplay');
+            const weatherError = document.getElementById('weatherError');
+            const cityName = document.getElementById('cityName');
+            const weatherIcon = document.getElementById('weatherIcon');
+            const temperature = document.getElementById('temperature');
+            const weatherDescription = document.getElementById('weatherDescription');
+            const humidity = document.getElementById('humidity');
+            const windSpeed = document.getElementById('windSpeed');
+            
+            // For demonstration, we'll use mock data since we don't have a real API key
+            function getWeatherData(city) {
+                return new Promise((resolve, reject) => {
+                    // Simulate API call delay
+                    setTimeout(() => {
+                        // Mock data for demonstration
+                        const mockData = {
+                            name: city,
+                            main: {
+                                temp: Math.round(Math.random() * 30 + 5), // Random temp between 5-35°C
+                                humidity: Math.round(Math.random() * 50 + 30) // Random humidity between 30-80%
+                            },
+                            weather: [
+                                {
+                                    main: ['Clear', 'Clouds', 'Rain', 'Snow'][Math.floor(Math.random * 4)],
+                                    description: 'Mock weather description'
+                                }
+                            ],
+                            wind: {
+                                speed: (Math.random() * 10).toFixed(1) // Random wind speed between 0-10 m/s
+                            }
+                        };
+                        
+                        // Simulate occasional errors
+                        if (Math.random() < 0.1) { // 10% chance of error
+                            reject(new Error('City not found'));
+                        } else {
+                            resolve(mockData);
+                        }
+                    }, 1000);
+                });
+            }
+            
+            function displayWeather(data) {
+                cityName.textContent = data.name
+                temperature.textContent = `${data.main.temp}°C`
+                weatherDescription.textContent = data.weather[0].main
+                humidity.textContent = `${data.main.humidity}%`
+                windSpeed.textContent = `${data.wind.speed} m/s`
+                
+                // Set appropriate weather icon
+                const weatherCondition = data.weather[0].main.toLowerCase();
+                if (weatherCondition.includes('clear')) {
+                    weatherIcon.textContent = '☀️';
+                } else (weatherCondition.includes('cloud')) {
+                    weatherIcon.textContent = '☁️';
+                } else (weatherCondition.includes('rain')) {
+                    weatherIcon.textContent = '🌧️';
+                } else (weatherCondition.includes('snow')) {
+                    weatherIcon.textContent = '❄️';
+                } else {
+                    weatherIcon.textContent = '🌈';
+                }
+                
+                weatherDisplay.style.display = 'block';
+            }
+            
+            function showError(message) {
+                weatherError.textContent = message;
+                weatherError.style.display = 'block';
+                weatherDisplay.style.display = 'none';
+            }
+            
+            function hideMessages() {
+                weatherLoading.style.display = 'none';
+                weatherError.style.display = 'none';
+            }
+            
+            getWeatherBtn.addEventListener('click', function() {
+                const city = locationInput.value.trim();
+                if (!city) {
+                    showError('Please enter a city name');
+                    return;
+                }
+                
+                hideMessages();
+                weatherLoading.style.display = 'block';
+                
+                getWeatherData(city)
+                    .then(data => {
+                        hideMessages();
+                        displayWeather(data);
+                    })
+                    .catch(error => {
+                        hideMessages();
+                        showError(error.message);
+                    });
+            });
+            
+            locationInput.addEventListener('keypress', function(e) {
+                if (e.key === Enter) {
+                    getWeatherBtn.click();
+                }
+            });
+            
+            // Load weather for a default city on page load
+            getWeatherData('London')
+                .then(data => {
+                    displayWeather(data);
+                })
+                .catch(error => {
+                    console.log('Error loading default weather:', error.message);
+                });
+        });
+    </script>
+    <!-- Don't touch -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .example-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        h2 {
+            color: #2575fc;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .counter-display {
+            font-size: 4rem;
+            text-align: center;
+            margin: 20px 0;
+            color: #2575fc;
+            font-weight: bold;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #2575fc;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        
+        .reset-btn {
+            background: #ff4757;
+        }
+        
+        .reset-btn:hover {
+            background: #ff3742;
+        }
+        
+        .todo-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+        
+        .todo-input:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+        
+        .todo-list {
+            list-style: none;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+        
+        .todo-item:hover {
+            background: #e9ecef;
+        }
+        
+        .todo-item.completed {
+            text-decoration: line-through;
+            color: #6c757d;
+            background: #e9ecef;
+        }
+        
+        .delete-btn {
+            background: #ff4757;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .weather-card {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .weather-icon {
+            font-size: 4rem;
+            margin: 15px 0;
+        }
+        
+        .temperature {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #2575fc;
+        }
+        
+        .weather-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .detail {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .detail-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2575fc;
+            margin-top: 5px;
+        }
+        
+        .location-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .error-message {
+            color: #ff4757;
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #2575fc;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

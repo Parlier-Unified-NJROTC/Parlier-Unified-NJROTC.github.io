@@ -1,0 +1,281 @@
+
+<!-- Answer -->
+!ERROR! shows errors in the goodman.astro
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- JavaScript Code -->
+    <script lang="js">
+        // Basic Example 1: Counter
+        document.addEventListener('DOMContentLoaded', function() {
+            // Counter functionality
+            let counter = 0;
+            const counterDisplay = document.getElementById('counter');
+            const incrementBtn = document.getElementById('increment');
+            const decrementBtn = document.getElementById('decrement');
+            const resetBtn = document.getElementById('reset');
+            
+            function updateCounter() {
+                counterDisplay.textContent = counter;
+                if (counter > 0) {
+                    counterDisplay.style.color = '#2575fc'; !ERROR!
+                } else if (counter < 0) {
+                    counterDisplay.style.color = '#ff4757'; !ERROR!
+                } else {
+                    counterDisplay.style.color = '#2575fc'; !ERROR!
+                }
+            }
+            
+            incrementBtn.addEventListener('click', function() {
+                counter++; !ERROR!
+                updateCounter(); !ERROR!
+            });
+            
+            decrementBtn.addEventListener('click', function() {
+                counter--; !ERROR!
+                updateCounter();
+            });
+            
+            resetBtn.addEventListener('click', function() {
+                counter = 0;
+                updateCounter(); !ERROR!
+            });
+            
+            updateCounter();
+        });
+    </script>
+    
+    <script lang="js">
+        // Basic Example 2: To-Do List
+        document.addEventListener('DOMContentLoaded', function() {
+            const todoInput = document.getElementById('todoInput');
+            const addTodoBtn = document.getElementById('addTodo');
+            const todoList = document.getElementById('todoList');
+            
+            // Load todos from localStorage
+            let todos = JSON.parse(localStorage.getItem('todos')) || []; !ERROR!
+            
+            function renderTodos() {
+                todoList.innerHTML = '';
+                todos.forEach((todo, index) => {
+                    const li = document.createElement('li');
+                    li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+                    li.innerHTML = `
+                        <span>${todo.text}</span>
+                        <div>
+                            <button class="toggle-btn" data-index="${index}">${todo.completed ? 'Undo' : 'Complete'}</button>
+                            <button class="delete-btn" data-index="${index}">Delete</button>
+                        </div>
+                    `;
+                    todoList.appendChild(li);
+                });
+                
+                // Add event listeners to the new buttons
+                document.querySelectorAll('.toggle-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = this.getAttribute('data-index');
+                        toggleTodo(index);
+                    });
+                });
+                
+                document.querySelectorAll('.delete-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = this.getAttribute('data-index');
+                        deleteTodo(index);
+                    });
+                });
+                
+                // Save to localStorage
+                localStorage.setItem('todos', JSON.stringify(todos)); !ERROR!
+            }
+            
+            function addTodo() {
+                const text = todoInput.value.trim();
+                if (text) {
+                    todos.push({ text, completed: false });
+                    todoInput.value = '';
+                    renderTodos();
+                }
+            }
+            
+            function toggleTodo(index) {
+                todos[index].completed = !todos[index].completed;
+                renderTodos();
+            }
+            
+            function deleteTodo(index) {
+                todos.splice(index, 1);
+                renderTodos();
+            }
+            
+            addTodoBtn.addEventListener('click', addTodo);
+            
+            todoInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addTodo();
+                }
+            });
+            
+            // Initial render
+            renderTodos(); !ERROR!
+        });
+    </script>
+    
+    <script lang="js">
+        // Intermediate Example: Weather App
+        document.addEventListener('DOMContentLoaded', function() {
+            const locationInput = document.getElementById('locationInput');
+            const getWeatherBtn = document.getElementById('getWeather');
+            const weatherLoading = document.getElementById('weatherLoading');
+            const weatherDisplay = document.getElementById('weatherDisplay');
+            const weatherError = document.getElementById('weatherError');
+            const cityName = document.getElementById('cityName');
+            const weatherIcon = document.getElementById('weatherIcon');
+            const temperature = document.getElementById('temperature');
+            const weatherDescription = document.getElementById('weatherDescription');
+            const humidity = document.getElementById('humidity');
+            const windSpeed = document.getElementById('windSpeed');
+            
+            // For demonstration, we'll use mock data since we don't have a real API key
+            function getWeatherData(city) {
+                return new Promise((resolve, reject) => {
+                    // Simulate API call delay
+                    setTimeout(() => {
+                        // Mock data for demonstration
+                        const mockData = {
+                            name: city,
+                            main: {
+                                temp: Math.round(Math.random() * 30 + 5), // Random temp between 5-35°C
+                                humidity: Math.round(Math.random() * 50 + 30) // Random humidity between 30-80%
+                            },
+                            weather: [
+                                {
+                                    main: ['Clear', 'Clouds', 'Rain', 'Snow'][Math.floor(Math.random() * 4)], !ERROR!
+                                    description: 'Mock weather description'
+                                }
+                            ],
+                            wind: {
+                                speed: (Math.random() * 10).toFixed(1) // Random wind speed between 0-10 m/s
+                            }
+                        };
+                        
+                        // Simulate occasional errors
+                        if (Math.random() < 0.1) { // 10% chance of error
+                            reject(new Error('City not found'));
+                        } else {
+                            resolve(mockData);
+                        }
+                    }, 1000);
+                });
+            }
+            
+            function displayWeather(data) {
+                cityName.textContent = data.name; !ERROR!
+                temperature.textContent = `${data.main.temp}°C`; !ERROR!
+                weatherDescription.textContent = data.weather[0].main; !ERROR!
+                humidity.textContent = `${data.main.humidity}%`; !ERROR!
+                windSpeed.textContent = `${data.wind.speed} m/s`; !ERROR!
+                
+                // Set appropriate weather icon
+                const weatherCondition = data.weather[0].main.toLowerCase();
+                if (weatherCondition.includes('clear')) {
+                    weatherIcon.textContent = '☀️';
+                } else if (weatherCondition.includes('cloud')) { !ERROR!
+                    weatherIcon.textContent = '☁️';
+                } else if (weatherCondition.includes('rain')) { !ERROR!
+                    weatherIcon.textContent = '🌧️';
+                } else if (weatherCondition.includes('snow')) { !ERROR!
+                    weatherIcon.textContent = '❄️';
+                } else {
+                    weatherIcon.textContent = '🌈';
+                }
+                
+                weatherDisplay.style.display = 'block';
+            }
+            
+            function showError(message) {
+                weatherError.textContent = message;
+                weatherError.style.display = 'block';
+                weatherDisplay.style.display = 'none';
+            }
+            
+            function hideMessages() {
+                weatherLoading.style.display = 'none';
+                weatherError.style.display = 'none';
+            }
+            
+            getWeatherBtn.addEventListener('click', function() {
+                const city = locationInput.value.trim();
+                if (!city) {
+                    showError('Please enter a city name');
+                    return;
+                }
+                
+                hideMessages();
+                weatherLoading.style.display = 'block';
+                
+                getWeatherData(city)
+                    .then(data => {
+                        hideMessages();
+                        displayWeather(data);
+                    })
+                    .catch(error => {
+                        hideMessages();
+                        showError(error.message);
+                    });
+            });
+            
+            locationInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') { !ERROR!
+                    getWeatherBtn.click();
+                }
+            });
+            
+            // Load weather for a default city on page load
+            getWeatherData('London')
+                .then(data => {
+                    displayWeather(data);
+                })
+                .catch(error => {
+                    console.log('Error loading default weather:', error.message);
+                });
+        });
+    </script>
