@@ -31,7 +31,7 @@ We are also the people respondsible for the website, if there are any request pl
 
 
 - Jose Ibarra-Martinez - Team Lead
-- Saul Sanchez - Lead Dev
+- Saul Sanchez - Senior Dev
 - Javier Valdez - Trainee Dev
 - Adrian Tabares - Trainee Dev
 - Matthew Maldonado - Trainee Dev
