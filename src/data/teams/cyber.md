@@ -16,9 +16,13 @@ CyberPatriot is a national youth cyber defense competition that challenges teams
 In IT we focus on practical defensive skills used in CyberPatriot rounds and real-world administration:
 
 - System hardening and secure configuration (Windows & Linux)
+
 - Network fundamentals and services (DHCP, DNS, HTTP/HTTPS)
+
 - Monitoring, incident response, and basic forensics
+
 - Virtualization, imaging, and patch management
+
 - Account, permission, and service management
 
 ### Programming
@@ -30,12 +34,17 @@ We are also the people respondsible for the website, if there are any request pl
 ## Team Members
 
 
-- Jose Ibarra-Martinez - Team Lead
-- Saul Sanchez - Senior Dev
-- Javier Valdez - Trainee Dev
-- Adrian Tabares - Trainee Dev
-- Matthew Maldonado - Trainee Dev
-- Chicken Nugget (Cat) - Lead Developer
+Jose Ibarra-Martinez - Team Lead
+
+Saul Sanchez - Senior Dev
+
+Javier Valdez - Trainee Dev
+
+Adrian Tabares - Trainee Dev
+
+Matthew Maldonado - Trainee Dev
+
+Chicken Nugget (Cat) - Lead Developer
 
 <!--
 Developer Levels
