@@ -8,37 +8,55 @@ const {frontmatter} = Astro.props;
     
 ---
 
-
-<!-- PLACEHOLDER FOR NOWWWWWWWWWWw -->
-
 <Layout disableHero title='Teams' fancyBackground>
 
 	<section class="teams-selector">
-		<!-- Full-width hero image for teams page -->
-
 		<div class="selector-bleed">
 			<div class="selector-wrap">
-				<div class="selector-grid">
-				<a class="team-card" href="/teams/academic">
-					<div class="card-bg" style="background-image:url('/Photo/Front.jpg')"></div>
-					<div class="card-overlay"></div>
-					<div class="card-inner"><h4>Academic Team</h4><p>Competition and knowledge-based team focusing on academics and STEM.</p></div>
-				</a>
-				<a class="team-card" href="/teams/color-guard">
-					<div class="card-bg" style="background-image:url('/Photo/IMG_1.jpeg')"></div>
-					<div class="card-overlay"></div>
-					<div class="card-inner"><h4>Color Guard</h4><p>Honoring traditions and presenting the colors at events and competitions.</p><hr>Leader: Cadet Voldovinos</div>
-				</a>
-				<a class="team-card" href="/teams/cyber">
-					<div class="card-bg" style="background-image:url('/Photo/IMG_2.jpeg')"></div>
-					<div class="card-overlay"></div>
-					<div class="card-inner"><h4>Cyberpatriot Team</h4><p>Competitive cybersecurity and networking challenges to develop technical skills. Website Developers and maintainers.</p><hr>Leader: Cadet Ibarra</div>
-				</a>
-				<a class="team-card" href="/teams/drill">
-					<div class="card-bg" style="background-image:url('/Photo/IMG_3.jpeg')"></div>
-					<div class="card-overlay"></div>
-					<div class="card-inner"><h4>Drill Team</h4><p>Precision marching and drill routines practiced for competitions and parades.</p><hr>Leader: Cadet Pena</div>
-				</a>
+				<!-- Carousel Container -->
+				<div class="carousel-container">
+					<button class="carousel-arrow carousel-arrow-left" aria-label="Previous cards">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M15 18l-6-6 6-6"/>
+						</svg>
+					</button>
+					
+					<div class="carousel-track-container">
+						<div class="selector-flex carousel-track">
+							<a class="team-card" href="/teams/academic">
+								<div class="card-bg" style="background-image:url('/Photo/academic.jpg')"></div>
+								<div class="card-overlay"></div>
+								<div class="card-inner"><h4>Academic Team</h4><p>Competition and knowledge-based team focusing on academics and STEM.</p></div>
+							</a>
+							<a class="team-card" href="/teams/color-guard">
+								<div class="card-bg" style="background-image:url('/Photo/IMG_1.jpeg')"></div>
+								<div class="card-overlay"></div>
+								<div class="card-inner"><h4>Color Guard</h4><p>Honoring traditions and presenting the colors at events and competitions.</p><hr>Leader: Cadet Voldovinos</div>
+							</a>
+							<a class="team-card" href="/teams/cyber">
+								<div class="card-bg" style="background-image:url('/icons/cyber.png');background-size: auto;background-repeat: no-repeat;"></div>
+								<div class="card-overlay"></div>
+								<div class="card-inner"><h4>Cyberpatriot Team</h4><p>Competitive cybersecurity and networking challenges to develop technical skills. Website Developers and maintainers.</p><hr>Leader: Cadet Ibarra</div>
+							</a>
+							<a class="team-card" href="/teams/drill">
+								<div class="card-bg" style="background-image:url('/Photo/drill.jpg')"></div>
+								<div class="card-overlay"></div>
+								<div class="card-inner"><h4>Drill Team</h4><p>Precision marching and drill routines practiced for competitions and parades.</p><hr>Leader: Cadet Pena</div>
+							</a>
+							<!-- New Physical Training Card -->
+							<a class="team-card" href="/teams/physical">
+								<div class="card-bg" style="background-image:url('/Photo/pt.jpg')"></div>
+								<div class="card-overlay"></div>
+								<div class="card-inner"><h4>Physical Training</h4><p>Fitness, endurance, and strength training to develop physical readiness and teamwork.</p><hr>Leader: Cadet Johnson</div>
+							</a>
+						</div>
+					</div>
+
+					<button class="carousel-arrow carousel-arrow-right" aria-label="Next cards">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M9 18l6-6-6-6"/>
+						</svg>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -47,31 +65,69 @@ const {frontmatter} = Astro.props;
 			.teams-selector { padding: 40px 0; background: transparent; }
 			/* full-bleed wrapper: extends to viewport edges */
 			.selector-bleed { position: relative; width: 100vw; left: 50%; margin-left: -50vw; margin-right: -50vw; }
-			.selector-wrap { overflow: hidden; padding: 20px 0; max-width: 100%; }
+			.selector-wrap { overflow: hidden; padding: 4vw 0; max-width: 100%; }
 
-			/* Hero image area */
-			.teams-hero {
+			/* Carousel Styles */
+			.carousel-container {
+				position: relative;
+				display: flex;
+				align-items: center;
 				width: 100%;
-				height: auto;
-				aspect-ratio: 16 / 5; /* reserved space */
-				background-image: linear-gradient(90deg, rgba(2,60,113,0.6), rgba(230,178,32,0.12));
-				background-size: cover;
-				background-position: center;
-				border-bottom: 1px solid rgba(255,255,255,0.03);
 			}
 
-			/* slant each column (card) instead of the whole band */
-			.selector-grid {
-				display: grid;
-				grid-template-columns: repeat(4, 1fr);
+			.carousel-track-container {
+				width: 100%;
+				padding: 0 6vw;
+			}
+
+			.selector-flex {
+				display: flex;
 				gap: 18px;
-				padding: 0 6vw; /* padding moved to inner for full-bleed height */
-				height: 100vh; /* make grid fill viewport height */
+				height: 100vh;
 				align-items: stretch;
 				box-sizing: border-box;
-            }
+				transition: transform 0.5s ease-in-out;
+			}
 
-			/* Full-height slanted columns */
+			.carousel-arrow {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				background: rgba(15, 23, 35, 0.8);
+				border: 1px solid rgba(230, 178, 32, 0.3);
+				color: #e6b220;
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				z-index: 10;
+				transition: all 0.3s ease;
+				backdrop-filter: blur(10px);
+			}
+
+			.carousel-arrow:hover {
+				background: rgba(230, 178, 32, 0.2);
+				border-color: #e6b220;
+				transform: translateY(-50%) scale(1.1);
+			}
+
+			.carousel-arrow:disabled {
+				opacity: 0.3;
+				cursor: not-allowed;
+			}
+
+			.carousel-arrow-left {
+				left: 20px;
+			}
+
+			.carousel-arrow-right {
+				right: 20px;
+			}
+
+			/* Card sizing for flex layout */
 			.team-card {
 				display: block;
 				position: relative;
@@ -84,22 +140,24 @@ const {frontmatter} = Astro.props;
 				transform-origin: center;
 				height: 100%;
 				transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms ease;
+				flex: 0 0 calc(25% - 14px); /* 4 cards with gap */
+				min-width: 0; /* Prevent flex items from overflowing */
 			}
 
-				/* anchors shouldn't show underlines; preserve card visuals */
-				.team-card {
-					text-decoration: none;
-					color: inherit;
-				}
+			/* anchors shouldn't show underlines; preserve card visuals */
+			.team-card {
+				text-decoration: none;
+				color: inherit;
+			}
 
-				/* make headings inside cards white (anchors inherit color, so h4 became link color earlier) */
-				.team-card h4 { color: #e6b220; }
+			/* make headings inside cards white (anchors inherit color, so h4 became link color earlier) */
+			.team-card h4 { color: #e6b220; }
 
-				/* keyboard focus indicator for accessibility */
-				.team-card:focus {
-					outline: 3px solid rgba(230,178,32,0.14);
-					outline-offset: 6px;
-				}
+			/* keyboard focus indicator for accessibility */
+			.team-card:focus {
+				outline: 3px solid rgba(230,178,32,0.14);
+				outline-offset: 6px;
+			}
 
 			/* background image behind content */
 			.team-card .card-bg {
@@ -133,19 +191,95 @@ const {frontmatter} = Astro.props;
 			.team-card p { margin: 0; color: rgba(255,255,255,0.9); }
 
 			@media (max-width: 980px) {
-				.selector-grid { grid-template-columns: repeat(2, 1fr); padding: 20px; height: auto; }
-				.team-card .card-inner { padding: 20px; height: auto; transform: none; }
-				.team-card { transform: none; height: auto; border-radius: 10px; }
+				.selector-flex { 
+					height: auto; 
+					padding: 0 20px;
+				}
+				.team-card { 
+					flex: 0 0 calc(50% - 9px); /* 2 cards on tablet */
+					transform: none; 
+					height: auto; 
+					border-radius: 10px; 
+				}
+				.team-card .card-inner { 
+					padding: 20px; 
+					height: auto; 
+					transform: none; 
+				}
+				.carousel-arrow { width: 40px; height: 40px; }
+				.carousel-arrow-left { left: 10px; }
+				.carousel-arrow-right { right: 10px; }
+				.carousel-track-container {
+					padding: 0;
+				}
 			}
 			@media (max-width: 640px) {
-				.selector-grid { grid-template-columns: 1fr; padding: 8px; }
-				.team-card { transform: none; border-radius: 8px; min-height: auto; }
-				.team-card .card-inner { transform: none; padding: 14px; }
+				.selector-flex { 
+					padding: 0 8px;
+				}
+				.team-card { 
+					flex: 0 0 100%; /* 1 card on mobile */
+					transform: none; 
+					border-radius: 8px; 
+					min-height: auto; 
+				}
+				.team-card .card-inner { 
+					transform: none; 
+					padding: 14px; 
+				}
+				.carousel-arrow { width: 35px; height: 35px; }
+				.carousel-track-container {
+					padding: 0;
+				}
 			}
 
 			h4{
 				color:#e6b220;
 			}
 		</style>
+
+		<script lang="js">
+			document.addEventListener('DOMContentLoaded', function() {
+				const track = document.querySelector('.carousel-track');
+				const cards = document.querySelectorAll('.team-card');
+				const leftArrow = document.querySelector('.carousel-arrow-left');
+				const rightArrow = document.querySelector('.carousel-arrow-right');
+				
+				const cardCount = cards.length;
+				const cardsPerView = 4;
+				let currentIndex = 0;
+
+				function updateCarousel() {
+					// Calculate the width of one card including gap
+					const cardWidth = cards[0].offsetWidth + parseInt(getComputedStyle(track).gap);
+					// Move the track
+					track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+					
+					// Update arrow states
+					leftArrow.disabled = currentIndex === 0;
+					rightArrow.disabled = currentIndex >= cardCount - cardsPerView;
+				}
+
+				leftArrow.addEventListener('click', function() {
+					if (currentIndex > 0) {
+						currentIndex--;
+						updateCarousel();
+					}
+				});
+
+				rightArrow.addEventListener('click', function() {
+					if (currentIndex < cardCount - cardsPerView) {
+						currentIndex++;
+						updateCarousel();
+					}
+				});
+
+				// Initialize
+				updateCarousel();
+
+				// Handle window resize
+				window.addEventListener('resize', updateCarousel);
+			});
+		</script>
 	</section>
 </Layout>
