@@ -1,0 +1,218 @@
+---
+
+import Warning from '../components/RollingWarning.astro';
+---
+
+<!-- Backdrop behind the announcement -->
+<div id="Announce-Backdrop" aria-hidden="true"></div>
+
+<div id="Main-Container">
+    <h1 id="Main-Title">! Alert !</h1>
+    <main id="Main-Content">
+        <Warning backgroundColor='#020307'></Warning>
+        <article>
+            <h1 style="margin-bottom: 0;">Annoucement</h1>
+            <h3>From: Cyberpatriot Team</h3>
+            <hr>
+            <p>
+                This is a emergency annoucement from the Cyberpatriot team concerning its status in the Parlier NJROTC unit.
+            </p>
+            <p>
+                Due to recent events, the Cyberpatriot team has been seperated from the NJROTC unit and is currently operating independently. We will no longer be answering to the current NJROTC instructor <a href="/about/instructor#instructor2">Mr.Lowry</a>, but are still open to cooperating with the rest of the unit.
+            </p>
+            <p>
+                The website will still be maintained and updated as needed, but any further development or changes will not be planned. The Cyberpatriot team has made it clear it will no longer be cooperating with Mr. Lowry.
+            </p>
+
+            <p>
+                If you have any questions, please reach out to Cadet Ibarra directly.
+            </p>
+
+            <p>
+                
+            </p>
+        </article>
+        <hr>
+
+    </main>
+</div>
+
+<!-- Small helper just outside the announcement: a mouse-logo placeholder and "continue" text -->
+<div id="Continue-Wrapper" role="group" aria-label="Continue action" tabindex="0">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="24px" height="24px" class="hidden sm:flex" style="overflow: visible;"><path d="M610,34H390c-99,0-200,101-200,200V658c0,160,150,308,310,308h0c160,0,310-148,310-308V234C810,135,709,34,610,34Z" fill="#141313"></path><path d="M250,548V656c0,138,112,250,250,250h0c138,0,250-112,250-250V548Z" fill="#EBEAE5"></path><path d="M469,143V94H405A155,155,0,0,0,250,249V486H469V437c-28,0-64-37-64-65V208C405,180,441,143,469,143Z" fill="#FFE710"></path><path d="M595,94H531v49c28,0,64,37,64,65V372c0,28-36,65-64,65v49H750V249A155,155,0,0,0,595,94Z" fill="#EBEAE5"></path><rect x="453" y="188" width="94" height="202" rx="34" ry="34" fill="#EBEAE5"></rect></svg>
+    <div class="continue-text">continue</div>
+</div>
+
+
+<style>
+    div{
+        
+    }
+    #Main-Container {
+        position: fixed;
+        z-index: 999999999999999999;
+        width:50vw;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        color: #ffffff;
+
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+    }
+    #Main-Content{
+        border: 8px double rgb(0, 110, 255);
+        padding:24px;
+
+        border-bottom-left-radius: 25px;
+        border-top-right-radius: 25px;
+    }
+    #Main-Title{
+        position: relative;
+        top:5px;
+
+        border: 4px solid rgb(0, 110, 255);
+        display: inline;
+
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top:10px;
+        background-color: #020307;
+
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: -25px;
+
+        text-decoration: underline;
+        font-size: 60px;
+
+        border-bottom:none;
+    }
+    main{
+        background-color: black;
+    }
+
+    /* Continue message / mouse placeholder */
+    #Continue-Wrapper{
+        position: fixed;
+        top: calc(50% + 33vh);
+        left: 28%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 999999999999999999;
+        pointer-events: auto;
+        outline: none;
+    }
+
+        /* Backdrop that covers the whole screen behind the announcement */
+        #Announce-Backdrop{
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 999999999999999998; /* just under the announcement */
+            opacity: 1;
+            transition: opacity 220ms ease;
+            pointer-events: auto;
+        }
+
+    .mouse-placeholder{
+        width: 40px;
+        height: 56px;
+        border: 2px solid rgb(0,110,255);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.02);
+    }
+
+    .mouse-placeholder::after{
+        content: '';
+        width: 6px;
+        height: 12px;
+        background: rgb(0,110,255);
+        border-radius: 2px;
+    }
+    @font-face {
+            font-family: "FS Sinclar";
+            src: url("/fonts/FS_Sinclar_Regular.otf") format("opentype");
+        }
+    .continue-text{
+        color: #ffffff;
+        font-family: "FS Sinclar", sans-serif;
+        font-weight: 600;
+        border-radius: 6px;
+    }
+</style>
+
+<script>
+    // Make the announcement dismissible by click (and Esc key).
+    // This runs in the browser only and keeps behavior minimal and unobtrusive.
+    document.addEventListener('DOMContentLoaded', function () {
+        const el = document.getElementById('Main-Container');
+        const backdrop = document.getElementById('Announce-Backdrop');
+        if (!el) return;
+        // make it focusable and indicate interactivity
+        el.setAttribute('tabindex', '0');
+        el.style.cursor = 'pointer';
+
+            function dismiss() {
+                if (!el) return;
+                el.style.transition = 'opacity 220ms ease, transform 220ms ease';
+                el.style.opacity = '0';
+                el.style.transform = 'translate(-50%, -45%) scale(0.98)';
+                setTimeout(() => {
+                    if (!el) return;
+                    el.style.display = 'none';
+                    const cont = document.getElementById('Continue-Wrapper');
+                    if (cont instanceof HTMLElement) cont.style.display = 'none';
+                    if (backdrop instanceof HTMLElement) {
+                        backdrop.style.opacity = '0';
+                        // hide after transition
+                        setTimeout(() => { backdrop.style.display = 'none'; }, 240);
+                    }
+                }, 240);
+            }
+
+            el.addEventListener('click', function (e) {
+                // If user clicks a link inside the announcement, don't intercept navigation
+                const t = e.target;
+                if (t instanceof Element && t.closest('a')) return;
+                dismiss();
+            });
+
+        el.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' || e.key === 'Esc') dismiss();
+            // Space or Enter should also dismiss when focused
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                dismiss();
+            }
+        });
+
+        // Wire up the external "continue" helper to also dismiss the announcement.
+        const continueEl = document.getElementById('Continue-Wrapper');
+        if (continueEl instanceof HTMLElement) {
+            continueEl.style.cursor = 'pointer';
+            continueEl.addEventListener('click', function (e) {
+                dismiss();
+            });
+            continueEl.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' || e.key === 'Esc') dismiss();
+                if (e.key === ' ' || e.key === 'Enter') {
+                    e.preventDefault();
+                    dismiss();
+                }
+            });
+        }
+
+        // clicking the backdrop should also dismiss
+        if (backdrop instanceof HTMLElement) {
+            backdrop.style.cursor = 'pointer';
+            backdrop.addEventListener('click', function () { dismiss(); });
+        }
+    });
+</script>

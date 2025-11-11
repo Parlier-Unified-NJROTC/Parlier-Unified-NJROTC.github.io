@@ -1,0 +1,133 @@
+---
+    interface Props {
+        backgroundColor?: string;
+    }
+    const { backgroundColor = "#cde6fe"} = Astro.props;
+    let seperators = ["!!!","///","---"]
+    let text = ["Alert","We are no longer answering to our current instructor","The Cyberpatriot team is now independent"]
+---
+
+<div class="container1">
+        <b id="banner-track">
+
+            {
+                 ()=>{
+                    let elements = [];
+                    for(let i=0;i<10;i++){
+                        let sep = seperators[i % seperators.length];
+                        let txt = text[i % seperators.length];
+                        elements.push(<div class="word">{sep}</div>);
+                        elements.push(<div class="word">{txt}</div>);
+                        elements.push(<div class="word">{sep}</div>);
+                    }
+                    return elements;
+                 }
+            }
+        </b>
+    </div>
+
+   
+
+    <style define:vars={{backgroundColor}}">
+        @font-face {
+            font-family: "FS Sinclar";
+            src: url("/fonts/FS_Sinclar_Regular.otf") format("opentype");
+        }
+        
+        .container1 {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        
+        #banner-track {
+            display: flex;
+            width: max-content;
+            animation: roll 50s linear infinite;
+
+            background-color: #f94143;
+            border: 10px double var(--backgroundColor);
+            box-shadow: 0 0 10px #f94143;
+        }
+        
+        .word {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            margin: 0 18px;
+            font-size: 32px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+
+            font-family: "FS Sinclar";
+            font-weight:900;
+            color:white;
+        }
+
+        
+        .container1::before,
+        .container1::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 150px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .container1::before {
+            left: 0;
+            background: linear-gradient(to right, var(--backgroundColor) 15%, transparent 100%);
+        }
+        
+        .container1::after {
+            right: 0;
+            background: linear-gradient(to left,var(--backgroundColor) 15%, transparent 100%);
+        }
+        
+        /* Title and instructions */
+        .title {
+            text-align: center;
+            color: black;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+        
+        .title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .title p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        @keyframes roll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Responsive design */
+        @media (orientation: portrait) {
+            .word {
+                font-size: 24px;
+                margin: 0 15px;
+            }
+            
+            .star {
+                font-size: 18px;
+            }
+            
+            .title h1 {
+                font-size: 2rem;
+            }
+        }

@@ -1,0 +1,65 @@
+---
+interface Props {
+    text: string;
+    type?: 'Sick-leave' | 'Warning' | 'Under-Investigation' | 'Alert' | 'Unknown' | 'Unqualified';
+    icon?: string;
+}
+
+const { text, type = 'Unknown', icon } = Astro.props;
+
+// Define color schemes based on status type
+const statusColors: Record<string, { bg: string; border: string; text: string }> = {
+    'Sick-leave': { bg: '#1a3a52', border: '#0066cc', text: '#0066cc' },
+    'Warning': { bg: '#5a1a1a', border: '#ff0000', text: '#ff3333' },
+    'Under-Investigation': { bg: '#5a1a1a', border: '#ff0000', text: '#ff3333' },
+    'Alert': { bg: '#5a5a1a', border: '#ffff00', text: '#ffff00' },
+    'Unknown': { bg: '#2a2a2a', border: '#888888', text: '#cccccc' },
+    'Unqualified': { bg: '#5a2a1a', border: '#ff6600', text: '#ff8833' },
+};
+
+const colors = statusColors[type];
+---
+
+<div class="status-badge" style={`--bg: ${colors.bg}; --border: ${colors.border}; --text: ${colors.text};`}>
+    {icon && <span class="status-icon">{icon}</span>}
+    <span class="status-text">{text}</span>
+</div>
+
+<style define:vars={{ bg: colors.bg, border: colors.border, text: colors.text }}>
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        background: var(--bg);
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        font-family: 'Arial', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+        text-transform: capitalize;
+        letter-spacing: 0.5px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.5), inset 0 0 4px rgba(255, 255, 255, 0.05);
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .status-badge:hover {
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.7), inset 0 0 6px rgba(255, 255, 255, 0.1);
+        transform: translateY(-1px);
+    }
+
+    .status-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 14px;
+        height: 14px;
+        font-size: 10px;
+    }
+
+    .status-text {
+        letter-spacing: 0.3px;
+    }
+</style>

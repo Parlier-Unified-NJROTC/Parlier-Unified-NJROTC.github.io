@@ -1,5 +1,6 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
+import Status from "../../../components/Status.astro";
 ---
 
 <Layout title="Instructors" subtitle="Parlier High School NJROTC" disableHero>
@@ -15,11 +16,15 @@ import Layout from "../../../layouts/Layout.astro";
             <div class="instructor-content">
                 <div class="instructor-text">
                     <h2 class="instructor-name">Chief Killian</h2>
-                    <p class="instructor-bio">
+                    <p><Status text="Sick-leave" type="Sick-leave"></Status> <Status text="Unknown" type="Unknown"></Status>
+                    <p class="instructor-bio"></p> 
                         Chief Killian has been our Naval Science Instructor for five years and has proudly served 
                         twenty years in the United States Navy. Chief has taught us countless skills, lessons, and 
                         leadership principles that continue to guide us every day. Her dedication and expertise 
                         inspire every cadet to lead with confidence, discipline, and pride.
+                    </p>
+                    <p>
+                        <b>Student Note</b>: Cheif Killian has been on sick leave for the past few months. We wish her a speedy recovery.
                     </p>
                 </div>
                 <div class="instructor-image">
@@ -34,10 +39,24 @@ import Layout from "../../../layouts/Layout.astro";
         </div>
 
         <!-- Petty Officer Lowry Section -->
-        <div class="instructor-section">
+        <div class="instructor-section" id="instructor2">
             <div class="instructor-content reverse">
                 <div class="instructor-text">
                     <h2 class="instructor-name">Petty Officer Lowry</h2>
+                    <p><Status text="Warning" type="Warning"></Status>  <Status text="Alert" type="Alert"></Status> </p>
+                    <p>
+                         <b>Student Note:</b> The Cyberpatriot team has announced that they are no longer answering to Petty Officer Lowry and have separated from the NJROTC unit. The team is now operating independently.
+                         <hr>
+                            <p id="student-warning">
+                                <b>Student Warning:</b>
+                                <p id="student-warning-text">Petty Officer Lowry has been shown to take actions without the leadership teams authorization. 
+                                    Many are expressing concerns about his leadership and decision-making skill, along side his overall behavior. 
+                                    Caution is advised when dealing with him, as he is known to be authoritarian over situations, often escalating minor issues into major conflicts. 
+                                    We have currently submitted an official complaint to the school administration regarding his actions and behavior.</p>
+                            </p>
+                         <hr>
+
+                    </p>
                     <p class="instructor-bio">
                         Petty Officer Lowry serves as an Instructor for the Parlier High School NJROTC Program. 
                         A proud U.S. Navy veteran, Petty Officer Lowry served as a Master at Arms, where he developed 
@@ -228,6 +247,15 @@ import Layout from "../../../layouts/Layout.astro";
             color: rgba(250, 250, 245, 0.7);
             font-size: 0.9rem;
             text-align: center;
+        }
+
+        /* Student Warning text color */
+        #student-warning {
+            color: #ff4343;
+        }
+
+        #student-warning-text {
+            color: #ffd8d8;
         }
 
         /* ensure any images inside the placeholder fit and crop nicely */

@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 const teams = await getCollection('teams');
 const departments = await getCollection('departments');
+
+import RollingWarning2 from './RollingWarning2.astro';
 ---
 
 <header>
@@ -113,6 +115,8 @@ const departments = await getCollection('departments');
     </div>
   </div>
 </header>
+
+<RollingWarning2></RollingWarning2>
 
 <style>
   body.no-scroll {
