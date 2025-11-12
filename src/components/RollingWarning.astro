@@ -3,8 +3,8 @@
         backgroundColor?: string;
     }
     const { backgroundColor = "white"} = Astro.props;
-    let seperators = ["!!!","///","---"]
-    let text = ["Alert","Warning","Notice"]
+    let seperators = ["///","---"]
+    let text = ["Alert","Notice"]
 ---
 
 <div class="container1">
@@ -46,9 +46,9 @@
             width: max-content;
             animation: roll 50s linear infinite;
 
-            background-color: #f94143;
+            background-color: #f9ed41;
             border: 10px double var(--backgroundColor);
-            box-shadow: 0 0 10px #f94143;
+            box-shadow: 0 0 10px #f9ed41;
         }
         
         .word {
@@ -56,7 +56,7 @@
             align-items: center;
             white-space: nowrap;
             margin: 0 18px;
-            font-size: 32px;
+            font-size: 1px;
             font-weight: 600;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
@@ -97,7 +97,7 @@
         }
         
         .title h1 {
-            font-size: 2.5rem;
+            font-size: 10px;
             margin-bottom: 10px;
             letter-spacing: 2px;
         }
@@ -124,7 +124,7 @@
             }
             
             .star {
-                font-size: 18px;
+                font-size: 8px;
             }
             
             .title h1 {
