@@ -6,7 +6,7 @@ img: ../../NA.png
 
 
 
-# Academic cCordinator
+# Academic Cordinator
 
 # Description
 
@@ -16,7 +16,7 @@ img: ../../NA.png
 </blockquote>
 
 ## Department Assistants
-Sancho Peña - Supply Assistant
+Sancho Peña - Academic Coordinator Assistant
 
 
 
