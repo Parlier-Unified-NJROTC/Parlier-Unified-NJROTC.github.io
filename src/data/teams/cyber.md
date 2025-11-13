@@ -33,24 +33,21 @@ We are also the people respondsible for the website, if there are any request pl
 
 ## Team Members
 
+Saul Sanchez - Lead Developer
 
-Jose Ibarra-Martinez - Team Lead
+Javier Valdez - Trainee Developer
 
-Saul Sanchez - Senior Dev
+Adrian Tabares - Trainee Developer
 
-Javier Valdez - Trainee Dev
-
-Adrian Tabares - Trainee Dev
-
-Matthew Maldonado - Trainee Dev
+Matthew Maldonado - Trainee Developer
 
 Chicken Nugget (Cat) - Lead Developer
 
 <!--
 Developer Levels
-Trainee Dev
-Junior Dev
-Senior Dev
+Trainee Developer
+Junior Developer
+Senior Developer
 Lead Developer
 -->
 
