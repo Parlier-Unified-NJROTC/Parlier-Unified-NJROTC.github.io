@@ -10,7 +10,7 @@ img: ../../NA.png
 Tulia Mata, a Cadet Seaman Recruit, has helped with setting up with cadet ball and has been a part of drill for a year. She has participated in the christmas parade, Ami, cadet ball, red ribbon, and other events
 
 ## Department Assistants
-Name - Admin Assistant
+Destiny Zunigas - Admin Assistant
 
 # Description
 

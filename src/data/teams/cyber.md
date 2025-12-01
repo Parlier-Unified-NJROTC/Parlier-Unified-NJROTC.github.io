@@ -4,32 +4,12 @@ description: "CyberPatriot team focused on hands-on IT, cybersecurity, and progr
 img: ../../NA.png
 
 ---
+# Department Head
 
-# CyberPatriot Team
+## Saul Sanchez
 
-## Description
-
-CyberPatriot is a national youth cyber defense competition that challenges teams to secure and manage virtual networks and systems under time pressure. Our Cyber team pairs IT operations and programming practice so cadets learn both how systems are defended and how to build tools that help automate and secure them.
-
-### IT
-
-In IT we focus on practical defensive skills used in CyberPatriot rounds and real-world administration:
-
-- System hardening and secure configuration (Windows & Linux)
-
-- Network fundamentals and services (DHCP, DNS, HTTP/HTTPS)
-
-- Monitoring, incident response, and basic forensics
-
-- Virtualization, imaging, and patch management
-
-- Account, permission, and service management
-
-### Programming
-
-Our team specializes in programming and web development. We teach reasearching skills and knowledge in Javascript, Express, and Astro. This allows us to create projects and tools for the unit and our own needs. 
-
-We are also the people respondsible for the website, if there are any request please let us know.
+<!-- note to self: this renders as a <p> tag -->
+Saul Sanchez, a Cadet Petty Officer 2nd Class.  He has done many things for the unit, for example, he has completely finished recording and sorting all unit equipment in the topside and Conex box, as well as work on both Parlier NJROTC website and he was awarded a cadet achievement ribbon from the Area Manager to recognize his efforts. 
 
 ## Team Members
 
@@ -41,7 +21,12 @@ Adrian Tabares - Trainee Developer
 
 Matthew Maldonado - Trainee Developer
 
-Chicken Nugget (Cat) - Lead Developer
+## Description
+
+<blockquote>
+CyberPatriot is a national youth cyber defense competition that challenges teams to secure and manage virtual networks and systems under time pressure. Our Cyber team pairs IT operations and programming practice so cadets learn both how systems are defended and how to build tools that help automate and secure them.
+<cite class="blockquote-attrib">- Cadet Petty Officer 2nd Class Sanchez</cite>
+</blockquote>
 
 <!--
 Developer Levels

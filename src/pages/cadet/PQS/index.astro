@@ -2,12 +2,6 @@
 import Layout from "../../../layouts/Layout.astro";
 ---
 
-
-
-<!-- This would be so much better as a compotent, mabye sevlte or react -->
-
-<!-- TODO: Refactor this once the crisis is over -->
-
 <Layout title="PQS" disableHero>
     <div class="BG555">
         <div class="container">
@@ -55,14 +49,23 @@ import Layout from "../../../layouts/Layout.astro";
 
             <!-- Rank Advancement Progress -->
             <div class="progress-section">
-                <h2 class="progress-title">Rank Advancement Progress
-                    <button id="edit-progress-toggle" class="pdf-button" style="margin-left:1rem;padding:0.35rem 0.9rem;font-size:0.9rem;">Edit Progress</button>
-                </h2>
+                <h2 class="progress-title">Rank Advancement Progress</h2>
                 <p class="progress-subtitle">
-                    Complete all requirements for next rank to advance
+                    Complete all requirements for your current rank to advance
                 </p>
+
+
                 <div id="rank-cards-container">
                     <!-- Rank cards will be generated here -->
+                </div>
+                <!-- Navigation Controls -->
+                <div class="navigation-controls">
+                    <button id="prev-rank" class="switcharoo-btn" disabled>
+                        &#128896; Previous Rank
+                    </button>
+                    <button id="next-rank" class="switcharoo-btn">
+                        Next Rank &#128898;
+                    </button>
                 </div>
             </div>
 
@@ -98,6 +101,7 @@ import Layout from "../../../layouts/Layout.astro";
     </div>
 
     <style is:global>
+        /* Your existing CSS remains exactly the same */
         .BG555 {
             background: #000000;
             color: #fafaf5;
@@ -261,6 +265,56 @@ import Layout from "../../../layouts/Layout.astro";
             color: rgba(250, 250, 245, 0.8);
             margin-bottom: 2rem;
         }
+        
+        /* Navigation Controls */
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.75rem 1.5rem;
+            background: rgba(2, 60, 113, 0.3);
+            color: #fafaf5;
+            border: 2px solid rgba(2, 60, 113, 0.7);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:not(:disabled):hover {
+            background: rgba(2, 60, 113, 0.5);
+            border-color: #e6b220;
+            transform: translateY(-2px);
+        }
+        
+        .nav-button:disabled {
+            background: rgba(2, 60, 113, 0.1);
+            border-color: rgba(2, 60, 113, 0.3);
+            color: rgba(250, 250, 245, 0.5);
+            cursor: not-allowed;
+        }
+        .switcharoo-btn{
+            background: #023c71;
+            color: #fafaf5;
+            border: 2px solid #023c71;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .switcharoo-btn:hover {
+            background: transparent;
+            color: #023c71;
+        }
+        
         .rank-card {
             background: rgba(0, 0, 0, 0.7);
             border: 1px solid rgba(2, 60, 113, 0.7);
@@ -290,18 +344,7 @@ import Layout from "../../../layouts/Layout.astro";
             font-weight: 700;
             margin: 0;
         }
-        .status-badge {
-            background: #e6b220;
-            color: #000;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        .status-badge.locked {
-            background: rgba(250, 250, 245, 0.2);
-            color: rgba(250, 250, 245, 0.7);
-        }
+        /* Removed status-badge styles */
         .requirements-list {
             margin-bottom: 2rem;
         }
@@ -420,20 +463,6 @@ import Layout from "../../../layouts/Layout.astro";
             font-size: 0.9rem;
             line-height: 1.5;
         }
-        .switcharoo-btn{
-            background: #023c71;
-            color: #fafaf5;
-            border: 2px solid #023c71;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .switcharoo-btn:hover {
-            background: transparent;
-            color: #023c71;
-        }
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
@@ -453,6 +482,9 @@ import Layout from "../../../layouts/Layout.astro";
             }
             .rank-card {
                 padding: 1.5rem;
+            }
+            .navigation-controls {
+                flex-direction: column;
             }
         }
         @media (max-width: 480px) {
@@ -482,13 +514,13 @@ import Layout from "../../../layouts/Layout.astro";
                     "Cadet Seaman Apprentice physical fitness requirements (1 minute plank, 3 push-ups, ¼ mile in 2:30 male & 3:15 female)",
                     "11 General Orders (fill in blank test)",
                     "Knowledge of basic stationary drill (Entering Classroom, Dismissal, Right/Left Face, About Face, Parade Rest, Hand Salute)",
-                    "Recommended by platoon commander and approved by Cadet Advancement Review Board and/or SNIS/NSI"
+                    "Recommended by platoon commander and approved by Cadet Advancement Review Board and/or SNIS/NSI",
                 ],
             },
             {
                 id: "csn",
                 name: "Cadet Seaman (C/SN)",
-                status: "locked",
+                status: "next",
                 requirements: [
                     "4 weeks TIG as Cadet Seaman Apprentice",
                     "8 weeks TIP",
@@ -597,41 +629,35 @@ import Layout from "../../../layouts/Layout.astro";
         function generateRankCards() {
             const container = document.getElementById("rank-cards-container");
 
-            ranks.forEach((rank) => {
+            ranks.forEach((rank, index) => {
                 const isCurrent = rank.status === "current";
                 const isLocked = rank.status === "locked";
 
                 const rankCard = document.createElement("div");
-                rankCard.className = `rank-card ${isLocked ? "hidden" : ""}`;
+                rankCard.className = `rank-card ${!isCurrent ? "hidden" : ""}`;
                 rankCard.setAttribute("data-rank", rank.id);
+                rankCard.setAttribute("data-index", index);
 
                 rankCard.innerHTML = `
       <div class="rank-header">
         <h3 class="rank-name">${rank.name}</h3>
-        <div class="rank-status">
-          <span class="status-badge ${isLocked ? "locked" : ""}">${isCurrent ? "Next Rank" : "Locked"}</span>
-        </div>
       </div>
-            <div class="requirements-list">
-                ${rank.requirements
-                        .map(
-                                (requirement, index) => `
-                    <div class="requirement-item">
-                        <input type="checkbox" id="${rank.id}-${index + 1}" class="requirement-checkbox" ${isLocked ? "disabled" : ""} data-original-disabled="${isLocked ? 'true' : 'false'}">
-                        <label for="${rank.id}-${index + 1}" class="requirement-label">
-                            <span class="requirement-text">${requirement}</span>
-                        </label>
-                    </div>
-                `,
-                        )
-                        .join("")}
-            </div>
-            <div class="rank-actions">
-                <div>
-                        <button class="back-btn switcharoo-btn">&lt; Back</button>
-                        <button class="advance-btn" disabled>Advance to Next Rank</button>
-                        <button class="fake-it-till-you-make-it switcharoo-btn">Skip ></button>
-                </div>
+      <div class="requirements-list">
+        ${rank.requirements
+            .map(
+                (requirement, reqIndex) => `
+          <div class="requirement-item">
+            <input type="checkbox" id="${rank.id}-${reqIndex + 1}" class="requirement-checkbox" ${isLocked ? "disabled" : ""}>
+            <label for="${rank.id}-${reqIndex + 1}" class="requirement-label">
+              <span class="requirement-text">${requirement}</span>
+            </label>
+          </div>
+        `,
+            )
+            .join("")}
+      </div>
+      <div class="rank-actions">
+        <button class="advance-btn" ${isLocked ? "disabled" : ""}>Advance to Next Rank</button>
         <div class="progress-bar">
           <div class="progress-fill" style="width: 0%"></div>
         </div>
@@ -644,10 +670,15 @@ import Layout from "../../../layouts/Layout.astro";
         }
 
         // Initialize when DOM is loaded
-
-        // NOTE: IF YOU TRY TO ADD CODE OUTSIDE OF THIS FUNCTION IT WILL NOT WORK
         document.addEventListener("DOMContentLoaded", function () {
             generateRankCards();
+            
+            // Get navigation buttons
+            const prevButton = document.getElementById("prev-rank");
+            const nextButton = document.getElementById("next-rank");
+            
+            // Initialize navigation
+            initializeNavigation();
 
             // Your existing progress tracking functionality remains the same
             function initializeProgress() {
@@ -679,39 +710,6 @@ import Layout from "../../../layouts/Layout.astro";
                         if (currentRankCard) {
                             currentRankCard.classList.remove("hidden");
 
-                            document
-                                .querySelectorAll(".rank-card")
-                                .forEach((card) => {
-                                    const rank = card.getAttribute("data-rank");
-                                    const badge =
-                                        card.querySelector(".status-badge");
-                                    if (
-                                        rank !== progressData.currentRank &&
-                                        progressData.completedRanks &&
-                                        progressData.completedRanks.includes(
-                                            rank,
-                                        )
-                                    ) {
-                                        badge.textContent = "Completed";
-                                        badge.classList.add("locked");
-
-                                        const checkboxes =
-                                            card.querySelectorAll(
-                                                ".requirement-checkbox",
-                                            );
-                                        checkboxes.forEach((checkbox) => {
-                                            checkbox.disabled = false;
-                                        });
-                                    }
-                                });
-
-                            const currentBadge =
-                                currentRankCard.querySelector(".status-badge");
-                            if (currentBadge) {
-                                currentBadge.textContent = "Advancing Rank";
-                                currentBadge.classList.remove("locked");
-                            }
-
                             const currentCheckboxes =
                                 currentRankCard.querySelectorAll(
                                     ".requirement-checkbox",
@@ -722,6 +720,9 @@ import Layout from "../../../layouts/Layout.astro";
                         }
                     }
                 }
+                
+                // Update navigation after loading progress
+                updateNavigation();
             }
 
             function saveProgress() {
@@ -794,100 +795,106 @@ import Layout from "../../../layouts/Layout.astro";
                 saveProgress();
             }
 
+            // Navigation functionality
+            function initializeNavigation() {
+                prevButton.addEventListener("click", navigateToPreviousRank);
+                nextButton.addEventListener("click", navigateToNextRank);
+                
+                // Update navigation state initially
+                updateNavigation();
+            }
+            
+            function navigateToPreviousRank() {
+                const currentRankCard = document.querySelector(".rank-card:not(.hidden)");
+                if (!currentRankCard) return;
+                
+                const currentIndex = parseInt(currentRankCard.getAttribute("data-index"));
+                if (currentIndex > 0) {
+                    // Hide current card
+                    currentRankCard.classList.add("hidden");
+                    
+                    // Show previous card
+                    const prevRankCard = document.querySelector(`[data-index="${currentIndex - 1}"]`);
+                    prevRankCard.classList.remove("hidden");
+                    
+                    // Update navigation buttons
+                    updateNavigation();
+                    
+                    // Save progress
+                    saveProgress();
+                    
+                    // Update progress display
+                    updateProgress();
+                }
+            }
+            
+            function navigateToNextRank() {
+                const currentRankCard = document.querySelector(".rank-card:not(.hidden)");
+                if (!currentRankCard) return;
+                
+                const currentIndex = parseInt(currentRankCard.getAttribute("data-index"));
+                if (currentIndex < ranks.length - 1) {
+                    // Hide current card
+                    currentRankCard.classList.add("hidden");
+                    
+                    // Show next card
+                    const nextRankCard = document.querySelector(`[data-index="${currentIndex + 1}"]`);
+                    nextRankCard.classList.remove("hidden");
+                    
+                    // Update navigation buttons
+                    updateNavigation();
+                    
+                    // Save progress
+                    saveProgress();
+                    
+                    // Update progress display
+                    updateProgress();
+                }
+            }
+            
+            function updateNavigation() {
+                const currentRankCard = document.querySelector(".rank-card:not(.hidden)");
+                if (!currentRankCard) return;
+                
+                const currentIndex = parseInt(currentRankCard.getAttribute("data-index"));
+                
+                // Update previous button
+                prevButton.disabled = currentIndex === 0;
+                
+                // Update next button
+                nextButton.disabled = currentIndex === ranks.length - 1;
+            }
+
             document
                 .querySelectorAll(".requirement-checkbox")
                 .forEach((checkbox) => {
                     checkbox.addEventListener("change", updateProgress);
                 });
 
-            // Wire advance buttons to use a shared helper
             document.querySelectorAll(".advance-btn").forEach((btn) => {
-                btn.addEventListener("click", function (e) {
-                    const currentRankCard = e.currentTarget.closest(".rank-card");
-                    advanceToNext(currentRankCard, true);
-                });
-            });
-
-            initializeProgress();
-            updateProgress();
-
-
-
-            document.getElementById("edit-progress-toggle").addEventListener("click", function () {
-            // Show the progress editing UI (if needed)
-            document.querySelectorAll(".rank-card").forEach(card => card.classList.remove("hidden"));
-
-            // Forward button: advance to next rank
-            document.querySelectorAll(".fake-it-till-you-make-it").forEach((btn) => {
-                btn.addEventListener("click", function (e) {
-                    const currentRankCard = e.currentTarget.closest(".rank-card");
-                    advanceToNext(currentRankCard, false);
-                });
-            });
-
-            // Back button: go to previous rank if available
-            document.querySelectorAll(".back-btn").forEach((btn) => {
-                btn.addEventListener("click", function (e) {
-                    const currentRankCard = e.currentTarget.closest(".rank-card");
-                    const prevRankCard = currentRankCard.previousElementSibling;
-                    if (prevRankCard && prevRankCard.classList.contains("rank-card")) {
+                btn.addEventListener("click", function () {
+                    const currentRankCard = this.closest(".rank-card");
+                    const currentIndex = parseInt(currentRankCard.getAttribute("data-index"));
+                    
+                    if (currentIndex < ranks.length - 1) {
+                        // Hide current card
                         currentRankCard.classList.add("hidden");
-                        prevRankCard.classList.remove("hidden");
-
-                        const curBadge = currentRankCard.querySelector(".status-badge");
-                        const prevBadge = prevRankCard.querySelector(".status-badge");
-                        if (curBadge) {
-                            curBadge.textContent = "Locked";
-                            curBadge.classList.add("locked");
-                        }
-                        if (prevBadge) {
-                            prevBadge.textContent = "Current Rank";
-                            prevBadge.classList.remove("locked");
-                        }
-
-                        prevRankCard.querySelectorAll(".requirement-checkbox").forEach((c) => (c.disabled = false));
-
+                        
+                        // Show next card
+                        const nextRankCard = document.querySelector(`[data-index="${currentIndex + 1}"]`);
+                        nextRankCard.classList.remove("hidden");
+                        
+                        // Update navigation buttons
+                        updateNavigation();
+                        
                         updateProgress();
                         saveProgress();
                     }
                 });
             });
-        });
 
-
-            // Helper to advance from the given card to the next rank
-            function advanceToNext(currentRankCard, save) {
-                if (!currentRankCard) return;
-                const nextRankCard = currentRankCard.nextElementSibling;
-                if (!nextRankCard || !nextRankCard.classList.contains("rank-card")) return;
-
-                // Mark current as completed and locked
-                currentRankCard.classList.add("hidden");
-                const curBadge = currentRankCard.querySelector(".status-badge");
-                if (curBadge) {
-                    curBadge.textContent = "Completed";
-                    curBadge.classList.add("locked");
-                }
-
-                // Make next available and current
-                nextRankCard.classList.remove("hidden");
-                const nextBadge = nextRankCard.querySelector(".status-badge");
-                if (nextBadge) {
-                    nextBadge.textContent = "Current Rank";
-                    nextBadge.classList.remove("locked");
-                }
-
-                // Enable checkboxes for the next rank
-                nextRankCard.querySelectorAll(".requirement-checkbox").forEach((checkbox) => (checkbox.disabled = false));
-
-                if (save) {
-                    updateProgress();
-                    saveProgress();
-                } else {
-                    // Even if not saving, update UI progress display
-                    updateProgress();
-                }
-            }
+            initializeProgress();
+            updateProgress();
         });
     </script>
 </Layout>
