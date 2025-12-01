@@ -2,6 +2,12 @@
 import Layout from "../../../layouts/Layout.astro";
 ---
 
+
+
+<!-- This would be so much better as a compotent, mabye sevlte or react -->
+
+<!-- TODO: Refactor this once the crisis is over -->
+
 <Layout title="PQS" disableHero>
     <div class="BG555">
         <div class="container">
@@ -49,23 +55,14 @@ import Layout from "../../../layouts/Layout.astro";
 
             <!-- Rank Advancement Progress -->
             <div class="progress-section">
-                <h2 class="progress-title">Rank Advancement Progress</h2>
+                <h2 class="progress-title">Rank Advancement Progress
+                    <button id="edit-progress-toggle" class="pdf-button" style="margin-left:1rem;padding:0.35rem 0.9rem;font-size:0.9rem;">Edit Progress</button>
+                </h2>
                 <p class="progress-subtitle">
-                    Complete all requirements for your current rank to advance
+                    Complete all requirements for next rank to advance
                 </p>
-
-
                 <div id="rank-cards-container">
                     <!-- Rank cards will be generated here -->
-                </div>
-                <!-- Navigation Controls -->
-                <div class="navigation-controls">
-                    <button id="prev-rank" class="switcharoo-btn" disabled>
-                        &#128896; Previous Rank
-                    </button>
-                    <button id="next-rank" class="switcharoo-btn">
-                        Next Rank &#128898;
-                    </button>
                 </div>
             </div>
 
@@ -101,7 +98,6 @@ import Layout from "../../../layouts/Layout.astro";
     </div>
 
     <style is:global>
-        /* Your existing CSS remains exactly the same */
         .BG555 {
             background: #000000;
             color: #fafaf5;
@@ -265,39 +261,304 @@ import Layout from "../../../layouts/Layout.astro";
             color: rgba(250, 250, 245, 0.8);
             margin-bottom: 2rem;
         }
-        
-        /* Navigation Controls */
-        .navigation-controls {
+        .rank-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(2, 60, 113, 0.7);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+        .rank-card:hover {
+            border-color: rgba(230, 178, 32, 0.4);
+        }
+        .rank-card.hidden {
+            display: none;
+        }
+        .rank-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 2rem;
-            gap: 1rem;
-        }
-        
-        .nav-button {
-            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 0.75rem 1.5rem;
-            background: rgba(2, 60, 113, 0.3);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(2, 60, 113, 0.5);
+        }
+        .rank-name {
+            color: #e6b220;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .status-badge {
+            background: #e6b220;
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-badge.locked {
+            background: rgba(250, 250, 245, 0.2);
+            color: rgba(250, 250, 245, 0.7);
+        }
+        .requirements-list {
+            margin-bottom: 2rem;
+        }
+        .requirement-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        .requirement-item:hover {
+            background: rgba(2, 60, 113, 0.2);
+        }
+        .requirement-checkbox {
+            margin-right: 1rem;
+            margin-top: 0.25rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .requirement-label {
+            flex: 1;
+            cursor: pointer;
+        }
+        .requirement-text {
+            color: rgba(250, 250, 245, 0.9);
+            line-height: 1.5;
+        }
+        .requirement-checkbox:checked + .requirement-label .requirement-text {
+            color: #e6b220;
+            text-decoration: line-through;
+        }
+        .rank-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        .advance-btn {
+            background: #023c71;
             color: #fafaf5;
-            border: 2px solid rgba(2, 60, 113, 0.7);
+            border: 2px solid #023c71;
+            padding: 1rem 2rem;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
-        .nav-button:not(:disabled):hover {
-            background: rgba(2, 60, 113, 0.5);
-            border-color: #e6b220;
-            transform: translateY(-2px);
+        .advance-btn:not(:disabled):hover {
+            background: transparent;
+            color: #023c71;
         }
-        
-        .nav-button:disabled {
-            background: rgba(2, 60, 113, 0.1);
-            border-color: rgba(2, 60, 113, 0.3);
+        .advance-btn:disabled {
+            background: rgba(2, 60, 113, 0.3);
+            border-color: rgba(2, 60, 113, 0.5);
             color: rgba(250, 250, 245, 0.5);
+            cursor: not-allowed;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(2, 60, 113, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #e6b220;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .progress-text {
+            color: rgba(250, 250, 245, 0.8);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .resources-section {
+            margin-top: 4rem;
+        }
+        .resources-title {
+            color: #fafaf5;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .resource-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(2, 60, 113, 0.7);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        .resource-card:hover {
+            border-color: rgba(230, 178, 32, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        .resource-card h3 {
+            color: #e6b220;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+        }
+        .resource-card p {
+            color: rgba(250, 250, 245, 0.8);
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .switcharoo-btn{
+            background: #023c71;
+            color: #fafaf5;
+            border: 2px solid #023c71;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .switcharoo-btn:hover {
+            background: transparent;
+            color: #023c71;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 3rem 1.5rem;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .rank-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .pdf-header,
+            .pdf-preview {
+                padding: 1.5rem;
+            }
+            .rank-card {
+                padding: 1.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script lang="js">
+        // Rank data - easily maintainable and extensible
+        const ranks = [
+            {
+                id: "csa",
+                name: "Cadet Seaman Apprentice (C/SA)",
+                status: "current",
+                requirements: [
+                    "4 weeks Time In Grade (TIG) as C/SR",
+                    "4 weeks Time In Program (TIP)",
+                    "Have all required NJROTC Program forms on file in the Admin Department",
+                    "Cadet Seaman Apprentice physical fitness requirements (1 minute plank, 3 push-ups, ¼ mile in 2:30 male & 3:15 female)",
+                    "11 General Orders (fill in blank test)",
+                    "Knowledge of basic stationary drill (Entering Classroom, Dismissal, Right/Left Face, About Face, Parade Rest, Hand Salute)",
+                    "Recommended by platoon commander and approved by Cadet Advancement Review Board and/or SNIS/NSI"
+                ],
+            },
+            {
+                id: "csn",
+                name: "Cadet Seaman (C/SN)",
+                status: "locked",
+                requirements: [
+                    "4 weeks TIG as Cadet Seaman Apprentice",
+                    "8 weeks TIP",
+                    "Participated in 3 NJ events (eligible for participation ribbon)",
+                    "Complete 1 hour of community service",
+                    "Complete the required practical factors for C/SN (1:15 plank, 8 push-ups, ½ mile in 5:15 male & 6:45 female)",
+                    "Knowledge of Squad drill (Open/Close Ranks, Dress Right, Cover/Uncover, Mark Time March, Left/Right Step)",
+                    "Knowledge of 11 general orders (tested written and verbally)",
+                    "Recommended by platoon commander and approved by Cadet Advancement Review Board and/or SNIS/NSI",
+                ],
+            },
+            {
+                id: "cpo3",
+                name: "Cadet Petty Officer 3rd Class (C/PO3)",
+                status: "locked",
+                requirements: [
+                    "6 weeks as TIG as cadet Seaman",
+                    "14 weeks TIP",
+                    "Pass rank knowledge test",
+                    "Pass Chain Of Command test",
+                    "Pass military alphabet test",
+                    "5 hours community service",
+                    "6 NJ events attended",
+                    "Proficient in basic marching drill (Left/Right Flank, To the rear, Column Left/Right, Oblique Left/Right, Extend/Close March)",
+                    "Knowledge of AMI questions defined in the CFM & CRM",
+                    "Recommended by platoon commander or staff and approved by Cadet Advancement Review Board and/or SNIS/NSI",
+                ],
+            },
+            {
+                id: "cpo2",
+                name: "Cadet Petty Officer 2nd Class (C/PO2)",
+                status: "locked",
+                requirements: [
+                    "Successfully completed 1 year of NJROTC or be an outstanding freshman. Minimum 22-weeks TIP",
+                    "8 weeks as Petty Officer 3rd class",
+                    "Participated in 9 NJ events",
+                    "10 hours of community service",
+                    "Pass Marine rank test",
+                    "Knowledge of AMI questions defined in the CFM & CRM",
+                    "15 push-ups in 2 minutes (females) 32 push-ups, 2 minutes (males)",
+                    "1-mile run in 13:30 (females), 10:30 (males)",
+                    "1 minute, 30 seconds plank for both genders",
+                    "Proficient in all basic drill enough to teach another cadet",
+                    "Recommended by platoon commander, self-recommendation, or staff recommendation and cadet is approved by Cadet Advancement Review Board and the SNIS/NSI",
+                ],
+            },
+            {
+                id: "cpo1",
+                name: "Cadet Petty Officer 1st Class (C/PO1)",
+                status: "locked",
+                requirements: [
+                    "12 weeks as Petty Officer 2nd class (if done in a year sometime in May or awards ceremony)",
+                    "Usually is assigned some sort of responsibility or position of leadership",
+                    "Participated in 12 NJ events",
+                    "15 hours of community service",
+                    "Proficient in Honor Color guard and armed drill",
+                    "Proficient guide-on",
+                    "Wear uniform whenever asked and have exemplary personal appearance",
+                    "Recommended by platoon commander, self-recommendation, or staff recommendation and cadet is approved by Cadet Advancement Review Board and the SNIS/NSI",
+                ],
+            },
+            {
+                id: "ccpo",
+                name: "Cadet Chief Petty Officer (C/CPO)",
+                status: "locked",
+                requirements: [
+                    "Successfully completed 2 years or NJROTC or be an exceptional sophomore",
+                    "12 weeks as Petty Officer 1st class",
+                    "Cadet Chief must be in a staff/leadership position",
+                    "Recommended advancement from pee250, 245, 0.5);
             cursor: not-allowed;
         }
         .switcharoo-btn{
