@@ -55,9 +55,6 @@ import Layout from "../../../layouts/Layout.astro";
 
             <!-- Rank Advancement Progress -->
             <div class="progress-section">
-                <h2 class="progress-title">Rank Advancement Progress
-                    <button id="edit-progress-toggle" class="pdf-button" style="margin-left:1rem;padding:0.35rem 0.9rem;font-size:0.9rem;">Edit Progress</button>
-                </h2>
                 <p class="progress-subtitle">
                     Complete all requirements for next rank to advance
                 </p>
@@ -606,9 +603,7 @@ import Layout from "../../../layouts/Layout.astro";
                 rankCard.innerHTML = `
       <div class="rank-header">
         <h3 class="rank-name">${rank.name}</h3>
-        <div class="rank-status">
-          <span class="status-badge ${isLocked ? "locked" : ""}">${isCurrent ? "Next Rank" : "Locked"}</span>
-        </div>
+        
       </div>
             <div class="requirements-list">
                 ${rank.requirements
