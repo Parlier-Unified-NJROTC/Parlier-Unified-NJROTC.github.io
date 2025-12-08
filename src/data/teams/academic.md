@@ -6,7 +6,7 @@ img: ../../NA.png
 
 
 
-# Department Head
+# Team Leader
 ## Saul Sanchez
 
 <!-- note to self: this renders as a <p> tag -->

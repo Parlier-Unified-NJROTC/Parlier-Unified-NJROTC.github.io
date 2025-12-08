@@ -4,7 +4,7 @@ description: The Physical Training (PT) Team promotes fitness, teamwork, and dis
 img: ../../NA.png
 ---
 
-# Department Head
+# Team Leader
 
 ## Richard Moreira
 

@@ -4,7 +4,7 @@ description: "CyberPatriot team focused on hands-on IT, cybersecurity, and progr
 img: ../../NA.png
 
 ---
-# Department Head
+# Team Leader
 
 ## Saul Sanchez
 
