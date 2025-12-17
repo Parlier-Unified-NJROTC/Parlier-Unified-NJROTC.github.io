@@ -6,7 +6,19 @@ import Boxess from "../../../../components/Ribbon.astro";
 <Layout title="Ribbon Rack" disableHero>
     <body>
         <section class="ribbon-section">
-            <a class="down444" href="#Ribbon-Rack"><svg xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg) scale(2); position: fixed;top:10px;left:10px;z-index:101;" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m357-384 123-123 123 123 57-56-180-180-180 180 57 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg></a>
+            <a class="down444" href="#Ribbon-Rack"
+                ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    style="transform: rotate(180deg) scale(2); position: fixed;top:10px;left:10px;z-index:101;"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="#e3e3e3"
+                    ><path
+                        d="m357-384 123-123 123 123 57-56-180-180-180 180 57 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
+                    ></path></svg
+                ></a
+            >
             <div class="ribbon-container">
                 <div class="section-header">
                     <h1 class="section-title">
@@ -218,392 +230,395 @@ import Boxess from "../../../../components/Ribbon.astro";
                 </div>
             </div>
 
-             <style>
+            <style>
                 body {
-                    scroll-behavior: smooth;   
+                    scroll-behavior: smooth;
                 }
-        /* Ribbon Builder Section */
-        .ribbon-section {
-            padding: 6rem 2rem;
-            background: #000000;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            font-family: "Montserrat", sans-serif;
-        }
+                /* Ribbon Builder Section */
+                .ribbon-section {
+                    padding: 6rem 2rem;
+                    background: #000000;
+                    position: relative;
+                    z-index: 1;
+                    overflow: hidden;
+                    font-family: "Montserrat", sans-serif;
+                }
 
-        .ribbon-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(
-                    circle at 20% 50%,
-                    rgb(2 60 113 / 40%) 0%,
-                    transparent 50%
-                ),
-                radial-gradient(
-                    circle at 80% 20%,
-                    rgb(2 60 113 / 40%) 0%,
-                    transparent 50%
-                );
-            z-index: -1;
-        }
+                .ribbon-section::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: radial-gradient(
+                            circle at 20% 50%,
+                            rgb(2 60 113 / 40%) 0%,
+                            transparent 50%
+                        ),
+                        radial-gradient(
+                            circle at 80% 20%,
+                            rgb(2 60 113 / 40%) 0%,
+                            transparent 50%
+                        );
+                    z-index: -1;
+                }
 
-        .ribbon-container {
-            max-width: 50rem;
-            margin: 0 auto;
-            position: relative;
-        }
+                .ribbon-container {
+                    max-width: 50rem;
+                    margin: 0 auto;
+                    position: relative;
+                }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+                .section-header {
+                    text-align: center;
+                    margin-bottom: 3rem;
+                }
 
-        .section-title {
-            font-family: "Montserrat", sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: #fafaf5;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            position: relative;
-            display: inline-block;
-        }
+                .section-title {
+                    font-family: "Montserrat", sans-serif;
+                    font-size: 3.5rem;
+                    font-weight: 800;
+                    margin-bottom: 1rem;
+                    color: #fafaf5;
+                    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                    position: relative;
+                    display: inline-block;
+                }
 
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: #e6b220;
-            border-radius: 2px;
-        }
+                .section-title::after {
+                    content: "";
+                    position: absolute;
+                    bottom: -10px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 100px;
+                    height: 4px;
+                    background: #e6b220;
+                    border-radius: 2px;
+                }
 
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: rgba(250, 250, 245, 0.8);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
+                .section-subtitle {
+                    font-size: 1.2rem;
+                    color: rgba(250, 250, 245, 0.8);
+                    max-width: 600px;
+                    margin: 0 auto;
+                    line-height: 1.6;
+                }
 
-        /* Content Container */
-        .content-container {
-            display: flex;
-            gap: 2rem;
-            align-items: flex-start;
-        }
+                /* Content Container */
+                .content-container {
+                    display: flex;
+                    gap: 2rem;
+                    align-items: flex-start;
+                }
 
-        /* Ribbon Selection */
-        .ribbon-selection-container {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid rgba(2, 60, 113, 0.7);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            flex: 3;
-        }
+                /* Ribbon Selection */
+                .ribbon-selection-container {
+                    background: rgba(0, 0, 0, 0.7);
+                    border-radius: 16px;
+                    overflow: hidden;
+                    border: 1px solid rgba(2, 60, 113, 0.7);
+                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+                    flex: 3;
+                }
 
-        .ribbon-selection-header {
-            padding: 2rem;
-            text-align: center;
-            background: rgba(2, 60, 113, 0.2);
-            border-bottom: 1px solid rgba(2, 60, 113, 0.5);
-        }
+                .ribbon-selection-header {
+                    padding: 2rem;
+                    text-align: center;
+                    background: rgba(2, 60, 113, 0.2);
+                    border-bottom: 1px solid rgba(2, 60, 113, 0.5);
+                }
 
-        .ribbon-selection-title {
-            font-family: "Montserrat", sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #fafaf5;
-            margin-bottom: 0.5rem;
-        }
+                .ribbon-selection-title {
+                    font-family: "Montserrat", sans-serif;
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: #fafaf5;
+                    margin-bottom: 0.5rem;
+                }
 
-        .ribbon-selection-subtitle {
-            font-size: 1rem;
-            color: rgba(250, 250, 245, 0.8);
-        }
+                .ribbon-selection-subtitle {
+                    font-size: 1rem;
+                    color: rgba(250, 250, 245, 0.8);
+                }
 
-        .ribbon-selection {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1.5rem;
-            padding: 2rem;
-            align-items: center;
-            justify-items: center;
-        }
+                .ribbon-selection {
+                    display: grid;
+                    grid-template-columns: repeat(
+                        auto-fill,
+                        minmax(150px, 1fr)
+                    );
+                    gap: 1.5rem;
+                    padding: 2rem;
+                    align-items: center;
+                    justify-items: center;
+                }
 
-        .ribbon-option {
-            background: rgba(10, 10, 15, 0.6);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(2, 60, 113, 0.3);
-            position: relative;
-            cursor: pointer;
-        }
+                .ribbon-option {
+                    background: rgba(10, 10, 15, 0.6);
+                    border-radius: 12px;
+                    overflow: hidden;
+                    transition: all 0.3s ease;
+                    border: 1px solid rgba(2, 60, 113, 0.3);
+                    position: relative;
+                    cursor: pointer;
+                }
 
-        .ribbon-option:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-            border-color: rgba(230, 178, 32, 0.4);
-        }
+                .ribbon-option:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+                    border-color: rgba(230, 178, 32, 0.4);
+                }
 
-        .ribbon-image {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            background: rgba(2, 60, 113, 0.1);
-        }
+                .ribbon-image {
+                    height: 80px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 1rem;
+                    background: rgba(2, 60, 113, 0.1);
+                }
 
-        .ribbon-image img {
-            max-height: 100%;
-            max-width: 100%;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-        }
+                .ribbon-image img {
+                    max-height: 100%;
+                    max-width: 100%;
+                    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+                }
 
-        .ribbon-content {
-            padding: 1rem;
-        }
+                .ribbon-content {
+                    padding: 1rem;
+                }
 
-        .ribbon-name {
-            font-family: "Montserrat", sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #fafaf5;
-            margin-bottom: 0.8rem;
-            line-height: 1.3;
-            text-align: center;
-        }
+                .ribbon-name {
+                    font-family: "Montserrat", sans-serif;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    color: #fafaf5;
+                    margin-bottom: 0.8rem;
+                    line-height: 1.3;
+                    text-align: center;
+                }
 
-        .ribbon-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+                .ribbon-controls {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
 
-        .ribbon-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+                .ribbon-checkbox {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
 
-        .ribbon-checkbox input {
-            width: 18px;
-            height: 18px;
-            accent-color: #e6b220;
-        }
+                .ribbon-checkbox input {
+                    width: 18px;
+                    height: 18px;
+                    accent-color: #e6b220;
+                }
 
-        .ribbon-checkbox label {
-            font-size: 0.8rem;
-            color: #fafaf5;
-            cursor: pointer;
-        }
+                .ribbon-checkbox label {
+                    font-size: 0.8rem;
+                    color: #fafaf5;
+                    cursor: pointer;
+                }
 
-        .ribbon-stars {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
+                .ribbon-stars {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.3rem;
+                }
 
-        .ribbon-stars select {
-            background: rgba(2, 60, 113, 0.3);
-            color: #fafaf5;
-            border: 1px solid rgba(2, 60, 113, 0.5);
-            border-radius: 4px;
-            padding: 0.2rem 0.4rem;
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
+                .ribbon-stars select {
+                    background: rgba(2, 60, 113, 0.3);
+                    color: #fafaf5;
+                    border: 1px solid rgba(2, 60, 113, 0.5);
+                    border-radius: 4px;
+                    padding: 0.2rem 0.4rem;
+                    font-size: 0.8rem;
+                    cursor: pointer;
+                }
 
-        /* Ribbon Rack Display */
-        .ribbon-rack-container {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid rgba(2, 60, 113, 0.7);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            transition: all 0.4s ease;
-            flex: 1;
-            max-width: 350px;
-            /* Fixed positioning properties */
-            position: fixed;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
-        }
+                /* Ribbon Rack Display */
+                .ribbon-rack-container {
+                    background: rgba(0, 0, 0, 0.7);
+                    border-radius: 16px;
+                    overflow: hidden;
+                    border: 1px solid rgba(2, 60, 113, 0.7);
+                    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+                    transition: all 0.4s ease;
+                    flex: 1;
+                    max-width: 350px;
+                    /* Fixed positioning properties */
+                    position: fixed;
+                    right: 2rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    z-index: 100;
+                }
 
-        .ribbon-rack-header {
-            padding: 2rem;
-            text-align: center;
-            background: rgba(2, 60, 113, 0.2);
-            border-bottom: 1px solid rgba(2, 60, 113, 0.5);
-        }
+                .ribbon-rack-header {
+                    padding: 2rem;
+                    text-align: center;
+                    background: rgba(2, 60, 113, 0.2);
+                    border-bottom: 1px solid rgba(2, 60, 113, 0.5);
+                }
 
-        .ribbon-rack-title {
-            font-family: "Montserrat", sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #fafaf5;
-            margin-bottom: 0.5rem;
-        }
+                .ribbon-rack-title {
+                    font-family: "Montserrat", sans-serif;
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: #fafaf5;
+                    margin-bottom: 0.5rem;
+                }
 
-        .ribbon-rack {
-            display: flex;
-            justify-content: flex-start;
-            transform: rotate(180deg);
-            width: 350px;
-            min-height: 200px;
-            justify-content: center;
-            flex-wrap: wrap;
-            align-items: center;
-            align-content: center;
-            padding: 15px 0px;
-        }
+                .ribbon-rack {
+                    display: flex;
+                    justify-content: flex-start;
+                    transform: rotate(180deg);
+                    width: 350px;
+                    min-height: 200px;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    align-content: center;
+                    padding: 15px 0px;
+                }
 
-        .ribbon-rack img {
-            width: 100%;
-            min-width: 120px;
-            transform: rotate(180deg);
-        }
+                .ribbon-rack img {
+                    width: 100%;
+                    min-width: 120px;
+                    transform: rotate(180deg);
+                }
 
-        .ribbon-container {
-            position: relative;
-        }
+                .ribbon-container {
+                    position: relative;
+                }
 
-        .ribbon-star {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            transform: rotate(180deg);
-        }
+                .ribbon-star {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    transform: rotate(180deg);
+                }
 
-        .ribbon-actions {
-            display: flex;
-            justify-content: center;
-            padding: 1.5rem;
-            border-top: 1px solid rgba(2, 60, 113, 0.5);
-        }
+                .ribbon-actions {
+                    display: flex;
+                    justify-content: center;
+                    padding: 1.5rem;
+                    border-top: 1px solid rgba(2, 60, 113, 0.5);
+                }
 
-        .ribbon-download-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.9rem 1.8rem;
-            background: transparent;
-            color: #e6b220;
-            border: 2px solid #e6b220;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
+                .ribbon-download-btn {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    padding: 0.9rem 1.8rem;
+                    background: transparent;
+                    color: #e6b220;
+                    border: 2px solid #e6b220;
+                    border-radius: 50px;
+                    text-decoration: none;
+                    font-weight: 700;
+                    transition: all 0.3s ease;
+                    cursor: pointer;
+                }
 
-        .ribbon-download-btn:hover {
-            background: #e6b220;
-            color: #000000;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(230, 178, 32, 0.4);
-        }
-        @media (orientation: landscape) {
-            .down444 {
-                display: none;
-            }
-        }
+                .ribbon-download-btn:hover {
+                    background: #e6b220;
+                    color: #000000;
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 20px rgba(230, 178, 32, 0.4);
+                }
+                @media (orientation: landscape) {
+                    .down444 {
+                        display: none;
+                    }
+                }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .content-container {
-                flex-direction: column;
-            }
-            
-            .ribbon-rack-container {
-                position: static;
-                transform: none;
-                min-width: auto;
-                width: 100%;
-                margin-top: 2rem;
-            }
+                /* Responsive Design */
+                @media (max-width: 768px) {
+                    .content-container {
+                        flex-direction: column;
+                    }
 
-            .ribbon-section {
-                padding: 4rem 1.5rem;
-            }
+                    .ribbon-rack-container {
+                        position: static;
+                        transform: none;
+                        min-width: auto;
+                        width: 100%;
+                        margin-top: 2rem;
+                    }
 
-            .section-header {
-                margin-bottom: 2rem;
-            }
+                    .ribbon-section {
+                        padding: 4rem 1.5rem;
+                    }
 
-            .section-title {
-                font-size: 2.5rem;
-            }
+                    .section-header {
+                        margin-bottom: 2rem;
+                    }
 
-            .section-subtitle {
-                font-size: 1.1rem;
-                padding: 0 1rem;
-            }
+                    .section-title {
+                        font-size: 2.5rem;
+                    }
 
-            .ribbon-selection {
-                grid-template-columns: repeat(
-                    auto-fill,
-                    minmax(150px, 1fr)
-                );
-                padding: 1.5rem;
-                gap: 1rem;
-            }
+                    .section-subtitle {
+                        font-size: 1.1rem;
+                        padding: 0 1rem;
+                    }
 
-            .ribbon-selection-header {
-                padding: 1.5rem;
-            }
+                    .ribbon-selection {
+                        grid-template-columns: repeat(
+                            auto-fill,
+                            minmax(150px, 1fr)
+                        );
+                        padding: 1.5rem;
+                        gap: 1rem;
+                    }
 
-            .ribbon-selection-title {
-                font-size: 1.5rem;
-            }
+                    .ribbon-selection-header {
+                        padding: 1.5rem;
+                    }
 
-            .ribbon-rack-header {
-                padding: 1.5rem;
-            }
+                    .ribbon-selection-title {
+                        font-size: 1.5rem;
+                    }
 
-            .ribbon-rack-title {
-                font-size: 1.5rem;
-            }
+                    .ribbon-rack-header {
+                        padding: 1.5rem;
+                    }
 
-            .ribbon-rack {
-                padding: 1.5rem;
-            }
-        }
+                    .ribbon-rack-title {
+                        font-size: 1.5rem;
+                    }
 
-        @media (max-width: 480px) {
-            .ribbon-section {
-                padding: 3rem 1rem;
-            }
+                    .ribbon-rack {
+                        padding: 1.5rem;
+                    }
+                }
 
-            .section-title {
-                font-size: 2rem;
-            }
+                @media (max-width: 480px) {
+                    .ribbon-section {
+                        padding: 3rem 1rem;
+                    }
 
-            .ribbon-selection {
-                grid-template-columns: 1fr;
-            }
+                    .section-title {
+                        font-size: 2rem;
+                    }
 
-            .ribbon-rack {
-                padding: 1rem;
-            }
-        }
-    </style>
+                    .ribbon-selection {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .ribbon-rack {
+                        padding: 1rem;
+                    }
+                }
+            </style>
 
             <!-- DON'T TOUCH MY CODE. NO JOKE IT IS SCARY -->
             <!-- DON'T TOUCH MY CODE. NO JOKE IT IS SCARY -->
@@ -649,90 +664,6 @@ import Boxess from "../../../../components/Ribbon.astro";
                     "CERT Ribbon",
                 ];
 
-                // Mouse following variables
-                let isFollowing = false;
-                let stopFollowing = false;
-                let mouseX = 0;
-                let mouseY = 0;
-
-                // Initialize mouse tracking
-                document.addEventListener("mousemove", (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-
-                    if (isFollowing && !stopFollowing) {
-                        updateRackPosition();
-                    }
-                });
-
-                function updateRackPosition() {
-                    if (!ribbonRackContainer.classList.contains("visible"))
-                        return;
-
-                    const rackRect =
-                        ribbonRackContainer.getBoundingClientRect();
-                    const offsetX = 20; // Offset from cursor
-                    const offsetY = 20;
-
-                    let newX = mouseX + offsetX;
-                    let newY = mouseY + offsetY;
-
-                    // Keep within viewport bounds
-                    const maxX = window.innerWidth - rackRect.width - 10;
-                    const maxY = window.innerHeight - rackRect.height - 10;
-
-                    newX = Math.max(10, Math.min(newX, maxX));
-                    newY = Math.max(10, Math.min(newY, maxY));
-
-                    ribbonRackContainer.style.left = newX + "px";
-                    ribbonRackContainer.style.top = newY + "px";
-                }
-
-                function startFollowing() {
-                    if (selectedRibbons.size === 0) return;
-
-                    isFollowing = true;
-                    stopFollowing = false;
-                    ribbonRackContainer.classList.add("following", "visible");
-                    updateRackPosition();
-                }
-
-                function stopRackFollowing() {
-                    isFollowing = false;
-                    stopFollowing = true;
-                    ribbonRackContainer.classList.remove("following");
-
-                    // Optionally hide the rack when stopping
-                    setTimeout(() => {
-                        if (!isFollowing) {
-                            ribbonRackContainer.classList.remove("visible");
-                        }
-                    }, 1000);
-                }
-
-                // Check if mouse meets stop conditions
-                function checkStopConditions() {
-                    // Stop if no ribbons are selected
-                    if (selectedRibbons.size === 0) {
-                        stopRackFollowing();
-                        return true;
-                    }
-
-                    // Stop if mouse is near the edges of the screen
-                    const edgeThreshold = 50;
-                    if (
-                        mouseX < edgeThreshold ||
-                        mouseX > window.innerWidth - edgeThreshold ||
-                        mouseY < edgeThreshold ||
-                        mouseY > window.innerHeight - edgeThreshold
-                    ) {
-                        stopRackFollowing();
-                        return true;
-                    }
-
-                    return false;
-                }
-
                 document
                     .querySelectorAll("#ribbon-option")
                     .forEach((option) => {
@@ -766,13 +697,6 @@ import Boxess from "../../../../components/Ribbon.astro";
                         } else {
                             removeRibbon(numberR);
                         }
-
-                        // Start following when ribbons are selected
-                        if (selectedRibbons.size > 0) {
-                            startFollowing();
-                        } else {
-                            stopRackFollowing();
-                        }
                     }
 
                     if (target.matches("select")) {
@@ -796,18 +720,18 @@ import Boxess from "../../../../components/Ribbon.astro";
                     newRibbonImage.alt =
                         ribbonOption.querySelector("label").textContent;
                     newRibbonImage.style = `transform: rotate(180deg);
-        user-select: none;
-        -webkit-user-drag: none;`;
+    user-select: none;
+    -webkit-user-drag: none;`;
 
                     const starImg = document.createElement("img");
                     starImg.className = "ribbon-star";
                     starImg.style = `position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        transform: rotate(180deg);`;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transform: rotate(180deg);`;
 
                     const select = ribbonOption.querySelector("select");
                     starImg.src = `https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/ribbon-stars/${select.value}.png`;
@@ -875,13 +799,7 @@ import Boxess from "../../../../components/Ribbon.astro";
                     }
                 }
 
-                // Add periodic check for stop conditions
-                setInterval(() => {
-                    if (isFollowing && !stopFollowing) {
-                        checkStopConditions();
-                    }
-                }, 100);
-
+                // CORS-related code for downloading the ribbon rack image
                 document
                     .getElementById("DOWNLOAD-RACK")
                     .addEventListener("click", async function () {
@@ -894,7 +812,7 @@ import Boxess from "../../../../components/Ribbon.astro";
                             return images.map((img) => {
                                 return new Promise((resolve, reject) => {
                                     const newImg = new Image();
-                                    newImg.crossOrigin = "Anonymous";
+                                    newImg.crossOrigin = "Anonymous"; // CORS setting
                                     newImg.src = img.src;
                                     newImg.onload = () => resolve(true);
                                     newImg.onerror = () =>
@@ -911,7 +829,7 @@ import Boxess from "../../../../components/Ribbon.astro";
                             html2canvas(
                                 document.querySelector(".ribbon-rack"),
                                 {
-                                    useCORS: true,
+                                    useCORS: true, // CORS setting for html2canvas
                                     backgroundColor: null,
                                     scale: 2,
                                     logging: true,
@@ -933,11 +851,8 @@ import Boxess from "../../../../components/Ribbon.astro";
                         }
                     });
 
-                // Initialize the rack container position
-                ribbonRackContainer.style.position = "fixed";
-                ribbonRackContainer.style.left = "50%";
-                ribbonRackContainer.style.top = "50%";
-                ribbonRackContainer.style.transform = "translate(-50%, -50%)";
+                // Position the rack container statically (removed mouse-following initialization)
+                ribbonRackContainer.style.position = "relative";
             </script>
             <!-- End of scary code -->
         </section>
