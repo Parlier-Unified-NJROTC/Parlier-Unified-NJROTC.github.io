@@ -621,9 +621,7 @@ import Layout from "../../../layouts/Layout.astro";
             </div>
             <div class="rank-actions">
                 <div>
-                        <button class="back-btn switcharoo-btn">&lt; Back</button>
                         <button class="advance-btn" disabled>Advance to Next Rank</button>
-                        <button class="fake-it-till-you-make-it switcharoo-btn">Skip ></button>
                 </div>
         <div class="progress-bar">
           <div class="progress-fill" style="width: 0%"></div>
@@ -637,8 +635,6 @@ import Layout from "../../../layouts/Layout.astro";
         }
 
         // Initialize when DOM is loaded
-
-        // NOTE: IF YOU TRY TO ADD CODE OUTSIDE OF THIS FUNCTION IT WILL NOT WORK
         document.addEventListener("DOMContentLoaded", function () {
             generateRankCards();
 
