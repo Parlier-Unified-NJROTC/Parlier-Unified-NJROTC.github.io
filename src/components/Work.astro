@@ -27,16 +27,18 @@
         padding: 0;
         box-sizing: border-box;
     }
+    
+
 
    #Body555 {
         font-family: "Montserrat", sans-serif;
         background: #000000;
         color: #fafaf5;
-        z-index: 500;
+        z-index: 999999991;
         overflow-x: hidden;
         position: absolute;
-        top: 135px;
         width: 100%;
+        min-height: 100vh;
         justify-self: center;
     }
 
@@ -297,6 +299,10 @@
         const image = document.querySelector(".error-image");
         image.style.opacity = "0";
         image.style.transform = "translateY(20px)";
+
+        document.documentElement.style.overflow = "hidden"; 
+        document.body.style.overflow = "hidden";          
+
 
         setTimeout(() => {
             image.style.transition = "opacity 0.8s ease, transform 0.8s ease";

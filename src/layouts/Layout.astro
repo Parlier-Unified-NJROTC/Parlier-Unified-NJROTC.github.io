@@ -3,6 +3,7 @@ import Hero from "../components/Hero.astro";
 import Work from "../components/Work.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import Warning from "../components/Warning.astro";
 
 interface Props {
 	title: string;
@@ -90,7 +91,9 @@ const {
 		/>
 	</head>
 	<body>
+		{maintain ? <Work /> : null}
 		<Header />
+		<Warning /> <!-- When user tries to use a Non-Webite Link then warn be before going -->
 		<!-- transition:persist is required, else switching pages messes it up -->
 		<!-- Also I wanna disable it for department layout -->
 		{
@@ -102,7 +105,7 @@ const {
 				/>
 			)
 		}
-		{maintain ? <Work /> : null}
+		
 		{
 			fancyBackground ? (
 				<main class="BG555">

@@ -2,7 +2,7 @@
 import Layout from "../../../../../layouts/Layout.astro";
 ---
 
-<Layout title="Military Alphabet" disableHero>
+<Layout title="AMI Questions" disableHero>
     <section class="flashcard-section">
         <div id="FlashCard-BG">
             <div class="card-counter" id="cardCounter">Card 1 of 15</div>
@@ -295,33 +295,53 @@ import Layout from "../../../../../layouts/Layout.astro";
     </style>
     <script lang="js">
         const flashcards = [
-            { front: "'A' Military Alphabet", back: "Alpha" },
-            { front: "'B' Military Alphabet", back: "Bravo" },
-            { front: "'C' Military Alphabet", back: "Charlie" },
-            { front: "'D' Military Alphabet", back: "Delta" },
-            { front: "'E' Military Alphabet", back: "Echo" },
-            { front: "'F' Military Alphabet", back: "Foxtrot" },
-            { front: "'G' Military Alphabet", back: "Golf" },
-            { front: "'H' Military Alphabet", back: "Hotel" },
-            { front: "'I' Military Alphabet", back: "India" },
-            { front: "'J' Military Alphabet", back: "Juliett" },
-            { front: "'K' Military Alphabet", back: "Kilo" },
-            { front: "'L' Military Alphabet", back: "Lima" },
-            { front: "'M' Military Alphabet", back: "Mike" },
-            { front: "'N' Military Alphabet", back: "November" },
-            { front: "'O' Military Alphabet", back: "Oscar" },
-            { front: "'P' Military Alphabet", back: "Papa" },
-            { front: "'Q' Military Alphabet", back: "Quebec" },
-            { front: "'R' Military Alphabet", back: "Romeo" },
-            { front: "'S' Military Alphabet", back: "Sierra" },
-            { front: "'T' Military Alphabet", back: "Tango" },
-            { front: "'U' Military Alphabet", back: "Uniform" },
-            { front: "'V' Military Alphabet", back: "Victor" },
-            { front: "'W' Military Alphabet", back: "Whiskey" },
-            { front: "'X' Military Alphabet", back: "X-ray" },
-            { front: "'Y' Military Alphabet", back: "Yankee" },
-            { front: "'Z' Military Alphabet", back: "Zulu" },
-        ];
+            { front: "What does 'NJROTC' stand for?", back: "Naval Junior Reserve Officers Training Corps" },
+        { front: "What are the three Core values of Navy JROTC?", back: "Honor/Courage/Commitment" },
+        { front: "What is the maximum distance your hair may reach away from your scalp?", back: "Maximum 'bulk' or 'height' of hair away from the scalp is 2', males & females" },
+        { front: "What is the regulation about wearing a necklace in an NJROTC uniform?", back: "You can, but it shall not be visible" },
+        { front: "Describe the correct placement of ribbons and name tags on NJROTC uniforms.", back: "MALE: Ribbons and name tags are worn parallel to the top of the shirt pocket, ¼' above and centered on the pocket. The name tag is on the right, and the ribbons are on the left. FEMALE: Centered horizontally over the front seams, 6-¼' down from the intersection of the shoulder and front seam of the blouse to the bottom of the lowest row of ribbons or bottom of the name tag. The name tag is on the right, and the ribbons are on the left." },
+        { front: "Describe the placement of the small fouled anchor worn on the garrison cap.", back: "The anchor is worn on the wearer's left side of the cap. The center of the anchor is bisected by a vertical line 2' from the fore crease of the garrison cap and a horizontal line 1-1/2' from the bottom edge of the cap." },
+        { front: "What are the three items depicted on the NJROTC patch?", back: "A ship, an anchor, and an eagle." },
+        { front: "Many uniforms authorize wearing aiguillettes – what is the maximum number of aiguillettes that can be worn on an NJROTC uniform?", back: "TWO, with no more than ONE on each shoulder." },
+        { front: "Name the highest ribbon award any NJROTC cadet may receive.", back: "The Meritorious Achievement Ribbon." },
+        { front: "What is the lowest rank for enlisted NJROTC cadets?", back: "Cadet Seaman Recruit" },
+        { front: "What rank is an NJROTC cadet wearing a collar device of a perched eagle over three chevrons?", back: "Cadet Petty Officer First Class" },
+        { front: "Q1What is the rank for an NJROTC cadet wearing a collar device of 3 silver diagonal stripes?", back: "Cadet Seaman" },
+        { front: "What is the highest attainable Navy rank for an enlisted NJROTC cadet?", back: "Cadet Master Chief Petty Officer" },
+        { front: "What is the lowest rank for a cadet officer in NJROTC?", back: "Cadet Ensign" },
+        { front: "What is the collar insignia for NJROTC cadets holding the rank of Cadet Lieutenant?", back: "The collar device has three attached gold bars" },
+        { front: "What is the collar insignia for NJROTC cadets with the rank of Cadet Lieutenant (Junior Grade)?", back: "The collar device has two attached gold bars" },
+        { front: "What is the rank of an NJROTC cadet wearing a collar device with four attached gold bars?", back: "Cadet Lieutenant Commander" },
+        { front: "What are the four types of commands?", back: "1) Preparatory command; 2) Command of execution; 3) Supplementary command; 4) Combined command" },
+        { front: "What are four items that must be studied & practiced to develop an effective command voice?", back: "1) Loudness and projection; 2) distinction or clarity; 3) inflection; 4) cadence" },
+        { front: "What is meant when it is said that a command voice has a 'good inflection'?", back: "A voice with a good rise and fall in pitch & tone has plenty of snap." },
+        { front: "What is the correct cadence while marching at Quick Time?", back: "120 steps per minute." },
+        { front: "What is the correct cadence while marching at Double Time?", back: "180 steps per minute." },
+        { front: "How many inches is the correct length of a step at Quick Time?", back: "30-inch, from heal to heal." },
+        { front: "How many inches is the correct length of a step at Double Time?", back: "36-inch." },
+        { front: "What specific command or phrase cancels a movement or order?", back: "As you were" },
+        { front: "What angle will an unarmed cadet at the position of Attention have feet forming?", back: "45 degrees." },
+        { front: "An unarmed cadet at the position of Attention will have thumbs placed where?", back: "Along the trouser seams." },
+        { front: "To attain the correct position of Parade Rest, what do you do with your left foot?", back: "Move the left foot smartly 12' to the left." },
+        { front: "At the position of Parade Rest or Ease, what is the only command that can be given?", back: "Attention." },
+        { front: "How many counts are involved in all facing movements?", back: "Two counts." },
+        { front: "When executing a proper NJROTC salute, where is the position of the forefinger?", back: "The tip of the forefinger touches the lower part of the headdress above and slightly to the right of the right eye." },
+        { front: "Why is the National Ensign flown at half-staff on some occasions?", back: "To honor and pay respect to deceased persons of national importance." },
+        { front: "What are the words to the Pledge of Allegiance?", back: "I pledge allegiance to the flag of the United States of America and to the republic for which it stands, one nation under God, indivisible, with liberty and justice for all." },
+        { front: "The grommet on the chin strap", back: "The grommet on the chin strap is placed on my left." },
+        { front: "Anchor on a garrison cover", back: "Sir, the anchor on a garrison cap is worn one and ½ inches above the bottom edge and 2 inches from the fore crease on the left side." },
+        { front: "CPO and above rank on garrison covers", back: "The rank insignia on a garrison cap is worn one and ½ inches above the bottom edge and 2 inches from the fore crease on the right side." },
+        { front: "Shoe Laces", back: "Shoelaces are right over left as you look at them; no bridges" },
+        { front: "Gig Line", back: "The gig line is the alignment of the outside edge of the shirt, pants, and belt buckle." },
+        { front: "Fingernails (female)", back: "The fingernails can be a maximum of ¼ inch from the fingertip, natural colors only." },
+        { front: "Fingernails (male)", back: "The fingernails cannot extend beyond the fingertip." },
+        { front: "Male sideburns Length", back: "Shall not extend below the middle of the ear" },
+        { front: "Male Hair", back: "Must be tapered upwards around the ears and neck, must not touch the collar, maximum length 4 inches" },
+        { front: "Female Hair Length", back: "May touch, but not be below the lower edge of the back of the collar" },
+        { front: "Female Ear Rings", back: "One per ear, centered on the earlobe, small gold or silver ball" },
+        { front: "Male Ear Rings", back: "Not authorized" },
+        { front: "Rings", back: "One per hand, plus an engagement ring" }
+];
 
         let currentFlashcards = [...flashcards];
         let currentCardIndex = 0;

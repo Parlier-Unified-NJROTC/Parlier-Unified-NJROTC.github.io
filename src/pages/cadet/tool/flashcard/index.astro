@@ -2,4 +2,231 @@
 import Layout from '../../../../layouts/Layout.astro';
 ---
 
-<Layout title="Cadets" disableHero maintain>d</Layout>
+<Layout title="Cadets" disableHero>
+    <div class="flashcard-section">
+        <div id="FlashCard-BG">
+            <div class="container">
+                <div class="flashcard-stack">
+                    <a href="/cadet/tool/flashcard/chain/" class="flashcard card-back"></a>
+                    <a href="/cadet/tool/flashcard/chain/" class="flashcard card-middle"></a>
+                    <a href="/cadet/tool/flashcard/chain/" class="flashcard card-front">
+                        <div class="card-label">Chain of Command</div>
+                        <div class="card-title">Flashcards</div>
+                    </a>
+                </div>
+
+                <div class="flashcard-stack">
+                    <a href="/cadet/tool/flashcard/navy/" class="flashcard card-back"></a>
+                    <a href="/cadet/tool/flashcard/navy/" class="flashcard card-middle"></a>
+                    <a href="/cadet/tool/flashcard/navy/" class="flashcard card-front">
+                        <div class="card-label">Navy Ranks</div>
+                        <div class="card-title">Flashcards</div>
+                    </a>
+                </div>
+
+                <div class="flashcard-stack">
+                    <a href="/cadet/tool/flashcard/abc/" class="flashcard card-back"></a>
+                    <a href="/cadet/tool/flashcard/abc/" class="flashcard card-middle"></a>
+                    <a href="/cadet/tool/flashcard/abc/" class="flashcard card-front">
+                        <div class="card-label">Military Alphabet</div>
+                        <div class="card-title">Flashcards</div>
+                    </a>
+                </div>
+
+                <div class="flashcard-stack">
+                    <a href="/cadet/tool/flashcard/ami/" class="flashcard card-back"></a>
+                    <a href="/cadet/tool/flashcard/ami/" class="flashcard card-middle"></a>
+                    <a href="/cadet/tool/flashcard/ami/" class="flashcard card-front">
+                        <div class="card-label">AMI questions</div>
+                        <div class="card-title">Flashcards</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        .flashcard-section {
+            padding: 6rem 2rem;
+            background: #000000;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .flashcard-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        #FlashCard-BG {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px 60px;
+            max-width: 100%;
+            height: 60vw;
+            padding: 60px 60px;
+            width: 100%;
+        }
+
+        .flashcard-stack {
+            position: relative;
+            width: 80%;
+            height: 280px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .flashcard {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-decoration: none;
+            color: #fafaf5;
+            border: 1px solid rgba(2, 60, 113, 0.7);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .flashcard::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(2, 60, 113, 0.3), rgba(230, 178, 32, 0.1));
+            border-radius: 16px;
+            opacity: 0.5;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, rgba(2, 60, 113, 0.1), rgba(15, 15, 20, 0.9));
+            transform: rotate(-2deg) translate(-5px, 5px);
+            z-index: 1;
+        }
+
+        .card-middle {
+            background: linear-gradient(135deg, rgba(2, 60, 113, 0.15), rgba(12, 12, 18, 0.9));
+            transform: rotate(1deg) translate(-3px, 3px);
+            z-index: 2;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, rgba(2, 60, 113, 0.2), rgba(10, 10, 15, 0.9));
+            z-index: 3;
+            transform: rotate(0deg);
+        }
+
+        .flashcard-stack:hover .card-front {
+            transform: translate(-15px, -15px) rotate(-3deg);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            border-color: rgba(230, 178, 32, 0.7);
+        }
+
+        .flashcard-stack:hover .card-front::before {
+            background: linear-gradient(45deg, rgba(230, 178, 32, 0.3), rgba(2, 60, 113, 0.2));
+        }
+
+        .flashcard-stack:hover .card-middle {
+            transform: rotate(2deg) translate(-2px, 2px);
+            border-color: rgba(2, 60, 113, 0.8);
+        }
+
+        .flashcard-stack:hover .card-back {
+            transform: rotate(-1deg) translate(-3px, 4px);
+            border-color: rgba(2, 60, 113, 0.8);
+        }
+
+        .card-label {
+            font-size: 16px;
+            color: #e6b220;
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 42px;
+            font-weight: bold;
+            color: #fafaf5;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .flashcard-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                height: auto;
+                padding: 40px 20px;
+            }
+
+            .flashcard-stack {
+                height: 240px;
+                width: 100%;
+            }
+
+            .card-title {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .flashcard-section {
+                padding: 3rem 1rem;
+            }
+            
+            .flashcard-stack {
+                height: 200px;
+            }
+            
+            .card-title {
+                font-size: 28px;
+            }
+            
+            .card-label {
+                font-size: 14px;
+            }
+        }
+    </style>
+</Layout>
