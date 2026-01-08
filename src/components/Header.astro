@@ -54,6 +54,9 @@ const departments = await getCollection('departments');
 
     <!-- Social Media Icons -->
     <div class="socials">
+      <a href="https://www.instagram.com/parlier_njrotc/" class="social-icon">
+        <img src="/icons/instagram.svg" alt="Instagram" />
+      </a>
     </div>
 
     <!-- Mobile Menu Button -->
@@ -109,7 +112,9 @@ const departments = await getCollection('departments');
     </nav>
 
     <div class="mobile-socials">
-      
+      <a href="https://www.instagram.com/parlier_njrotc/" class="social-icon">
+        <img src="/icons/instagram.svg" alt="Instagram" />
+      </a>
     </div>
   </div>
 </header>
@@ -244,13 +249,15 @@ const departments = await getCollection('departments');
   }
 
   .social-icon {
+    display: flex;
+    justify-content: center;
     color: #fff;
     margin: 0 1rem;
     text-decoration: none;
   }
 
   .social-icon img {
-    height: 40px;
+    height: 45px;
   }
 
   /* Mobile Menu Styles */
