@@ -1,419 +1,976 @@
----
-// src/pages/cadet/help/index.astro
-import Layout from '../../../layouts/Layout.astro';
----
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>test</title>
+        
+        <!-- Material Icons -->
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Help</h1>
+                <p>
+                    This is in testing leave if you see this
+                </p>
+            </div>
 
-<Layout title="Cadet Help Center">
-    <div class="flashcard-section">
-        <div id="FlashCard-BG">
-            <div class="container">
-                <!-- Exit Warning Modal -->
-                <div id="exit-warning" class="exit-modal">
-                    <div class="exit-modal-content">
-                        <div class="warning-icon">⚠️</div>
-                        <h3>Leaving Secure Site</h3>
-                        <p>You are about to leave the official website. External links may not follow the same security protocols.</p>
-                        <div class="button-group">
-                            <button id="cancel-exit" class="exit-btn cancel-btn">Stay Here</button>
-                            <button id="confirm-exit" class="exit-btn confirm-btn">Continue Anyway</button>
-                        </div>
+            <div class="tab-container">
+                <div class="tab-scroll-container">
+                    <button class="tab-scroll-arrow left">
+                        <span class="material-icons">chevron_left</span>
+                    </button>
+
+                    <div class="tab-headers">
+                        <button class="tab-header active" data-tab="signup">
+                            <span class="material-icons tab-icon"
+                                >person_add</span
+                            >
+                            Signup Form
+                        </button>
+                        <button class="tab-header" data-tab="suggestion">
+                            <span class="material-icons tab-icon"
+                                >lightbulb</span
+                            >
+                            Suggestion Box
+                        </button>
                     </div>
+
+                    <button class="tab-scroll-arrow right">
+                        <span class="material-icons">chevron_right</span>
+                    </button>
+
+                    <div class="tab-indicator" id="tabIndicator"></div>
                 </div>
-                
-                <h1 style="text-align: center; color: #e6b220; margin-bottom: 40px;">Cadet Help Center</h1>
-                
-                <!-- Google-style Tab Container -->
-                <div class="tab-container">
-                    <div class="tab-scroll-container">
-                        <div class="tab-headers">
-                            <button class="tab-header active" data-tab="signup">
-                                <span class="material-icons tab-icon">person_add</span>
-                                Signup Form
+
+                <div class="tab-contents">
+                    <!-- Signup Form -->
+                    <div class="tab-content active" id="signup-content">
+                        <h2>Program Signup</h2>
+                        <form id="signupForm">
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    name="fullName"
+                                    class="form-control"
+                                    placeholder="Enter your full name"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="schoolId">School ID *</label>
+                                <input
+                                    type="text"
+                                    id="schoolId"
+                                    name="schoolId"
+                                    class="form-control"
+                                    placeholder="Enter your school ID"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="grade">Grade Level *</label>
+                                <select
+                                    id="grade"
+                                    name="grade"
+                                    class="form-control"
+                                    required
+                                >
+                                    <option value="">Select Grade</option>
+                                    <option value="9">9th Grade</option>
+                                    <option value="10">10th Grade</option>
+                                    <option value="11">11th Grade</option>
+                                    <option value="12">12th Grade</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    class="form-control"
+                                    placeholder="Enter your email"
+                                    required
+                                />
+                            </div>
+
+                            <div class="status-message" id="signupStatus"></div>
+
+                            <button
+                                type="submit"
+                                class="submit-btn"
+                                id="signupSubmit"
+                            >
+                                <span id="signupBtnText">Submit Signup</span>
+                                <div
+                                    class="loading"
+                                    id="signupLoading"
+                                    style="display: none;"
+                                >
+                                </div>
                             </button>
-                            <button class="tab-header" data-tab="suggestion">
-                                <span class="material-icons tab-icon">lightbulb</span>
-                                Suggestion Box
-                            </button>
-                        </div>
-                        <div class="tab-indicator" id="tabIndicator"></div>
+                        </form>
                     </div>
-                    
-                    <div class="tab-contents">
-                        <!-- Signup Form -->
-                        <div class="tab-content active" id="signup-content">
-                            <h2>NJROTC Program Signup</h2>
-                            <form id="signupForm">
-                                <div class="form-group">
-                                    <label for="fullName">Full Name *</label>
-                                    <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Enter your full name" required>
+
+                    <!-- Suggestion Form -->
+                    <div class="tab-content" id="suggestion-content">
+                        <h2>Suggestion Box</h2>
+                        <form id="suggestionForm">
+                            <div class="form-group">
+                                <label for="suggFullName">Full Name *</label>
+                                <input
+                                    type="text"
+                                    id="suggFullName"
+                                    name="fullName"
+                                    class="form-control"
+                                    placeholder="Enter your full name"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="suggSchoolId">School ID *</label>
+                                <input
+                                    type="text"
+                                    id="suggSchoolId"
+                                    name="schoolId"
+                                    class="form-control"
+                                    placeholder="Enter your school ID"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="suggGrade">Grade Level *</label>
+                                <select
+                                    id="suggGrade"
+                                    name="grade"
+                                    class="form-control"
+                                    required
+                                >
+                                    <option value="">Select Grade</option>
+                                    <option value="9">9th Grade</option>
+                                    <option value="10">10th Grade</option>
+                                    <option value="11">11th Grade</option>
+                                    <option value="12">12th Grade</option>
+                                    <option value="college">College</option>
+                                    <option value="faculty"
+                                        >Faculty/Staff</option
+                                    >
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="suggestionType"
+                                    >Suggestion Type *</label
+                                >
+                                <select
+                                    id="suggestionType"
+                                    name="type"
+                                    class="form-control"
+                                    required
+                                >
+                                    <option value="">Select Type</option>
+                                    <option value="improvement"
+                                        >Website Bugs</option
+                                    >
+                                    <option value="event">Event Idea</option>
+                                    <option value="Webite"
+                                        >Webite Suggestion</option
+                                    >
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="suggestionText"
+                                    >Your Suggestion *</label
+                                >
+                                <textarea
+                                    id="suggestionText"
+                                    name="suggestion"
+                                    class="form-control"
+                                    placeholder="Please describe your suggestion in detail..."
+                                    required></textarea>
+                            </div>
+
+                            <div class="status-message" id="suggestionStatus">
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="submit-btn"
+                                id="suggestionSubmit"
+                            >
+                                <span id="suggestionBtnText"
+                                    >Submit Suggestion</span
+                                >
+                                <div
+                                    class="loading"
+                                    id="suggestionLoading"
+                                    style="display: none;"
+                                >
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="schoolId">School ID *</label>
-                                    <input type="text" id="schoolId" name="schoolId" class="form-control" placeholder="Enter your school ID" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="grade">Grade Level *</label>
-                                    <select id="grade" name="grade" class="form-control" required>
-                                        <option value="">Select Grade</option>
-                                        <option value="9">9th Grade</option>
-                                        <option value="10">10th Grade</option>
-                                        <option value="11">11th Grade</option>
-                                        <option value="12">12th Grade</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="email">Email Address *</label>
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="program">Program Interest</label>
-                                    <select id="program" name="program" class="form-control">
-                                        <option value="">Select Program</option>
-                                        <option value="leadership">Leadership Program</option>
-                                        <option value="drill">Drill Team</option>
-                                        <option value="rifle">Rifle Team</option>
-                                        <option value="academic">Academic Team</option>
-                                        <option value="color_guard">Color Guard</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="status-message" id="signupStatus"></div>
-                                
-                                <button type="submit" class="submit-btn" id="signupSubmit">
-                                    <span id="signupBtnText">Submit Signup</span>
-                                    <div class="loading" id="signupLoading" style="display: none;"></div>
-                                </button>
-                            </form>
-                        </div>
-                        
-                        <!-- Suggestion Form -->
-                        <div class="tab-content" id="suggestion-content">
-                            <h2>Suggestion Box</h2>
-                            <form id="suggestionForm">
-                                <div class="form-group">
-                                    <label for="suggFullName">Full Name *</label>
-                                    <input type="text" id="suggFullName" name="fullName" class="form-control" placeholder="Enter your full name" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="suggSchoolId">School ID *</label>
-                                    <input type="text" id="suggSchoolId" name="schoolId" class="form-control" placeholder="Enter your school ID" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="suggGrade">Grade Level *</label>
-                                    <select id="suggGrade" name="grade" class="form-control" required>
-                                        <option value="">Select Grade</option>
-                                        <option value="9">9th Grade</option>
-                                        <option value="10">10th Grade</option>
-                                        <option value="11">11th Grade</option>
-                                        <option value="12">12th Grade</option>
-                                        <option value="faculty">Faculty/Staff</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="suggestionType">Suggestion Type *</label>
-                                    <select id="suggestionType" name="type" class="form-control" required>
-                                        <option value="">Select Type</option>
-                                        <option value="improvement">NJROTC Improvement</option>
-                                        <option value="event">Event Idea</option>
-                                        <option value="uniform">Uniform/Fitting</option>
-                                        <option value="training">Training Suggestion</option>
-                                        <option value="safety">Safety Concern</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="suggestionText">Your Suggestion *</label>
-                                    <textarea id="suggestionText" name="suggestion" class="form-control" placeholder="Please describe your suggestion in detail..." required></textarea>
-                                </div>
-                                
-                                <div class="status-message" id="suggestionStatus"></div>
-                                
-                                <button type="submit" class="submit-btn" id="suggestionSubmit">
-                                    <span id="suggestionBtnText">Submit Suggestion</span>
-                                    <div class="loading" id="suggestionLoading" style="display: none;"></div>
-                                </button>
-                            </form>
-                        </div>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
-    <style>
-        /* Your existing CSS styles here */
-        /* Make sure all your CSS from before is included */
-    </style>
-    
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('Page loaded, initializing forms...');
-        
-        // Tab switching code (keep your existing tab code)
-        const tabHeaders = document.querySelectorAll('.tab-header');
-        const tabContents = document.querySelectorAll('.tab-content');
-        const tabIndicator = document.getElementById('tabIndicator');
-        const tabHeadersContainer = document.querySelector('.tab-headers');
-        
-        // Tab Switching Function
-        function switchTab(tabName) {
-            // Update URL hash
-            window.location.hash = tabName;
-            
-            // Update active tab header
-            tabHeaders.forEach(header => {
-                if (header.dataset.tab === tabName) {
-                    header.classList.add('active');
-                } else {
-                    header.classList.remove('active');
-                }
-            });
-            
-            // Update active tab content
-            tabContents.forEach(content => {
-                if (content.id === `${tabName}-content`) {
-                    content.classList.add('active');
-                } else {
-                    content.classList.remove('active');
-                }
-            });
-        }
-        
-        // Tab header click events
-        tabHeaders.forEach(header => {
-            header.addEventListener('click', function() {
-                const tabName = this.dataset.tab;
-                switchTab(tabName);
-            });
-        });
-        
-        // Check URL hash on load
-        function checkHash() {
-            const hash = window.location.hash.substring(1).toLowerCase();
-            if (hash === 'suggestion') {
-                switchTab('suggestion');
-            } else if (hash === 'signup') {
-                switchTab('signup');
-            } else {
-                switchTab('signup');
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family:
+                    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             }
-        }
-        
-        checkHash();
-        window.addEventListener('hashchange', checkHash);
-        
-        // ============ FORM SUBMISSION ============
-        console.log('Setting up form submissions...');
-        
-        // Get form elements
-        const signupForm = document.getElementById('signupForm');
-        const suggestionForm = document.getElementById('suggestionForm');
-        
-        if (!signupForm) console.error('Signup form not found!');
-        if (!suggestionForm) console.error('Suggestion form not found!');
-        
-        // Test API endpoint first
-        async function testAPI() {
-            try {
-                const response = await fetch('/api/signup', { method: 'POST' });
-                console.log('API test response status:', response.status);
-                return response.status !== 404;
-            } catch (error) {
-                console.warn('API test failed:', error.message);
-                return false;
+
+            body {
+                background: #000000;
+                color: #fafaf5;
+                min-height: 100vh;
+                padding: 2rem;
+                position: relative;
+                overflow-x: hidden;
             }
-        }
-        
-        // Signup Form Submission
-        signupForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            console.log('Signup form submitted');
-            
-            const submitBtn = document.getElementById('signupSubmit');
-            const btnText = document.getElementById('signupBtnText');
-            const loading = document.getElementById('signupLoading');
-            const status = document.getElementById('signupStatus');
-            
-            // Show loading
-            btnText.style.display = 'none';
-            loading.style.display = 'inline-block';
-            submitBtn.disabled = true;
-            status.style.display = 'none';
-            
-            try {
-                // Get form data
-                const formData = {
-                    fullName: document.getElementById('fullName').value.trim(),
-                    schoolId: document.getElementById('schoolId').value.trim(),
-                    grade: document.getElementById('grade').value,
-                    email: document.getElementById('email').value.trim(),
-                    program: document.getElementById('program').value
-                };
-                
-                console.log('Submitting signup:', formData);
-                
-                // Send to Vercel serverless function
-                const response = await fetch('/api/signup', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
+
+            body::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background:
+                    radial-gradient(
+                        circle at 20% 50%,
+                        rgb(2 60 113 / 40%) 0%,
+                        transparent 50%
+                    ),
+                    radial-gradient(
+                        circle at 80% 20%,
+                        rgb(2 60 113 / 40%) 0%,
+                        transparent 50%
+                    );
+                z-index: -1;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 3rem;
+            }
+
+            .header {
+                text-align: center;
+                padding: 2rem;
+            }
+
+            .header h1 {
+                color: #e6b220;
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+
+            .header p {
+                color: #fafaf5;
+                opacity: 0.8;
+                font-size: 1.1rem;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            /* Google-style Tab Container */
+            .tab-container {
+                background: linear-gradient(
+                    135deg,
+                    rgba(10, 10, 15, 0.95),
+                    rgba(2, 60, 113, 0.2)
+                );
+                border: 2px solid #e6b220;
+                border-radius: 12px;
+                width: 100%;
+                max-width: 800px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+                position: relative;
+                min-height: 600px;
+            }
+
+            .tab-container::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    45deg,
+                    rgba(2, 60, 113, 0.3),
+                    rgba(230, 178, 32, 0.1)
+                );
+                opacity: 0.3;
+                z-index: -1;
+            }
+
+            /* Google-style Tab Headers */
+            .tab-headers {
+                display: flex;
+                background: rgba(2, 60, 113, 0.1);
+                border-bottom: 1px solid rgba(230, 178, 32, 0.3);
+                padding: 0 1rem;
+                position: relative;
+                overflow-x: auto;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* IE/Edge */
+            }
+
+            .tab-headers::-webkit-scrollbar {
+                display: none; /* Chrome/Safari */
+            }
+
+            .tab-header {
+                padding: 1rem 1.5rem;
+                background: transparent;
+                color: rgba(255, 255, 255, 0.7);
+                border: none;
+                font-size: 1rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                position: relative;
+                white-space: nowrap;
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-bottom: 3px solid transparent;
+            }
+
+            .tab-header.active {
+                color: #e6b220;
+                border-bottom: 3px solid #e6b220;
+            }
+
+            .tab-header:hover:not(.active) {
+                color: rgba(230, 178, 32, 0.8);
+                background: rgba(230, 178, 32, 0.05);
+            }
+
+            .tab-header .tab-icon {
+                margin-right: 8px;
+                font-size: 1.2rem;
+            }
+
+            /* Google-style Tab Indicator */
+            .tab-indicator {
+                position: absolute;
+                bottom: 0;
+                height: 3px;
+                background: #e6b220;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1;
+            }
+
+            /* Tab Content */
+            .tab-contents {
+                position: relative;
+                padding: 2.5rem;
+                min-height: 500px;
+            }
+
+            .tab-content {
+                display: none;
+                animation: fadeIn 0.3s ease;
+            }
+
+            .tab-content.active {
+                display: block;
+            }
+
+            .tab-content h2 {
+                color: #e6b220;
+                margin-bottom: 1.5rem;
+                font-size: 1.8rem;
+                text-align: center;
+                font-weight: 500;
+            }
+
+            /* Form Styles */
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: #fafaf5;
+                font-weight: 500;
+                font-size: 0.95rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .form-control {
+                width: 100%;
+                padding: 0.9rem 1rem;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(230, 178, 32, 0.3);
+                border-radius: 8px;
+                color: #fafaf5;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+            }
+
+            .form-control:focus {
+                outline: none;
+                border-color: #e6b220;
+                box-shadow: 0 0 0 2px rgba(230, 178, 32, 0.2);
+                background: rgba(255, 255, 255, 0.08);
+            }
+
+            .form-control::placeholder {
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+            select.form-control {
+                appearance: none;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e6b220' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: right 1rem center;
+                background-size: 16px;
+            }
+
+            textarea.form-control {
+                min-height: 120px;
+                resize: vertical;
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 1rem;
+                background: linear-gradient(135deg, #e6b220, #d4a41c);
+                color: #000;
+                border: none;
+                border-radius: 8px;
+                font-size: 1rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-top: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .submit-btn:hover {
+                background: linear-gradient(135deg, #d4a41c, #c29518);
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(230, 178, 32, 0.3);
+            }
+
+            .submit-btn:active {
+                transform: translateY(0);
+            }
+
+            /* Status Messages */
+            .status-message {
+                padding: 1rem;
+                margin: 1rem 0;
+                border-radius: 8px;
+                text-align: center;
+                font-weight: 500;
+                display: none;
+            }
+
+            .success {
+                background: rgba(46, 204, 113, 0.2);
+                color: #2ecc71;
+                border: 1px solid #2ecc71;
+            }
+
+            .error {
+                background: rgba(231, 76, 60, 0.2);
+                color: #e74c3c;
+                border: 1px solid #e74c3c;
+            }
+
+            /* Mobile Styles */
+            @media (max-width: 768px) {
+                body {
+                    padding: 1rem;
+                }
+
+                .header h1 {
+                    font-size: 2rem;
+                }
+
+                .tab-container {
+                    min-height: 500px;
+                    border-radius: 8px;
+                }
+
+                .tab-contents {
+                    padding: 1.5rem;
+                }
+
+                .tab-header {
+                    padding: 0.8rem 1rem;
+                    font-size: 0.95rem;
+                    min-height: 44px;
+                    flex: 1;
+                    text-align: center;
+                }
+
+                .tab-header .tab-icon {
+                    margin-right: 6px;
+                    font-size: 1.1rem;
+                }
+
+                /* Mobile swipe indicator */
+                .swipe-indicator {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .tab-contents {
+                    padding: 1rem;
+                }
+
+                .header h1 {
+                    font-size: 1.8rem;
+                }
+
+                .tab-header {
+                    padding: 0.7rem 0.5rem;
+                    font-size: 0.9rem;
+                }
+
+                .tab-header .tab-icon {
+                    display: none;
+                }
+            }
+
+            /* Animations */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Loading Animation */
+            .loading {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border: 3px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                border-top-color: #e6b220;
+                animation: spin 1s ease-in-out infinite;
+            }
+
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            /* Tab icons */
+            .material-icons {
+                font-family: "Material Icons";
+                font-weight: normal;
+                font-style: normal;
+                font-size: 24px;
+                line-height: 1;
+                letter-spacing: normal;
+                text-transform: none;
+                display: inline-block;
+                white-space: nowrap;
+                word-wrap: normal;
+                direction: ltr;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            /* Responsive tab scrolling for mobile */
+            .tab-scroll-container {
+                position: relative;
+            }
+
+            .tab-scroll-arrow {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: rgba(230, 178, 32, 0.2);
+                color: #e6b220;
+                border: none;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                cursor: pointer;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                z-index: 2;
+                transition: all 0.3s ease;
+            }
+
+            .tab-scroll-arrow:hover {
+                background: rgba(230, 178, 32, 0.3);
+            }
+
+            .tab-scroll-arrow.left {
+                left: 8px;
+            }
+
+            .tab-scroll-arrow.right {
+                right: 8px;
+            }
+
+            @media (max-width: 768px) {
+                .tab-scroll-arrow {
+                    display: flex;
+                }
+            }
+        </style>
+
+        <script lang="js">
+            document.addEventListener("DOMContentLoaded", function () {
+                const tabHeaders = document.querySelectorAll(".tab-header");
+                const tabContents = document.querySelectorAll(".tab-content");
+                const tabIndicator = document.getElementById("tabIndicator");
+                const tabHeadersContainer =
+                    document.querySelector(".tab-headers");
+                const scrollArrows =
+                    document.querySelectorAll(".tab-scroll-arrow");
+                const signupForm = document.getElementById("signupForm");
+                const suggestionForm =
+                    document.getElementById("suggestionForm");
+
+                // Initialize tab indicator
+                updateTabIndicator();
+
+                // Tab Switching Function
+                function switchTab(tabName) {
+                    window.location.hash = tabName;
+                    tabHeaders.forEach((header) => {
+                        if (header.dataset.tab === tabName) {
+                            header.classList.add("active");
+                        } else {
+                            header.classList.remove("active");
+                        }
+                    });
+
+                    tabContents.forEach((content) => {
+                        if (content.id === `${tabName}-content`) {
+                            content.classList.add("active");
+                        } else {
+                            content.classList.remove("active");
+                        }
+                    });
+
+                    updateTabIndicator();
+                    scrollToActiveTab();
+                }
+
+                // Update tab indicator position
+                function updateTabIndicator() {
+                    const activeTab =
+                        document.querySelector(".tab-header.active");
+                    if (!activeTab) return;
+
+                    const tabRect = activeTab.getBoundingClientRect();
+                    const containerRect =
+                        tabHeadersContainer.getBoundingClientRect();
+
+                    tabIndicator.style.width = `${tabRect.width}px`;
+                    tabIndicator.style.left = `${tabRect.left - containerRect.left}px`;
+                }
+
+                // Scroll to active tab on mobile
+                function scrollToActiveTab() {
+                    const activeTab =
+                        document.querySelector(".tab-header.active");
+                    if (activeTab && window.innerWidth <= 768) {
+                        activeTab.scrollIntoView({
+                            behavior: "smooth",
+                            block: "nearest",
+                            inline: "center",
+                        });
+                    }
+                }
+
+                // Tab header click events
+                tabHeaders.forEach((header) => {
+                    header.addEventListener("click", function () {
+                        const tabName = this.dataset.tab;
+                        switchTab(tabName);
+                    });
+                });
+
+                // Check URL hash on load
+                function checkHash() {
+                    const hash = window.location.hash
+                        .substring(1)
+                        .toLowerCase();
+                    if (hash === "suggestion") {
+                        switchTab("suggestion");
+                    } else if (hash === "signup") {
+                        switchTab("signup");
+                    } else {
+                        switchTab("signup");
+                    }
+                }
+
+                checkHash();
+
+                // Handle hash changes
+                window.addEventListener("hashchange", checkHash);
+
+                // Handle window resize
+                window.addEventListener("resize", function () {
+                    updateTabIndicator();
+                });
+
+                // Scroll arrows for mobile
+                scrollArrows.forEach((arrow) => {
+                    arrow.addEventListener("click", function () {
+                        const scrollAmount = 200;
+                        const direction = this.classList.contains("left")
+                            ? -1
+                            : 1;
+                        tabHeadersContainer.scrollBy({
+                            left: scrollAmount * direction,
+                            behavior: "smooth",
+                        });
+                    });
+                });
+
+                // Update scroll arrows visibility
+                function updateScrollArrows() {
+                    if (window.innerWidth > 768) {
+                        scrollArrows.forEach(
+                            (arrow) => (arrow.style.display = "none"),
+                        );
+                        return;
+                    }
+
+                    const scrollLeft = tabHeadersContainer.scrollLeft;
+                    const scrollWidth = tabHeadersContainer.scrollWidth;
+                    const clientWidth = tabHeadersContainer.clientWidth;
+
+                    scrollArrows.forEach((arrow) => {
+                        arrow.style.display = "flex";
+                    });
+
+                    // Hide left arrow if at start
+                    document.querySelector(
+                        ".tab-scroll-arrow.left",
+                    ).style.opacity = scrollLeft <= 10 ? "0.5" : "1";
+
+                    // Hide right arrow if at end
+                    document.querySelector(
+                        ".tab-scroll-arrow.right",
+                    ).style.opacity =
+                        scrollLeft + clientWidth >= scrollWidth - 10
+                            ? "0.5"
+                            : "1";
+                }
+
+                // Update scroll arrows on scroll
+                tabHeadersContainer.addEventListener(
+                    "scroll",
+                    updateScrollArrows,
+                );
+                window.addEventListener("resize", updateScrollArrows);
+                updateScrollArrows();
+
+                // Mobile touch/swipe for tab switching
+                let touchStartX = 0;
+                let touchStartY = 0;
+                let touchEndX = 0;
+                let touchEndY = 0;
+
+                document.addEventListener(
+                    "touchstart",
+                    function (e) {
+                        touchStartX = e.changedTouches[0].screenX;
+                        touchStartY = e.changedTouches[0].screenY;
                     },
-                    body: JSON.stringify(formData)
-                });
-                
-                console.log('Response status:', response.status);
-                
-                // Check if response is JSON
-                const contentType = response.headers.get('content-type');
-                if (!contentType || !contentType.includes('application/json')) {
-                    const text = await response.text();
-                    console.error('Non-JSON response:', text.substring(0, 100));
-                    throw new Error('Server returned non-JSON response');
-                }
-                
-                const result = await response.json();
-                console.log('Server response:', result);
-                
-                if (response.ok) {
-                    status.className = 'status-message success';
-                    status.innerHTML = '✅ Signup submitted successfully! Confirmation email sent.';
-                    status.style.display = 'block';
-                    
-                    // Reset form after 2 seconds
-                    setTimeout(() => {
-                        signupForm.reset();
-                    }, 2000);
-                } else {
-                    throw new Error(result.error || 'Submission failed');
-                }
-                
-            } catch (error) {
-                console.error('Submission error:', error);
-                status.className = 'status-message error';
-                status.innerHTML = `❌ Error: ${error.message}`;
-                status.style.display = 'block';
-            } finally {
-                // Hide loading
-                btnText.style.display = 'inline';
-                loading.style.display = 'none';
-                submitBtn.disabled = false;
-                
-                // Scroll to status message
-                setTimeout(() => {
-                    status.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 100);
-            }
-        });
-        
-        // Suggestion Form Submission
-        suggestionForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            console.log('Suggestion form submitted');
-            
-            const submitBtn = document.getElementById('suggestionSubmit');
-            const btnText = document.getElementById('suggestionBtnText');
-            const loading = document.getElementById('suggestionLoading');
-            const status = document.getElementById('suggestionStatus');
-            
-            // Show loading
-            btnText.style.display = 'none';
-            loading.style.display = 'inline-block';
-            submitBtn.disabled = true;
-            status.style.display = 'none';
-            
-            try {
-                // Get form data
-                const formData = {
-                    fullName: document.getElementById('suggFullName').value.trim(),
-                    schoolId: document.getElementById('suggSchoolId').value.trim(),
-                    grade: document.getElementById('suggGrade').value,
-                    suggestionType: document.getElementById('suggestionType').value,
-                    suggestionText: document.getElementById('suggestionText').value.trim()
-                };
-                
-                console.log('Submitting suggestion:', { 
-                    ...formData, 
-                    suggestionTextPreview: formData.suggestionText.substring(0, 50) + '...' 
-                });
-                
-                // Send to Vercel serverless function
-                const response = await fetch('/api/suggestion', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
+                    { passive: true },
+                );
+
+                document.addEventListener(
+                    "touchend",
+                    function (e) {
+                        touchEndX = e.changedTouches[0].screenX;
+                        touchEndY = e.changedTouches[0].screenY;
+                        handleSwipe();
                     },
-                    body: JSON.stringify(formData)
+                    { passive: true },
+                );
+
+                function handleSwipe() {
+                    const minSwipeDistance = 50;
+                    const horizontalSwipe = Math.abs(touchEndX - touchStartX);
+                    const verticalSwipe = Math.abs(touchEndY - touchStartY);
+
+                    // Only handle horizontal swipes (not vertical)
+                    if (
+                        horizontalSwipe > verticalSwipe &&
+                        horizontalSwipe > minSwipeDistance
+                    ) {
+                        const currentTab =
+                            document.querySelector(".tab-header.active").dataset
+                                .tab;
+
+                        if (touchEndX < touchStartX) {
+                            // Swipe left - go to next tab
+                            if (currentTab === "signup") {
+                                switchTab("suggestion");
+                            }
+                        } else {
+                            // Swipe right - go to previous tab
+                            if (currentTab === "suggestion") {
+                                switchTab("signup");
+                            }
+                        }
+                    }
+                }
+                signupForm.addEventListener("submit", async function (e) {
+                    e.preventDefault();
+
+                    const submitBtn = document.getElementById("signupSubmit");
+                    const btnText = document.getElementById("signupBtnText");
+                    const loading = document.getElementById("signupLoading");
+                    const status = document.getElementById("signupStatus");
+
+                    // Show loading
+                    btnText.style.display = "none";
+                    loading.style.display = "inline-block";
+                    submitBtn.disabled = true;
+                    status.style.display = "none";
+                    try {
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            status.className = "status-message success";
+                            status.innerHTML =
+                                "✓ Signup submitted successfully! Confirmation email sent.";
+                            status.style.display = "block";
+                            signupForm.reset();
+                        } else {
+                            throw new Error(
+                                result.error || "Submission failed",
+                            );
+                        }
+                    } catch (error) {
+                        console.error("Error:", error);
+                        status.className = "status-message error";
+                        status.innerHTML = `✗ ${error.message}`;
+                        status.style.display = "block";
+                    } finally {
+                        // Hide loading
+                        btnText.style.display = "inline";
+                        loading.style.display = "none";
+                        submitBtn.disabled = false;
+                        status.scrollIntoView({
+                            behavior: "smooth",
+                            block: "nearest",
+                        });
+                    }
                 });
-                
-                console.log('Response status:', response.status);
-                
-                // Check if response is JSON
-                const contentType = response.headers.get('content-type');
-                if (!contentType || !contentType.includes('application/json')) {
-                    const text = await response.text();
-                    console.error('Non-JSON response:', text.substring(0, 100));
-                    throw new Error('Server returned non-JSON response');
-                }
-                
-                const result = await response.json();
-                console.log('Server response:', result);
-                
-                if (response.ok) {
-                    status.className = 'status-message success';
-                    status.innerHTML = '✅ Suggestion submitted successfully! Thank you for your feedback.';
-                    status.style.display = 'block';
-                    
-                    // Reset form after 2 seconds
-                    setTimeout(() => {
-                        suggestionForm.reset();
-                    }, 2000);
-                } else {
-                    throw new Error(result.error || 'Submission failed');
-                }
-                
-            } catch (error) {
-                console.error('Submission error:', error);
-                status.className = 'status-message error';
-                status.innerHTML = `❌ Error: ${error.message}`;
-                status.style.display = 'block';
-            } finally {
-                // Hide loading
-                btnText.style.display = 'inline';
-                loading.style.display = 'none';
-                submitBtn.disabled = false;
-                
-                // Scroll to status message
-                setTimeout(() => {
-                    status.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 100);
-            }
-        });
-        
-        console.log('Forms initialized successfully');
-        
-        // Test API on load
-        testAPI().then(apiAvailable => {
-            if (apiAvailable) {
-                console.log('✅ API endpoints are available');
-            } else {
-                console.warn('⚠️ API endpoints may not be available');
-                document.getElementById('signupStatus').innerHTML = 
-                    '⚠️ API endpoint not available. Make sure server is running.';
-                document.getElementById('signupStatus').style.display = 'block';
-            }
-        });
-    });
-    </script>
-</Layout>
+
+                // Suggestion Form Submission
+                suggestionForm.addEventListener("submit", async function (e) {
+                    e.preventDefault();
+
+                    const submitBtn =
+                        document.getElementById("suggestionSubmit");
+                    const btnText =
+                        document.getElementById("suggestionBtnText");
+                    const loading =
+                        document.getElementById("suggestionLoading");
+                    const status = document.getElementById("suggestionStatus");
+
+                    // Show loading
+                    btnText.style.display = "none";
+                    loading.style.display = "inline-block";
+                    submitBtn.disabled = true;
+                    status.style.display = "none";
+
+                    try {
+                        // Prepare form data
+                        const formData = {
+                            fullName:
+                                document.getElementById("suggFullName").value,
+                            schoolId:
+                                document.getElementById("suggSchoolId").value,
+                            grade: document.getElementById("suggGrade").value,
+                            suggestionType:
+                                document.getElementById("suggestionType").value,
+                            suggestionText:
+                                document.getElementById("suggestionText").value,
+                        };
+
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            status.className = "status-message success";
+                            status.innerHTML =
+                                "✓ Suggestion submitted successfully! Thank you for your feedback.";
+                            status.style.display = "block";
+                            suggestionForm.reset();
+                        } else {
+                            throw new Error(
+                                result.error || "Submission failed",
+                            );
+                        }
+                    } catch (error) {
+                        console.error("Error:", error);
+                        status.className = "status-message error";
+                        status.innerHTML = `✗ ${error.message}`;
+                        status.style.display = "block";
+                    } finally {
+                        // Hide loading
+                        btnText.style.display = "inline";
+                        loading.style.display = "none";
+                        submitBtn.disabled = false;
+                        status.scrollIntoView({
+                            behavior: "smooth",
+                            block: "nearest",
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
