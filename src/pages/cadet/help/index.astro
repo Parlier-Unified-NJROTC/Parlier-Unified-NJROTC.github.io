@@ -827,11 +827,6 @@
                         return;
                     }
 
-                    if (!validateSchoolId(schoolId)) {
-                        showStatus(status, "Please enter a valid student ID (numbers only, at least 6 digits)", false);
-                        return;
-                    }
-
                     if (!grade) {
                         showStatus(status, "Please select your grade level", false);
                         return;
