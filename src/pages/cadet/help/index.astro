@@ -66,13 +66,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="schoolId">School ID *</label>
+                                <label for="schoolId">Student ID *</label>
                                 <input
                                     type="text"
                                     id="schoolId"
                                     name="schoolId"
                                     class="form-control"
-                                    placeholder="Enter your school ID"
+                                    placeholder="Enter your student ID"
                                     required
                                 />
                             </div>
@@ -105,6 +105,18 @@
                                 />
                             </div>
 
+                            <div class="form-group">
+                                <label for="reason">Why do you want to join NJROTC? *</label>
+                                <textarea
+                                    id="reason"
+                                    name="reason"
+                                    class="form-control"
+                                    placeholder="Please tell us why you're interested in joining the NJROTC program..."
+                                    rows="4"
+                                    required
+                                ></textarea>
+                            </div>
+
                             <div class="status-message" id="signupStatus"></div>
 
                             <button
@@ -123,7 +135,7 @@
                         </form>
                     </div>
 
-    
+                    <!-- Suggestion Form -->
                     <div class="tab-content" id="suggestion-content">
                         <h2>Suggestion Box</h2>
                         <form id="suggestionForm">
@@ -509,11 +521,6 @@
                     margin-right: 6px;
                     font-size: 1.1rem;
                 }
-
-                /* Mobile swipe indicator */
-                .swipe-indicator {
-                    display: none;
-                }
             }
 
             @media (max-width: 480px) {
@@ -622,11 +629,10 @@
             }
         </style>
 
-        <script lang="js">
+        <script lang="">
             const API_BASE_URL = 'https://parlier-unified-njrotc-server.onrender.com';
 
             document.addEventListener("DOMContentLoaded", function () {
-                // Tab Management Code
                 const tabHeaders = document.querySelectorAll(".tab-header");
                 const tabContents = document.querySelectorAll(".tab-content");
                 const tabIndicator = document.getElementById("tabIndicator");
@@ -635,10 +641,7 @@
                 const signupForm = document.getElementById("signupForm");
                 const suggestionForm = document.getElementById("suggestionForm");
 
-                // Initialize tab indicator
                 updateTabIndicator();
-
-                // Tab Switching Function
                 function switchTab(tabName) {
                     window.location.hash = tabName;
                     tabHeaders.forEach((header) => {
@@ -661,7 +664,6 @@
                     scrollToActiveTab();
                 }
 
-                // Update tab indicator position
                 function updateTabIndicator() {
                     const activeTab = document.querySelector(".tab-header.active");
                     if (!activeTab) return;
@@ -673,7 +675,6 @@
                     tabIndicator.style.left = `${tabRect.left - containerRect.left}px`;
                 }
 
-                // Scroll to active tab on mobile
                 function scrollToActiveTab() {
                     const activeTab = document.querySelector(".tab-header.active");
                     if (activeTab && window.innerWidth <= 768) {
@@ -685,7 +686,6 @@
                     }
                 }
 
-                // Tab header click events
                 tabHeaders.forEach((header) => {
                     header.addEventListener("click", function () {
                         const tabName = this.dataset.tab;
@@ -693,7 +693,6 @@
                     });
                 });
 
-                // Check URL hash on load
                 function checkHash() {
                     const hash = window.location.hash.substring(1).toLowerCase();
                     if (hash === "suggestion") {
@@ -707,15 +706,12 @@
 
                 checkHash();
 
-                // Handle hash changes
                 window.addEventListener("hashchange", checkHash);
 
-                // Handle window resize
                 window.addEventListener("resize", function () {
                     updateTabIndicator();
                 });
 
-                // Scroll arrows for mobile
                 scrollArrows.forEach((arrow) => {
                     arrow.addEventListener("click", function () {
                         const scrollAmount = 200;
@@ -727,7 +723,6 @@
                     });
                 });
 
-                // Update scroll arrows visibility
                 function updateScrollArrows() {
                     if (window.innerWidth > 768) {
                         scrollArrows.forEach((arrow) => (arrow.style.display = "none"));
@@ -742,20 +737,16 @@
                         arrow.style.display = "flex";
                     });
 
-                    // Hide left arrow if at start
                     document.querySelector(".tab-scroll-arrow.left").style.opacity = scrollLeft <= 10 ? "0.5" : "1";
 
-                    // Hide right arrow if at end
                     document.querySelector(".tab-scroll-arrow.right").style.opacity =
                         scrollLeft + clientWidth >= scrollWidth - 10 ? "0.5" : "1";
                 }
 
-                // Update scroll arrows on scroll
                 tabHeadersContainer.addEventListener("scroll", updateScrollArrows);
                 window.addEventListener("resize", updateScrollArrows);
                 updateScrollArrows();
 
-                // Mobile touch/swipe for tab switching
                 let touchStartX = 0;
                 let touchStartY = 0;
                 let touchEndX = 0;
@@ -785,17 +776,14 @@
                     const horizontalSwipe = Math.abs(touchEndX - touchStartX);
                     const verticalSwipe = Math.abs(touchEndY - touchStartY);
 
-                    // Only handle horizontal swipes (not vertical)
                     if (horizontalSwipe > verticalSwipe && horizontalSwipe > minSwipeDistance) {
                         const currentTab = document.querySelector(".tab-header.active").dataset.tab;
 
                         if (touchEndX < touchStartX) {
-                            // Swipe left - go to next tab
                             if (currentTab === "signup") {
                                 switchTab("suggestion");
                             }
                         } else {
-                            // Swipe right - go to previous tab
                             if (currentTab === "suggestion") {
                                 switchTab("signup");
                             }
@@ -803,28 +791,23 @@
                     }
                 }
 
-                // Form Validation Functions
                 function validateEmail(email) {
                     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     return re.test(email);
                 }
 
-                function validateSchoolId(id) {
-                    return /^\d+$/.test(id) && id.length >= 6;
-                }
 
                 function showStatus(element, message, isSuccess) {
                     element.textContent = message;
                     element.className = `status-message ${isSuccess ? 'success' : 'error'}`;
                     element.style.display = 'block';
                     
-                    // Scroll to status message
                     setTimeout(() => {
                         element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }, 100);
                 }
 
-                // Signup Form Submission
+                // Signup  
                 signupForm.addEventListener("submit", async function (e) {
                     e.preventDefault();
 
@@ -833,20 +816,19 @@
                     const loading = document.getElementById("signupLoading");
                     const status = document.getElementById("signupStatus");
 
-                    // Get form values
                     const fullName = document.getElementById("fullName").value.trim();
                     const schoolId = document.getElementById("schoolId").value.trim();
                     const grade = document.getElementById("grade").value;
                     const email = document.getElementById("email").value.trim();
+                    const reason = document.getElementById("reason").value.trim();
 
-                    // Validation
                     if (!fullName) {
                         showStatus(status, "Please enter your full name", false);
                         return;
                     }
 
                     if (!validateSchoolId(schoolId)) {
-                        showStatus(status, "Please enter a valid school ID (numbers only, at least 6 digits)", false);
+                        showStatus(status, "Please enter a valid student ID (numbers only, at least 6 digits)", false);
                         return;
                     }
 
@@ -860,7 +842,11 @@
                         return;
                     }
 
-                    // Show loading
+                    if (!reason || reason.length < 20) {
+                        showStatus(status, "Please provide a meaningful reason for joining (at least 20 characters)", false);
+                        return;
+                    }
+
                     btnText.style.display = "none";
                     loading.style.display = "inline-block";
                     submitBtn.disabled = true;
@@ -872,6 +858,7 @@
                             schoolId: schoolId,
                             grade: grade,
                             email: email,
+                            reason: reason
                         };
 
                         // Log the request for debugging
@@ -897,7 +884,6 @@
                             showStatus(status, "✓ Signup submitted successfully! Confirmation email sent.", true);
                             signupForm.reset();
                             
-                            // Optional: Switch to thank you message
                             setTimeout(() => {
                                 status.style.display = 'none';
                             }, 5000);
@@ -906,8 +892,6 @@
                         }
                     } catch (error) {
                         console.error("Error:", error);
-                        
-                        // Provide more specific error messages
                         let errorMessage = error.message;
                         if (error.message.includes("Failed to fetch")) {
                             errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
@@ -915,16 +899,15 @@
                             errorMessage = "Network error. Please check your connection.";
                         }
                         
-                        showStatus(status, `✗ ${errorMessage}`, false);
+                        showStatus(status, `X ${errorMessage}`, false);
                     } finally {
-                        // Hide loading
                         btnText.style.display = "inline";
                         loading.style.display = "none";
                         submitBtn.disabled = false;
                     }
                 });
 
-                // Suggestion Form Submission
+                // Suggestion 
                 suggestionForm.addEventListener("submit", async function (e) {
                     e.preventDefault();
 
@@ -933,12 +916,10 @@
                     const loading = document.getElementById("suggestionLoading");
                     const status = document.getElementById("suggestionStatus");
 
-                    // Get form values
                     const fullName = document.getElementById("suggFullName").value.trim();
                     const suggestionType = document.getElementById("suggestionType").value;
                     const suggestionText = document.getElementById("suggestionText").value.trim();
 
-                    // Validation
                     if (!fullName) {
                         showStatus(status, "Please enter your full name", false);
                         return;
@@ -954,7 +935,6 @@
                         return;
                     }
 
-                    // Show loading
                     btnText.style.display = "none";
                     loading.style.display = "inline-block";
                     submitBtn.disabled = true;
@@ -990,7 +970,6 @@
                             showStatus(status, "✓ Suggestion submitted successfully! Thank you for your feedback.", true);
                             suggestionForm.reset();
                             
-                            // Optional: Switch to thank you message
                             setTimeout(() => {
                                 status.style.display = 'none';
                             }, 5000);
@@ -1000,7 +979,6 @@
                     } catch (error) {
                         console.error("Error:", error);
                         
-                        // Provide more specific error messages
                         let errorMessage = error.message;
                         if (error.message.includes("Failed to fetch")) {
                             errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
@@ -1008,9 +986,8 @@
                             errorMessage = "Network error. Please check your connection.";
                         }
                         
-                        showStatus(status, `✗ ${errorMessage}`, false);
+                        showStatus(status, `X ${errorMessage}`, false);
                     } finally {
-                        // Hide loading
                         btnText.style.display = "inline";
                         loading.style.display = "none";
                         submitBtn.disabled = false;
@@ -1031,12 +1008,11 @@
                             console.warn("⚠ Backend API returned non-OK status:", response.status);
                         }
                     } catch (error) {
-                        console.error("✗ Cannot connect to backend API:", error.message);
+                        console.error("X Cannot connect to backend API:", error.message);
                         console.log("Make sure to update API_BASE_URL with your Render URL");
                     }
                 }
 
-                // Test connection after a short delay
                 setTimeout(testAPIConnection, 1000);
             });
         </script>
