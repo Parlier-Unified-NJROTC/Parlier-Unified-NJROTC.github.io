@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>test</title>
+        <title>NJROTC Help Center</title>
         
         <!-- Material Icons -->
         <link
@@ -14,9 +14,9 @@
     <body>
         <div class="container">
             <div class="header">
-                <h1>Help</h1>
+                <h1>NJROTC Help Center</h1>
                 <p>
-                    This is in testing leave if you see this
+                    Submit program signups or suggestions for improvement.
                 </p>
             </div>
 
@@ -123,7 +123,7 @@
                         </form>
                     </div>
 
-                    <!-- Suggestion Form -->
+    
                     <div class="tab-content" id="suggestion-content">
                         <h2>Suggestion Box</h2>
                         <form id="suggestionForm">
@@ -140,25 +140,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="suggGrade">Grade Level *</label>
-                                <select
-                                    id="suggGrade"
-                                    name="grade"
-                                    class="form-control"
-                                    required
-                                >
-                                    <option value="">Select Grade</option>
-                                    <option value="9">9th Grade</option>
-                                    <option value="10">10th Grade</option>
-                                    <option value="11">11th Grade</option>
-                                    <option value="12">12th Grade</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="suggestionType"
-                                    >Suggestion Type *</label
-                                >
+                                <label for="suggestionType">Suggestion Type *</label>
                                 <select
                                     id="suggestionType"
                                     name="type"
@@ -166,26 +148,22 @@
                                     required
                                 >
                                     <option value="">Select Type</option>
-                                    <option value="improvement"
-                                        >Website Bugs</option
-                                    >
+                                    <option value="bug">Website Bug</option>
+                                    <option value="improvement">Website Improvement</option>
                                     <option value="event">Event Idea</option>
-                                    <option value="Webite"
-                                        >Webite Suggestion</option
-                                    >
+                                    <option value="program">Program Suggestion</option>
                                     <option value="other">Other</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="suggestionText"
-                                    >Your Suggestion *</label
-                                >
+                                <label for="suggestionText">Your Suggestion *</label>
                                 <textarea
                                     id="suggestionText"
                                     name="suggestion"
                                     class="form-control"
                                     placeholder="Please describe your suggestion in detail..."
+                                    rows="6"
                                     required></textarea>
                             </div>
 
@@ -645,17 +623,17 @@
         </style>
 
         <script lang="js">
+            const API_BASE_URL = 'https://parlier-unified-njrotc-server.onrender.com';
+
             document.addEventListener("DOMContentLoaded", function () {
+                // Tab Management Code
                 const tabHeaders = document.querySelectorAll(".tab-header");
                 const tabContents = document.querySelectorAll(".tab-content");
                 const tabIndicator = document.getElementById("tabIndicator");
-                const tabHeadersContainer =
-                    document.querySelector(".tab-headers");
-                const scrollArrows =
-                    document.querySelectorAll(".tab-scroll-arrow");
+                const tabHeadersContainer = document.querySelector(".tab-headers");
+                const scrollArrows = document.querySelectorAll(".tab-scroll-arrow");
                 const signupForm = document.getElementById("signupForm");
-                const suggestionForm =
-                    document.getElementById("suggestionForm");
+                const suggestionForm = document.getElementById("suggestionForm");
 
                 // Initialize tab indicator
                 updateTabIndicator();
@@ -685,13 +663,11 @@
 
                 // Update tab indicator position
                 function updateTabIndicator() {
-                    const activeTab =
-                        document.querySelector(".tab-header.active");
+                    const activeTab = document.querySelector(".tab-header.active");
                     if (!activeTab) return;
 
                     const tabRect = activeTab.getBoundingClientRect();
-                    const containerRect =
-                        tabHeadersContainer.getBoundingClientRect();
+                    const containerRect = tabHeadersContainer.getBoundingClientRect();
 
                     tabIndicator.style.width = `${tabRect.width}px`;
                     tabIndicator.style.left = `${tabRect.left - containerRect.left}px`;
@@ -699,8 +675,7 @@
 
                 // Scroll to active tab on mobile
                 function scrollToActiveTab() {
-                    const activeTab =
-                        document.querySelector(".tab-header.active");
+                    const activeTab = document.querySelector(".tab-header.active");
                     if (activeTab && window.innerWidth <= 768) {
                         activeTab.scrollIntoView({
                             behavior: "smooth",
@@ -720,9 +695,7 @@
 
                 // Check URL hash on load
                 function checkHash() {
-                    const hash = window.location.hash
-                        .substring(1)
-                        .toLowerCase();
+                    const hash = window.location.hash.substring(1).toLowerCase();
                     if (hash === "suggestion") {
                         switchTab("suggestion");
                     } else if (hash === "signup") {
@@ -746,9 +719,7 @@
                 scrollArrows.forEach((arrow) => {
                     arrow.addEventListener("click", function () {
                         const scrollAmount = 200;
-                        const direction = this.classList.contains("left")
-                            ? -1
-                            : 1;
+                        const direction = this.classList.contains("left") ? -1 : 1;
                         tabHeadersContainer.scrollBy({
                             left: scrollAmount * direction,
                             behavior: "smooth",
@@ -759,9 +730,7 @@
                 // Update scroll arrows visibility
                 function updateScrollArrows() {
                     if (window.innerWidth > 768) {
-                        scrollArrows.forEach(
-                            (arrow) => (arrow.style.display = "none"),
-                        );
+                        scrollArrows.forEach((arrow) => (arrow.style.display = "none"));
                         return;
                     }
 
@@ -774,24 +743,15 @@
                     });
 
                     // Hide left arrow if at start
-                    document.querySelector(
-                        ".tab-scroll-arrow.left",
-                    ).style.opacity = scrollLeft <= 10 ? "0.5" : "1";
+                    document.querySelector(".tab-scroll-arrow.left").style.opacity = scrollLeft <= 10 ? "0.5" : "1";
 
                     // Hide right arrow if at end
-                    document.querySelector(
-                        ".tab-scroll-arrow.right",
-                    ).style.opacity =
-                        scrollLeft + clientWidth >= scrollWidth - 10
-                            ? "0.5"
-                            : "1";
+                    document.querySelector(".tab-scroll-arrow.right").style.opacity =
+                        scrollLeft + clientWidth >= scrollWidth - 10 ? "0.5" : "1";
                 }
 
                 // Update scroll arrows on scroll
-                tabHeadersContainer.addEventListener(
-                    "scroll",
-                    updateScrollArrows,
-                );
+                tabHeadersContainer.addEventListener("scroll", updateScrollArrows);
                 window.addEventListener("resize", updateScrollArrows);
                 updateScrollArrows();
 
@@ -807,7 +767,7 @@
                         touchStartX = e.changedTouches[0].screenX;
                         touchStartY = e.changedTouches[0].screenY;
                     },
-                    { passive: true },
+                    { passive: true }
                 );
 
                 document.addEventListener(
@@ -817,7 +777,7 @@
                         touchEndY = e.changedTouches[0].screenY;
                         handleSwipe();
                     },
-                    { passive: true },
+                    { passive: true }
                 );
 
                 function handleSwipe() {
@@ -826,13 +786,8 @@
                     const verticalSwipe = Math.abs(touchEndY - touchStartY);
 
                     // Only handle horizontal swipes (not vertical)
-                    if (
-                        horizontalSwipe > verticalSwipe &&
-                        horizontalSwipe > minSwipeDistance
-                    ) {
-                        const currentTab =
-                            document.querySelector(".tab-header.active").dataset
-                                .tab;
+                    if (horizontalSwipe > verticalSwipe && horizontalSwipe > minSwipeDistance) {
+                        const currentTab = document.querySelector(".tab-header.active").dataset.tab;
 
                         if (touchEndX < touchStartX) {
                             // Swipe left - go to next tab
@@ -847,6 +802,29 @@
                         }
                     }
                 }
+
+                // Form Validation Functions
+                function validateEmail(email) {
+                    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return re.test(email);
+                }
+
+                function validateSchoolId(id) {
+                    return /^\d+$/.test(id) && id.length >= 6;
+                }
+
+                function showStatus(element, message, isSuccess) {
+                    element.textContent = message;
+                    element.className = `status-message ${isSuccess ? 'success' : 'error'}`;
+                    element.style.display = 'block';
+                    
+                    // Scroll to status message
+                    setTimeout(() => {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 100);
+                }
+
+                // Signup Form Submission
                 signupForm.addEventListener("submit", async function (e) {
                     e.preventDefault();
 
@@ -855,40 +833,94 @@
                     const loading = document.getElementById("signupLoading");
                     const status = document.getElementById("signupStatus");
 
+                    // Get form values
+                    const fullName = document.getElementById("fullName").value.trim();
+                    const schoolId = document.getElementById("schoolId").value.trim();
+                    const grade = document.getElementById("grade").value;
+                    const email = document.getElementById("email").value.trim();
+
+                    // Validation
+                    if (!fullName) {
+                        showStatus(status, "Please enter your full name", false);
+                        return;
+                    }
+
+                    if (!validateSchoolId(schoolId)) {
+                        showStatus(status, "Please enter a valid school ID (numbers only, at least 6 digits)", false);
+                        return;
+                    }
+
+                    if (!grade) {
+                        showStatus(status, "Please select your grade level", false);
+                        return;
+                    }
+
+                    if (!validateEmail(email)) {
+                        showStatus(status, "Please enter a valid email address", false);
+                        return;
+                    }
+
                     // Show loading
                     btnText.style.display = "none";
                     loading.style.display = "inline-block";
                     submitBtn.disabled = true;
                     status.style.display = "none";
+
                     try {
+                        const formData = {
+                            fullName: fullName,
+                            schoolId: schoolId,
+                            grade: grade,
+                            email: email,
+                        };
+
+                        // Log the request for debugging
+                        console.log("Sending signup request:", formData);
+                        console.log("API URL:", `${API_BASE_URL}/api/signup`);
+
+                        const response = await fetch(`${API_BASE_URL}/api/signup`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(formData),
+                            mode: "cors",
+                            credentials: "omit",
+                        });
+
+                        console.log("Response status:", response.status);
 
                         const result = await response.json();
+                        console.log("Response data:", result);
 
                         if (response.ok) {
-                            status.className = "status-message success";
-                            status.innerHTML =
-                                "✓ Signup submitted successfully! Confirmation email sent.";
-                            status.style.display = "block";
+                            showStatus(status, "✓ Signup submitted successfully! Confirmation email sent.", true);
                             signupForm.reset();
+                            
+                            // Optional: Switch to thank you message
+                            setTimeout(() => {
+                                status.style.display = 'none';
+                            }, 5000);
                         } else {
-                            throw new Error(
-                                result.error || "Submission failed",
-                            );
+                            throw new Error(result.error || result.details || "Submission failed");
                         }
                     } catch (error) {
                         console.error("Error:", error);
-                        status.className = "status-message error";
-                        status.innerHTML = `✗ ${error.message}`;
-                        status.style.display = "block";
+                        
+                        // Provide more specific error messages
+                        let errorMessage = error.message;
+                        if (error.message.includes("Failed to fetch")) {
+                            errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
+                        } else if (error.message.includes("NetworkError")) {
+                            errorMessage = "Network error. Please check your connection.";
+                        }
+                        
+                        showStatus(status, `✗ ${errorMessage}`, false);
                     } finally {
                         // Hide loading
                         btnText.style.display = "inline";
                         loading.style.display = "none";
                         submitBtn.disabled = false;
-                        status.scrollIntoView({
-                            behavior: "smooth",
-                            block: "nearest",
-                        });
                     }
                 });
 
@@ -896,13 +928,31 @@
                 suggestionForm.addEventListener("submit", async function (e) {
                     e.preventDefault();
 
-                    const submitBtn =
-                        document.getElementById("suggestionSubmit");
-                    const btnText =
-                        document.getElementById("suggestionBtnText");
-                    const loading =
-                        document.getElementById("suggestionLoading");
+                    const submitBtn = document.getElementById("suggestionSubmit");
+                    const btnText = document.getElementById("suggestionBtnText");
+                    const loading = document.getElementById("suggestionLoading");
                     const status = document.getElementById("suggestionStatus");
+
+                    // Get form values
+                    const fullName = document.getElementById("suggFullName").value.trim();
+                    const suggestionType = document.getElementById("suggestionType").value;
+                    const suggestionText = document.getElementById("suggestionText").value.trim();
+
+                    // Validation
+                    if (!fullName) {
+                        showStatus(status, "Please enter your full name", false);
+                        return;
+                    }
+
+                    if (!suggestionType) {
+                        showStatus(status, "Please select a suggestion type", false);
+                        return;
+                    }
+
+                    if (!suggestionText || suggestionText.length < 10) {
+                        showStatus(status, "Please provide a detailed suggestion (at least 10 characters)", false);
+                        return;
+                    }
 
                     // Show loading
                     btnText.style.display = "none";
@@ -911,49 +961,83 @@
                     status.style.display = "none";
 
                     try {
-                        // Prepare form data
                         const formData = {
-                            fullName:
-                                document.getElementById("suggFullName").value,
-                            schoolId:
-                                document.getElementById("suggSchoolId").value,
-                            grade: document.getElementById("suggGrade").value,
-                            suggestionType:
-                                document.getElementById("suggestionType").value,
-                            suggestionText:
-                                document.getElementById("suggestionText").value,
+                            fullName: fullName,
+                            suggestionType: suggestionType,
+                            suggestionText: suggestionText
                         };
 
+                        // Log the request for debugging
+                        console.log("Sending suggestion request:", formData);
+                        console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
+
+                        const response = await fetch(`${API_BASE_URL}/api/suggestion`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(formData),
+                            mode: "cors",
+                            credentials: "omit",
+                        });
+
+                        console.log("Response status:", response.status);
 
                         const result = await response.json();
+                        console.log("Response data:", result);
 
                         if (response.ok) {
-                            status.className = "status-message success";
-                            status.innerHTML =
-                                "✓ Suggestion submitted successfully! Thank you for your feedback.";
-                            status.style.display = "block";
+                            showStatus(status, "✓ Suggestion submitted successfully! Thank you for your feedback.", true);
                             suggestionForm.reset();
+                            
+                            // Optional: Switch to thank you message
+                            setTimeout(() => {
+                                status.style.display = 'none';
+                            }, 5000);
                         } else {
-                            throw new Error(
-                                result.error || "Submission failed",
-                            );
+                            throw new Error(result.error || result.details || "Submission failed");
                         }
                     } catch (error) {
                         console.error("Error:", error);
-                        status.className = "status-message error";
-                        status.innerHTML = `✗ ${error.message}`;
-                        status.style.display = "block";
+                        
+                        // Provide more specific error messages
+                        let errorMessage = error.message;
+                        if (error.message.includes("Failed to fetch")) {
+                            errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
+                        } else if (error.message.includes("NetworkError")) {
+                            errorMessage = "Network error. Please check your connection.";
+                        }
+                        
+                        showStatus(status, `✗ ${errorMessage}`, false);
                     } finally {
                         // Hide loading
                         btnText.style.display = "inline";
                         loading.style.display = "none";
                         submitBtn.disabled = false;
-                        status.scrollIntoView({
-                            behavior: "smooth",
-                            block: "nearest",
-                        });
                     }
                 });
+
+                // Test API connection on load
+                async function testAPIConnection() {
+                    try {
+                        const response = await fetch(`${API_BASE_URL}/health`, {
+                            method: 'GET',
+                            mode: 'cors'
+                        });
+                        
+                        if (response.ok) {
+                            console.log("✓ Backend API is reachable");
+                        } else {
+                            console.warn("⚠ Backend API returned non-OK status:", response.status);
+                        }
+                    } catch (error) {
+                        console.error("✗ Cannot connect to backend API:", error.message);
+                        console.log("Make sure to update API_BASE_URL with your Render URL");
+                    }
+                }
+
+                // Test connection after a short delay
+                setTimeout(testAPIConnection, 1000);
             });
         </script>
     </body>
