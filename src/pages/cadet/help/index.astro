@@ -1,17 +1,15 @@
-<!doctype html>
-<html lang="en">
+---
+import Layout from '../../../layouts/Layout.astro';
+---
+<Layout title="NJROTC Help Center" disableHero >
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>NJROTC Help Center</title>
-        
         <!-- Material Icons -->
         <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
         />
     </head>
-    <body>
+    <div class="BG555">
         <div class="container">
             <div class="header">
                 <h1>NJROTC Help Center</h1>
@@ -22,35 +20,91 @@
 
             <div class="tab-container">
                 <div class="tab-scroll-container">
-                    <button class="tab-scroll-arrow left">
-                        <span class="material-icons">chevron_left</span>
-                    </button>
-
                     <div class="tab-headers">
-                        <button class="tab-header active" data-tab="signup">
-                            <span class="material-icons tab-icon"
-                                >person_add</span
-                            >
-                            Signup Form
-                        </button>
-                        <button class="tab-header" data-tab="suggestion">
+                        <button class="tab-header active" data-tab="suggestion">
                             <span class="material-icons tab-icon"
                                 >lightbulb</span
                             >
                             Suggestion Box
                         </button>
+                        <button class="tab-header" data-tab="signup">
+                            <span class="material-icons tab-icon"
+                                >person_add</span
+                            >
+                            Signup Form
+                        </button>
                     </div>
-
-                    <button class="tab-scroll-arrow right">
-                        <span class="material-icons">chevron_right</span>
-                    </button>
-
                     <div class="tab-indicator" id="tabIndicator"></div>
                 </div>
 
                 <div class="tab-contents">
+                    <!-- Suggestion Form -->
+                    <div class="tab-content active" id="suggestion-content">
+                        <h2>Suggestion Box</h2>
+                        <form id="suggestionForm">
+                            <div class="form-group">
+                                <label for="suggFullName">Full Name *</label>
+                                <input
+                                    type="text"
+                                    id="suggFullName"
+                                    name="fullName"
+                                    class="form-control"
+                                    placeholder="Enter your full name"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="suggestionType">Suggestion Type *</label>
+                                <select
+                                    id="suggestionType"
+                                    name="type"
+                                    class="form-control"
+                                    required
+                                >
+                                    <option value="">Select Type</option>
+                                    <option value="Website Bug">Website Bug</option>
+                                    <option value="Website Improvement">Website Improvement</option>
+                                    <option value="Event Idea">Event Idea</option>
+                                    <option value="Program Suggestion">Program Suggestion</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="suggestionText">Your Suggestion *</label>
+                                <textarea
+                                    id="suggestionText"
+                                    name="suggestion"
+                                    class="form-control"
+                                    placeholder="Please describe your suggestion in detail..."
+                                    rows="6"
+                                    required></textarea>
+                            </div>
+
+                            <div class="status-message" id="suggestionStatus">
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="submit-btn"
+                                id="suggestionSubmit"
+                            >
+                                <span id="suggestionBtnText"
+                                    >Submit Suggestion</span
+                                >
+                                <div
+                                    class="loading"
+                                    id="suggestionLoading"
+                                    style="display: none;"
+                                >
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+
                     <!-- Signup Form -->
-                    <div class="tab-content active" id="signup-content">
+                    <div class="tab-content" id="signup-content">
                         <h2>Program Signup</h2>
                         <form id="signupForm">
                             <div class="form-group">
@@ -134,882 +188,729 @@
                             </button>
                         </form>
                     </div>
-
-                    <!-- Suggestion Form -->
-                    <div class="tab-content" id="suggestion-content">
-                        <h2>Suggestion Box</h2>
-                        <form id="suggestionForm">
-                            <div class="form-group">
-                                <label for="suggFullName">Full Name *</label>
-                                <input
-                                    type="text"
-                                    id="suggFullName"
-                                    name="fullName"
-                                    class="form-control"
-                                    placeholder="Enter your full name"
-                                    required
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="suggestionType">Suggestion Type *</label>
-                                <select
-                                    id="suggestionType"
-                                    name="type"
-                                    class="form-control"
-                                    required
-                                >
-                                    <option value="">Select Type</option>
-                                    <option value="Website Bug">Website Bug</option>
-                                    <option value="Website Improvement">Website Improvement</option>
-                                    <option value="Event Idea">Event Idea</option>
-                                    <option value="Program Suggestion">Program Suggestion</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="suggestionText">Your Suggestion *</label>
-                                <textarea
-                                    id="suggestionText"
-                                    name="suggestion"
-                                    class="form-control"
-                                    placeholder="Please describe your suggestion in detail..."
-                                    rows="6"
-                                    required></textarea>
-                            </div>
-
-                            <div class="status-message" id="suggestionStatus">
-                            </div>
-
-                            <button
-                                type="submit"
-                                class="submit-btn"
-                                id="suggestionSubmit"
-                            >
-                                <span id="suggestionBtnText"
-                                    >Submit Suggestion</span
-                                >
-                                <div
-                                    class="loading"
-                                    id="suggestionLoading"
-                                    style="display: none;"
-                                >
-                                </div>
-                            </button>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:
+                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
 
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family:
-                    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
 
-            body {
-                background: #000000;
-                color: #fafaf5;
-                min-height: 100vh;
-                padding: 2rem;
-                position: relative;
-                overflow-x: hidden;
-            }
+        .header {
+            text-align: center;
+            padding: 2rem;
+        }
 
-            body::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background:
-                    radial-gradient(
-                        circle at 20% 50%,
-                        rgb(2 60 113 / 40%) 0%,
-                        transparent 50%
-                    ),
-                    radial-gradient(
-                        circle at 80% 20%,
-                        rgb(2 60 113 / 40%) 0%,
-                        transparent 50%
-                    );
-                z-index: -1;
-            }
+        .header h1 {
+            color: #e6b220;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 3rem;
-            }
+        .header p {
+            color: #fafaf5;
+            opacity: 0.8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-            .header {
-                text-align: center;
-                padding: 2rem;
-            }
+        /* Google-style Tab Container */
+        .tab-container {
+            background: linear-gradient(
+                135deg,
+                rgba(10, 10, 15, 0.95),
+                rgba(2, 60, 113, 0.2)
+            );
+            border: 2px solid #e6b220;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            position: relative;
+            min-height: 600px;
+        }
 
+        .tab-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                rgba(2, 60, 113, 0.3),
+                rgba(230, 178, 32, 0.1)
+            );
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        /* Google-style Tab Headers */
+        .tab-headers {
+            display: flex;
+            background: rgba(2, 60, 113, 0.1);
+            border-bottom: 1px solid rgba(230, 178, 32, 0.3);
+            padding: 0 1rem;
+            position: relative;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+
+        .tab-headers::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        .tab-header {
+            padding: 1rem 1.5rem;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 3px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .tab-header.active {
+            color: #e6b220;
+        }
+
+        .tab-header:hover:not(.active) {
+            color: rgba(230, 178, 32, 0.8);
+            background: rgba(230, 178, 32, 0.05);
+        }
+
+        .tab-header .tab-icon {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* Google-style Tab Indicator */
+        .tab-indicator {
+            position: absolute;
+            bottom: 0;
+            height: 4px;
+            background: #e6b220;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            will-change: transform, width;
+            pointer-events: none;
+        }
+
+        /* Tab Content */
+        .tab-contents {
+            position: relative;
+            padding: 2.5rem;
+            min-height: 500px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content h2 {
+            color: #e6b220;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #fafaf5;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(230, 178, 32, 0.3);
+            border-radius: 8px;
+            color: #fafaf5;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #e6b220;
+            box-shadow: 0 0 0 2px rgba(230, 178, 32, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e6b220' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 16px;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #e6b220, #d4a41c);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #d4a41c, #c29518);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230, 178, 32, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .success {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            border: 1px solid #2ecc71;
+        }
+
+        .error {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
             .header h1 {
-                color: #e6b220;
-                font-size: 2.5rem;
-                margin-bottom: 1rem;
-                text-transform: uppercase;
-                letter-spacing: 2px;
+                font-size: 2rem;
             }
 
-            .header p {
-                color: #fafaf5;
-                opacity: 0.8;
-                font-size: 1.1rem;
-                max-width: 600px;
-                margin: 0 auto;
-            }
-
-            /* Google-style Tab Container */
             .tab-container {
-                background: linear-gradient(
-                    135deg,
-                    rgba(10, 10, 15, 0.95),
-                    rgba(2, 60, 113, 0.2)
-                );
-                border: 2px solid #e6b220;
-                border-radius: 12px;
-                width: 100%;
-                max-width: 800px;
-                overflow: hidden;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-                position: relative;
-                min-height: 600px;
+                min-height: 500px;
+                border-radius: 8px;
             }
 
-            .tab-container::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(
-                    45deg,
-                    rgba(2, 60, 113, 0.3),
-                    rgba(230, 178, 32, 0.1)
-                );
-                opacity: 0.3;
-                z-index: -1;
-            }
-
-            /* Google-style Tab Headers */
-            .tab-headers {
-                display: flex;
-                background: rgba(2, 60, 113, 0.1);
-                border-bottom: 1px solid rgba(230, 178, 32, 0.3);
-                padding: 0 1rem;
-                position: relative;
-                overflow-x: auto;
-                scrollbar-width: none; /* Firefox */
-                -ms-overflow-style: none; /* IE/Edge */
-            }
-
-            .tab-headers::-webkit-scrollbar {
-                display: none; /* Chrome/Safari */
+            .tab-contents {
+                padding: 1.5rem;
             }
 
             .tab-header {
-                padding: 1rem 1.5rem;
-                background: transparent;
-                color: rgba(255, 255, 255, 0.7);
-                border: none;
-                font-size: 1rem;
-                font-weight: 500;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                position: relative;
-                white-space: nowrap;
-                min-height: 48px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-bottom: 3px solid transparent;
-            }
-
-            .tab-header.active {
-                color: #e6b220;
-                border-bottom: 3px solid #e6b220;
-            }
-
-            .tab-header:hover:not(.active) {
-                color: rgba(230, 178, 32, 0.8);
-                background: rgba(230, 178, 32, 0.05);
+                padding: 0.8rem 1rem;
+                min-height: 44px;
+                flex: 1;
+                text-align: center;
             }
 
             .tab-header .tab-icon {
-                margin-right: 8px;
-                font-size: 1.2rem;
+                margin-right: 6px;
             }
+        }
 
-            /* Google-style Tab Indicator */
-            .tab-indicator {
-                position: absolute;
-                bottom: 0;
-                height: 3px;
-                background: #e6b220;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 1;
-            }
-
-            /* Tab Content */
+        @media (max-width: 480px) {
             .tab-contents {
-                position: relative;
-                padding: 2.5rem;
-                min-height: 500px;
-            }
-
-            .tab-content {
-                display: none;
-                animation: fadeIn 0.3s ease;
-            }
-
-            .tab-content.active {
-                display: block;
-            }
-
-            .tab-content h2 {
-                color: #e6b220;
-                margin-bottom: 1.5rem;
-                font-size: 1.8rem;
-                text-align: center;
-                font-weight: 500;
-            }
-
-            /* Form Styles */
-            .form-group {
-                margin-bottom: 1.5rem;
-            }
-
-            .form-group label {
-                display: block;
-                margin-bottom: 0.5rem;
-                color: #fafaf5;
-                font-weight: 500;
-                font-size: 0.95rem;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-            }
-
-            .form-control {
-                width: 100%;
-                padding: 0.9rem 1rem;
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid rgba(230, 178, 32, 0.3);
-                border-radius: 8px;
-                color: #fafaf5;
-                font-size: 1rem;
-                transition: all 0.3s ease;
-            }
-
-            .form-control:focus {
-                outline: none;
-                border-color: #e6b220;
-                box-shadow: 0 0 0 2px rgba(230, 178, 32, 0.2);
-                background: rgba(255, 255, 255, 0.08);
-            }
-
-            .form-control::placeholder {
-                color: rgba(255, 255, 255, 0.5);
-            }
-
-            select.form-control {
-                appearance: none;
-                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e6b220' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-                background-repeat: no-repeat;
-                background-position: right 1rem center;
-                background-size: 16px;
-            }
-
-            textarea.form-control {
-                min-height: 120px;
-                resize: vertical;
-            }
-
-            .submit-btn {
-                width: 100%;
                 padding: 1rem;
-                background: linear-gradient(135deg, #e6b220, #d4a41c);
-                color: #000;
-                border: none;
-                border-radius: 8px;
-                font-size: 1rem;
-                font-weight: 500;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                margin-top: 1rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
             }
 
-            .submit-btn:hover {
-                background: linear-gradient(135deg, #d4a41c, #c29518);
-                transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(230, 178, 32, 0.3);
+            .header h1 {
+                font-size: 1.8rem;
             }
 
-            .submit-btn:active {
+            .tab-header {
+                padding: 0.7rem 0.5rem;
+            }
+
+            .tab-header .tab-icon {
+                display: none;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
                 transform: translateY(0);
             }
+        }
 
-            /* Status Messages */
-            .status-message {
-                padding: 1rem;
-                margin: 1rem 0;
-                border-radius: 8px;
-                text-align: center;
-                font-weight: 500;
-                display: none;
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #e6b220;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Tab icons */
+        .material-icons {
+            font-family: "Material Icons";
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Responsive tab scrolling for mobile */
+        .tab-scroll-container {
+            position: relative;
+        }
+    </style>
+
+    <script lang="">
+        const API_BASE_URL = 'https://parlier-unified-njrotc-server.onrender.com';
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const tabHeaders = document.querySelectorAll(".tab-header");
+            const tabContents = document.querySelectorAll(".tab-content");
+            const tabIndicator = document.getElementById("tabIndicator");
+            const tabHeadersContainer = document.querySelector(".tab-headers");
+            const signupForm = document.getElementById("signupForm");
+            const suggestionForm = document.getElementById("suggestionForm");
+            const scrollArrows = document.querySelectorAll(".tab-scroll-arrow");
+            scrollArrows.forEach(arrow => arrow.style.display = 'none');
+            
+            let resizeTimeout;
+            let isResizing = false;
+
+            function updateTabIndicator() {
+                const activeTab = document.querySelector(".tab-header.active");
+                if (!activeTab) return;
+
+                void activeTab.offsetWidth;
+                
+                const tabRect = activeTab.getBoundingClientRect();
+                const containerRect = tabHeadersContainer.getBoundingClientRect();
+
+                const left = tabRect.left - containerRect.left;
+                const width = tabRect.width;
+                
+                requestAnimationFrame(() => {
+                    tabIndicator.style.width = `${width}px`;
+                    tabIndicator.style.left = `${left}px`;
+                    tabIndicator.style.opacity = '1';
+                });
             }
 
-            .success {
-                background: rgba(46, 204, 113, 0.2);
-                color: #2ecc71;
-                border: 1px solid #2ecc71;
-            }
+            updateTabIndicator();
+            setTimeout(updateTabIndicator, 100);
 
-            .error {
-                background: rgba(231, 76, 60, 0.2);
-                color: #e74c3c;
-                border: 1px solid #e74c3c;
-            }
-
-            /* Mobile Styles */
-            @media (max-width: 768px) {
-                body {
-                    padding: 1rem;
-                }
-
-                .header h1 {
-                    font-size: 2rem;
-                }
-
-                .tab-container {
-                    min-height: 500px;
-                    border-radius: 8px;
-                }
-
-                .tab-contents {
-                    padding: 1.5rem;
-                }
-
-                .tab-header {
-                    padding: 0.8rem 1rem;
-                    font-size: 0.95rem;
-                    min-height: 44px;
-                    flex: 1;
-                    text-align: center;
-                }
-
-                .tab-header .tab-icon {
-                    margin-right: 6px;
-                    font-size: 1.1rem;
-                }
-            }
-
-            @media (max-width: 480px) {
-                .tab-contents {
-                    padding: 1rem;
-                }
-
-                .header h1 {
-                    font-size: 1.8rem;
-                }
-
-                .tab-header {
-                    padding: 0.7rem 0.5rem;
-                    font-size: 0.9rem;
-                }
-
-                .tab-header .tab-icon {
-                    display: none;
-                }
-            }
-
-            /* Animations */
-            @keyframes fadeIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            /* Loading Animation */
-            .loading {
-                display: inline-block;
-                width: 20px;
-                height: 20px;
-                border: 3px solid rgba(255, 255, 255, 0.3);
-                border-radius: 50%;
-                border-top-color: #e6b220;
-                animation: spin 1s ease-in-out infinite;
-            }
-
-            @keyframes spin {
-                to {
-                    transform: rotate(360deg);
-                }
-            }
-
-            /* Tab icons */
-            .material-icons {
-                font-family: "Material Icons";
-                font-weight: normal;
-                font-style: normal;
-                font-size: 24px;
-                line-height: 1;
-                letter-spacing: normal;
-                text-transform: none;
-                display: inline-block;
-                white-space: nowrap;
-                word-wrap: normal;
-                direction: ltr;
-                -webkit-font-smoothing: antialiased;
-            }
-
-            /* Responsive tab scrolling for mobile */
-            .tab-scroll-container {
-                position: relative;
-            }
-
-            .tab-scroll-arrow {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                background: rgba(230, 178, 32, 0.2);
-                color: #e6b220;
-                border: none;
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                cursor: pointer;
-                display: none;
-                align-items: center;
-                justify-content: center;
-                z-index: 2;
-                transition: all 0.3s ease;
-            }
-
-            .tab-scroll-arrow:hover {
-                background: rgba(230, 178, 32, 0.3);
-            }
-
-            .tab-scroll-arrow.left {
-                left: 8px;
-            }
-
-            .tab-scroll-arrow.right {
-                right: 8px;
-            }
-
-            @media (max-width: 768px) {
-                .tab-scroll-arrow {
-                    display: flex;
-                }
-            }
-        </style>
-
-        <script lang="">
-            const API_BASE_URL = 'https://parlier-unified-njrotc-server.onrender.com';
-
-            document.addEventListener("DOMContentLoaded", function () {
-                const tabHeaders = document.querySelectorAll(".tab-header");
-                const tabContents = document.querySelectorAll(".tab-content");
-                const tabIndicator = document.getElementById("tabIndicator");
-                const tabHeadersContainer = document.querySelector(".tab-headers");
-                const scrollArrows = document.querySelectorAll(".tab-scroll-arrow");
-                const signupForm = document.getElementById("signupForm");
-                const suggestionForm = document.getElementById("suggestionForm");
-
-                updateTabIndicator();
-                function switchTab(tabName) {
-                    window.location.hash = tabName;
-                    tabHeaders.forEach((header) => {
-                        if (header.dataset.tab === tabName) {
-                            header.classList.add("active");
-                        } else {
-                            header.classList.remove("active");
-                        }
-                    });
-
-                    tabContents.forEach((content) => {
-                        if (content.id === `${tabName}-content`) {
-                            content.classList.add("active");
-                        } else {
-                            content.classList.remove("active");
-                        }
-                    });
-
-                    updateTabIndicator();
-                    scrollToActiveTab();
-                }
-
-                function updateTabIndicator() {
-                    const activeTab = document.querySelector(".tab-header.active");
-                    if (!activeTab) return;
-
-                    const tabRect = activeTab.getBoundingClientRect();
-                    const containerRect = tabHeadersContainer.getBoundingClientRect();
-
-                    tabIndicator.style.width = `${tabRect.width}px`;
-                    tabIndicator.style.left = `${tabRect.left - containerRect.left}px`;
-                }
-
-                function scrollToActiveTab() {
-                    const activeTab = document.querySelector(".tab-header.active");
-                    if (activeTab && window.innerWidth <= 768) {
-                        activeTab.scrollIntoView({
-                            behavior: "smooth",
-                            block: "nearest",
-                            inline: "center",
-                        });
-                    }
-                }
-
+            function switchTab(tabName) {
+                window.location.hash = tabName;
                 tabHeaders.forEach((header) => {
-                    header.addEventListener("click", function () {
-                        const tabName = this.dataset.tab;
-                        switchTab(tabName);
-                    });
-                });
-
-                function checkHash() {
-                    const hash = window.location.hash.substring(1).toLowerCase();
-                    if (hash === "suggestion") {
-                        switchTab("suggestion");
-                    } else if (hash === "signup") {
-                        switchTab("signup");
+                    if (header.dataset.tab === tabName) {
+                        header.classList.add("active");
                     } else {
-                        switchTab("signup");
-                    }
-                }
-
-                checkHash();
-
-                window.addEventListener("hashchange", checkHash);
-
-                window.addEventListener("resize", function () {
-                    updateTabIndicator();
-                });
-
-                scrollArrows.forEach((arrow) => {
-                    arrow.addEventListener("click", function () {
-                        const scrollAmount = 200;
-                        const direction = this.classList.contains("left") ? -1 : 1;
-                        tabHeadersContainer.scrollBy({
-                            left: scrollAmount * direction,
-                            behavior: "smooth",
-                        });
-                    });
-                });
-
-                function updateScrollArrows() {
-                    if (window.innerWidth > 768) {
-                        scrollArrows.forEach((arrow) => (arrow.style.display = "none"));
-                        return;
-                    }
-
-                    const scrollLeft = tabHeadersContainer.scrollLeft;
-                    const scrollWidth = tabHeadersContainer.scrollWidth;
-                    const clientWidth = tabHeadersContainer.clientWidth;
-
-                    scrollArrows.forEach((arrow) => {
-                        arrow.style.display = "flex";
-                    });
-
-                    document.querySelector(".tab-scroll-arrow.left").style.opacity = scrollLeft <= 10 ? "0.5" : "1";
-
-                    document.querySelector(".tab-scroll-arrow.right").style.opacity =
-                        scrollLeft + clientWidth >= scrollWidth - 10 ? "0.5" : "1";
-                }
-
-                tabHeadersContainer.addEventListener("scroll", updateScrollArrows);
-                window.addEventListener("resize", updateScrollArrows);
-                updateScrollArrows();
-
-                let touchStartX = 0;
-                let touchStartY = 0;
-                let touchEndX = 0;
-                let touchEndY = 0;
-
-                document.addEventListener(
-                    "touchstart",
-                    function (e) {
-                        touchStartX = e.changedTouches[0].screenX;
-                        touchStartY = e.changedTouches[0].screenY;
-                    },
-                    { passive: true }
-                );
-
-                document.addEventListener(
-                    "touchend",
-                    function (e) {
-                        touchEndX = e.changedTouches[0].screenX;
-                        touchEndY = e.changedTouches[0].screenY;
-                        handleSwipe();
-                    },
-                    { passive: true }
-                );
-
-                function handleSwipe() {
-                    const minSwipeDistance = 50;
-                    const horizontalSwipe = Math.abs(touchEndX - touchStartX);
-                    const verticalSwipe = Math.abs(touchEndY - touchStartY);
-
-                    if (horizontalSwipe > verticalSwipe && horizontalSwipe > minSwipeDistance) {
-                        const currentTab = document.querySelector(".tab-header.active").dataset.tab;
-
-                        if (touchEndX < touchStartX) {
-                            if (currentTab === "signup") {
-                                switchTab("suggestion");
-                            }
-                        } else {
-                            if (currentTab === "suggestion") {
-                                switchTab("signup");
-                            }
-                        }
-                    }
-                }
-
-                function validateEmail(email) {
-                    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    return re.test(email);
-                }
-
-
-                function showStatus(element, message, isSuccess) {
-                    element.textContent = message;
-                    element.className = `status-message ${isSuccess ? 'success' : 'error'}`;
-                    element.style.display = 'block';
-                    
-                    setTimeout(() => {
-                        element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }, 100);
-                }
-
-                // Signup  
-                signupForm.addEventListener("submit", async function (e) {
-                    e.preventDefault();
-
-                    const submitBtn = document.getElementById("signupSubmit");
-                    const btnText = document.getElementById("signupBtnText");
-                    const loading = document.getElementById("signupLoading");
-                    const status = document.getElementById("signupStatus");
-
-                    const fullName = document.getElementById("fullName").value.trim();
-                    const schoolId = document.getElementById("schoolId").value.trim();
-                    const grade = document.getElementById("grade").value;
-                    const email = document.getElementById("email").value.trim();
-                    const reason = document.getElementById("reason").value.trim();
-
-                    if (!fullName) {
-                        showStatus(status, "Please enter your full name", false);
-                        return;
-                    }
-
-                    if (!grade) {
-                        showStatus(status, "Please select your grade level", false);
-                        return;
-                    }
-
-                    if (!validateEmail(email)) {
-                        showStatus(status, "Please enter a valid email address", false);
-                        return;
-                    }
-
-                    if (!reason || reason.length < 20) {
-                        showStatus(status, "Please provide a meaningful reason for joining (at least 20 characters)", false);
-                        return;
-                    }
-
-                    btnText.style.display = "none";
-                    loading.style.display = "inline-block";
-                    submitBtn.disabled = true;
-                    status.style.display = "none";
-
-                    try {
-                        const formData = {
-                            fullName: fullName,
-                            schoolId: schoolId,
-                            grade: grade,
-                            email: email,
-                            reason: reason
-                        };
-
-                        // Log the request for debugging
-                        console.log("Sending signup request:", formData);
-                        console.log("API URL:", `${API_BASE_URL}/api/signup`);
-
-                        const response = await fetch(`${API_BASE_URL}/api/signup`, {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(formData),
-                            mode: "cors",
-                            credentials: "omit",
-                        });
-
-                        console.log("Response status:", response.status);
-
-                        const result = await response.json();
-                        console.log("Response data:", result);
-
-                        if (response.ok) {
-                            showStatus(status, "✓ Signup submitted successfully! Confirmation email sent.", true);
-                            signupForm.reset();
-                            
-                            setTimeout(() => {
-                                status.style.display = 'none';
-                            }, 5000);
-                        } else {
-                            throw new Error(result.error || result.details || "Submission failed");
-                        }
-                    } catch (error) {
-                        console.error("Error:", error);
-                        let errorMessage = error.message;
-                        if (error.message.includes("Failed to fetch")) {
-                            errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
-                        } else if (error.message.includes("NetworkError")) {
-                            errorMessage = "Network error. Please check your connection.";
-                        }
-                        
-                        showStatus(status, `X ${errorMessage}`, false);
-                    } finally {
-                        btnText.style.display = "inline";
-                        loading.style.display = "none";
-                        submitBtn.disabled = false;
+                        header.classList.remove("active");
                     }
                 });
 
-                // Suggestion 
-                suggestionForm.addEventListener("submit", async function (e) {
-                    e.preventDefault();
-
-                    const submitBtn = document.getElementById("suggestionSubmit");
-                    const btnText = document.getElementById("suggestionBtnText");
-                    const loading = document.getElementById("suggestionLoading");
-                    const status = document.getElementById("suggestionStatus");
-
-                    const fullName = document.getElementById("suggFullName").value.trim();
-                    const suggestionType = document.getElementById("suggestionType").value;
-                    const suggestionText = document.getElementById("suggestionText").value.trim();
-
-                    if (!fullName) {
-                        showStatus(status, "Please enter your full name", false);
-                        return;
-                    }
-
-                    if (!suggestionType) {
-                        showStatus(status, "Please select a suggestion type", false);
-                        return;
-                    }
-
-                    if (!suggestionText || suggestionText.length < 10) {
-                        showStatus(status, "Please provide a detailed suggestion (at least 10 characters)", false);
-                        return;
-                    }
-
-                    btnText.style.display = "none";
-                    loading.style.display = "inline-block";
-                    submitBtn.disabled = true;
-                    status.style.display = "none";
-
-                    try {
-                        const formData = {
-                            fullName: fullName,
-                            suggestionType: suggestionType,
-                            suggestionText: suggestionText
-                        };
-
-                        // Log the request for debugging
-                        console.log("Sending suggestion request:", formData);
-                        console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
-
-                        const response = await fetch(`${API_BASE_URL}/api/suggestion`, {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(formData),
-                            mode: "cors",
-                            credentials: "omit",
-                        });
-
-                        console.log("Response status:", response.status);
-
-                        const result = await response.json();
-                        console.log("Response data:", result);
-
-                        if (response.ok) {
-                            showStatus(status, "✓ Suggestion submitted successfully! Thank you for your feedback.", true);
-                            suggestionForm.reset();
-                            
-                            setTimeout(() => {
-                                status.style.display = 'none';
-                            }, 5000);
-                        } else {
-                            throw new Error(result.error || result.details || "Submission failed");
-                        }
-                    } catch (error) {
-                        console.error("Error:", error);
-                        
-                        let errorMessage = error.message;
-                        if (error.message.includes("Failed to fetch")) {
-                            errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
-                        } else if (error.message.includes("NetworkError")) {
-                            errorMessage = "Network error. Please check your connection.";
-                        }
-                        
-                        showStatus(status, `X ${errorMessage}`, false);
-                    } finally {
-                        btnText.style.display = "inline";
-                        loading.style.display = "none";
-                        submitBtn.disabled = false;
+                tabContents.forEach((content) => {
+                    if (content.id === `${tabName}-content`) {
+                        content.classList.add("active");
+                    } else {
+                        content.classList.remove("active");
                     }
                 });
 
-                // Test API connection on load
-                async function testAPIConnection() {
-                    try {
-                        const response = await fetch(`${API_BASE_URL}/health`, {
-                            method: 'GET',
-                            mode: 'cors'
-                        });
-                        
-                        if (response.ok) {
-                            console.log("✓ Backend API is reachable");
-                        } else {
-                            console.warn("⚠ Backend API returned non-OK status:", response.status);
-                        }
-                    } catch (error) {
-                        console.error("X Cannot connect to backend API:", error.message);
-                        console.log("Make sure to update API_BASE_URL with your Render URL");
-                    }
-                }
+                setTimeout(updateTabIndicator, 10);
+            }
 
-                setTimeout(testAPIConnection, 1000);
+            tabHeaders.forEach((header) => {
+                header.addEventListener("click", function () {
+                    const tabName = this.dataset.tab;
+                    switchTab(tabName);
+                });
             });
-        </script>
-    </body>
-</html>
+
+            function checkHash() {
+                const hash = window.location.hash.substring(1).toLowerCase();
+                if (hash === "signup") {
+                    switchTab("signup");
+                } else if (hash === "suggestion") {
+                    switchTab("suggestion");
+                } else {
+                    switchTab("suggestion");
+                }
+            }
+
+            checkHash();
+
+            window.addEventListener("hashchange", checkHash);
+
+            window.addEventListener("resize", function () {
+                isResizing = true;
+                
+                tabIndicator.style.opacity = '0';
+                
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    updateTabIndicator();
+                    isResizing = false;
+                }, 150);
+            });
+            window.addEventListener("orientationchange", function() {
+                setTimeout(updateTabIndicator, 300);
+            });
+
+            document.addEventListener("transitionend", function(e) {
+                if (e.target.classList.contains('tab-header')) {
+                    updateTabIndicator();
+                }
+            });
+
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchEndX = 0;
+            let touchEndY = 0;
+
+            document.addEventListener(
+                "touchstart",
+                function (e) {
+                    touchStartX = e.changedTouches[0].screenX;
+                    touchStartY = e.changedTouches[0].screenY;
+                },
+                { passive: true }
+            );
+
+            document.addEventListener(
+                "touchend",
+                function (e) {
+                    touchEndX = e.changedTouches[0].screenX;
+                    touchEndY = e.changedTouches[0].screenY;
+                    handleSwipe();
+                },
+                { passive: true }
+            );
+
+            function handleSwipe() {
+                const minSwipeDistance = 50;
+                const horizontalSwipe = Math.abs(touchEndX - touchStartX);
+                const verticalSwipe = Math.abs(touchEndY - touchStartY);
+
+                if (horizontalSwipe > verticalSwipe && horizontalSwipe > minSwipeDistance) {
+                    const currentTab = document.querySelector(".tab-header.active").dataset.tab;
+
+                    if (touchEndX < touchStartX) {
+                        if (currentTab === "suggestion") {
+                            switchTab("signup");
+                        }
+                    } else {
+                        if (currentTab === "signup") {
+                            switchTab("suggestion");
+                        }
+                    }
+                }
+            }
+
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+
+            function showStatus(element, message, isSuccess) {
+                element.textContent = message;
+                element.className = `status-message ${isSuccess ? 'success' : 'error'}`;
+                element.style.display = 'block';
+                
+                setTimeout(() => {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+
+            // Signup  
+            signupForm.addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const submitBtn = document.getElementById("signupSubmit");
+                const btnText = document.getElementById("signupBtnText");
+                const loading = document.getElementById("signupLoading");
+                const status = document.getElementById("signupStatus");
+
+                const fullName = document.getElementById("fullName").value.trim();
+                const schoolId = document.getElementById("schoolId").value.trim();
+                const grade = document.getElementById("grade").value;
+                const email = document.getElementById("email").value.trim();
+                const reason = document.getElementById("reason").value.trim();
+
+                if (!fullName) {
+                    showStatus(status, "Please enter your full name", false);
+                    return;
+                }
+
+                if (!grade) {
+                    showStatus(status, "Please select your grade level", false);
+                    return;
+                }
+
+                if (!validateEmail(email)) {
+                    showStatus(status, "Please enter a valid email address", false);
+                    return;
+                }
+
+                if (!reason || reason.length < 20) {
+                    showStatus(status, "Please provide a meaningful reason for joining (at least 20 characters)", false);
+                    return;
+                }
+
+                btnText.style.display = "none";
+                loading.style.display = "inline-block";
+                submitBtn.disabled = true;
+                status.style.display = "none";
+
+                try {
+                    const formData = {
+                        fullName: fullName,
+                        schoolId: schoolId,
+                        grade: grade,
+                        email: email,
+                        reason: reason
+                    };
+
+                    // Log the request for debugging
+                    console.log("Sending signup request:", formData);
+                    console.log("API URL:", `${API_BASE_URL}/api/signup`);
+
+                    const response = await fetch(`${API_BASE_URL}/api/signup`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(formData),
+                        mode: "cors",
+                        credentials: "omit",
+                    });
+
+                    console.log("Response status:", response.status);
+
+                    const result = await response.json();
+                    console.log("Response data:", result);
+
+                    if (response.ok) {
+                        showStatus(status, "✓ Signup submitted successfully! Confirmation email sent.", true);
+                        signupForm.reset();
+                        
+                        setTimeout(() => {
+                            status.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        throw new Error(result.error || result.details || "Submission failed");
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    let errorMessage = error.message;
+                    if (error.message.includes("Failed to fetch")) {
+                        errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
+                    } else if (error.message.includes("NetworkError")) {
+                        errorMessage = "Network error. Please check your connection.";
+                    }
+                    
+                    showStatus(status, `X ${errorMessage}`, false);
+                } finally {
+                    btnText.style.display = "inline";
+                    loading.style.display = "none";
+                    submitBtn.disabled = false;
+                }
+            });
+
+            // Suggestion 
+            suggestionForm.addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const submitBtn = document.getElementById("suggestionSubmit");
+                const btnText = document.getElementById("suggestionBtnText");
+                const loading = document.getElementById("suggestionLoading");
+                const status = document.getElementById("suggestionStatus");
+
+                const fullName = document.getElementById("suggFullName").value.trim();
+                const suggestionType = document.getElementById("suggestionType").value;
+                const suggestionText = document.getElementById("suggestionText").value.trim();
+
+                if (!fullName) {
+                    showStatus(status, "Please enter your full name", false);
+                    return;
+                }
+
+                if (!suggestionType) {
+                    showStatus(status, "Please select a suggestion type", false);
+                    return;
+                }
+
+                if (!suggestionText || suggestionText.length < 10) {
+                    showStatus(status, "Please provide a detailed suggestion (at least 10 characters)", false);
+                    return;
+                }
+
+                btnText.style.display = "none";
+                loading.style.display = "inline-block";
+                submitBtn.disabled = true;
+                status.style.display = "none";
+
+                try {
+                    const formData = {
+                        fullName: fullName,
+                        suggestionType: suggestionType,
+                        suggestionText: suggestionText
+                    };
+
+                    // Log the request for debugging
+                    console.log("Sending suggestion request:", formData);
+                    console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
+
+                    const response = await fetch(`${API_BASE_URL}/api/suggestion`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(formData),
+                        mode: "cors",
+                        credentials: "omit",
+                    });
+
+                    console.log("Response status:", response.status);
+
+                    const result = await response.json();
+                    console.log("Response data:", result);
+
+                    if (response.ok) {
+                        showStatus(status, "✓ Suggestion submitted successfully! Thank you for your feedback.", true);
+                        suggestionForm.reset();
+                        
+                        setTimeout(() => {
+                            status.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        throw new Error(result.error || result.details || "Submission failed");
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    
+                    let errorMessage = error.message;
+                    if (error.message.includes("Failed to fetch")) {
+                        errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
+                    } else if (error.message.includes("NetworkError")) {
+                        errorMessage = "Network error. Please check your connection.";
+                    }
+                    
+                    showStatus(status, `X ${errorMessage}`, false);
+                } finally {
+                    btnText.style.display = "inline";
+                    loading.style.display = "none";
+                    submitBtn.disabled = false;
+                }
+            });
+
+            // Test API connection on load
+            async function testAPIConnection() {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/health`, {
+                        method: 'GET',
+                        mode: 'cors'
+                    });
+                    
+                    if (response.ok) {
+                        console.log("✓ Backend API is reachable");
+                    } else {
+                        console.warn("⚠ Backend API returned non-OK status:", response.status);
+                    }
+                } catch (error) {
+                    console.error("X Cannot connect to backend API:", error.message);
+                    console.log("Make sure to update API_BASE_URL with your Render URL");
+                }
+            }
+
+            setTimeout(testAPIConnection, 1000);
+        });
+    </script>
+</Layout>
