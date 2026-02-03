@@ -709,208 +709,208 @@ import Layout from '../../../layouts/Layout.astro';
                 }, 100);
             }
 
-            // Signup  
-            signupForm.addEventListener("submit", async function (e) {
-                e.preventDefault();
+             // Signup  
+                signupForm.addEventListener("submit", async function (e) {
+                    e.preventDefault();
 
-                const submitBtn = document.getElementById("signupSubmit");
-                const btnText = document.getElementById("signupBtnText");
-                const loading = document.getElementById("signupLoading");
-                const status = document.getElementById("signupStatus");
+                    const submitBtn = document.getElementById("signupSubmit");
+                    const btnText = document.getElementById("signupBtnText");
+                    const loading = document.getElementById("signupLoading");
+                    const status = document.getElementById("signupStatus");
 
-                const fullName = document.getElementById("fullName").value.trim();
-                const schoolId = document.getElementById("schoolId").value.trim();
-                const grade = document.getElementById("grade").value;
-                const email = document.getElementById("email").value.trim();
-                const reason = document.getElementById("reason").value.trim();
+                    const fullName = document.getElementById("fullName").value.trim();
+                    const schoolId = document.getElementById("schoolId").value.trim();
+                    const grade = document.getElementById("grade").value;
+                    const email = document.getElementById("email").value.trim();
+                    const reason = document.getElementById("reason").value.trim();
 
-                if (!fullName) {
-                    showStatus(status, "Please enter your full name", false);
-                    return;
-                }
+                    if (!fullName) {
+                        showStatus(status, "Please enter your full name", false);
+                        return;
+                    }
 
-                if (!grade) {
-                    showStatus(status, "Please select your grade level", false);
-                    return;
-                }
+                    if (!grade) {
+                        showStatus(status, "Please select your grade level", false);
+                        return;
+                    }
 
-                if (!validateEmail(email)) {
-                    showStatus(status, "Please enter a valid email address", false);
-                    return;
-                }
+                    if (!validateEmail(email)) {
+                        showStatus(status, "Please enter a valid email address", false);
+                        return;
+                    }
 
-                if (!reason || reason.length < 20) {
-                    showStatus(status, "Please provide a meaningful reason for joining (at least 20 characters)", false);
-                    return;
-                }
+                    if (!reason || reason.length < 20) {
+                        showStatus(status, "Please provide a meaningful reason for joining (at least 20 characters)", false);
+                        return;
+                    }
 
-                btnText.style.display = "none";
-                loading.style.display = "inline-block";
-                submitBtn.disabled = true;
-                status.style.display = "none";
+                    btnText.style.display = "none";
+                    loading.style.display = "inline-block";
+                    submitBtn.disabled = true;
+                    status.style.display = "none";
 
-                try {
-                    const formData = {
-                        fullName: fullName,
-                        schoolId: schoolId,
-                        grade: grade,
-                        email: email,
-                        reason: reason
-                    };
+                    try {
+                        const formData = {
+                            fullName: fullName,
+                            schoolId: schoolId,
+                            grade: grade,
+                            email: email,
+                            reason: reason
+                        };
 
-                    // Log the request for debugging
-                    console.log("Sending signup request:", formData);
-                    console.log("API URL:", `${API_BASE_URL}/api/signup`);
+                        // Log the request for debugging
+                        console.log("Sending signup request:", formData);
+                        console.log("API URL:", `${API_BASE_URL}/api/signup`);
 
-                    const response = await fetch(`${API_BASE_URL}/api/signup`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(formData),
-                        mode: "cors",
-                        credentials: "omit",
-                    });
+                        const response = await fetch(`${API_BASE_URL}/api/signup`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(formData),
+                            mode: "cors",
+                            credentials: "omit",
+                        });
 
-                    console.log("Response status:", response.status);
+                        console.log("Response status:", response.status);
 
-                    const result = await response.json();
-                    console.log("Response data:", result);
+                        const result = await response.json();
+                        console.log("Response data:", result);
 
-                    if (response.ok) {
-                        showStatus(status, "✓ Signup submitted successfully! Confirmation email sent.", true);
-                        signupForm.reset();
+                        if (response.ok) {
+                            showStatus(status, "✓ Signup submitted successfully! Confirmation email sent.", true);
+                            signupForm.reset();
+                            
+                            setTimeout(() => {
+                                status.style.display = 'none';
+                            }, 5000);
+                        } else {
+                            throw new Error(result.error || result.details || "Submission failed");
+                        }
+                    } catch (error) {
+                        console.error("Error:", error);
+                        let errorMessage = error.message;
+                        if (error.message.includes("Failed to fetch")) {
+                            errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
+                        } else if (error.message.includes("NetworkError")) {
+                            errorMessage = "Network error. Please check your connection.";
+                        }
                         
-                        setTimeout(() => {
-                            status.style.display = 'none';
-                        }, 5000);
-                    } else {
-                        throw new Error(result.error || result.details || "Submission failed");
+                        showStatus(status, `X ${errorMessage}`, false);
+                    } finally {
+                        btnText.style.display = "inline";
+                        loading.style.display = "none";
+                        submitBtn.disabled = false;
                     }
-                } catch (error) {
-                    console.error("Error:", error);
-                    let errorMessage = error.message;
-                    if (error.message.includes("Failed to fetch")) {
-                        errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
-                    } else if (error.message.includes("NetworkError")) {
-                        errorMessage = "Network error. Please check your connection.";
+                });
+
+                // Suggestion 
+                suggestionForm.addEventListener("submit", async function (e) {
+                    e.preventDefault();
+
+                    const submitBtn = document.getElementById("suggestionSubmit");
+                    const btnText = document.getElementById("suggestionBtnText");
+                    const loading = document.getElementById("suggestionLoading");
+                    const status = document.getElementById("suggestionStatus");
+
+                    const fullName = document.getElementById("suggFullName").value.trim();
+                    const suggestionType = document.getElementById("suggestionType").value;
+                    const suggestionText = document.getElementById("suggestionText").value.trim();
+
+                    if (!fullName) {
+                        showStatus(status, "Please enter your full name", false);
+                        return;
                     }
-                    
-                    showStatus(status, `X ${errorMessage}`, false);
-                } finally {
-                    btnText.style.display = "inline";
-                    loading.style.display = "none";
-                    submitBtn.disabled = false;
-                }
-            });
 
-            // Suggestion 
-            suggestionForm.addEventListener("submit", async function (e) {
-                e.preventDefault();
+                    if (!suggestionType) {
+                        showStatus(status, "Please select a suggestion type", false);
+                        return;
+                    }
 
-                const submitBtn = document.getElementById("suggestionSubmit");
-                const btnText = document.getElementById("suggestionBtnText");
-                const loading = document.getElementById("suggestionLoading");
-                const status = document.getElementById("suggestionStatus");
+                    if (!suggestionText || suggestionText.length < 10) {
+                        showStatus(status, "Please provide a detailed suggestion (at least 10 characters)", false);
+                        return;
+                    }
 
-                const fullName = document.getElementById("suggFullName").value.trim();
-                const suggestionType = document.getElementById("suggestionType").value;
-                const suggestionText = document.getElementById("suggestionText").value.trim();
+                    btnText.style.display = "none";
+                    loading.style.display = "inline-block";
+                    submitBtn.disabled = true;
+                    status.style.display = "none";
 
-                if (!fullName) {
-                    showStatus(status, "Please enter your full name", false);
-                    return;
-                }
+                    try {
+                        const formData = {
+                            fullName: fullName,
+                            suggestionType: suggestionType,
+                            suggestionText: suggestionText
+                        };
 
-                if (!suggestionType) {
-                    showStatus(status, "Please select a suggestion type", false);
-                    return;
-                }
+                        // Log the request for debugging
+                        console.log("Sending suggestion request:", formData);
+                        console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
 
-                if (!suggestionText || suggestionText.length < 10) {
-                    showStatus(status, "Please provide a detailed suggestion (at least 10 characters)", false);
-                    return;
-                }
+                        const response = await fetch(`${API_BASE_URL}/api/suggestion`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(formData),
+                            mode: "cors",
+                            credentials: "omit",
+                        });
 
-                btnText.style.display = "none";
-                loading.style.display = "inline-block";
-                submitBtn.disabled = true;
-                status.style.display = "none";
+                        console.log("Response status:", response.status);
 
-                try {
-                    const formData = {
-                        fullName: fullName,
-                        suggestionType: suggestionType,
-                        suggestionText: suggestionText
-                    };
+                        const result = await response.json();
+                        console.log("Response data:", result);
 
-                    // Log the request for debugging
-                    console.log("Sending suggestion request:", formData);
-                    console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
-
-                    const response = await fetch(`${API_BASE_URL}/api/suggestion`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(formData),
-                        mode: "cors",
-                        credentials: "omit",
-                    });
-
-                    console.log("Response status:", response.status);
-
-                    const result = await response.json();
-                    console.log("Response data:", result);
-
-                    if (response.ok) {
-                        showStatus(status, "✓ Suggestion submitted successfully! Thank you for your feedback.", true);
-                        suggestionForm.reset();
+                        if (response.ok) {
+                            showStatus(status, "✓ Suggestion submitted successfully! Thank you for your feedback.", true);
+                            suggestionForm.reset();
+                            
+                            setTimeout(() => {
+                                status.style.display = 'none';
+                            }, 5000);
+                        } else {
+                            throw new Error(result.error || result.details || "Submission failed");
+                        }
+                    } catch (error) {
+                        console.error("Error:", error);
                         
-                        setTimeout(() => {
-                            status.style.display = 'none';
-                        }, 5000);
-                    } else {
-                        throw new Error(result.error || result.details || "Submission failed");
+                        let errorMessage = error.message;
+                        if (error.message.includes("Failed to fetch")) {
+                            errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
+                        } else if (error.message.includes("NetworkError")) {
+                            errorMessage = "Network error. Please check your connection.";
+                        }
+                        
+                        showStatus(status, `X ${errorMessage}`, false);
+                    } finally {
+                        btnText.style.display = "inline";
+                        loading.style.display = "none";
+                        submitBtn.disabled = false;
                     }
-                } catch (error) {
-                    console.error("Error:", error);
-                    
-                    let errorMessage = error.message;
-                    if (error.message.includes("Failed to fetch")) {
-                        errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
-                    } else if (error.message.includes("NetworkError")) {
-                        errorMessage = "Network error. Please check your connection.";
+                });
+
+                // Test API connection on load
+                async function testAPIConnection() {
+                    try {
+                        const response = await fetch(`${API_BASE_URL}/health`, {
+                            method: 'GET',
+                            mode: 'cors'
+                        });
+                        
+                        if (response.ok) {
+                            console.log("✓ Backend API is reachable");
+                        } else {
+                            console.warn("⚠ Backend API returned non-OK status:", response.status);
+                        }
+                    } catch (error) {
+                        console.error("X Cannot connect to backend API:", error.message);
+                        console.log("Make sure to update API_BASE_URL with your Render URL");
                     }
-                    
-                    showStatus(status, `X ${errorMessage}`, false);
-                } finally {
-                    btnText.style.display = "inline";
-                    loading.style.display = "none";
-                    submitBtn.disabled = false;
                 }
+
+                setTimeout(testAPIConnection, 1000);
             });
-
-            // Test API connection on load
-            async function testAPIConnection() {
-                try {
-                    const response = await fetch(`${API_BASE_URL}/health`, {
-                        method: 'GET',
-                        mode: 'cors'
-                    });
-                    
-                    if (response.ok) {
-                        console.log("✓ Backend API is reachable");
-                    } else {
-                        console.warn("⚠ Backend API returned non-OK status:", response.status);
-                    }
-                } catch (error) {
-                    console.error("X Cannot connect to backend API:", error.message);
-                    console.log("Make sure to update API_BASE_URL with your Render URL");
-                }
-            }
-
-            setTimeout(testAPIConnection, 1000);
-        });
-    </script>
+        </script>
 </Layout>
