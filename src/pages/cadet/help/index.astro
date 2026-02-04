@@ -1,7 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 ---
-<Layout title="NJROTC Help Center" disableHero maintain>
+<Layout title="NJROTC Help Center" disableHero>
     <head>
         <!-- Material Icons -->
         <link
@@ -42,17 +42,6 @@ import Layout from '../../../layouts/Layout.astro';
                     <div class="tab-content active" id="suggestion-content">
                         <h2>Suggestion Box</h2>
                         <form id="suggestionForm">
-                            <div class="form-group">
-                                <label for="suggFullName">Full Name *</label>
-                                <input
-                                    type="text"
-                                    id="suggFullName"
-                                    name="fullName"
-                                    class="form-control"
-                                    placeholder="Enter your full name"
-                                    required
-                                />
-                            </div>
 
                             <div class="form-group">
                                 <label for="suggestionType">Suggestion Type *</label>
@@ -757,8 +746,6 @@ import Layout from '../../../layouts/Layout.astro';
                             email: email,
                             reason: reason
                         };
-
-                        // Log the request for debugging
                         console.log("Sending signup request:", formData);
                         console.log("API URL:", `${API_BASE_URL}/api/signup`);
 
@@ -813,7 +800,6 @@ import Layout from '../../../layouts/Layout.astro';
                     const loading = document.getElementById("suggestionLoading");
                     const status = document.getElementById("suggestionStatus");
 
-                    const fullName = document.getElementById("suggFullName").value.trim();
                     const suggestionType = document.getElementById("suggestionType").value;
                     const suggestionText = document.getElementById("suggestionText").value.trim();
 
@@ -843,8 +829,6 @@ import Layout from '../../../layouts/Layout.astro';
                             suggestionType: suggestionType,
                             suggestionText: suggestionText
                         };
-
-                        // Log the request for debugging
                         console.log("Sending suggestion request:", formData);
                         console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
 
@@ -890,8 +874,6 @@ import Layout from '../../../layouts/Layout.astro';
                         submitBtn.disabled = false;
                     }
                 });
-
-                // Test API connection on load
                 async function testAPIConnection() {
                     try {
                         const response = await fetch(`${API_BASE_URL}/health`, {
@@ -902,7 +884,7 @@ import Layout from '../../../layouts/Layout.astro';
                         if (response.ok) {
                             console.log("✓ Backend API is reachable");
                         } else {
-                            console.warn("⚠ Backend API returned non-OK status:", response.status);
+                            console.warn(" Backend API returned non-OK status:", response.status);
                         }
                     } catch (error) {
                         console.error("X Cannot connect to backend API:", error.message);
