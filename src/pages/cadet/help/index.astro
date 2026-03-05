@@ -45,19 +45,32 @@ import Layout from '../../../layouts/Layout.astro';
 
                             <div class="form-group">
                                 <label for="suggestionType">Suggestion Type *</label>
-                                <select
-                                    id="suggestionType"
-                                    name="type"
-                                    class="form-control"
-                                    required
-                                >
-                                    <option value="">Select Type</option>
-                                    <option value="Website Bug">Website Bug</option>
-                                    <option value="Website Improvement">Website Improvement</option>
-                                    <option value="Event Idea">Event Idea</option>
-                                    <option value="Program Suggestion">Program Suggestion</option>
-                                    <option value="Other">Other</option>
-                                </select>
+                                <div class="custom-select" id="suggestionCustomSelect" aria-label="Select Type">
+                                    <select class="hidden-native" id="suggestionType" name="type" required>
+                                        <option value="">Select Type</option>
+                                        <option value="Website Bug" selected>Website Bug</option>
+                                        <option value="Website Improvement">Website Improvement</option>
+                                        <option value="Event Idea">Event Idea</option>
+                                        <option value="Program Suggestion">Program Suggestion</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+
+                                    <button class="select-face" id="suggestionSelectFace" type="button" aria-haspopup="listbox" aria-expanded="false">
+                                        <span class="title" id="suggestionSelectedLabel">
+                                            Website Bug
+                                        </span>
+                                        <span class="arrow" aria-hidden="true"></span>
+                                    </button>
+
+                                    <div class="dropdown" id="suggestionDropdown" role="listbox" aria-label="Options">
+                                        <div class="dropdown-header" aria-hidden="true"></div>
+                                        <div class="option" data-value="Website Bug" tabindex="0">Website Bug</div>
+                                        <div class="option" data-value="Website Improvement" tabindex="0">Website Improvement</div>
+                                        <div class="option" data-value="Event Idea" tabindex="0">Event Idea</div>
+                                        <div class="option" data-value="Program Suggestion" tabindex="0">Program Suggestion</div>
+                                        <div class="option" data-value="Other" tabindex="0">Other</div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -122,18 +135,30 @@ import Layout from '../../../layouts/Layout.astro';
 
                             <div class="form-group">
                                 <label for="grade">Grade Level *</label>
-                                <select
-                                    id="grade"
-                                    name="grade"
-                                    class="form-control"
-                                    required
-                                >
-                                    <option value="">Select Grade</option>
-                                    <option value="9">9th Grade</option>
-                                    <option value="10">10th Grade</option>
-                                    <option value="11">11th Grade</option>
-                                    <option value="12">12th Grade</option>
-                                </select>
+                                <div class="custom-select" id="gradeCustomSelect" aria-label="Select Grade">
+                                    <select class="hidden-native" id="grade" name="grade" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="9">9th Grade</option>
+                                        <option value="10">10th Grade</option>
+                                        <option value="11">11th Grade</option>
+                                        <option value="12">12th Grade</option>
+                                    </select>
+
+                                    <button class="select-face" id="gradeSelectFace" type="button" aria-haspopup="listbox" aria-expanded="false">
+                                        <span class="title" id="gradeSelectedLabel">
+                                            Select Grade
+                                        </span>
+                                        <span class="arrow" aria-hidden="true"></span>
+                                    </button>
+
+                                    <div class="dropdown" id="gradeDropdown" role="listbox" aria-label="Grade Options">
+                                        <div class="dropdown-header" aria-hidden="true"></div>
+                                        <div class="option" data-value="9" tabindex="0">9th Grade</div>
+                                        <div class="option" data-value="10" tabindex="0">10th Grade</div>
+                                        <div class="option" data-value="11" tabindex="0">11th Grade</div>
+                                        <div class="option" data-value="12" tabindex="0">12th Grade</div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -235,6 +260,7 @@ import Layout from '../../../layouts/Layout.astro';
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
             position: relative;
             min-height: 600px;
+            margin-bottom: 10vw;
         }
 
         .tab-container::before {
@@ -418,7 +444,6 @@ import Layout from '../../../layouts/Layout.astro';
             transform: translateY(0);
         }
 
-        /* Status Messages */
         .status-message {
             padding: 1rem;
             margin: 1rem 0;
@@ -438,6 +463,109 @@ import Layout from '../../../layouts/Layout.astro';
             background: rgba(231, 76, 60, 0.2);
             color: #e74c3c;
             border: 1px solid #e74c3c;
+        }
+
+        /* Custom Select Styles */
+        :root{
+            --bg: #0b1b2b;
+            --surface: #111e2b;
+            --surface-2: #0f1a28;
+            --text: #e9f4ff;
+            --muted: #a6c1d9;
+            --accent: #2b9af3;
+            --border: #2a3a50;
+            --dropdown: #0e1a29;
+        }
+
+        .custom-select {
+            position: relative;
+            width: 100%;
+            user-select: none;
+        }
+        .select-face {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(230, 178, 32, 0.3);
+            color: var(--text);
+            cursor: pointer;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.04),
+                        0 8px 20px rgba(0,0,0,.4);
+            min-height: 40px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .select-face .title {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .select-face .arrow {
+            width: 0; 
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #e6b220;
+            transform: translateY(-1px);
+        }
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            width: 100%;
+            border-radius: 12px;
+            background: rgba(14, 20, 27,0.8);
+            border: 1px solid rgba(230, 178, 32, 0.3);
+            backdrop-filter: blur(3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,.6);
+            max-height: 260px;
+            overflow: auto;
+            z-index: 99;
+            padding: 6px;
+            display: none;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text);
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .option:hover {
+            background: rgba(230, 178, 32, 0.25);
+        }
+
+        .option.active {
+            background: rgba(230, 178, 32, 0.45);
+        }
+        .dropdown-header {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,.15), transparent);
+            margin-bottom: 6px;
+        }
+        select.hidden-native {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            width: 0;
+            height: 0;
+        }
+
+        .select-face:focus-within {
+            outline: 2px solid #e6b220;
+            outline-offset: 2px;
         }
 
         /* Mobile Styles */
@@ -698,6 +826,221 @@ import Layout from '../../../layouts/Layout.astro';
                 }, 100);
             }
 
+            // Custom Select functionality for Suggestion Type
+            const suggestionNativeSelect = document.getElementById('suggestionType');
+            if (suggestionNativeSelect) {
+                const selectFace = document.getElementById('suggestionSelectFace');
+                const dropdown = document.getElementById('suggestionDropdown');
+                const selectedLabel = document.getElementById('suggestionSelectedLabel');
+                const options = Array.from(dropdown.querySelectorAll('.option'));
+
+                // Initialize active from native select
+                function setActiveFromValue(value) {
+                    options.forEach(opt => {
+                        opt.classList.toggle('active', opt.dataset.value === value);
+                    });
+                    selectedLabel.textContent = value || 'Select Type';
+                }
+
+                // Open/close dropdown
+                function openDropdown() {
+                    dropdown.style.display = 'block';
+                    selectFace.setAttribute('aria-expanded', 'true');
+                }
+                function closeDropdown() {
+                    dropdown.style.display = 'none';
+                    selectFace.setAttribute('aria-expanded', 'false');
+                }
+
+                // Click to toggle
+                let open = false;
+                function toggleDropdown() {
+                    open = !open;
+                    if (open) {
+                        openDropdown();
+                    } else {
+                        closeDropdown();
+                    }
+                }
+
+                selectFace.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleDropdown();
+                });
+
+                // Click on option
+                options.forEach(opt => {
+                    opt.addEventListener('click', (e) => {
+                        const value = e.currentTarget.dataset.value;
+                        setActiveFromValue(value);
+                        suggestionNativeSelect.value = value;
+                        closeDropdown();
+                        open = false;
+                        
+                        // Trigger change event for form validation
+                        suggestionNativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                    });
+                    opt.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            const value = e.currentTarget.dataset.value;
+                            setActiveFromValue(value);
+                            suggestionNativeSelect.value = value;
+                            closeDropdown();
+                            open = false;
+                            
+                            // Trigger change event for form validation
+                            suggestionNativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                    });
+                });
+
+                // Keyboard navigation for the faux dropdown
+                document.addEventListener('keydown', (e) => {
+                    if (!open) return;
+                    const current = options.findIndex(o => o.classList.contains('active'));
+                    let idx = current >= 0 ? current : -1;
+
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        idx = (idx + 1) % options.length;
+                        options.forEach(o => o.classList.remove('active'));
+                        options[idx].classList.add('active');
+                        options[idx].focus();
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        idx = (idx - 1 + options.length) % options.length;
+                        options.forEach(o => o.classList.remove('active'));
+                        options[idx].classList.add('active');
+                        options[idx].focus();
+                    } else if (e.key === 'Escape') {
+                        closeDropdown();
+                        open = false;
+                    }
+                });
+
+                // Click outside to close
+                document.addEventListener('click', (e) => {
+                    const customSelect = document.getElementById('suggestionCustomSelect');
+                    if (customSelect && !customSelect.contains(e.target)) {
+                        closeDropdown();
+                        open = false;
+                    }
+                });
+
+                // Init with default
+                setActiveFromValue(suggestionNativeSelect.value || 'Website Bug');
+            }
+
+            // Custom Select functionality for Grade Level
+            const gradeNativeSelect = document.getElementById('grade');
+            if (gradeNativeSelect) {
+                const gradeSelectFace = document.getElementById('gradeSelectFace');
+                const gradeDropdown = document.getElementById('gradeDropdown');
+                const gradeSelectedLabel = document.getElementById('gradeSelectedLabel');
+                const gradeOptions = Array.from(gradeDropdown.querySelectorAll('.option'));
+
+                // Initialize active from native select
+                function setGradeActiveFromValue(value) {
+                    gradeOptions.forEach(opt => {
+                        opt.classList.toggle('active', opt.dataset.value === value);
+                    });
+                    
+                    // Update the displayed text
+                    const selectedOption = gradeOptions.find(opt => opt.dataset.value === value);
+                    gradeSelectedLabel.textContent = selectedOption ? selectedOption.textContent : 'Select Grade';
+                }
+
+                // Open/close dropdown
+                function openGradeDropdown() {
+                    gradeDropdown.style.display = 'block';
+                    gradeSelectFace.setAttribute('aria-expanded', 'true');
+                }
+                function closeGradeDropdown() {
+                    gradeDropdown.style.display = 'none';
+                    gradeSelectFace.setAttribute('aria-expanded', 'false');
+                }
+
+                // Click to toggle
+                let gradeOpen = false;
+                function toggleGradeDropdown() {
+                    gradeOpen = !gradeOpen;
+                    if (gradeOpen) {
+                        openGradeDropdown();
+                    } else {
+                        closeGradeDropdown();
+                    }
+                }
+
+                gradeSelectFace.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleGradeDropdown();
+                });
+
+                // Click on option
+                gradeOptions.forEach(opt => {
+                    opt.addEventListener('click', (e) => {
+                        const value = e.currentTarget.dataset.value;
+                        setGradeActiveFromValue(value);
+                        gradeNativeSelect.value = value;
+                        closeGradeDropdown();
+                        gradeOpen = false;
+                        
+                        // Trigger change event for form validation
+                        gradeNativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                    });
+                    opt.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            const value = e.currentTarget.dataset.value;
+                            setGradeActiveFromValue(value);
+                            gradeNativeSelect.value = value;
+                            closeGradeDropdown();
+                            gradeOpen = false;
+                            
+                            // Trigger change event for form validation
+                            gradeNativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                    });
+                });
+
+                // Keyboard navigation for the faux dropdown
+                document.addEventListener('keydown', (e) => {
+                    if (!gradeOpen) return;
+                    const current = gradeOptions.findIndex(o => o.classList.contains('active'));
+                    let idx = current >= 0 ? current : -1;
+
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        idx = (idx + 1) % gradeOptions.length;
+                        gradeOptions.forEach(o => o.classList.remove('active'));
+                        gradeOptions[idx].classList.add('active');
+                        gradeOptions[idx].focus();
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        idx = (idx - 1 + gradeOptions.length) % gradeOptions.length;
+                        gradeOptions.forEach(o => o.classList.remove('active'));
+                        gradeOptions[idx].classList.add('active');
+                        gradeOptions[idx].focus();
+                    } else if (e.key === 'Escape') {
+                        closeGradeDropdown();
+                        gradeOpen = false;
+                    }
+                });
+
+                // Click outside to close (specific to grade select)
+                document.addEventListener('click', (e) => {
+                    const gradeCustomSelect = document.getElementById('gradeCustomSelect');
+                    if (gradeCustomSelect && !gradeCustomSelect.contains(e.target)) {
+                        closeGradeDropdown();
+                        gradeOpen = false;
+                    }
+                });
+
+                // Init with default (no selection)
+                setGradeActiveFromValue('');
+            }
+
              // Signup  
                 signupForm.addEventListener("submit", async function (e) {
                     e.preventDefault();
@@ -768,6 +1111,9 @@ import Layout from '../../../layouts/Layout.astro';
                             showStatus(status, "✓ Signup submitted successfully! Confirmation email sent.", true);
                             signupForm.reset();
                             
+                            // Reset custom select after form reset
+                            setGradeActiveFromValue('');
+                            
                             setTimeout(() => {
                                 status.style.display = 'none';
                             }, 5000);
@@ -803,11 +1149,6 @@ import Layout from '../../../layouts/Layout.astro';
                     const suggestionType = document.getElementById("suggestionType").value;
                     const suggestionText = document.getElementById("suggestionText").value.trim();
 
-                    if (!fullName) {
-                        showStatus(status, "Please enter your full name", false);
-                        return;
-                    }
-
                     if (!suggestionType) {
                         showStatus(status, "Please select a suggestion type", false);
                         return;
@@ -825,7 +1166,6 @@ import Layout from '../../../layouts/Layout.astro';
 
                     try {
                         const formData = {
-                            fullName: fullName,
                             suggestionType: suggestionType,
                             suggestionText: suggestionText
                         };
