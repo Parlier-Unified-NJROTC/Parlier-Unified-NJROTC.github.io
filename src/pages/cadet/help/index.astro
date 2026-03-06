@@ -656,6 +656,7 @@ import Layout from "../../../layouts/Layout.astro";
             white-space: nowrap;
         }
 
+
         .option:hover {
             background: rgba(21, 101, 187, 0.5);
         }
@@ -688,6 +689,10 @@ import Layout from "../../../layouts/Layout.astro";
 
         /* Mobile Styles */
         @media (max-width: 768px) {
+            .option{
+                padding: 10px 14px;
+                font-size: 20px;
+            }
             .header h1 {
                 font-size: 2rem;
             }
@@ -782,231 +787,255 @@ import Layout from "../../../layouts/Layout.astro";
         }
     </style>
 
-    <script lang="">
-        const API_BASE_URL =
-            "https://parlier-unified-njrotc-server.onrender.com";
+<script lang="">
+    const API_BASE_URL = "https://parlier-unified-njrotc-server.onrender.com";
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const tabHeaders = document.querySelectorAll(".tab-header");
-            const tabContents = document.querySelectorAll(".tab-content");
-            const tabIndicator = document.getElementById("tabIndicator");
-            const tabHeadersContainer = document.querySelector(".tab-headers");
-            const signupForm = document.getElementById("signupForm");
-            const suggestionForm = document.getElementById("suggestionForm");
-            const scrollArrows = document.querySelectorAll(".tab-scroll-arrow");
-            scrollArrows.forEach((arrow) => (arrow.style.display = "none"));
+    document.addEventListener("DOMContentLoaded", function () {
+        const fadeAnimations = {};
+        
+        function addDropdownAnimations(dropdown) {
+            let fadeOutTimer;
 
-            let resizeTimeout;
-            let isResizing = false;
-
-            function updateTabIndicator() {
-                const activeTab = document.querySelector(".tab-header.active");
-                if (!activeTab) return;
-
-                void activeTab.offsetWidth;
-
-                const tabRect = activeTab.getBoundingClientRect();
-                const containerRect =
-                    tabHeadersContainer.getBoundingClientRect();
-
-                const left = tabRect.left - containerRect.left;
-                const width = tabRect.width;
-
-                requestAnimationFrame(() => {
-                    tabIndicator.style.width = `${width}px`;
-                    tabIndicator.style.left = `${left}px`;
-                    tabIndicator.style.opacity = "1";
-                });
+            function fadeIn() {
+                clearTimeout(fadeOutTimer);
+                dropdown.style.transition = 'opacity 0.15s ease-in';
+                dropdown.style.opacity = '1';
+                dropdown.style.display = 'block';
             }
 
-            updateTabIndicator();
-            setTimeout(updateTabIndicator, 100);
-
-            function switchTab(tabName) {
-                window.location.hash = tabName;
-                tabHeaders.forEach((header) => {
-                    if (header.dataset.tab === tabName) {
-                        header.classList.add("active");
-                    } else {
-                        header.classList.remove("active");
-                    }
-                });
-
-                tabContents.forEach((content) => {
-                    if (content.id === `${tabName}-content`) {
-                        content.classList.add("active");
-                    } else {
-                        content.classList.remove("active");
-                    }
-                });
-
-                setTimeout(updateTabIndicator, 10);
+            function fadeOut() {
+                dropdown.style.transition = 'opacity 250ms ease-out';
+                dropdown.style.opacity = '0';
+                fadeOutTimer = setTimeout(() => {
+                    dropdown.style.display = 'none';
+                    dropdown.style.transition = '';
+                }, 250);
             }
+            
+            return { fadeIn, fadeOut };
+        }
 
+        const tabHeaders = document.querySelectorAll(".tab-header");
+        const tabContents = document.querySelectorAll(".tab-content");
+        const tabIndicator = document.getElementById("tabIndicator");
+        const tabHeadersContainer = document.querySelector(".tab-headers");
+        const signupForm = document.getElementById("signupForm");
+        const suggestionForm = document.getElementById("suggestionForm");
+        const scrollArrows = document.querySelectorAll(".tab-scroll-arrow");
+        scrollArrows.forEach((arrow) => (arrow.style.display = "none"));
+
+        let resizeTimeout;
+        let isResizing = false;
+
+        function updateTabIndicator() {
+            const activeTab = document.querySelector(".tab-header.active");
+            if (!activeTab) return;
+
+            void activeTab.offsetWidth;
+
+            const tabRect = activeTab.getBoundingClientRect();
+            const containerRect = tabHeadersContainer.getBoundingClientRect();
+
+            const left = tabRect.left - containerRect.left;
+            const width = tabRect.width;
+
+            requestAnimationFrame(() => {
+                tabIndicator.style.width = `${width}px`;
+                tabIndicator.style.left = `${left}px`;
+                tabIndicator.style.opacity = "1";
+            });
+        }
+
+        updateTabIndicator();
+        setTimeout(updateTabIndicator, 100);
+
+        function switchTab(tabName) {
+            window.location.hash = tabName;
             tabHeaders.forEach((header) => {
-                header.addEventListener("click", function () {
-                    const tabName = this.dataset.tab;
-                    switchTab(tabName);
-                });
-            });
-
-            function checkHash() {
-                const hash = window.location.hash.substring(1).toLowerCase();
-                if (hash === "signup") {
-                    switchTab("signup");
-                } else if (hash === "suggestion") {
-                    switchTab("suggestion");
+                if (header.dataset.tab === tabName) {
+                    header.classList.add("active");
                 } else {
-                    switchTab("suggestion");
+                    header.classList.remove("active");
                 }
+            });
+
+            tabContents.forEach((content) => {
+                if (content.id === `${tabName}-content`) {
+                    content.classList.add("active");
+                } else {
+                    content.classList.remove("active");
+                }
+            });
+
+            setTimeout(updateTabIndicator, 10);
+        }
+
+        tabHeaders.forEach((header) => {
+            header.addEventListener("click", function () {
+                const tabName = this.dataset.tab;
+                switchTab(tabName);
+            });
+        });
+
+        function checkHash() {
+            const hash = window.location.hash.substring(1).toLowerCase();
+            if (hash === "signup") {
+                switchTab("signup");
+            } else if (hash === "suggestion") {
+                switchTab("suggestion");
+            } else {
+                switchTab("suggestion");
             }
+        }
 
-            checkHash();
+        checkHash();
 
-            window.addEventListener("hashchange", checkHash);
+        window.addEventListener("hashchange", checkHash);
 
-            window.addEventListener("resize", function () {
-                isResizing = true;
+        window.addEventListener("resize", function () {
+            isResizing = true;
 
-                tabIndicator.style.opacity = "0";
+            tabIndicator.style.opacity = "0";
 
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(function () {
-                    updateTabIndicator();
-                    isResizing = false;
-                }, 150);
-            });
-            window.addEventListener("orientationchange", function () {
-                setTimeout(updateTabIndicator, 300);
-            });
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function () {
+                updateTabIndicator();
+                isResizing = false;
+            }, 150);
+        });
+        window.addEventListener("orientationchange", function () {
+            setTimeout(updateTabIndicator, 300);
+        });
 
-            document.addEventListener("transitionend", function (e) {
-                if (e.target.classList.contains("tab-header")) {
-                    updateTabIndicator();
-                }
-            });
+        document.addEventListener("transitionend", function (e) {
+            if (e.target.classList.contains("tab-header")) {
+                updateTabIndicator();
+            }
+        });
 
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let touchEndX = 0;
-            let touchEndY = 0;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
 
-            document.addEventListener(
-                "touchstart",
-                function (e) {
-                    touchStartX = e.changedTouches[0].screenX;
-                    touchStartY = e.changedTouches[0].screenY;
-                },
-                { passive: true },
-            );
+        document.addEventListener(
+            "touchstart",
+            function (e) {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+            },
+            { passive: true },
+        );
 
-            document.addEventListener(
-                "touchend",
-                function (e) {
-                    touchEndX = e.changedTouches[0].screenX;
-                    touchEndY = e.changedTouches[0].screenY;
-                    handleSwipe();
-                },
-                { passive: true },
-            );
+        document.addEventListener(
+            "touchend",
+            function (e) {
+                touchEndX = e.changedTouches[0].screenX;
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+            },
+            { passive: true },
+        );
 
-            function handleSwipe() {
-                const minSwipeDistance = 50;
-                const horizontalSwipe = Math.abs(touchEndX - touchStartX);
-                const verticalSwipe = Math.abs(touchEndY - touchStartY);
+        function handleSwipe() {
+            const minSwipeDistance = 50;
+            const horizontalSwipe = Math.abs(touchEndX - touchStartX);
+            const verticalSwipe = Math.abs(touchEndY - touchStartY);
 
-                if (
-                    horizontalSwipe > verticalSwipe &&
-                    horizontalSwipe > minSwipeDistance
-                ) {
-                    const currentTab =
-                        document.querySelector(".tab-header.active").dataset
-                            .tab;
+            if (horizontalSwipe > verticalSwipe && horizontalSwipe > minSwipeDistance) {
+                const currentTab = document.querySelector(".tab-header.active").dataset.tab;
 
-                    if (touchEndX < touchStartX) {
-                        if (currentTab === "suggestion") {
-                            switchTab("signup");
-                        }
-                    } else {
-                        if (currentTab === "signup") {
-                            switchTab("suggestion");
-                        }
+                if (touchEndX < touchStartX) {
+                    if (currentTab === "suggestion") {
+                        switchTab("signup");
+                    }
+                } else {
+                    if (currentTab === "signup") {
+                        switchTab("suggestion");
                     }
                 }
             }
+        }
 
-            function validateEmail(email) {
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return re.test(email);
-            }
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
 
-            function showStatus(element, message, isSuccess) {
-                element.textContent = message;
-                element.className = `status-message ${isSuccess ? "success" : "error"}`;
-                element.style.display = "block";
+        function showStatus(element, message, isSuccess) {
+            element.textContent = message;
+            element.className = `status-message ${isSuccess ? "success" : "error"}`;
+            element.style.display = "block";
 
-                setTimeout(() => {
-                    element.scrollIntoView({
-                        behavior: "smooth",
-                        block: "nearest",
-                    });
-                }, 100);
-            }
-
-            const suggestionNativeSelect =
-                document.getElementById("suggestionType");
-            if (suggestionNativeSelect) {
-                const selectFace = document.getElementById(
-                    "suggestionSelectFace",
-                );
-                const dropdown = document.getElementById("suggestionDropdown");
-                const arrow = document.querySelector(".arrow");
-                const selectedLabel = document.getElementById(
-                    "suggestionSelectedLabel",
-                );
-                const options = Array.from(
-                    dropdown.querySelectorAll(".option"),
-                );
-
-                function setActiveFromValue(value) {
-                    options.forEach((opt) => {
-                        opt.classList.toggle(
-                            "active",
-                            opt.dataset.value === value,
-                        );
-                    });
-                    selectedLabel.textContent = value || "Select Type";
-                }
-
-                function openDropdown() {
-                    dropdown.style.display = "block";
-                    arrow.style.transform = "rotate(180deg)";
-                    selectFace.setAttribute("aria-expanded", "true");
-                }
-
-                function closeDropdown() {
-                    dropdown.style.display = "none";
-                    arrow.style.transform = "rotate(0deg)";
-                    selectFace.setAttribute("aria-expanded", "false");
-                }
-
-                let open = false;
-                function toggleDropdown() {
-                    open = !open;
-                    if (open) {
-                        openDropdown();
-                    } else {
-                        closeDropdown();
-                    }
-                }
-
-                selectFace.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    toggleDropdown();
+            setTimeout(() => {
+                element.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
                 });
+            }, 100);
+        }
 
+        // Suggestion Dropdown with Fade Animations
+        const suggestionNativeSelect = document.getElementById("suggestionType");
+        if (suggestionNativeSelect) {
+            const selectFace = document.getElementById("suggestionSelectFace");
+            const dropdown = document.getElementById("suggestionDropdown");
+            const arrow = document.querySelector(".arrow");
+            const selectedLabel = document.getElementById("suggestionSelectedLabel");
+            const options = Array.from(dropdown.querySelectorAll(".option"));
+
+            // Add animations for this dropdown
+            fadeAnimations.suggestion = addDropdownAnimations(dropdown);
+
+            function setActiveFromValue(value) {
                 options.forEach((opt) => {
-                    opt.addEventListener("click", (e) => {
+                    opt.classList.toggle("active", opt.dataset.value === value);
+                });
+                selectedLabel.textContent = value || "Select Type";
+            }
+
+            function openDropdown() {
+                fadeAnimations.suggestion.fadeIn();
+                arrow.style.transform = "rotate(180deg)";
+                selectFace.setAttribute("aria-expanded", "true");
+            }
+
+            function closeDropdown() {
+                fadeAnimations.suggestion.fadeOut();
+                arrow.style.transform = "rotate(0deg)";
+                selectFace.setAttribute("aria-expanded", "false");
+            }
+
+            let open = false;
+            function toggleDropdown() {
+                open = !open;
+                if (open) {
+                    openDropdown();
+                } else {
+                    closeDropdown();
+                }
+            }
+
+            selectFace.addEventListener("click", (e) => {
+                e.stopPropagation();
+                toggleDropdown();
+            });
+
+            options.forEach((opt) => {
+                opt.addEventListener("click", (e) => {
+                    const value = e.currentTarget.dataset.value;
+                    setActiveFromValue(value);
+                    suggestionNativeSelect.value = value;
+                    closeDropdown();
+                    open = false;
+
+                    suggestionNativeSelect.dispatchEvent(
+                        new Event("change", { bubbles: true }),
+                    );
+                });
+                opt.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
                         const value = e.currentTarget.dataset.value;
                         setActiveFromValue(value);
                         suggestionNativeSelect.value = value;
@@ -1016,443 +1045,354 @@ import Layout from "../../../layouts/Layout.astro";
                         suggestionNativeSelect.dispatchEvent(
                             new Event("change", { bubbles: true }),
                         );
-                    });
-                    opt.addEventListener("keydown", (e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            const value = e.currentTarget.dataset.value;
-                            setActiveFromValue(value);
-                            suggestionNativeSelect.value = value;
-                            closeDropdown();
-                            open = false;
-
-                            suggestionNativeSelect.dispatchEvent(
-                                new Event("change", { bubbles: true }),
-                            );
-                        }
-                    });
-                });
-
-                document.addEventListener("keydown", (e) => {
-                    if (!open) return;
-                    const current = options.findIndex((o) =>
-                        o.classList.contains("active"),
-                    );
-                    let idx = current >= 0 ? current : -1;
-
-                    if (e.key === "ArrowDown") {
-                        e.preventDefault();
-                        idx = (idx + 1) % options.length;
-                        options.forEach((o) => o.classList.remove("active"));
-                        options[idx].classList.add("active");
-                        options[idx].focus();
-                    } else if (e.key === "ArrowUp") {
-                        e.preventDefault();
-                        idx = (idx - 1 + options.length) % options.length;
-                        options.forEach((o) => o.classList.remove("active"));
-                        options[idx].classList.add("active");
-                        options[idx].focus();
-                    } else if (e.key === "Escape") {
-                        closeDropdown();
-                        open = false;
                     }
                 });
+            });
 
-                document.addEventListener("click", (e) => {
-                    const customSelect = document.getElementById(
-                        "suggestionCustomSelect",
-                    );
-                    if (customSelect && !customSelect.contains(e.target)) {
-                        closeDropdown();
-                        open = false;
-                    }
-                });
-
-                setActiveFromValue(
-                    suggestionNativeSelect.value || "Website Bug",
+            document.addEventListener("keydown", (e) => {
+                if (!open) return;
+                const current = options.findIndex((o) =>
+                    o.classList.contains("active"),
                 );
+                let idx = current >= 0 ? current : -1;
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    idx = (idx + 1) % options.length;
+                    options.forEach((o) => o.classList.remove("active"));
+                    options[idx].classList.add("active");
+                    options[idx].focus();
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    idx = (idx - 1 + options.length) % options.length;
+                    options.forEach((o) => o.classList.remove("active"));
+                    options[idx].classList.add("active");
+                    options[idx].focus();
+                } else if (e.key === "Escape") {
+                    closeDropdown();
+                    open = false;
+                }
+            });
+
+            document.addEventListener("click", (e) => {
+                const customSelect = document.getElementById("suggestionCustomSelect");
+                if (customSelect && !customSelect.contains(e.target)) {
+                    closeDropdown();
+                    open = false;
+                }
+            });
+
+            setActiveFromValue(suggestionNativeSelect.value || "Website Bug");
+        }
+
+        // Grade Dropdown with Fade Animations
+        const gradeNativeSelect = document.getElementById("grade");
+        if (gradeNativeSelect) {
+            const gradeSelectFace = document.getElementById("gradeSelectFace");
+            const gradeDropdown = document.getElementById("gradeDropdown");
+            const gradeArrow = gradeSelectFace.querySelector(".arrow");
+            const gradeSelectedLabel = document.getElementById("gradeSelectedLabel");
+            const gradeOptions = Array.from(gradeDropdown.querySelectorAll(".option"));
+
+            // Add animations for this dropdown
+            fadeAnimations.grade = addDropdownAnimations(gradeDropdown);
+
+            function setGradeActiveFromValue(value) {
+                gradeOptions.forEach((opt) => {
+                    opt.classList.toggle("active", opt.dataset.value === value);
+                });
+
+                const selectedOption = gradeOptions.find(
+                    (opt) => opt.dataset.value === value,
+                );
+                gradeSelectedLabel.textContent = selectedOption
+                    ? selectedOption.textContent
+                    : "Select Grade";
             }
 
-            const gradeNativeSelect = document.getElementById("grade");
-            if (gradeNativeSelect) {
-                const gradeSelectFace =
-                    document.getElementById("gradeSelectFace");
-                const gradeDropdown = document.getElementById("gradeDropdown");
-                const gradeArrow = gradeSelectFace.querySelector(".arrow");
-                const gradeSelectedLabel =
-                    document.getElementById("gradeSelectedLabel");
-                const gradeOptions = Array.from(
-                    gradeDropdown.querySelectorAll(".option"),
-                );
+            function openGradeDropdown() {
+                fadeAnimations.grade.fadeIn();
+                gradeArrow.style.transform = "rotate(180deg)";
+                gradeSelectFace.setAttribute("aria-expanded", "true");
+            }
 
-                function setGradeActiveFromValue(value) {
-                    gradeOptions.forEach((opt) => {
-                        opt.classList.toggle(
-                            "active",
-                            opt.dataset.value === value,
-                        );
-                    });
+            function closeGradeDropdown() {
+                fadeAnimations.grade.fadeOut();
+                gradeArrow.style.transform = "rotate(0deg)";
+                gradeSelectFace.setAttribute("aria-expanded", "false");
+            }
 
-                    const selectedOption = gradeOptions.find(
-                        (opt) => opt.dataset.value === value,
+            let gradeOpen = false;
+            function toggleGradeDropdown() {
+                gradeOpen = !gradeOpen;
+                if (gradeOpen) {
+                    openGradeDropdown();
+                } else {
+                    closeGradeDropdown();
+                }
+            }
+
+            gradeSelectFace.addEventListener("click", (e) => {
+                e.stopPropagation();
+                toggleGradeDropdown();
+            });
+
+            gradeOptions.forEach((opt) => {
+                opt.addEventListener("click", (e) => {
+                    const value = e.currentTarget.dataset.value;
+                    setGradeActiveFromValue(value);
+                    gradeNativeSelect.value = value;
+                    closeGradeDropdown();
+                    gradeOpen = false;
+
+                    gradeNativeSelect.dispatchEvent(
+                        new Event("change", { bubbles: true }),
                     );
-                    gradeSelectedLabel.textContent = selectedOption
-                        ? selectedOption.textContent
-                        : "Select Grade";
-                }
-
-                function openGradeDropdown() {
-                    gradeDropdown.style.display = "block";
-                    gradeArrow.style.transform = "rotate(180deg)";
-                    gradeSelectFace.setAttribute("aria-expanded", "true");
-                }
-                function closeGradeDropdown() {
-                    gradeDropdown.style.display = "none";
-                    gradeArrow.style.transform = "rotate(0deg)";
-                    gradeSelectFace.setAttribute("aria-expanded", "false");
-                }
-
-                let gradeOpen = false;
-                function toggleGradeDropdown() {
-                    gradeOpen = !gradeOpen;
-                    if (gradeOpen) {
-                        openGradeDropdown();
-                    } else {
-                        closeGradeDropdown();
-                    }
-                }
-
-                gradeSelectFace.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    toggleGradeDropdown();
                 });
-
-                // Click on option
-                gradeOptions.forEach((opt) => {
-                    opt.addEventListener("click", (e) => {
+                opt.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
                         const value = e.currentTarget.dataset.value;
                         setGradeActiveFromValue(value);
                         gradeNativeSelect.value = value;
                         closeGradeDropdown();
                         gradeOpen = false;
 
-                        // Trigger change event for form validation
                         gradeNativeSelect.dispatchEvent(
                             new Event("change", { bubbles: true }),
                         );
-                    });
-                    opt.addEventListener("keydown", (e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            const value = e.currentTarget.dataset.value;
-                            setGradeActiveFromValue(value);
-                            gradeNativeSelect.value = value;
-                            closeGradeDropdown();
-                            gradeOpen = false;
-
-                            // Trigger change event for form validation
-                            gradeNativeSelect.dispatchEvent(
-                                new Event("change", { bubbles: true }),
-                            );
-                        }
-                    });
-                });
-
-                // Keyboard navigation for the faux dropdown
-                document.addEventListener("keydown", (e) => {
-                    if (!gradeOpen) return;
-                    const current = gradeOptions.findIndex((o) =>
-                        o.classList.contains("active"),
-                    );
-                    let idx = current >= 0 ? current : -1;
-
-                    if (e.key === "ArrowDown") {
-                        e.preventDefault();
-                        idx = (idx + 1) % gradeOptions.length;
-                        gradeOptions.forEach((o) =>
-                            o.classList.remove("active"),
-                        );
-                        gradeOptions[idx].classList.add("active");
-                        gradeOptions[idx].focus();
-                    } else if (e.key === "ArrowUp") {
-                        e.preventDefault();
-                        idx =
-                            (idx - 1 + gradeOptions.length) %
-                            gradeOptions.length;
-                        gradeOptions.forEach((o) =>
-                            o.classList.remove("active"),
-                        );
-                        gradeOptions[idx].classList.add("active");
-                        gradeOptions[idx].focus();
-                    } else if (e.key === "Escape") {
-                        closeGradeDropdown();
-                        gradeOpen = false;
                     }
                 });
+            });
 
-                // Click outside to close (specific to grade select)
-                document.addEventListener("click", (e) => {
-                    const gradeCustomSelect =
-                        document.getElementById("gradeCustomSelect");
-                    if (
-                        gradeCustomSelect &&
-                        !gradeCustomSelect.contains(e.target)
-                    ) {
-                        closeGradeDropdown();
-                        gradeOpen = false;
-                    }
-                });
+            document.addEventListener("keydown", (e) => {
+                if (!gradeOpen) return;
+                const current = gradeOptions.findIndex((o) =>
+                    o.classList.contains("active"),
+                );
+                let idx = current >= 0 ? current : -1;
 
-                // Init with default (no selection)
-                setGradeActiveFromValue("");
-            }
-
-            // Signup
-            signupForm.addEventListener("submit", async function (e) {
-                e.preventDefault();
-
-                const submitBtn = document.getElementById("signupSubmit");
-                const btnText = document.getElementById("signupBtnText");
-                const loading = document.getElementById("signupLoading");
-                const status = document.getElementById("signupStatus");
-
-                const fullName = document
-                    .getElementById("fullName")
-                    .value.trim();
-                const schoolId = document
-                    .getElementById("schoolId")
-                    .value.trim();
-                const grade = document.getElementById("grade").value;
-                const email = document.getElementById("email").value.trim();
-                const reason = document.getElementById("reason").value.trim();
-
-                if (!fullName) {
-                    showStatus(status, "Please enter your full name", false);
-                    return;
-                }
-
-                if (!grade) {
-                    showStatus(status, "Please select your grade level", false);
-                    return;
-                }
-
-                if (!validateEmail(email)) {
-                    showStatus(
-                        status,
-                        "Please enter a valid email address",
-                        false,
-                    );
-                    return;
-                }
-
-                if (!reason || reason.length < 20) {
-                    showStatus(
-                        status,
-                        "Please provide a meaningful reason for joining (at least 20 characters)",
-                        false,
-                    );
-                    return;
-                }
-
-                btnText.style.display = "none";
-                loading.style.display = "inline-block";
-                submitBtn.disabled = true;
-                status.style.display = "none";
-
-                try {
-                    const formData = {
-                        fullName: fullName,
-                        schoolId: schoolId,
-                        grade: grade,
-                        email: email,
-                        reason: reason,
-                    };
-                    console.log("Sending signup request:", formData);
-                    console.log("API URL:", `${API_BASE_URL}/api/signup`);
-
-                    const response = await fetch(`${API_BASE_URL}/api/signup`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(formData),
-                        mode: "cors",
-                        credentials: "omit",
-                    });
-
-                    console.log("Response status:", response.status);
-
-                    const result = await response.json();
-                    console.log("Response data:", result);
-
-                    if (response.ok) {
-                        showStatus(
-                            status,
-                            "✓ Signup submitted successfully! Confirmation email sent.",
-                            true,
-                        );
-                        signupForm.reset();
-
-                        // Reset custom select after form reset
-                        setGradeActiveFromValue("");
-
-                        setTimeout(() => {
-                            status.style.display = "none";
-                        }, 5000);
-                    } else {
-                        throw new Error(
-                            result.error ||
-                                result.details ||
-                                "Submission failed",
-                        );
-                    }
-                } catch (error) {
-                    console.error("Error:", error);
-                    let errorMessage = error.message;
-                    if (error.message.includes("Failed to fetch")) {
-                        errorMessage =
-                            "Cannot connect to server. Please check your internet connection or try again later.";
-                    } else if (error.message.includes("NetworkError")) {
-                        errorMessage =
-                            "Network error. Please check your connection.";
-                    }
-
-                    showStatus(status, `X ${errorMessage}`, false);
-                } finally {
-                    btnText.style.display = "inline";
-                    loading.style.display = "none";
-                    submitBtn.disabled = false;
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    idx = (idx + 1) % gradeOptions.length;
+                    gradeOptions.forEach((o) => o.classList.remove("active"));
+                    gradeOptions[idx].classList.add("active");
+                    gradeOptions[idx].focus();
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    idx = (idx - 1 + gradeOptions.length) % gradeOptions.length;
+                    gradeOptions.forEach((o) => o.classList.remove("active"));
+                    gradeOptions[idx].classList.add("active");
+                    gradeOptions[idx].focus();
+                } else if (e.key === "Escape") {
+                    closeGradeDropdown();
+                    gradeOpen = false;
                 }
             });
 
-            // Suggestion
-            suggestionForm.addEventListener("submit", async function (e) {
-                e.preventDefault();
-
-                const submitBtn = document.getElementById("suggestionSubmit");
-                const btnText = document.getElementById("suggestionBtnText");
-                const loading = document.getElementById("suggestionLoading");
-                const status = document.getElementById("suggestionStatus");
-
-                const suggestionType =
-                    document.getElementById("suggestionType").value;
-                const suggestionText = document
-                    .getElementById("suggestionText")
-                    .value.trim();
-
-                if (!suggestionType) {
-                    showStatus(
-                        status,
-                        "Please select a suggestion type",
-                        false,
-                    );
-                    return;
-                }
-
-                if (!suggestionText || suggestionText.length < 10) {
-                    showStatus(
-                        status,
-                        "Please provide a detailed suggestion (at least 10 characters)",
-                        false,
-                    );
-                    return;
-                }
-
-                btnText.style.display = "none";
-                loading.style.display = "inline-block";
-                submitBtn.disabled = true;
-                status.style.display = "none";
-
-                try {
-                    const formData = {
-                        suggestionType: suggestionType,
-                        suggestionText: suggestionText,
-                    };
-                    console.log("Sending suggestion request:", formData);
-                    console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
-
-                    const response = await fetch(
-                        `${API_BASE_URL}/api/suggestion`,
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(formData),
-                            mode: "cors",
-                            credentials: "omit",
-                        },
-                    );
-
-                    console.log("Response status:", response.status);
-
-                    const result = await response.json();
-                    console.log("Response data:", result);
-
-                    if (response.ok) {
-                        showStatus(
-                            status,
-                            "✓ Suggestion submitted successfully! Thank you for your feedback.",
-                            true,
-                        );
-                        suggestionForm.reset();
-
-                        setTimeout(() => {
-                            status.style.display = "none";
-                        }, 5000);
-                    } else {
-                        throw new Error(
-                            result.error ||
-                                result.details ||
-                                "Submission failed",
-                        );
-                    }
-                } catch (error) {
-                    console.error("Error:", error);
-
-                    let errorMessage = error.message;
-                    if (error.message.includes("Failed to fetch")) {
-                        errorMessage =
-                            "Cannot connect to server. Please check your internet connection or try again later.";
-                    } else if (error.message.includes("NetworkError")) {
-                        errorMessage =
-                            "Network error. Please check your connection.";
-                    }
-
-                    showStatus(status, `X ${errorMessage}`, false);
-                } finally {
-                    btnText.style.display = "inline";
-                    loading.style.display = "none";
-                    submitBtn.disabled = false;
+            document.addEventListener("click", (e) => {
+                const gradeCustomSelect = document.getElementById("gradeCustomSelect");
+                if (gradeCustomSelect && !gradeCustomSelect.contains(e.target)) {
+                    closeGradeDropdown();
+                    gradeOpen = false;
                 }
             });
-            async function testAPIConnection() {
-                try {
-                    const response = await fetch(`${API_BASE_URL}/health`, {
-                        method: "GET",
-                        mode: "cors",
-                    });
 
-                    if (response.ok) {
-                        console.log("✓ Backend API is reachable");
-                    } else {
-                        console.warn(
-                            " Backend API returned non-OK status:",
-                            response.status,
-                        );
-                    }
-                } catch (error) {
-                    console.error(
-                        "X Cannot connect to backend API:",
-                        error.message,
-                    );
-                    console.log(
-                        "Make sure to update API_BASE_URL with your Render URL",
-                    );
-                }
+            setGradeActiveFromValue("");
+        }
+
+        // Rest of your form submission code remains the same...
+        signupForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById("signupSubmit");
+            const btnText = document.getElementById("signupBtnText");
+            const loading = document.getElementById("signupLoading");
+            const status = document.getElementById("signupStatus");
+
+            const fullName = document.getElementById("fullName").value.trim();
+            const schoolId = document.getElementById("schoolId").value.trim();
+            const grade = document.getElementById("grade").value;
+            const email = document.getElementById("email").value.trim();
+            const reason = document.getElementById("reason").value.trim();
+
+            if (!fullName) {
+                showStatus(status, "Please enter your full name", false);
+                return;
             }
 
-            setTimeout(testAPIConnection, 1000);
+            if (!grade) {
+                showStatus(status, "Please select your grade level", false);
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                showStatus(status, "Please enter a valid email address", false);
+                return;
+            }
+
+            if (!reason || reason.length < 20) {
+                showStatus(status, "Please provide a meaningful reason for joining (at least 20 characters)", false);
+                return;
+            }
+
+            btnText.style.display = "none";
+            loading.style.display = "inline-block";
+            submitBtn.disabled = true;
+            status.style.display = "none";
+
+            try {
+                const formData = {
+                    fullName: fullName,
+                    schoolId: schoolId,
+                    grade: grade,
+                    email: email,
+                    reason: reason,
+                };
+                console.log("Sending signup request:", formData);
+                console.log("API URL:", `${API_BASE_URL}/api/signup`);
+
+                const response = await fetch(`${API_BASE_URL}/api/signup`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                    mode: "cors",
+                    credentials: "omit",
+                });
+
+                console.log("Response status:", response.status);
+
+                const result = await response.json();
+                console.log("Response data:", result);
+
+                if (response.ok) {
+                    showStatus(status, "✓ Signup submitted successfully! Confirmation email sent.", true);
+                    signupForm.reset();
+
+                    // Reset custom select after form reset
+                    setGradeActiveFromValue("");
+
+                    setTimeout(() => {
+                        status.style.display = "none";
+                    }, 5000);
+                } else {
+                    throw new Error(result.error || result.details || "Submission failed");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                let errorMessage = error.message;
+                if (error.message.includes("Failed to fetch")) {
+                    errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
+                } else if (error.message.includes("NetworkError")) {
+                    errorMessage = "Network error. Please check your connection.";
+                }
+
+                showStatus(status, `X ${errorMessage}`, false);
+            } finally {
+                btnText.style.display = "inline";
+                loading.style.display = "none";
+                submitBtn.disabled = false;
+            }
         });
-    </script>
+
+        suggestionForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById("suggestionSubmit");
+            const btnText = document.getElementById("suggestionBtnText");
+            const loading = document.getElementById("suggestionLoading");
+            const status = document.getElementById("suggestionStatus");
+
+            const suggestionType = document.getElementById("suggestionType").value;
+            const suggestionText = document.getElementById("suggestionText").value.trim();
+
+            if (!suggestionType) {
+                showStatus(status, "Please select a suggestion type", false);
+                return;
+            }
+
+            if (!suggestionText || suggestionText.length < 10) {
+                showStatus(status, "Please provide a detailed suggestion (at least 10 characters)", false);
+                return;
+            }
+
+            btnText.style.display = "none";
+            loading.style.display = "inline-block";
+            submitBtn.disabled = true;
+            status.style.display = "none";
+
+            try {
+                const formData = {
+                    suggestionType: suggestionType,
+                    suggestionText: suggestionText,
+                };
+                console.log("Sending suggestion request:", formData);
+                console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
+
+                const response = await fetch(`${API_BASE_URL}/api/suggestion`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                    mode: "cors",
+                    credentials: "omit",
+                });
+
+                console.log("Response status:", response.status);
+
+                const result = await response.json();
+                console.log("Response data:", result);
+
+                if (response.ok) {
+                    showStatus(status, "✓ Suggestion submitted successfully! Thank you for your feedback.", true);
+                    suggestionForm.reset();
+
+                    setTimeout(() => {
+                        status.style.display = "none";
+                    }, 5000);
+                } else {
+                    throw new Error(result.error || result.details || "Submission failed");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+
+                let errorMessage = error.message;
+                if (error.message.includes("Failed to fetch")) {
+                    errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
+                } else if (error.message.includes("NetworkError")) {
+                    errorMessage = "Network error. Please check your connection.";
+                }
+
+                showStatus(status, `X ${errorMessage}`, false);
+            } finally {
+                btnText.style.display = "inline";
+                loading.style.display = "none";
+                submitBtn.disabled = false;
+            }
+        });
+
+        async function testAPIConnection() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`, {
+                    method: "GET",
+                    mode: "cors",
+                });
+
+                if (response.ok) {
+                    console.log("✓ Backend API is reachable");
+                } else {
+                    console.warn(" Backend API returned non-OK status:", response.status);
+                }
+            } catch (error) {
+                console.error("X Cannot connect to backend API:", error.message);
+                console.log("Make sure to update API_BASE_URL with your Render URL");
+            }
+        }
+
+        setTimeout(testAPIConnection, 1000);
+    });
+</script>
 </Layout>
