@@ -1,6 +1,7 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
+import Layout from "../../../layouts/Layout.astro";
 ---
+
 <Layout title="NJROTC Help Center" disableHero>
     <head>
         <!-- Material Icons -->
@@ -13,9 +14,7 @@ import Layout from '../../../layouts/Layout.astro';
         <div class="container">
             <div class="header">
                 <h1>NJROTC Help Center</h1>
-                <p>
-                    Submit program signups or suggestions for improvement.
-                </p>
+                <p>Submit program signups or suggestions for improvement.</p>
             </div>
 
             <div class="tab-container">
@@ -42,39 +41,103 @@ import Layout from '../../../layouts/Layout.astro';
                     <div class="tab-content active" id="suggestion-content">
                         <h2>Suggestion Box</h2>
                         <form id="suggestionForm">
-
                             <div class="form-group">
-                                <label for="suggestionType">Suggestion Type *</label>
-                                <div class="custom-select" id="suggestionCustomSelect" aria-label="Select Type">
-                                    <select class="hidden-native" id="suggestionType" name="type" required>
+                                <label for="suggestionType"
+                                    >Suggestion Type *</label
+                                >
+                                <div
+                                    class="custom-select"
+                                    id="suggestionCustomSelect"
+                                    aria-label="Select Type"
+                                >
+                                    <select
+                                        class="hidden-native"
+                                        id="suggestionType"
+                                        name="type"
+                                        required
+                                    >
                                         <option value="">Select Type</option>
-                                        <option value="Website Bug" selected>Website Bug</option>
-                                        <option value="Website Improvement">Website Improvement</option>
-                                        <option value="Event Idea">Event Idea</option>
-                                        <option value="Program Suggestion">Program Suggestion</option>
+                                        <option value="Website Bug" selected
+                                            >Website Bug</option
+                                        >
+                                        <option value="Website Improvement"
+                                            >Website Improvement</option
+                                        >
+                                        <option value="Event Idea"
+                                            >Event Idea</option
+                                        >
+                                        <option value="Program Suggestion"
+                                            >Program Suggestion</option
+                                        >
                                         <option value="Other">Other</option>
                                     </select>
 
-                                    <button class="select-face" id="suggestionSelectFace" type="button" aria-haspopup="listbox" aria-expanded="false">
-                                        <span class="title" id="suggestionSelectedLabel">
+                                    <button
+                                        class="select-face"
+                                        id="suggestionSelectFace"
+                                        type="button"
+                                        aria-haspopup="listbox"
+                                        aria-expanded="false"
+                                    >
+                                        <span
+                                            class="title"
+                                            id="suggestionSelectedLabel"
+                                        >
                                             Website Bug
                                         </span>
-                                        <span class="arrow" aria-hidden="true"></span>
+                                        <span class="arrow" aria-hidden="true"
+                                        ></span>
                                     </button>
 
-                                    <div class="dropdown" id="suggestionDropdown" role="listbox" aria-label="Options">
-                                        <div class="dropdown-header" aria-hidden="true"></div>
-                                        <div class="option" data-value="Website Bug" tabindex="0">Website Bug</div>
-                                        <div class="option" data-value="Website Improvement" tabindex="0">Website Improvement</div>
-                                        <div class="option" data-value="Event Idea" tabindex="0">Event Idea</div>
-                                        <div class="option" data-value="Program Suggestion" tabindex="0">Program Suggestion</div>
-                                        <div class="option" data-value="Other" tabindex="0">Other</div>
+                                    <div
+                                        class="dropdown"
+                                        id="suggestionDropdown"
+                                        role="listbox"
+                                        aria-label="Options"
+                                    >
+                                        <div
+                                            class="option"
+                                            data-value="Website Bug"
+                                            tabindex="0"
+                                        >
+                                            Website Bug
+                                        </div>
+                                        <div
+                                            class="option"
+                                            data-value="Website Improvement"
+                                            tabindex="0"
+                                        >
+                                            Website Improvement
+                                        </div>
+                                        <div
+                                            class="option"
+                                            data-value="Event Idea"
+                                            tabindex="0"
+                                        >
+                                            Event Idea
+                                        </div>
+                                        <div
+                                            class="option"
+                                            data-value="Program Suggestion"
+                                            tabindex="0"
+                                        >
+                                            Program Suggestion
+                                        </div>
+                                        <div
+                                            class="option"
+                                            data-value="Other"
+                                            tabindex="0"
+                                        >
+                                            Other
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="suggestionText">Your Suggestion *</label>
+                                <label for="suggestionText"
+                                    >Your Suggestion *</label
+                                >
                                 <textarea
                                     id="suggestionText"
                                     name="suggestion"
@@ -135,8 +198,17 @@ import Layout from '../../../layouts/Layout.astro';
 
                             <div class="form-group">
                                 <label for="grade">Grade Level *</label>
-                                <div class="custom-select" id="gradeCustomSelect" aria-label="Select Grade">
-                                    <select class="hidden-native" id="grade" name="grade" required>
+                                <div
+                                    class="custom-select"
+                                    id="gradeCustomSelect"
+                                    aria-label="Select Grade"
+                                >
+                                    <select
+                                        class="hidden-native"
+                                        id="grade"
+                                        name="grade"
+                                        required
+                                    >
                                         <option value="">Select Grade</option>
                                         <option value="9">9th Grade</option>
                                         <option value="10">10th Grade</option>
@@ -144,19 +216,57 @@ import Layout from '../../../layouts/Layout.astro';
                                         <option value="12">12th Grade</option>
                                     </select>
 
-                                    <button class="select-face" id="gradeSelectFace" type="button" aria-haspopup="listbox" aria-expanded="false">
-                                        <span class="title" id="gradeSelectedLabel">
+                                    <button
+                                        class="select-face"
+                                        id="gradeSelectFace"
+                                        type="button"
+                                        aria-haspopup="listbox"
+                                        aria-expanded="false"
+                                    >
+                                        <span
+                                            class="title"
+                                            id="gradeSelectedLabel"
+                                        >
                                             Select Grade
                                         </span>
-                                        <span class="arrow" aria-hidden="true"></span>
+                                        <span class="arrow" aria-hidden="true"
+                                        ></span>
                                     </button>
 
-                                    <div class="dropdown" id="gradeDropdown" role="listbox" aria-label="Grade Options">
-                                        <div class="dropdown-header" aria-hidden="true"></div>
-                                        <div class="option" data-value="9" tabindex="0">9th Grade</div>
-                                        <div class="option" data-value="10" tabindex="0">10th Grade</div>
-                                        <div class="option" data-value="11" tabindex="0">11th Grade</div>
-                                        <div class="option" data-value="12" tabindex="0">12th Grade</div>
+                                    <div
+                                        class="dropdown"
+                                        id="gradeDropdown"
+                                        role="listbox"
+                                        aria-label="Grade Options"
+                                    >
+                                        <div
+                                            class="option"
+                                            data-value="9"
+                                            tabindex="0"
+                                        >
+                                            9th Grade
+                                        </div>
+                                        <div
+                                            class="option"
+                                            data-value="10"
+                                            tabindex="0"
+                                        >
+                                            10th Grade
+                                        </div>
+                                        <div
+                                            class="option"
+                                            data-value="11"
+                                            tabindex="0"
+                                        >
+                                            11th Grade
+                                        </div>
+                                        <div
+                                            class="option"
+                                            data-value="12"
+                                            tabindex="0"
+                                        >
+                                            12th Grade
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -174,15 +284,16 @@ import Layout from '../../../layouts/Layout.astro';
                             </div>
 
                             <div class="form-group">
-                                <label for="reason">Why do you want to join NJROTC? *</label>
+                                <label for="reason"
+                                    >Why do you want to join NJROTC? *</label
+                                >
                                 <textarea
                                     id="reason"
                                     name="reason"
                                     class="form-control"
                                     placeholder="Please tell us why you're interested in joining the NJROTC program..."
                                     rows="4"
-                                    required
-                                ></textarea>
+                                    required></textarea>
                             </div>
 
                             <div class="status-message" id="signupStatus"></div>
@@ -466,7 +577,7 @@ import Layout from '../../../layouts/Layout.astro';
         }
 
         /* Custom Select Styles */
-        :root{
+        :root {
             --bg: #0b1b2b;
             --surface: #111e2b;
             --surface-2: #0f1a28;
@@ -493,8 +604,9 @@ import Layout from '../../../layouts/Layout.astro';
             border: 1px solid rgba(230, 178, 32, 0.3);
             color: var(--text);
             cursor: pointer;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,.04),
-                        0 8px 20px rgba(0,0,0,.4);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.04),
+                0 8px 20px rgba(0, 0, 0, 0.4);
             min-height: 40px;
             font-family: inherit;
             font-size: 1rem;
@@ -508,12 +620,13 @@ import Layout from '../../../layouts/Layout.astro';
         }
 
         .select-face .arrow {
-            width: 0; 
+            width: 0;
             height: 0;
             border-left: 6px solid transparent;
             border-right: 6px solid transparent;
             border-top: 8px solid #e6b220;
             transform: translateY(-1px);
+            transition: transform 0.3s ease;
         }
         .dropdown {
             position: absolute;
@@ -521,10 +634,10 @@ import Layout from '../../../layouts/Layout.astro';
             left: 0;
             width: 100%;
             border-radius: 12px;
-            background: rgba(14, 20, 27,0.8);
-            border: 1px solid rgba(230, 178, 32, 0.3);
+            background: rgba(14, 20, 27, 0.8);
+            border: 1px solid rgba(72, 81, 88);
             backdrop-filter: blur(3px);
-            box-shadow: 0 8px 24px rgba(0,0,0,.6);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
             max-height: 260px;
             overflow: auto;
             z-index: 99;
@@ -535,7 +648,7 @@ import Layout from '../../../layouts/Layout.astro';
         .option {
             display: flex;
             align-items: center;
-            padding: 10px 12px;
+            padding: 5px 12px;
             border-radius: 8px;
             cursor: pointer;
             color: var(--text);
@@ -544,15 +657,20 @@ import Layout from '../../../layouts/Layout.astro';
         }
 
         .option:hover {
-            background: rgba(230, 178, 32, 0.25);
+            background: rgba(21, 101, 187, 0.5);
         }
 
         .option.active {
-            background: rgba(230, 178, 32, 0.45);
+            background: rgba(21, 101, 187);
         }
         .dropdown-header {
             height: 1px;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,.15), transparent);
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(255, 255, 255, 0.15),
+                transparent
+            );
             margin-bottom: 6px;
         }
         select.hidden-native {
@@ -665,7 +783,8 @@ import Layout from '../../../layouts/Layout.astro';
     </style>
 
     <script lang="">
-        const API_BASE_URL = 'https://parlier-unified-njrotc-server.onrender.com';
+        const API_BASE_URL =
+            "https://parlier-unified-njrotc-server.onrender.com";
 
         document.addEventListener("DOMContentLoaded", function () {
             const tabHeaders = document.querySelectorAll(".tab-header");
@@ -675,8 +794,8 @@ import Layout from '../../../layouts/Layout.astro';
             const signupForm = document.getElementById("signupForm");
             const suggestionForm = document.getElementById("suggestionForm");
             const scrollArrows = document.querySelectorAll(".tab-scroll-arrow");
-            scrollArrows.forEach(arrow => arrow.style.display = 'none');
-            
+            scrollArrows.forEach((arrow) => (arrow.style.display = "none"));
+
             let resizeTimeout;
             let isResizing = false;
 
@@ -685,17 +804,18 @@ import Layout from '../../../layouts/Layout.astro';
                 if (!activeTab) return;
 
                 void activeTab.offsetWidth;
-                
+
                 const tabRect = activeTab.getBoundingClientRect();
-                const containerRect = tabHeadersContainer.getBoundingClientRect();
+                const containerRect =
+                    tabHeadersContainer.getBoundingClientRect();
 
                 const left = tabRect.left - containerRect.left;
                 const width = tabRect.width;
-                
+
                 requestAnimationFrame(() => {
                     tabIndicator.style.width = `${width}px`;
                     tabIndicator.style.left = `${left}px`;
-                    tabIndicator.style.opacity = '1';
+                    tabIndicator.style.opacity = "1";
                 });
             }
 
@@ -747,21 +867,21 @@ import Layout from '../../../layouts/Layout.astro';
 
             window.addEventListener("resize", function () {
                 isResizing = true;
-                
-                tabIndicator.style.opacity = '0';
-                
+
+                tabIndicator.style.opacity = "0";
+
                 clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(function() {
+                resizeTimeout = setTimeout(function () {
                     updateTabIndicator();
                     isResizing = false;
                 }, 150);
             });
-            window.addEventListener("orientationchange", function() {
+            window.addEventListener("orientationchange", function () {
                 setTimeout(updateTabIndicator, 300);
             });
 
-            document.addEventListener("transitionend", function(e) {
-                if (e.target.classList.contains('tab-header')) {
+            document.addEventListener("transitionend", function (e) {
+                if (e.target.classList.contains("tab-header")) {
                     updateTabIndicator();
                 }
             });
@@ -777,7 +897,7 @@ import Layout from '../../../layouts/Layout.astro';
                     touchStartX = e.changedTouches[0].screenX;
                     touchStartY = e.changedTouches[0].screenY;
                 },
-                { passive: true }
+                { passive: true },
             );
 
             document.addEventListener(
@@ -787,7 +907,7 @@ import Layout from '../../../layouts/Layout.astro';
                     touchEndY = e.changedTouches[0].screenY;
                     handleSwipe();
                 },
-                { passive: true }
+                { passive: true },
             );
 
             function handleSwipe() {
@@ -795,8 +915,13 @@ import Layout from '../../../layouts/Layout.astro';
                 const horizontalSwipe = Math.abs(touchEndX - touchStartX);
                 const verticalSwipe = Math.abs(touchEndY - touchStartY);
 
-                if (horizontalSwipe > verticalSwipe && horizontalSwipe > minSwipeDistance) {
-                    const currentTab = document.querySelector(".tab-header.active").dataset.tab;
+                if (
+                    horizontalSwipe > verticalSwipe &&
+                    horizontalSwipe > minSwipeDistance
+                ) {
+                    const currentTab =
+                        document.querySelector(".tab-header.active").dataset
+                            .tab;
 
                     if (touchEndX < touchStartX) {
                         if (currentTab === "suggestion") {
@@ -815,44 +940,56 @@ import Layout from '../../../layouts/Layout.astro';
                 return re.test(email);
             }
 
-
             function showStatus(element, message, isSuccess) {
                 element.textContent = message;
-                element.className = `status-message ${isSuccess ? 'success' : 'error'}`;
-                element.style.display = 'block';
-                
+                element.className = `status-message ${isSuccess ? "success" : "error"}`;
+                element.style.display = "block";
+
                 setTimeout(() => {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    element.scrollIntoView({
+                        behavior: "smooth",
+                        block: "nearest",
+                    });
                 }, 100);
             }
 
-            // Custom Select functionality for Suggestion Type
-            const suggestionNativeSelect = document.getElementById('suggestionType');
+            const suggestionNativeSelect =
+                document.getElementById("suggestionType");
             if (suggestionNativeSelect) {
-                const selectFace = document.getElementById('suggestionSelectFace');
-                const dropdown = document.getElementById('suggestionDropdown');
-                const selectedLabel = document.getElementById('suggestionSelectedLabel');
-                const options = Array.from(dropdown.querySelectorAll('.option'));
+                const selectFace = document.getElementById(
+                    "suggestionSelectFace",
+                );
+                const dropdown = document.getElementById("suggestionDropdown");
+                const arrow = document.querySelector(".arrow");
+                const selectedLabel = document.getElementById(
+                    "suggestionSelectedLabel",
+                );
+                const options = Array.from(
+                    dropdown.querySelectorAll(".option"),
+                );
 
-                // Initialize active from native select
                 function setActiveFromValue(value) {
-                    options.forEach(opt => {
-                        opt.classList.toggle('active', opt.dataset.value === value);
+                    options.forEach((opt) => {
+                        opt.classList.toggle(
+                            "active",
+                            opt.dataset.value === value,
+                        );
                     });
-                    selectedLabel.textContent = value || 'Select Type';
+                    selectedLabel.textContent = value || "Select Type";
                 }
 
-                // Open/close dropdown
                 function openDropdown() {
-                    dropdown.style.display = 'block';
-                    selectFace.setAttribute('aria-expanded', 'true');
-                }
-                function closeDropdown() {
-                    dropdown.style.display = 'none';
-                    selectFace.setAttribute('aria-expanded', 'false');
+                    dropdown.style.display = "block";
+                    arrow.style.transform = "rotate(180deg)";
+                    selectFace.setAttribute("aria-expanded", "true");
                 }
 
-                // Click to toggle
+                function closeDropdown() {
+                    dropdown.style.display = "none";
+                    arrow.style.transform = "rotate(0deg)";
+                    selectFace.setAttribute("aria-expanded", "false");
+                }
+
                 let open = false;
                 function toggleDropdown() {
                     open = !open;
@@ -863,105 +1000,118 @@ import Layout from '../../../layouts/Layout.astro';
                     }
                 }
 
-                selectFace.addEventListener('click', (e) => {
+                selectFace.addEventListener("click", (e) => {
                     e.stopPropagation();
                     toggleDropdown();
                 });
 
-                // Click on option
-                options.forEach(opt => {
-                    opt.addEventListener('click', (e) => {
+                options.forEach((opt) => {
+                    opt.addEventListener("click", (e) => {
                         const value = e.currentTarget.dataset.value;
                         setActiveFromValue(value);
                         suggestionNativeSelect.value = value;
                         closeDropdown();
                         open = false;
-                        
-                        // Trigger change event for form validation
-                        suggestionNativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+
+                        suggestionNativeSelect.dispatchEvent(
+                            new Event("change", { bubbles: true }),
+                        );
                     });
-                    opt.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
+                    opt.addEventListener("keydown", (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
                             e.preventDefault();
                             const value = e.currentTarget.dataset.value;
                             setActiveFromValue(value);
                             suggestionNativeSelect.value = value;
                             closeDropdown();
                             open = false;
-                            
-                            // Trigger change event for form validation
-                            suggestionNativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+
+                            suggestionNativeSelect.dispatchEvent(
+                                new Event("change", { bubbles: true }),
+                            );
                         }
                     });
                 });
 
-                // Keyboard navigation for the faux dropdown
-                document.addEventListener('keydown', (e) => {
+                document.addEventListener("keydown", (e) => {
                     if (!open) return;
-                    const current = options.findIndex(o => o.classList.contains('active'));
+                    const current = options.findIndex((o) =>
+                        o.classList.contains("active"),
+                    );
                     let idx = current >= 0 ? current : -1;
 
-                    if (e.key === 'ArrowDown') {
+                    if (e.key === "ArrowDown") {
                         e.preventDefault();
                         idx = (idx + 1) % options.length;
-                        options.forEach(o => o.classList.remove('active'));
-                        options[idx].classList.add('active');
+                        options.forEach((o) => o.classList.remove("active"));
+                        options[idx].classList.add("active");
                         options[idx].focus();
-                    } else if (e.key === 'ArrowUp') {
+                    } else if (e.key === "ArrowUp") {
                         e.preventDefault();
                         idx = (idx - 1 + options.length) % options.length;
-                        options.forEach(o => o.classList.remove('active'));
-                        options[idx].classList.add('active');
+                        options.forEach((o) => o.classList.remove("active"));
+                        options[idx].classList.add("active");
                         options[idx].focus();
-                    } else if (e.key === 'Escape') {
+                    } else if (e.key === "Escape") {
                         closeDropdown();
                         open = false;
                     }
                 });
 
-                // Click outside to close
-                document.addEventListener('click', (e) => {
-                    const customSelect = document.getElementById('suggestionCustomSelect');
+                document.addEventListener("click", (e) => {
+                    const customSelect = document.getElementById(
+                        "suggestionCustomSelect",
+                    );
                     if (customSelect && !customSelect.contains(e.target)) {
                         closeDropdown();
                         open = false;
                     }
                 });
 
-                // Init with default
-                setActiveFromValue(suggestionNativeSelect.value || 'Website Bug');
+                setActiveFromValue(
+                    suggestionNativeSelect.value || "Website Bug",
+                );
             }
 
-            // Custom Select functionality for Grade Level
-            const gradeNativeSelect = document.getElementById('grade');
+            const gradeNativeSelect = document.getElementById("grade");
             if (gradeNativeSelect) {
-                const gradeSelectFace = document.getElementById('gradeSelectFace');
-                const gradeDropdown = document.getElementById('gradeDropdown');
-                const gradeSelectedLabel = document.getElementById('gradeSelectedLabel');
-                const gradeOptions = Array.from(gradeDropdown.querySelectorAll('.option'));
+                const gradeSelectFace =
+                    document.getElementById("gradeSelectFace");
+                const gradeDropdown = document.getElementById("gradeDropdown");
+                const gradeArrow = gradeSelectFace.querySelector(".arrow");
+                const gradeSelectedLabel =
+                    document.getElementById("gradeSelectedLabel");
+                const gradeOptions = Array.from(
+                    gradeDropdown.querySelectorAll(".option"),
+                );
 
-                // Initialize active from native select
                 function setGradeActiveFromValue(value) {
-                    gradeOptions.forEach(opt => {
-                        opt.classList.toggle('active', opt.dataset.value === value);
+                    gradeOptions.forEach((opt) => {
+                        opt.classList.toggle(
+                            "active",
+                            opt.dataset.value === value,
+                        );
                     });
-                    
-                    // Update the displayed text
-                    const selectedOption = gradeOptions.find(opt => opt.dataset.value === value);
-                    gradeSelectedLabel.textContent = selectedOption ? selectedOption.textContent : 'Select Grade';
+
+                    const selectedOption = gradeOptions.find(
+                        (opt) => opt.dataset.value === value,
+                    );
+                    gradeSelectedLabel.textContent = selectedOption
+                        ? selectedOption.textContent
+                        : "Select Grade";
                 }
 
-                // Open/close dropdown
                 function openGradeDropdown() {
-                    gradeDropdown.style.display = 'block';
-                    gradeSelectFace.setAttribute('aria-expanded', 'true');
+                    gradeDropdown.style.display = "block";
+                    gradeArrow.style.transform = "rotate(180deg)";
+                    gradeSelectFace.setAttribute("aria-expanded", "true");
                 }
                 function closeGradeDropdown() {
-                    gradeDropdown.style.display = 'none';
-                    gradeSelectFace.setAttribute('aria-expanded', 'false');
+                    gradeDropdown.style.display = "none";
+                    gradeArrow.style.transform = "rotate(0deg)";
+                    gradeSelectFace.setAttribute("aria-expanded", "false");
                 }
 
-                // Click to toggle
                 let gradeOpen = false;
                 function toggleGradeDropdown() {
                     gradeOpen = !gradeOpen;
@@ -972,267 +1122,337 @@ import Layout from '../../../layouts/Layout.astro';
                     }
                 }
 
-                gradeSelectFace.addEventListener('click', (e) => {
+                gradeSelectFace.addEventListener("click", (e) => {
                     e.stopPropagation();
                     toggleGradeDropdown();
                 });
 
                 // Click on option
-                gradeOptions.forEach(opt => {
-                    opt.addEventListener('click', (e) => {
+                gradeOptions.forEach((opt) => {
+                    opt.addEventListener("click", (e) => {
                         const value = e.currentTarget.dataset.value;
                         setGradeActiveFromValue(value);
                         gradeNativeSelect.value = value;
                         closeGradeDropdown();
                         gradeOpen = false;
-                        
+
                         // Trigger change event for form validation
-                        gradeNativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                        gradeNativeSelect.dispatchEvent(
+                            new Event("change", { bubbles: true }),
+                        );
                     });
-                    opt.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
+                    opt.addEventListener("keydown", (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
                             e.preventDefault();
                             const value = e.currentTarget.dataset.value;
                             setGradeActiveFromValue(value);
                             gradeNativeSelect.value = value;
                             closeGradeDropdown();
                             gradeOpen = false;
-                            
+
                             // Trigger change event for form validation
-                            gradeNativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                            gradeNativeSelect.dispatchEvent(
+                                new Event("change", { bubbles: true }),
+                            );
                         }
                     });
                 });
 
                 // Keyboard navigation for the faux dropdown
-                document.addEventListener('keydown', (e) => {
+                document.addEventListener("keydown", (e) => {
                     if (!gradeOpen) return;
-                    const current = gradeOptions.findIndex(o => o.classList.contains('active'));
+                    const current = gradeOptions.findIndex((o) =>
+                        o.classList.contains("active"),
+                    );
                     let idx = current >= 0 ? current : -1;
 
-                    if (e.key === 'ArrowDown') {
+                    if (e.key === "ArrowDown") {
                         e.preventDefault();
                         idx = (idx + 1) % gradeOptions.length;
-                        gradeOptions.forEach(o => o.classList.remove('active'));
-                        gradeOptions[idx].classList.add('active');
+                        gradeOptions.forEach((o) =>
+                            o.classList.remove("active"),
+                        );
+                        gradeOptions[idx].classList.add("active");
                         gradeOptions[idx].focus();
-                    } else if (e.key === 'ArrowUp') {
+                    } else if (e.key === "ArrowUp") {
                         e.preventDefault();
-                        idx = (idx - 1 + gradeOptions.length) % gradeOptions.length;
-                        gradeOptions.forEach(o => o.classList.remove('active'));
-                        gradeOptions[idx].classList.add('active');
+                        idx =
+                            (idx - 1 + gradeOptions.length) %
+                            gradeOptions.length;
+                        gradeOptions.forEach((o) =>
+                            o.classList.remove("active"),
+                        );
+                        gradeOptions[idx].classList.add("active");
                         gradeOptions[idx].focus();
-                    } else if (e.key === 'Escape') {
+                    } else if (e.key === "Escape") {
                         closeGradeDropdown();
                         gradeOpen = false;
                     }
                 });
 
                 // Click outside to close (specific to grade select)
-                document.addEventListener('click', (e) => {
-                    const gradeCustomSelect = document.getElementById('gradeCustomSelect');
-                    if (gradeCustomSelect && !gradeCustomSelect.contains(e.target)) {
+                document.addEventListener("click", (e) => {
+                    const gradeCustomSelect =
+                        document.getElementById("gradeCustomSelect");
+                    if (
+                        gradeCustomSelect &&
+                        !gradeCustomSelect.contains(e.target)
+                    ) {
                         closeGradeDropdown();
                         gradeOpen = false;
                     }
                 });
 
                 // Init with default (no selection)
-                setGradeActiveFromValue('');
+                setGradeActiveFromValue("");
             }
 
-             // Signup  
-                signupForm.addEventListener("submit", async function (e) {
-                    e.preventDefault();
+            // Signup
+            signupForm.addEventListener("submit", async function (e) {
+                e.preventDefault();
 
-                    const submitBtn = document.getElementById("signupSubmit");
-                    const btnText = document.getElementById("signupBtnText");
-                    const loading = document.getElementById("signupLoading");
-                    const status = document.getElementById("signupStatus");
+                const submitBtn = document.getElementById("signupSubmit");
+                const btnText = document.getElementById("signupBtnText");
+                const loading = document.getElementById("signupLoading");
+                const status = document.getElementById("signupStatus");
 
-                    const fullName = document.getElementById("fullName").value.trim();
-                    const schoolId = document.getElementById("schoolId").value.trim();
-                    const grade = document.getElementById("grade").value;
-                    const email = document.getElementById("email").value.trim();
-                    const reason = document.getElementById("reason").value.trim();
+                const fullName = document
+                    .getElementById("fullName")
+                    .value.trim();
+                const schoolId = document
+                    .getElementById("schoolId")
+                    .value.trim();
+                const grade = document.getElementById("grade").value;
+                const email = document.getElementById("email").value.trim();
+                const reason = document.getElementById("reason").value.trim();
 
-                    if (!fullName) {
-                        showStatus(status, "Please enter your full name", false);
-                        return;
-                    }
-
-                    if (!grade) {
-                        showStatus(status, "Please select your grade level", false);
-                        return;
-                    }
-
-                    if (!validateEmail(email)) {
-                        showStatus(status, "Please enter a valid email address", false);
-                        return;
-                    }
-
-                    if (!reason || reason.length < 20) {
-                        showStatus(status, "Please provide a meaningful reason for joining (at least 20 characters)", false);
-                        return;
-                    }
-
-                    btnText.style.display = "none";
-                    loading.style.display = "inline-block";
-                    submitBtn.disabled = true;
-                    status.style.display = "none";
-
-                    try {
-                        const formData = {
-                            fullName: fullName,
-                            schoolId: schoolId,
-                            grade: grade,
-                            email: email,
-                            reason: reason
-                        };
-                        console.log("Sending signup request:", formData);
-                        console.log("API URL:", `${API_BASE_URL}/api/signup`);
-
-                        const response = await fetch(`${API_BASE_URL}/api/signup`, {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(formData),
-                            mode: "cors",
-                            credentials: "omit",
-                        });
-
-                        console.log("Response status:", response.status);
-
-                        const result = await response.json();
-                        console.log("Response data:", result);
-
-                        if (response.ok) {
-                            showStatus(status, "✓ Signup submitted successfully! Confirmation email sent.", true);
-                            signupForm.reset();
-                            
-                            // Reset custom select after form reset
-                            setGradeActiveFromValue('');
-                            
-                            setTimeout(() => {
-                                status.style.display = 'none';
-                            }, 5000);
-                        } else {
-                            throw new Error(result.error || result.details || "Submission failed");
-                        }
-                    } catch (error) {
-                        console.error("Error:", error);
-                        let errorMessage = error.message;
-                        if (error.message.includes("Failed to fetch")) {
-                            errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
-                        } else if (error.message.includes("NetworkError")) {
-                            errorMessage = "Network error. Please check your connection.";
-                        }
-                        
-                        showStatus(status, `X ${errorMessage}`, false);
-                    } finally {
-                        btnText.style.display = "inline";
-                        loading.style.display = "none";
-                        submitBtn.disabled = false;
-                    }
-                });
-
-                // Suggestion 
-                suggestionForm.addEventListener("submit", async function (e) {
-                    e.preventDefault();
-
-                    const submitBtn = document.getElementById("suggestionSubmit");
-                    const btnText = document.getElementById("suggestionBtnText");
-                    const loading = document.getElementById("suggestionLoading");
-                    const status = document.getElementById("suggestionStatus");
-
-                    const suggestionType = document.getElementById("suggestionType").value;
-                    const suggestionText = document.getElementById("suggestionText").value.trim();
-
-                    if (!suggestionType) {
-                        showStatus(status, "Please select a suggestion type", false);
-                        return;
-                    }
-
-                    if (!suggestionText || suggestionText.length < 10) {
-                        showStatus(status, "Please provide a detailed suggestion (at least 10 characters)", false);
-                        return;
-                    }
-
-                    btnText.style.display = "none";
-                    loading.style.display = "inline-block";
-                    submitBtn.disabled = true;
-                    status.style.display = "none";
-
-                    try {
-                        const formData = {
-                            suggestionType: suggestionType,
-                            suggestionText: suggestionText
-                        };
-                        console.log("Sending suggestion request:", formData);
-                        console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
-
-                        const response = await fetch(`${API_BASE_URL}/api/suggestion`, {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(formData),
-                            mode: "cors",
-                            credentials: "omit",
-                        });
-
-                        console.log("Response status:", response.status);
-
-                        const result = await response.json();
-                        console.log("Response data:", result);
-
-                        if (response.ok) {
-                            showStatus(status, "✓ Suggestion submitted successfully! Thank you for your feedback.", true);
-                            suggestionForm.reset();
-                            
-                            setTimeout(() => {
-                                status.style.display = 'none';
-                            }, 5000);
-                        } else {
-                            throw new Error(result.error || result.details || "Submission failed");
-                        }
-                    } catch (error) {
-                        console.error("Error:", error);
-                        
-                        let errorMessage = error.message;
-                        if (error.message.includes("Failed to fetch")) {
-                            errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
-                        } else if (error.message.includes("NetworkError")) {
-                            errorMessage = "Network error. Please check your connection.";
-                        }
-                        
-                        showStatus(status, `X ${errorMessage}`, false);
-                    } finally {
-                        btnText.style.display = "inline";
-                        loading.style.display = "none";
-                        submitBtn.disabled = false;
-                    }
-                });
-                async function testAPIConnection() {
-                    try {
-                        const response = await fetch(`${API_BASE_URL}/health`, {
-                            method: 'GET',
-                            mode: 'cors'
-                        });
-                        
-                        if (response.ok) {
-                            console.log("✓ Backend API is reachable");
-                        } else {
-                            console.warn(" Backend API returned non-OK status:", response.status);
-                        }
-                    } catch (error) {
-                        console.error("X Cannot connect to backend API:", error.message);
-                        console.log("Make sure to update API_BASE_URL with your Render URL");
-                    }
+                if (!fullName) {
+                    showStatus(status, "Please enter your full name", false);
+                    return;
                 }
 
-                setTimeout(testAPIConnection, 1000);
+                if (!grade) {
+                    showStatus(status, "Please select your grade level", false);
+                    return;
+                }
+
+                if (!validateEmail(email)) {
+                    showStatus(
+                        status,
+                        "Please enter a valid email address",
+                        false,
+                    );
+                    return;
+                }
+
+                if (!reason || reason.length < 20) {
+                    showStatus(
+                        status,
+                        "Please provide a meaningful reason for joining (at least 20 characters)",
+                        false,
+                    );
+                    return;
+                }
+
+                btnText.style.display = "none";
+                loading.style.display = "inline-block";
+                submitBtn.disabled = true;
+                status.style.display = "none";
+
+                try {
+                    const formData = {
+                        fullName: fullName,
+                        schoolId: schoolId,
+                        grade: grade,
+                        email: email,
+                        reason: reason,
+                    };
+                    console.log("Sending signup request:", formData);
+                    console.log("API URL:", `${API_BASE_URL}/api/signup`);
+
+                    const response = await fetch(`${API_BASE_URL}/api/signup`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(formData),
+                        mode: "cors",
+                        credentials: "omit",
+                    });
+
+                    console.log("Response status:", response.status);
+
+                    const result = await response.json();
+                    console.log("Response data:", result);
+
+                    if (response.ok) {
+                        showStatus(
+                            status,
+                            "✓ Signup submitted successfully! Confirmation email sent.",
+                            true,
+                        );
+                        signupForm.reset();
+
+                        // Reset custom select after form reset
+                        setGradeActiveFromValue("");
+
+                        setTimeout(() => {
+                            status.style.display = "none";
+                        }, 5000);
+                    } else {
+                        throw new Error(
+                            result.error ||
+                                result.details ||
+                                "Submission failed",
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    let errorMessage = error.message;
+                    if (error.message.includes("Failed to fetch")) {
+                        errorMessage =
+                            "Cannot connect to server. Please check your internet connection or try again later.";
+                    } else if (error.message.includes("NetworkError")) {
+                        errorMessage =
+                            "Network error. Please check your connection.";
+                    }
+
+                    showStatus(status, `X ${errorMessage}`, false);
+                } finally {
+                    btnText.style.display = "inline";
+                    loading.style.display = "none";
+                    submitBtn.disabled = false;
+                }
             });
-        </script>
+
+            // Suggestion
+            suggestionForm.addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const submitBtn = document.getElementById("suggestionSubmit");
+                const btnText = document.getElementById("suggestionBtnText");
+                const loading = document.getElementById("suggestionLoading");
+                const status = document.getElementById("suggestionStatus");
+
+                const suggestionType =
+                    document.getElementById("suggestionType").value;
+                const suggestionText = document
+                    .getElementById("suggestionText")
+                    .value.trim();
+
+                if (!suggestionType) {
+                    showStatus(
+                        status,
+                        "Please select a suggestion type",
+                        false,
+                    );
+                    return;
+                }
+
+                if (!suggestionText || suggestionText.length < 10) {
+                    showStatus(
+                        status,
+                        "Please provide a detailed suggestion (at least 10 characters)",
+                        false,
+                    );
+                    return;
+                }
+
+                btnText.style.display = "none";
+                loading.style.display = "inline-block";
+                submitBtn.disabled = true;
+                status.style.display = "none";
+
+                try {
+                    const formData = {
+                        suggestionType: suggestionType,
+                        suggestionText: suggestionText,
+                    };
+                    console.log("Sending suggestion request:", formData);
+                    console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
+
+                    const response = await fetch(
+                        `${API_BASE_URL}/api/suggestion`,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(formData),
+                            mode: "cors",
+                            credentials: "omit",
+                        },
+                    );
+
+                    console.log("Response status:", response.status);
+
+                    const result = await response.json();
+                    console.log("Response data:", result);
+
+                    if (response.ok) {
+                        showStatus(
+                            status,
+                            "✓ Suggestion submitted successfully! Thank you for your feedback.",
+                            true,
+                        );
+                        suggestionForm.reset();
+
+                        setTimeout(() => {
+                            status.style.display = "none";
+                        }, 5000);
+                    } else {
+                        throw new Error(
+                            result.error ||
+                                result.details ||
+                                "Submission failed",
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+
+                    let errorMessage = error.message;
+                    if (error.message.includes("Failed to fetch")) {
+                        errorMessage =
+                            "Cannot connect to server. Please check your internet connection or try again later.";
+                    } else if (error.message.includes("NetworkError")) {
+                        errorMessage =
+                            "Network error. Please check your connection.";
+                    }
+
+                    showStatus(status, `X ${errorMessage}`, false);
+                } finally {
+                    btnText.style.display = "inline";
+                    loading.style.display = "none";
+                    submitBtn.disabled = false;
+                }
+            });
+            async function testAPIConnection() {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/health`, {
+                        method: "GET",
+                        mode: "cors",
+                    });
+
+                    if (response.ok) {
+                        console.log("✓ Backend API is reachable");
+                    } else {
+                        console.warn(
+                            " Backend API returned non-OK status:",
+                            response.status,
+                        );
+                    }
+                } catch (error) {
+                    console.error(
+                        "X Cannot connect to backend API:",
+                        error.message,
+                    );
+                    console.log(
+                        "Make sure to update API_BASE_URL with your Render URL",
+                    );
+                }
+            }
+
+            setTimeout(testAPIConnection, 1000);
+        });
+    </script>
 </Layout>

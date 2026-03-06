@@ -1,13 +1,6 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
 ---
-
-
-
-<!-- This would be so much better as a compotent, mabye sevlte or react -->
-
-<!-- TODO: Refactor this once the crisis is over -->
-
 <Layout title="PQS" disableHero>
     <div class="BG555">
         <div class="container">
@@ -462,9 +455,11 @@ import Layout from "../../../layouts/Layout.astro";
                 grid-template-columns: 1fr;
             }
         }
-    </style>
+        </style>
     <script lang="js">
-        // Rank data - easily maintainable and extensible
+        const STORAGE_VERSION = '1.0.0';
+        const STORAGE_KEY = 'pqsProgress';
+
         const ranks = [
             {
                 id: "csa",
@@ -588,7 +583,83 @@ import Layout from "../../../layouts/Layout.astro";
             },
         ];
 
-        // Function to generate rank cards
+        function migrateOldData(oldData) {
+            console.log('Migrating data from version', oldData.version || 'unknown', 'to version', STORAGE_VERSION);
+            
+            const newData = {
+                version: STORAGE_VERSION,
+                checkboxes: {},
+                currentRank: null,
+                completedRanks: []
+            };
+
+            if (oldData && oldData.checkboxes) {
+                const currentCheckboxes = document.querySelectorAll('.requirement-checkbox');
+                const currentIds = Array.from(currentCheckboxes).map(cb => cb.id);
+                
+                Object.keys(oldData.checkboxes).forEach(oldId => {
+                    const matchingId = currentIds.find(id => id === oldId);
+                    if (matchingId) {
+                        newData.checkboxes[matchingId] = oldData.checkboxes[oldId];
+                    }
+                });
+            }
+
+            if (oldData.currentRank) {
+                const rankExists = ranks.some(r => r.id === oldData.currentRank);
+                if (rankExists) {
+                    newData.currentRank = oldData.currentRank;
+                } else {
+                    newData.currentRank = ranks[0].id;
+                }
+            } else {
+                newData.currentRank = ranks[0].id;
+            }
+
+            if (oldData.completedRanks && Array.isArray(oldData.completedRanks)) {
+                newData.completedRanks = oldData.completedRanks.filter(oldRank => 
+                    ranks.some(r => r.id === oldRank)
+                );
+            }
+
+            return newData;
+        }
+
+        function loadProgressWithVersion() {
+            try {
+                const savedData = localStorage.getItem(STORAGE_KEY);
+                if (!savedData) return null;
+
+                const parsedData = JSON.parse(savedData);
+                
+                if (!parsedData.version || parsedData.version !== STORAGE_VERSION) {
+                    console.log('Data version mismatch or missing, attempting migration...');
+                    const migratedData = migrateOldData(parsedData);
+                    
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(migratedData));
+                    
+                    return migratedData;
+                }
+                
+                return parsedData;
+            } catch (e) {
+                console.error('Error loading progress data:', e);
+                return null;
+            }
+        }
+
+        function saveProgressWithVersion(progressData) {
+            try {
+                const dataWithVersion = {
+                    ...progressData,
+                    version: STORAGE_VERSION
+                };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(dataWithVersion));
+            } catch (e) {
+                console.error('Error saving progress data:', e);
+            }
+        }
+
         function generateRankCards() {
             const container = document.getElementById("rank-cards-container");
 
@@ -601,115 +672,117 @@ import Layout from "../../../layouts/Layout.astro";
                 rankCard.setAttribute("data-rank", rank.id);
 
                 rankCard.innerHTML = `
-      <div class="rank-header">
-        <h3 class="rank-name">${rank.name}</h3>
-        
-      </div>
-            <div class="requirements-list">
-                ${rank.requirements
-                        .map(
-                                (requirement, index) => `
-                    <div class="requirement-item">
-                        <input type="checkbox" id="${rank.id}-${index + 1}" class="requirement-checkbox" ${isLocked ? "disabled" : ""} data-original-disabled="${isLocked ? 'true' : 'false'}">
-                        <label for="${rank.id}-${index + 1}" class="requirement-label">
-                            <span class="requirement-text">${requirement}</span>
-                        </label>
+                    <div class="rank-header">
+                        <h3 class="rank-name">${rank.name}</h3>
+                        <span style="display:none;" class="status-badge ${isLocked ? 'locked' : ''}">${isCurrent ? 'Current Rank' : (isLocked ? 'Locked' : '')}</span>
                     </div>
-                `,
-                        )
-                        .join("")}
-            </div>
-            <div class="rank-actions">
-                <div>
-                        <button class="advance-btn" disabled>Advance to Next Rank</button>
-                </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 0%"></div>
-        </div>
-        <span class="progress-text">0% Complete</span>
-      </div>
-    `;
+                    <div class="requirements-list">
+                        ${rank.requirements
+                                .map(
+                                        (requirement, index) => `
+                            <div class="requirement-item">
+                                <input type="checkbox" id="${rank.id}-${index + 1}" class="requirement-checkbox" ${isLocked ? "disabled" : ""} data-original-disabled="${isLocked ? 'true' : 'false'}">
+                                <label for="${rank.id}-${index + 1}" class="requirement-label">
+                                    <span class="requirement-text">${requirement}</span>
+                                </label>
+                            </div>
+                        `,
+                                )
+                                .join("")}
+                    </div>
+                    <div class="rank-actions">
+                        <div>
+                            <button class="advance-btn" disabled>Advance to Next Rank</button>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+                `;
 
                 container.appendChild(rankCard);
             });
         }
 
-        // Initialize when DOM is loaded
         document.addEventListener("DOMContentLoaded", function () {
             generateRankCards();
 
-            // Your existing progress tracking functionality remains the same
             function initializeProgress() {
-                const savedProgress = localStorage.getItem("pqsProgress");
+                const savedProgress = loadProgressWithVersion();
                 if (savedProgress) {
-                    const progressData = JSON.parse(savedProgress);
+                    const progressData = savedProgress;
 
-                    Object.keys(progressData.checkboxes).forEach(
-                        (checkboxId) => {
-                            const checkbox =
-                                document.getElementById(checkboxId);
-                            if (checkbox) {
-                                checkbox.checked =
-                                    progressData.checkboxes[checkboxId];
-                            }
-                        },
+                    document.querySelectorAll(".rank-card").forEach((card) => {
+                        card.classList.add("hidden");
+                    });
+
+                    const currentRankCard = document.querySelector(
+                        `[data-rank="${progressData.currentRank}"]`,
                     );
-
-                    if (progressData.currentRank) {
-                        document
-                            .querySelectorAll(".rank-card")
-                            .forEach((card) => {
-                                card.classList.add("hidden");
-                            });
-
-                        const currentRankCard = document.querySelector(
-                            `[data-rank="${progressData.currentRank}"]`,
-                        );
-                        if (currentRankCard) {
-                            currentRankCard.classList.remove("hidden");
-
-                            document
-                                .querySelectorAll(".rank-card")
-                                .forEach((card) => {
-                                    const rank = card.getAttribute("data-rank");
-                                    const badge =
-                                        card.querySelector(".status-badge");
-                                    if (
-                                        rank !== progressData.currentRank &&
-                                        progressData.completedRanks &&
-                                        progressData.completedRanks.includes(
-                                            rank,
-                                        )
-                                    ) {
-                                        badge.textContent = "Completed";
-                                        badge.classList.add("locked");
-
-                                        const checkboxes =
-                                            card.querySelectorAll(
-                                                ".requirement-checkbox",
-                                            );
-                                        checkboxes.forEach((checkbox) => {
-                                            checkbox.disabled = false;
-                                        });
-                                    }
+                    
+                    if (currentRankCard) {
+                        currentRankCard.classList.remove("hidden");
+                        
+                        document.querySelectorAll(".rank-card").forEach((card) => {
+                            const rank = card.getAttribute("data-rank");
+                            const badge = card.querySelector(".status-badge");
+                            const checkboxes = card.querySelectorAll(".requirement-checkbox");
+                            
+                            if (rank === progressData.currentRank) {
+                                badge.textContent = "Current Rank";
+                                badge.classList.remove("locked");
+                                
+                                checkboxes.forEach((checkbox) => {
+                                    checkbox.disabled = false;
                                 });
-
-                            const currentBadge =
-                                currentRankCard.querySelector(".status-badge");
-                            if (currentBadge) {
-                                currentBadge.textContent = "Advancing Rank";
-                                currentBadge.classList.remove("locked");
+                            } else if (progressData.completedRanks && progressData.completedRanks.includes(rank)) {
+                                badge.textContent = "Completed";
+                                badge.classList.add("locked");
+                                
+                                checkboxes.forEach((checkbox) => {
+                                    checkbox.disabled = false;
+                                });
+                            } else {
+                                badge.textContent = "Locked";
+                                badge.classList.add("locked");
+                                
+                                checkboxes.forEach((checkbox) => {
+                                    checkbox.disabled = true;
+                                });
                             }
+                        });
 
-                            const currentCheckboxes =
-                                currentRankCard.querySelectorAll(
-                                    ".requirement-checkbox",
-                                );
-                            currentCheckboxes.forEach((checkbox) => {
+                        Object.keys(progressData.checkboxes || {}).forEach(
+                            (checkboxId) => {
+                                const checkbox = document.getElementById(checkboxId);
+                                if (checkbox) {
+                                    checkbox.checked = progressData.checkboxes[checkboxId];
+                                }
+                            },
+                        );
+                    }
+                } else {
+                    document.querySelectorAll(".rank-card").forEach((card) => {
+                        const rank = card.getAttribute("data-rank");
+                        const badge = card.querySelector(".status-badge");
+                        const checkboxes = card.querySelectorAll(".requirement-checkbox");
+                        
+                        if (rank === ranks[0].id) {
+                            card.classList.remove("hidden");
+                            badge.textContent = "Current Rank";
+                            badge.classList.remove("locked");
+                            checkboxes.forEach((checkbox) => {
                                 checkbox.disabled = false;
                             });
+                        } else {
+                            badge.textContent = "Locked";
+                            badge.classList.add("locked");
+                            checkboxes.forEach((checkbox) => {
+                                checkbox.disabled = true;
+                            });
                         }
-                    }
+                    });
                 }
             }
 
@@ -731,23 +804,18 @@ import Layout from "../../../layouts/Layout.astro";
                     const rank = card.getAttribute("data-rank");
                     if (!card.classList.contains("hidden")) {
                         progressData.currentRank = rank;
-                    } else {
-                        const checkboxes = card.querySelectorAll(
-                            ".requirement-checkbox",
-                        );
-                        const allChecked = Array.from(checkboxes).every(
-                            (checkbox) => checkbox.checked,
-                        );
-                        if (allChecked) {
-                            progressData.completedRanks.push(rank);
-                        }
+                    }
+                    
+                    const checkboxes = card.querySelectorAll(".requirement-checkbox");
+                    const allChecked = Array.from(checkboxes).length > 0 && 
+                                      Array.from(checkboxes).every((checkbox) => checkbox.checked);
+                    
+                    if (rank !== progressData.currentRank && allChecked) {
+                        progressData.completedRanks.push(rank);
                     }
                 });
 
-                localStorage.setItem(
-                    "pqsProgress",
-                    JSON.stringify(progressData),
-                );
+                saveProgressWithVersion(progressData);
             }
 
             function updateProgress() {
@@ -762,7 +830,11 @@ import Layout from "../../../layouts/Layout.astro";
                 const checked = currentRankCard.querySelectorAll(
                     ".requirement-checkbox:not(:disabled):checked",
                 );
-                const progress = (checked.length / checkboxes.length) * 100;
+                
+                let progress = 0;
+                if (checkboxes.length > 0) {
+                    progress = (checked.length / checkboxes.length) * 100;
+                }
 
                 const progressFill =
                     currentRankCard.querySelector(".progress-fill");
@@ -777,7 +849,7 @@ import Layout from "../../../layouts/Layout.astro";
                 const advanceBtn =
                     currentRankCard.querySelector(".advance-btn");
                 if (advanceBtn) {
-                    advanceBtn.disabled = checked.length !== checkboxes.length;
+                    advanceBtn.disabled = checked.length !== checkboxes.length || checkboxes.length === 0;
                 }
 
                 saveProgress();
@@ -789,7 +861,6 @@ import Layout from "../../../layouts/Layout.astro";
                     checkbox.addEventListener("change", updateProgress);
                 });
 
-            // Wire advance buttons to use a shared helper
             document.querySelectorAll(".advance-btn").forEach((btn) => {
                 btn.addEventListener("click", function (e) {
                     const currentRankCard = e.currentTarget.closest(".rank-card");
@@ -800,80 +871,46 @@ import Layout from "../../../layouts/Layout.astro";
             initializeProgress();
             updateProgress();
 
-
-
-            document.getElementById("edit-progress-toggle").addEventListener("click", function () {
-            // Show the progress editing UI (if needed)
-            document.querySelectorAll(".rank-card").forEach(card => card.classList.remove("hidden"));
-
-            // Forward button: advance to next rank
-            document.querySelectorAll(".fake-it-till-you-make-it").forEach((btn) => {
-                btn.addEventListener("click", function (e) {
-                    const currentRankCard = e.currentTarget.closest(".rank-card");
-                    advanceToNext(currentRankCard, false);
-                });
-            });
-
-            // Back button: go to previous rank if available
-            document.querySelectorAll(".back-btn").forEach((btn) => {
-                btn.addEventListener("click", function (e) {
-                    const currentRankCard = e.currentTarget.closest(".rank-card");
-                    const prevRankCard = currentRankCard.previousElementSibling;
-                    if (prevRankCard && prevRankCard.classList.contains("rank-card")) {
-                        currentRankCard.classList.add("hidden");
-                        prevRankCard.classList.remove("hidden");
-
-                        const curBadge = currentRankCard.querySelector(".status-badge");
-                        const prevBadge = prevRankCard.querySelector(".status-badge");
-                        if (curBadge) {
-                            curBadge.textContent = "Locked";
-                            curBadge.classList.add("locked");
-                        }
-                        if (prevBadge) {
-                            prevBadge.textContent = "Current Rank";
-                            prevBadge.classList.remove("locked");
-                        }
-
-                        prevRankCard.querySelectorAll(".requirement-checkbox").forEach((c) => (c.disabled = false));
-
-                        updateProgress();
-                        saveProgress();
-                    }
-                });
-            });
-        });
-
-
-            // Helper to advance from the given card to the next rank
             function advanceToNext(currentRankCard, save) {
                 if (!currentRankCard) return;
                 const nextRankCard = currentRankCard.nextElementSibling;
                 if (!nextRankCard || !nextRankCard.classList.contains("rank-card")) return;
 
-                // Mark current as completed and locked
-                currentRankCard.classList.add("hidden");
+                const currentRank = currentRankCard.getAttribute("data-rank");
+                const nextRank = nextRankCard.getAttribute("data-rank");
+
                 const curBadge = currentRankCard.querySelector(".status-badge");
                 if (curBadge) {
                     curBadge.textContent = "Completed";
                     curBadge.classList.add("locked");
                 }
 
-                // Make next available and current
+                currentRankCard.classList.add("hidden");
                 nextRankCard.classList.remove("hidden");
+                
                 const nextBadge = nextRankCard.querySelector(".status-badge");
                 if (nextBadge) {
                     nextBadge.textContent = "Current Rank";
                     nextBadge.classList.remove("locked");
                 }
 
-                // Enable checkboxes for the next rank
-                nextRankCard.querySelectorAll(".requirement-checkbox").forEach((checkbox) => (checkbox.disabled = false));
+                nextRankCard.querySelectorAll(".requirement-checkbox").forEach((checkbox) => {
+                    checkbox.disabled = false;
+                });
 
                 if (save) {
-                    updateProgress();
-                    saveProgress();
-                } else {
-                    // Even if not saving, update UI progress display
+                    const progressData = loadProgressWithVersion() || {
+                        checkboxes: {},
+                        currentRank: null,
+                        completedRanks: []
+                    };
+                    
+                    if (!progressData.completedRanks.includes(currentRank)) {
+                        progressData.completedRanks.push(currentRank);
+                    }
+                    progressData.currentRank = nextRank;
+                    
+                    saveProgressWithVersion(progressData);
                     updateProgress();
                 }
             }
