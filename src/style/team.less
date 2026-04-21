@@ -1,0 +1,174 @@
+.teams-selector { padding: 40px 0; background: transparent; }
+			/* full-bleed wrapper: extends to viewport edges */
+			.selector-bleed { position: relative; width: 100vw; left: 50%; margin-left: -50vw; margin-right: -50vw; }
+			.selector-wrap { overflow: hidden; padding: 4vw 0; max-width: 100%; }
+
+			/* Carousel Styles */
+			.carousel-container {
+				position: relative;
+				display: flex;
+				align-items: center;
+				width: 100%;
+			}
+
+			.carousel-track-container {
+				width: 100%;
+				padding: 0 6vw;
+			}
+
+			.selector-flex {
+				display: flex;
+				gap: 18px;
+				height: 100vh;
+				align-items: stretch;
+				box-sizing: border-box;
+				transition: transform 0.5s ease-in-out;
+			}
+
+			.carousel-arrow {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				background: rgba(15, 23, 35, 0.8);
+				border: 1px solid rgba(230, 178, 32, 0.3);
+				color: #e6b220;
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				z-index: 10;
+				transition: all 0.3s ease;
+				backdrop-filter: blur(10px);
+			}
+
+			.carousel-arrow:hover {
+				background: rgba(230, 178, 32, 0.2);
+				border-color: #e6b220;
+				transform: translateY(-50%) scale(1.1);
+			}
+
+			.carousel-arrow:disabled {
+				opacity: 0.3;
+				cursor: not-allowed;
+			}
+
+			.carousel-arrow-left {
+				left: 20px;
+			}
+
+			.carousel-arrow-right {
+				right: 20px;
+			}
+
+			/* Card sizing for flex layout */
+			.team-card {
+				display: block;
+				position: relative;
+				background: linear-gradient(180deg,#0f1723, rgba(15,23,35,0.85));
+				border-radius: 10px;
+				overflow: hidden;
+				box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+				border: 1px solid rgba(255,255,255,0.04);
+				transform: skewY(-6deg) scale(1);
+				transform-origin: center;
+				height: 100%;
+				transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms ease;
+				flex: 0 0 calc(25% - 14px); /* 4 cards with gap */
+				min-width: 0; /* Prevent flex items from overflowing */
+			}
+
+			/* anchors shouldn't show underlines; preserve card visuals */
+			.team-card {
+				text-decoration: none;
+				color: inherit;
+			}
+
+			/* make headings inside cards white (anchors inherit color, so h4 became link color earlier) */
+			.team-card h4 { color: #e6b220; }
+
+			/* keyboard focus indicator for accessibility */
+			.team-card:focus {
+				outline: 3px solid rgba(230,178,32,0.14);
+				outline-offset: 6px;
+			}
+
+			/* background image behind content */
+			.team-card .card-bg {
+				position: absolute;
+				inset: 0;
+				background-size: cover;
+				background-position: center;
+				filter: saturate(0.95) contrast(0.9);
+				z-index: 0;
+			}
+			.team-card .card-overlay {
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
+				z-index: 1;
+			}
+			.team-card .card-inner { z-index: 2; position: relative; }
+
+			.team-card:hover { transform: skewY(-6deg) scale(1.04); z-index: 3; box-shadow: 0 14px 36px rgba(2,6,23,0.7); }
+
+			.team-card .card-inner {
+				transform: skewY(6deg);
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				height: 100%;
+				padding: 40px;
+			}
+
+			.team-card h4 { margin: 0 0 8px; font-size: 1.05rem; color:#e6b220; }
+			.team-card p { margin: 0; color: rgba(255,255,255,0.9); }
+
+			@media (max-width: 980px) {
+				.selector-flex { 
+					height: auto; 
+					padding: 0 20px;
+				}
+				.team-card { 
+					flex: 0 0 calc(50% - 9px); /* 2 cards on tablet */
+					transform: none; 
+					height: auto; 
+					border-radius: 10px; 
+				}
+				.team-card .card-inner { 
+					padding: 20px; 
+					height: auto; 
+					transform: none; 
+				}
+				.carousel-arrow { width: 40px; height: 40px; }
+				.carousel-arrow-left { left: 10px; }
+				.carousel-arrow-right { right: 10px; }
+				.carousel-track-container {
+					padding: 0;
+				}
+			}
+			@media (max-width: 640px) {
+				.selector-flex { 
+					padding: 0 8px;
+				}
+				.team-card { 
+					flex: 0 0 100%; /* 1 card on mobile */
+					transform: none; 
+					border-radius: 8px; 
+					min-height: auto; 
+				}
+				.team-card .card-inner { 
+					transform: none; 
+					padding: 14px; 
+				}
+				.carousel-arrow { width: 35px; height: 35px; }
+				.carousel-track-container {
+					padding: 0;
+				}
+			}
+
+			h4{
+				color:#e6b220;
+			}
