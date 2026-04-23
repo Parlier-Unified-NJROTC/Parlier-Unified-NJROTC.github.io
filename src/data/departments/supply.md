@@ -14,8 +14,6 @@ Saul Sanchez, a Cadet Petty Officer 2nd Class, has been assigned the job of Supp
 ## Department Assistants
 Daniel Mejia - Supply Assistant
 
-Shaila Velasquez - Supply Assistant
-
 
 # Description
 

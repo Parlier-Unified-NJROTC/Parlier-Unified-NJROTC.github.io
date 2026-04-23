@@ -1,5 +1,8 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
+
+// Style & JS
+import "../../../style/help.css";
 ---
 
 <Layout title="NJROTC Help Center" disableHero>
@@ -90,8 +93,8 @@ import Layout from "../../../layouts/Layout.astro";
                                     </button>
 
                                     <div
-                                        class="dropdown"
-                                        id="suggestionDropdown"
+                                        class="dropdowns"
+                                        id="suggestiondropdowns"
                                         role="listbox"
                                         aria-label="Options"
                                     >
@@ -234,8 +237,8 @@ import Layout from "../../../layouts/Layout.astro";
                                     </button>
 
                                     <div
-                                        class="dropdown"
-                                        id="gradeDropdown"
+                                        class="dropdowns"
+                                        id="gradedropdowns"
                                         role="listbox"
                                         aria-label="Grade Options"
                                     >
@@ -317,1082 +320,705 @@ import Layout from "../../../layouts/Layout.astro";
             </div>
         </div>
     </div>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family:
-                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3rem;
-        }
+    <script lang="">
+        const API_BASE_URL =
+            "https://parlier-unified-njrotc-server.onrender.com";
 
-        .header {
-            text-align: center;
-            padding: 2rem;
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const fadeAnimations = {};
 
-        .header h1 {
-            color: #e6b220;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+            function adddropdownsAnimations(dropdowns) {
+                let fadeOutTimer;
 
-        .header p {
-            color: #fafaf5;
-            opacity: 0.8;
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+                function fadeIn() {
+                    clearTimeout(fadeOutTimer);
+                    dropdowns.style.transition = "opacity 0.15s ease-in";
+                    dropdowns.style.opacity = "1";
+                    dropdowns.style.display = "block";
+                }
 
-        /* Google-style Tab Container */
-        .tab-container {
-            background: linear-gradient(
-                135deg,
-                rgba(10, 10, 15, 0.95),
-                rgba(2, 60, 113, 0.2)
-            );
-            border: 2px solid #e6b220;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 800px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            position: relative;
-            min-height: 600px;
-            margin-bottom: 10vw;
-        }
+                function fadeOut() {
+                    dropdowns.style.transition = "opacity 250ms ease-out";
+                    dropdowns.style.opacity = "0";
+                    fadeOutTimer = setTimeout(() => {
+                        dropdowns.style.display = "none";
+                        dropdowns.style.transition = "";
+                    }, 250);
+                }
 
-        .tab-container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                45deg,
-                rgba(2, 60, 113, 0.3),
-                rgba(230, 178, 32, 0.1)
-            );
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        /* Google-style Tab Headers */
-        .tab-headers {
-            display: flex;
-            background: rgba(2, 60, 113, 0.1);
-            border-bottom: 1px solid rgba(230, 178, 32, 0.3);
-            padding: 0 1rem;
-            position: relative;
-            overflow-x: auto;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE/Edge */
-        }
-
-        .tab-headers::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
-        }
-
-        .tab-header {
-            padding: 1rem 1.5rem;
-            background: transparent;
-            color: rgba(255, 255, 255, 0.7);
-            border: none;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            white-space: nowrap;
-            min-height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 3px solid transparent;
-            flex-shrink: 0;
-        }
-
-        .tab-header.active {
-            color: #e6b220;
-        }
-
-        .tab-header:hover:not(.active) {
-            color: rgba(230, 178, 32, 0.8);
-            background: rgba(230, 178, 32, 0.05);
-        }
-
-        .tab-header .tab-icon {
-            margin-right: 8px;
-            font-size: 1.2rem;
-        }
-
-        /* Google-style Tab Indicator */
-        .tab-indicator {
-            position: absolute;
-            bottom: 0;
-            height: 4px;
-            background: #e6b220;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
-            will-change: transform, width;
-            pointer-events: none;
-        }
-
-        /* Tab Content */
-        .tab-contents {
-            position: relative;
-            padding: 2.5rem;
-            min-height: 500px;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .tab-content h2 {
-            color: #e6b220;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #fafaf5;
-            font-weight: 500;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.9rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(230, 178, 32, 0.3);
-            border-radius: 8px;
-            color: #fafaf5;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #e6b220;
-            box-shadow: 0 0 0 2px rgba(230, 178, 32, 0.2);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        select.form-control {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e6b220' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 16px;
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, #e6b220, #d4a41c);
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .submit-btn:hover {
-            background: linear-gradient(135deg, #d4a41c, #c29518);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(230, 178, 32, 0.3);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
-        .status-message {
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 500;
-            display: none;
-        }
-
-        .success {
-            background: rgba(46, 204, 113, 0.2);
-            color: #2ecc71;
-            border: 1px solid #2ecc71;
-        }
-
-        .error {
-            background: rgba(231, 76, 60, 0.2);
-            color: #e74c3c;
-            border: 1px solid #e74c3c;
-        }
-
-        /* Custom Select Styles */
-        :root {
-            --bg: #0b1b2b;
-            --surface: #111e2b;
-            --surface-2: #0f1a28;
-            --text: #e9f4ff;
-            --muted: #a6c1d9;
-            --accent: #2b9af3;
-            --border: #2a3a50;
-            --dropdown: #0e1a29;
-        }
-
-        .custom-select {
-            position: relative;
-            width: 100%;
-            user-select: none;
-        }
-        .select-face {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            padding: 12px 14px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(230, 178, 32, 0.3);
-            color: var(--text);
-            cursor: pointer;
-            box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.04),
-                0 8px 20px rgba(0, 0, 0, 0.4);
-            min-height: 40px;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .select-face .title {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-        }
-
-        .select-face .arrow {
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 8px solid #e6b220;
-            transform: translateY(-1px);
-            transition: transform 0.3s ease;
-        }
-        .dropdown {
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 0;
-            width: 100%;
-            border-radius: 12px;
-            background: rgba(14, 20, 27, 0.8);
-            border: 1px solid rgba(72, 81, 88);
-            backdrop-filter: blur(3px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-            max-height: 260px;
-            overflow: auto;
-            z-index: 99;
-            padding: 6px;
-            display: none;
-        }
-
-        .option {
-            display: flex;
-            align-items: center;
-            padding: 5px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            color: var(--text);
-            font-size: 14px;
-            white-space: nowrap;
-        }
-
-
-        .option:hover {
-            background: rgba(21, 101, 187, 0.5);
-        }
-
-        .option.active {
-            background: rgba(21, 101, 187);
-        }
-        .dropdown-header {
-            height: 1px;
-            background: linear-gradient(
-                to right,
-                transparent,
-                rgba(255, 255, 255, 0.15),
-                transparent
-            );
-            margin-bottom: 6px;
-        }
-        select.hidden-native {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-            width: 0;
-            height: 0;
-        }
-
-        .select-face:focus-within {
-            outline: 2px solid #e6b220;
-            outline-offset: 2px;
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            .option{
-                padding: 10px 14px;
-                font-size: 20px;
-            }
-            .header h1 {
-                font-size: 2rem;
+                return { fadeIn, fadeOut };
             }
 
-            .tab-container {
-                min-height: 500px;
-                border-radius: 8px;
+            const tabHeaders = document.querySelectorAll(".tab-header");
+            const tabContents = document.querySelectorAll(".tab-content");
+            const tabIndicator = document.getElementById("tabIndicator");
+            const tabHeadersContainer = document.querySelector(".tab-headers");
+            const signupForm = document.getElementById("signupForm");
+            const suggestionForm = document.getElementById("suggestionForm");
+            const scrollArrows = document.querySelectorAll(".tab-scroll-arrow");
+            scrollArrows.forEach((arrow) => (arrow.style.display = "none"));
+
+            let resizeTimeout;
+            let isResizing = false;
+
+            function updateTabIndicator() {
+                const activeTab = document.querySelector(".tab-header.active");
+                if (!activeTab) return;
+
+                void activeTab.offsetWidth;
+
+                const tabRect = activeTab.getBoundingClientRect();
+                const containerRect =
+                    tabHeadersContainer.getBoundingClientRect();
+
+                const left = tabRect.left - containerRect.left;
+                const width = tabRect.width;
+
+                requestAnimationFrame(() => {
+                    tabIndicator.style.width = `${width}px`;
+                    tabIndicator.style.left = `${left}px`;
+                    tabIndicator.style.opacity = "1";
+                });
             }
 
-            .tab-contents {
-                padding: 1.5rem;
+            updateTabIndicator();
+            setTimeout(updateTabIndicator, 100);
+
+            function switchTab(tabName) {
+                window.location.hash = tabName;
+                tabHeaders.forEach((header) => {
+                    if (header.dataset.tab === tabName) {
+                        header.classList.add("active");
+                    } else {
+                        header.classList.remove("active");
+                    }
+                });
+
+                tabContents.forEach((content) => {
+                    if (content.id === `${tabName}-content`) {
+                        content.classList.add("active");
+                    } else {
+                        content.classList.remove("active");
+                    }
+                });
+
+                setTimeout(updateTabIndicator, 10);
             }
 
-            .tab-header {
-                padding: 0.8rem 1rem;
-                min-height: 44px;
-                flex: 1;
-                text-align: center;
-            }
-
-            .tab-header .tab-icon {
-                margin-right: 6px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .tab-contents {
-                padding: 1rem;
-            }
-
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            .tab-header {
-                padding: 0.7rem 0.5rem;
-            }
-
-            .tab-header .tab-icon {
-                display: none;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #e6b220;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Tab icons */
-        .material-icons {
-            font-family: "Material Icons";
-            font-weight: normal;
-            font-style: normal;
-            font-size: 24px;
-            line-height: 1;
-            letter-spacing: normal;
-            text-transform: none;
-            display: inline-block;
-            white-space: nowrap;
-            word-wrap: normal;
-            direction: ltr;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Responsive tab scrolling for mobile */
-        .tab-scroll-container {
-            position: relative;
-        }
-    </style>
-
-<script lang="">
-    const API_BASE_URL = "https://parlier-unified-njrotc-server.onrender.com";
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const fadeAnimations = {};
-        
-        function addDropdownAnimations(dropdown) {
-            let fadeOutTimer;
-
-            function fadeIn() {
-                clearTimeout(fadeOutTimer);
-                dropdown.style.transition = 'opacity 0.15s ease-in';
-                dropdown.style.opacity = '1';
-                dropdown.style.display = 'block';
-            }
-
-            function fadeOut() {
-                dropdown.style.transition = 'opacity 250ms ease-out';
-                dropdown.style.opacity = '0';
-                fadeOutTimer = setTimeout(() => {
-                    dropdown.style.display = 'none';
-                    dropdown.style.transition = '';
-                }, 250);
-            }
-            
-            return { fadeIn, fadeOut };
-        }
-
-        const tabHeaders = document.querySelectorAll(".tab-header");
-        const tabContents = document.querySelectorAll(".tab-content");
-        const tabIndicator = document.getElementById("tabIndicator");
-        const tabHeadersContainer = document.querySelector(".tab-headers");
-        const signupForm = document.getElementById("signupForm");
-        const suggestionForm = document.getElementById("suggestionForm");
-        const scrollArrows = document.querySelectorAll(".tab-scroll-arrow");
-        scrollArrows.forEach((arrow) => (arrow.style.display = "none"));
-
-        let resizeTimeout;
-        let isResizing = false;
-
-        function updateTabIndicator() {
-            const activeTab = document.querySelector(".tab-header.active");
-            if (!activeTab) return;
-
-            void activeTab.offsetWidth;
-
-            const tabRect = activeTab.getBoundingClientRect();
-            const containerRect = tabHeadersContainer.getBoundingClientRect();
-
-            const left = tabRect.left - containerRect.left;
-            const width = tabRect.width;
-
-            requestAnimationFrame(() => {
-                tabIndicator.style.width = `${width}px`;
-                tabIndicator.style.left = `${left}px`;
-                tabIndicator.style.opacity = "1";
-            });
-        }
-
-        updateTabIndicator();
-        setTimeout(updateTabIndicator, 100);
-
-        function switchTab(tabName) {
-            window.location.hash = tabName;
             tabHeaders.forEach((header) => {
-                if (header.dataset.tab === tabName) {
-                    header.classList.add("active");
-                } else {
-                    header.classList.remove("active");
-                }
-            });
-
-            tabContents.forEach((content) => {
-                if (content.id === `${tabName}-content`) {
-                    content.classList.add("active");
-                } else {
-                    content.classList.remove("active");
-                }
-            });
-
-            setTimeout(updateTabIndicator, 10);
-        }
-
-        tabHeaders.forEach((header) => {
-            header.addEventListener("click", function () {
-                const tabName = this.dataset.tab;
-                switchTab(tabName);
-            });
-        });
-
-        function checkHash() {
-            const hash = window.location.hash.substring(1).toLowerCase();
-            if (hash === "signup") {
-                switchTab("signup");
-            } else if (hash === "suggestion") {
-                switchTab("suggestion");
-            } else {
-                switchTab("suggestion");
-            }
-        }
-
-        checkHash();
-
-        window.addEventListener("hashchange", checkHash);
-
-        window.addEventListener("resize", function () {
-            isResizing = true;
-
-            tabIndicator.style.opacity = "0";
-
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(function () {
-                updateTabIndicator();
-                isResizing = false;
-            }, 150);
-        });
-        window.addEventListener("orientationchange", function () {
-            setTimeout(updateTabIndicator, 300);
-        });
-
-        document.addEventListener("transitionend", function (e) {
-            if (e.target.classList.contains("tab-header")) {
-                updateTabIndicator();
-            }
-        });
-
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let touchEndX = 0;
-        let touchEndY = 0;
-
-        document.addEventListener(
-            "touchstart",
-            function (e) {
-                touchStartX = e.changedTouches[0].screenX;
-                touchStartY = e.changedTouches[0].screenY;
-            },
-            { passive: true },
-        );
-
-        document.addEventListener(
-            "touchend",
-            function (e) {
-                touchEndX = e.changedTouches[0].screenX;
-                touchEndY = e.changedTouches[0].screenY;
-                handleSwipe();
-            },
-            { passive: true },
-        );
-
-        function handleSwipe() {
-            const minSwipeDistance = 50;
-            const horizontalSwipe = Math.abs(touchEndX - touchStartX);
-            const verticalSwipe = Math.abs(touchEndY - touchStartY);
-
-            if (horizontalSwipe > verticalSwipe && horizontalSwipe > minSwipeDistance) {
-                const currentTab = document.querySelector(".tab-header.active").dataset.tab;
-
-                if (touchEndX < touchStartX) {
-                    if (currentTab === "suggestion") {
-                        switchTab("signup");
-                    }
-                } else {
-                    if (currentTab === "signup") {
-                        switchTab("suggestion");
-                    }
-                }
-            }
-        }
-
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        function showStatus(element, message, isSuccess) {
-            element.textContent = message;
-            element.className = `status-message ${isSuccess ? "success" : "error"}`;
-            element.style.display = "block";
-
-            setTimeout(() => {
-                element.scrollIntoView({
-                    behavior: "smooth",
-                    block: "nearest",
+                header.addEventListener("click", function () {
+                    const tabName = this.dataset.tab;
+                    switchTab(tabName);
                 });
-            }, 100);
-        }
+            });
 
-        // Suggestion Dropdown with Fade Animations
-        const suggestionNativeSelect = document.getElementById("suggestionType");
-        if (suggestionNativeSelect) {
-            const selectFace = document.getElementById("suggestionSelectFace");
-            const dropdown = document.getElementById("suggestionDropdown");
-            const arrow = document.querySelector(".arrow");
-            const selectedLabel = document.getElementById("suggestionSelectedLabel");
-            const options = Array.from(dropdown.querySelectorAll(".option"));
+            function checkHash() {
+                const hash = window.location.hash.substring(1).toLowerCase();
+                if (hash === "signup") {
+                    switchTab("signup");
+                } else if (hash === "suggestion") {
+                    switchTab("suggestion");
+                } else {
+                    switchTab("suggestion");
+                }
+            }
 
-            // Add animations for this dropdown
-            fadeAnimations.suggestion = addDropdownAnimations(dropdown);
+            checkHash();
 
-            function setActiveFromValue(value) {
+            window.addEventListener("hashchange", checkHash);
+
+            window.addEventListener("resize", function () {
+                isResizing = true;
+
+                tabIndicator.style.opacity = "0";
+
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function () {
+                    updateTabIndicator();
+                    isResizing = false;
+                }, 150);
+            });
+            window.addEventListener("orientationchange", function () {
+                setTimeout(updateTabIndicator, 300);
+            });
+
+            document.addEventListener("transitionend", function (e) {
+                if (e.target.classList.contains("tab-header")) {
+                    updateTabIndicator();
+                }
+            });
+
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchEndX = 0;
+            let touchEndY = 0;
+
+            document.addEventListener(
+                "touchstart",
+                function (e) {
+                    touchStartX = e.changedTouches[0].screenX;
+                    touchStartY = e.changedTouches[0].screenY;
+                },
+                { passive: true },
+            );
+
+            document.addEventListener(
+                "touchend",
+                function (e) {
+                    touchEndX = e.changedTouches[0].screenX;
+                    touchEndY = e.changedTouches[0].screenY;
+                    handleSwipe();
+                },
+                { passive: true },
+            );
+
+            function handleSwipe() {
+                const minSwipeDistance = 50;
+                const horizontalSwipe = Math.abs(touchEndX - touchStartX);
+                const verticalSwipe = Math.abs(touchEndY - touchStartY);
+
+                if (
+                    horizontalSwipe > verticalSwipe &&
+                    horizontalSwipe > minSwipeDistance
+                ) {
+                    const currentTab =
+                        document.querySelector(".tab-header.active").dataset
+                            .tab;
+
+                    if (touchEndX < touchStartX) {
+                        if (currentTab === "suggestion") {
+                            switchTab("signup");
+                        }
+                    } else {
+                        if (currentTab === "signup") {
+                            switchTab("suggestion");
+                        }
+                    }
+                }
+            }
+
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            function showStatus(element, message, isSuccess) {
+                element.textContent = message;
+                element.className = `status-message ${isSuccess ? "success" : "error"}`;
+                element.style.display = "block";
+
+                setTimeout(() => {
+                    element.scrollIntoView({
+                        behavior: "smooth",
+                        block: "nearest",
+                    });
+                }, 100);
+            }
+
+            // Suggestion dropdowns with Fade Animations
+            const suggestionNativeSelect =
+                document.getElementById("suggestionType");
+            if (suggestionNativeSelect) {
+                const selectFace = document.getElementById(
+                    "suggestionSelectFace",
+                );
+                const dropdowns = document.getElementById("suggestiondropdowns");
+                const arrow = document.querySelector(".arrow");
+                const selectedLabel = document.getElementById(
+                    "suggestionSelectedLabel",
+                );
+                const options = Array.from(
+                    dropdowns.querySelectorAll(".option"),
+                );
+
+                // Add animations for this dropdowns
+                fadeAnimations.suggestion = adddropdownsAnimations(dropdowns);
+
+                function setActiveFromValue(value) {
+                    options.forEach((opt) => {
+                        opt.classList.toggle(
+                            "active",
+                            opt.dataset.value === value,
+                        );
+                    });
+                    selectedLabel.textContent = value || "Select Type";
+                }
+
+                function opendropdowns() {
+                    fadeAnimations.suggestion.fadeIn();
+                    arrow.style.transform = "rotate(180deg)";
+                    selectFace.setAttribute("aria-expanded", "true");
+                }
+
+                function closedropdowns() {
+                    fadeAnimations.suggestion.fadeOut();
+                    arrow.style.transform = "rotate(0deg)";
+                    selectFace.setAttribute("aria-expanded", "false");
+                }
+
+                let open = false;
+                function toggledropdowns() {
+                    open = !open;
+                    if (open) {
+                        opendropdowns();
+                    } else {
+                        closedropdowns();
+                    }
+                }
+
+                selectFace.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    toggledropdowns();
+                });
+
                 options.forEach((opt) => {
-                    opt.classList.toggle("active", opt.dataset.value === value);
-                });
-                selectedLabel.textContent = value || "Select Type";
-            }
-
-            function openDropdown() {
-                fadeAnimations.suggestion.fadeIn();
-                arrow.style.transform = "rotate(180deg)";
-                selectFace.setAttribute("aria-expanded", "true");
-            }
-
-            function closeDropdown() {
-                fadeAnimations.suggestion.fadeOut();
-                arrow.style.transform = "rotate(0deg)";
-                selectFace.setAttribute("aria-expanded", "false");
-            }
-
-            let open = false;
-            function toggleDropdown() {
-                open = !open;
-                if (open) {
-                    openDropdown();
-                } else {
-                    closeDropdown();
-                }
-            }
-
-            selectFace.addEventListener("click", (e) => {
-                e.stopPropagation();
-                toggleDropdown();
-            });
-
-            options.forEach((opt) => {
-                opt.addEventListener("click", (e) => {
-                    const value = e.currentTarget.dataset.value;
-                    setActiveFromValue(value);
-                    suggestionNativeSelect.value = value;
-                    closeDropdown();
-                    open = false;
-
-                    suggestionNativeSelect.dispatchEvent(
-                        new Event("change", { bubbles: true }),
-                    );
-                });
-                opt.addEventListener("keydown", (e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
+                    opt.addEventListener("click", (e) => {
                         const value = e.currentTarget.dataset.value;
                         setActiveFromValue(value);
                         suggestionNativeSelect.value = value;
-                        closeDropdown();
+                        closedropdowns();
                         open = false;
 
                         suggestionNativeSelect.dispatchEvent(
                             new Event("change", { bubbles: true }),
                         );
+                    });
+                    opt.addEventListener("keydown", (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            const value = e.currentTarget.dataset.value;
+                            setActiveFromValue(value);
+                            suggestionNativeSelect.value = value;
+                            closedropdowns();
+                            open = false;
+
+                            suggestionNativeSelect.dispatchEvent(
+                                new Event("change", { bubbles: true }),
+                            );
+                        }
+                    });
+                });
+
+                document.addEventListener("keydown", (e) => {
+                    if (!open) return;
+                    const current = options.findIndex((o) =>
+                        o.classList.contains("active"),
+                    );
+                    let idx = current >= 0 ? current : -1;
+
+                    if (e.key === "ArrowDown") {
+                        e.preventDefault();
+                        idx = (idx + 1) % options.length;
+                        options.forEach((o) => o.classList.remove("active"));
+                        options[idx].classList.add("active");
+                        options[idx].focus();
+                    } else if (e.key === "ArrowUp") {
+                        e.preventDefault();
+                        idx = (idx - 1 + options.length) % options.length;
+                        options.forEach((o) => o.classList.remove("active"));
+                        options[idx].classList.add("active");
+                        options[idx].focus();
+                    } else if (e.key === "Escape") {
+                        closedropdowns();
+                        open = false;
                     }
                 });
-            });
 
-            document.addEventListener("keydown", (e) => {
-                if (!open) return;
-                const current = options.findIndex((o) =>
-                    o.classList.contains("active"),
-                );
-                let idx = current >= 0 ? current : -1;
-
-                if (e.key === "ArrowDown") {
-                    e.preventDefault();
-                    idx = (idx + 1) % options.length;
-                    options.forEach((o) => o.classList.remove("active"));
-                    options[idx].classList.add("active");
-                    options[idx].focus();
-                } else if (e.key === "ArrowUp") {
-                    e.preventDefault();
-                    idx = (idx - 1 + options.length) % options.length;
-                    options.forEach((o) => o.classList.remove("active"));
-                    options[idx].classList.add("active");
-                    options[idx].focus();
-                } else if (e.key === "Escape") {
-                    closeDropdown();
-                    open = false;
-                }
-            });
-
-            document.addEventListener("click", (e) => {
-                const customSelect = document.getElementById("suggestionCustomSelect");
-                if (customSelect && !customSelect.contains(e.target)) {
-                    closeDropdown();
-                    open = false;
-                }
-            });
-
-            setActiveFromValue(suggestionNativeSelect.value || "Website Bug");
-        }
-
-        // Grade Dropdown with Fade Animations
-        const gradeNativeSelect = document.getElementById("grade");
-        if (gradeNativeSelect) {
-            const gradeSelectFace = document.getElementById("gradeSelectFace");
-            const gradeDropdown = document.getElementById("gradeDropdown");
-            const gradeArrow = gradeSelectFace.querySelector(".arrow");
-            const gradeSelectedLabel = document.getElementById("gradeSelectedLabel");
-            const gradeOptions = Array.from(gradeDropdown.querySelectorAll(".option"));
-
-            // Add animations for this dropdown
-            fadeAnimations.grade = addDropdownAnimations(gradeDropdown);
-
-            function setGradeActiveFromValue(value) {
-                gradeOptions.forEach((opt) => {
-                    opt.classList.toggle("active", opt.dataset.value === value);
-                });
-
-                const selectedOption = gradeOptions.find(
-                    (opt) => opt.dataset.value === value,
-                );
-                gradeSelectedLabel.textContent = selectedOption
-                    ? selectedOption.textContent
-                    : "Select Grade";
-            }
-
-            function openGradeDropdown() {
-                fadeAnimations.grade.fadeIn();
-                gradeArrow.style.transform = "rotate(180deg)";
-                gradeSelectFace.setAttribute("aria-expanded", "true");
-            }
-
-            function closeGradeDropdown() {
-                fadeAnimations.grade.fadeOut();
-                gradeArrow.style.transform = "rotate(0deg)";
-                gradeSelectFace.setAttribute("aria-expanded", "false");
-            }
-
-            let gradeOpen = false;
-            function toggleGradeDropdown() {
-                gradeOpen = !gradeOpen;
-                if (gradeOpen) {
-                    openGradeDropdown();
-                } else {
-                    closeGradeDropdown();
-                }
-            }
-
-            gradeSelectFace.addEventListener("click", (e) => {
-                e.stopPropagation();
-                toggleGradeDropdown();
-            });
-
-            gradeOptions.forEach((opt) => {
-                opt.addEventListener("click", (e) => {
-                    const value = e.currentTarget.dataset.value;
-                    setGradeActiveFromValue(value);
-                    gradeNativeSelect.value = value;
-                    closeGradeDropdown();
-                    gradeOpen = false;
-
-                    gradeNativeSelect.dispatchEvent(
-                        new Event("change", { bubbles: true }),
+                document.addEventListener("click", (e) => {
+                    const customSelect = document.getElementById(
+                        "suggestionCustomSelect",
                     );
+                    if (customSelect && !customSelect.contains(e.target)) {
+                        closedropdowns();
+                        open = false;
+                    }
                 });
-                opt.addEventListener("keydown", (e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
+
+                setActiveFromValue(
+                    suggestionNativeSelect.value || "Website Bug",
+                );
+            }
+
+            // Grade dropdowns with Fade Animations
+            const gradeNativeSelect = document.getElementById("grade");
+            if (gradeNativeSelect) {
+                const gradeSelectFace =
+                    document.getElementById("gradeSelectFace");
+                const gradedropdowns = document.getElementById("gradedropdowns");
+                const gradeArrow = gradeSelectFace.querySelector(".arrow");
+                const gradeSelectedLabel =
+                    document.getElementById("gradeSelectedLabel");
+                const gradeOptions = Array.from(
+                    gradedropdowns.querySelectorAll(".option"),
+                );
+
+                // Add animations for this dropdowns
+                fadeAnimations.grade = adddropdownsAnimations(gradedropdowns);
+
+                function setGradeActiveFromValue(value) {
+                    gradeOptions.forEach((opt) => {
+                        opt.classList.toggle(
+                            "active",
+                            opt.dataset.value === value,
+                        );
+                    });
+
+                    const selectedOption = gradeOptions.find(
+                        (opt) => opt.dataset.value === value,
+                    );
+                    gradeSelectedLabel.textContent = selectedOption
+                        ? selectedOption.textContent
+                        : "Select Grade";
+                }
+
+                function openGradedropdowns() {
+                    fadeAnimations.grade.fadeIn();
+                    gradeArrow.style.transform = "rotate(180deg)";
+                    gradeSelectFace.setAttribute("aria-expanded", "true");
+                }
+
+                function closeGradedropdowns() {
+                    fadeAnimations.grade.fadeOut();
+                    gradeArrow.style.transform = "rotate(0deg)";
+                    gradeSelectFace.setAttribute("aria-expanded", "false");
+                }
+
+                let gradeOpen = false;
+                function toggleGradedropdowns() {
+                    gradeOpen = !gradeOpen;
+                    if (gradeOpen) {
+                        openGradedropdowns();
+                    } else {
+                        closeGradedropdowns();
+                    }
+                }
+
+                gradeSelectFace.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    toggleGradedropdowns();
+                });
+
+                gradeOptions.forEach((opt) => {
+                    opt.addEventListener("click", (e) => {
                         const value = e.currentTarget.dataset.value;
                         setGradeActiveFromValue(value);
                         gradeNativeSelect.value = value;
-                        closeGradeDropdown();
+                        closeGradedropdowns();
                         gradeOpen = false;
 
                         gradeNativeSelect.dispatchEvent(
                             new Event("change", { bubbles: true }),
                         );
+                    });
+                    opt.addEventListener("keydown", (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            const value = e.currentTarget.dataset.value;
+                            setGradeActiveFromValue(value);
+                            gradeNativeSelect.value = value;
+                            closeGradedropdowns();
+                            gradeOpen = false;
+
+                            gradeNativeSelect.dispatchEvent(
+                                new Event("change", { bubbles: true }),
+                            );
+                        }
+                    });
+                });
+
+                document.addEventListener("keydown", (e) => {
+                    if (!gradeOpen) return;
+                    const current = gradeOptions.findIndex((o) =>
+                        o.classList.contains("active"),
+                    );
+                    let idx = current >= 0 ? current : -1;
+
+                    if (e.key === "ArrowDown") {
+                        e.preventDefault();
+                        idx = (idx + 1) % gradeOptions.length;
+                        gradeOptions.forEach((o) =>
+                            o.classList.remove("active"),
+                        );
+                        gradeOptions[idx].classList.add("active");
+                        gradeOptions[idx].focus();
+                    } else if (e.key === "ArrowUp") {
+                        e.preventDefault();
+                        idx =
+                            (idx - 1 + gradeOptions.length) %
+                            gradeOptions.length;
+                        gradeOptions.forEach((o) =>
+                            o.classList.remove("active"),
+                        );
+                        gradeOptions[idx].classList.add("active");
+                        gradeOptions[idx].focus();
+                    } else if (e.key === "Escape") {
+                        closeGradedropdowns();
+                        gradeOpen = false;
                     }
                 });
-            });
 
-            document.addEventListener("keydown", (e) => {
-                if (!gradeOpen) return;
-                const current = gradeOptions.findIndex((o) =>
-                    o.classList.contains("active"),
-                );
-                let idx = current >= 0 ? current : -1;
-
-                if (e.key === "ArrowDown") {
-                    e.preventDefault();
-                    idx = (idx + 1) % gradeOptions.length;
-                    gradeOptions.forEach((o) => o.classList.remove("active"));
-                    gradeOptions[idx].classList.add("active");
-                    gradeOptions[idx].focus();
-                } else if (e.key === "ArrowUp") {
-                    e.preventDefault();
-                    idx = (idx - 1 + gradeOptions.length) % gradeOptions.length;
-                    gradeOptions.forEach((o) => o.classList.remove("active"));
-                    gradeOptions[idx].classList.add("active");
-                    gradeOptions[idx].focus();
-                } else if (e.key === "Escape") {
-                    closeGradeDropdown();
-                    gradeOpen = false;
-                }
-            });
-
-            document.addEventListener("click", (e) => {
-                const gradeCustomSelect = document.getElementById("gradeCustomSelect");
-                if (gradeCustomSelect && !gradeCustomSelect.contains(e.target)) {
-                    closeGradeDropdown();
-                    gradeOpen = false;
-                }
-            });
-
-            setGradeActiveFromValue("");
-        }
-
-        // Rest of your form submission code remains the same...
-        signupForm.addEventListener("submit", async function (e) {
-            e.preventDefault();
-
-            const submitBtn = document.getElementById("signupSubmit");
-            const btnText = document.getElementById("signupBtnText");
-            const loading = document.getElementById("signupLoading");
-            const status = document.getElementById("signupStatus");
-
-            const fullName = document.getElementById("fullName").value.trim();
-            const schoolId = document.getElementById("schoolId").value.trim();
-            const grade = document.getElementById("grade").value;
-            const email = document.getElementById("email").value.trim();
-            const reason = document.getElementById("reason").value.trim();
-
-            if (!fullName) {
-                showStatus(status, "Please enter your full name", false);
-                return;
-            }
-
-            if (!grade) {
-                showStatus(status, "Please select your grade level", false);
-                return;
-            }
-
-            if (!validateEmail(email)) {
-                showStatus(status, "Please enter a valid email address", false);
-                return;
-            }
-
-            if (!reason || reason.length < 20) {
-                showStatus(status, "Please provide a meaningful reason for joining (at least 20 characters)", false);
-                return;
-            }
-
-            btnText.style.display = "none";
-            loading.style.display = "inline-block";
-            submitBtn.disabled = true;
-            status.style.display = "none";
-
-            try {
-                const formData = {
-                    fullName: fullName,
-                    schoolId: schoolId,
-                    grade: grade,
-                    email: email,
-                    reason: reason,
-                };
-                console.log("Sending signup request:", formData);
-                console.log("API URL:", `${API_BASE_URL}/api/signup`);
-
-                const response = await fetch(`${API_BASE_URL}/api/signup`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(formData),
-                    mode: "cors",
-                    credentials: "omit",
+                document.addEventListener("click", (e) => {
+                    const gradeCustomSelect =
+                        document.getElementById("gradeCustomSelect");
+                    if (
+                        gradeCustomSelect &&
+                        !gradeCustomSelect.contains(e.target)
+                    ) {
+                        closeGradedropdowns();
+                        gradeOpen = false;
+                    }
                 });
 
-                console.log("Response status:", response.status);
-
-                const result = await response.json();
-                console.log("Response data:", result);
-
-                if (response.ok) {
-                    showStatus(status, "✓ Signup submitted successfully! Confirmation email sent.", true);
-                    signupForm.reset();
-
-                    // Reset custom select after form reset
-                    setGradeActiveFromValue("");
-
-                    setTimeout(() => {
-                        status.style.display = "none";
-                    }, 5000);
-                } else {
-                    throw new Error(result.error || result.details || "Submission failed");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                let errorMessage = error.message;
-                if (error.message.includes("Failed to fetch")) {
-                    errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
-                } else if (error.message.includes("NetworkError")) {
-                    errorMessage = "Network error. Please check your connection.";
-                }
-
-                showStatus(status, `X ${errorMessage}`, false);
-            } finally {
-                btnText.style.display = "inline";
-                loading.style.display = "none";
-                submitBtn.disabled = false;
+                setGradeActiveFromValue("");
             }
+
+            // Rest of your form submission code remains the same...
+            signupForm.addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const submitBtn = document.getElementById("signupSubmit");
+                const btnText = document.getElementById("signupBtnText");
+                const loading = document.getElementById("signupLoading");
+                const status = document.getElementById("signupStatus");
+
+                const fullName = document
+                    .getElementById("fullName")
+                    .value.trim();
+                const schoolId = document
+                    .getElementById("schoolId")
+                    .value.trim();
+                const grade = document.getElementById("grade").value;
+                const email = document.getElementById("email").value.trim();
+                const reason = document.getElementById("reason").value.trim();
+
+                if (!fullName) {
+                    showStatus(status, "Please enter your full name", false);
+                    return;
+                }
+
+                if (!grade) {
+                    showStatus(status, "Please select your grade level", false);
+                    return;
+                }
+
+                if (!validateEmail(email)) {
+                    showStatus(
+                        status,
+                        "Please enter a valid email address",
+                        false,
+                    );
+                    return;
+                }
+
+                if (!reason || reason.length < 20) {
+                    showStatus(
+                        status,
+                        "Please provide a meaningful reason for joining (at least 20 characters)",
+                        false,
+                    );
+                    return;
+                }
+
+                btnText.style.display = "none";
+                loading.style.display = "inline-block";
+                submitBtn.disabled = true;
+                status.style.display = "none";
+
+                try {
+                    const formData = {
+                        fullName: fullName,
+                        schoolId: schoolId,
+                        grade: grade,
+                        email: email,
+                        reason: reason,
+                    };
+                    console.log("Sending signup request:", formData);
+                    console.log("API URL:", `${API_BASE_URL}/api/signup`);
+
+                    const response = await fetch(`${API_BASE_URL}/api/signup`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(formData),
+                        mode: "cors",
+                        credentials: "omit",
+                    });
+
+                    console.log("Response status:", response.status);
+
+                    const result = await response.json();
+                    console.log("Response data:", result);
+
+                    if (response.ok) {
+                        showStatus(
+                            status,
+                            "✓ Signup submitted successfully! Confirmation email sent.",
+                            true,
+                        );
+                        signupForm.reset();
+
+                        // Reset custom select after form reset
+                        setGradeActiveFromValue("");
+
+                        setTimeout(() => {
+                            status.style.display = "none";
+                        }, 5000);
+                    } else {
+                        throw new Error(
+                            result.error ||
+                                result.details ||
+                                "Submission failed",
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    let errorMessage = error.message;
+                    if (error.message.includes("Failed to fetch")) {
+                        errorMessage =
+                            "Cannot connect to server. Please check your internet connection or try again later.";
+                    } else if (error.message.includes("NetworkError")) {
+                        errorMessage =
+                            "Network error. Please check your connection.";
+                    }
+
+                    showStatus(status, `X ${errorMessage}`, false);
+                } finally {
+                    btnText.style.display = "inline";
+                    loading.style.display = "none";
+                    submitBtn.disabled = false;
+                }
+            });
+
+            suggestionForm.addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const submitBtn = document.getElementById("suggestionSubmit");
+                const btnText = document.getElementById("suggestionBtnText");
+                const loading = document.getElementById("suggestionLoading");
+                const status = document.getElementById("suggestionStatus");
+
+                const suggestionType =
+                    document.getElementById("suggestionType").value;
+                const suggestionText = document
+                    .getElementById("suggestionText")
+                    .value.trim();
+
+                if (!suggestionType) {
+                    showStatus(
+                        status,
+                        "Please select a suggestion type",
+                        false,
+                    );
+                    return;
+                }
+
+                if (!suggestionText || suggestionText.length < 10) {
+                    showStatus(
+                        status,
+                        "Please provide a detailed suggestion (at least 10 characters)",
+                        false,
+                    );
+                    return;
+                }
+
+                btnText.style.display = "none";
+                loading.style.display = "inline-block";
+                submitBtn.disabled = true;
+                status.style.display = "none";
+
+                try {
+                    const formData = {
+                        suggestionType: suggestionType,
+                        suggestionText: suggestionText,
+                    };
+                    console.log("Sending suggestion request:", formData);
+                    console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
+
+                    const response = await fetch(
+                        `${API_BASE_URL}/api/suggestion`,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(formData),
+                            mode: "cors",
+                            credentials: "omit",
+                        },
+                    );
+
+                    console.log("Response status:", response.status);
+
+                    const result = await response.json();
+                    console.log("Response data:", result);
+
+                    if (response.ok) {
+                        showStatus(
+                            status,
+                            "✓ Suggestion submitted successfully! Thank you for your feedback.",
+                            true,
+                        );
+                        suggestionForm.reset();
+
+                        setTimeout(() => {
+                            status.style.display = "none";
+                        }, 5000);
+                    } else {
+                        throw new Error(
+                            result.error ||
+                                result.details ||
+                                "Submission failed",
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+
+                    let errorMessage = error.message;
+                    if (error.message.includes("Failed to fetch")) {
+                        errorMessage =
+                            "Cannot connect to server. Please check your internet connection or try again later.";
+                    } else if (error.message.includes("NetworkError")) {
+                        errorMessage =
+                            "Network error. Please check your connection.";
+                    }
+
+                    showStatus(status, `X ${errorMessage}`, false);
+                } finally {
+                    btnText.style.display = "inline";
+                    loading.style.display = "none";
+                    submitBtn.disabled = false;
+                }
+            });
+
+            async function testAPIConnection() {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/health`, {
+                        method: "GET",
+                        mode: "cors",
+                    });
+
+                    if (response.ok) {
+                        console.log("✓ Backend API is reachable");
+                    } else {
+                        console.warn(
+                            " Backend API returned non-OK status:",
+                            response.status,
+                        );
+                    }
+                } catch (error) {
+                    console.error(
+                        "X Cannot connect to backend API:",
+                        error.message,
+                    );
+                    console.log(
+                        "Make sure to update API_BASE_URL with your Render URL",
+                    );
+                }
+            }
+
+            setTimeout(testAPIConnection, 1000);
         });
-
-        suggestionForm.addEventListener("submit", async function (e) {
-            e.preventDefault();
-
-            const submitBtn = document.getElementById("suggestionSubmit");
-            const btnText = document.getElementById("suggestionBtnText");
-            const loading = document.getElementById("suggestionLoading");
-            const status = document.getElementById("suggestionStatus");
-
-            const suggestionType = document.getElementById("suggestionType").value;
-            const suggestionText = document.getElementById("suggestionText").value.trim();
-
-            if (!suggestionType) {
-                showStatus(status, "Please select a suggestion type", false);
-                return;
-            }
-
-            if (!suggestionText || suggestionText.length < 10) {
-                showStatus(status, "Please provide a detailed suggestion (at least 10 characters)", false);
-                return;
-            }
-
-            btnText.style.display = "none";
-            loading.style.display = "inline-block";
-            submitBtn.disabled = true;
-            status.style.display = "none";
-
-            try {
-                const formData = {
-                    suggestionType: suggestionType,
-                    suggestionText: suggestionText,
-                };
-                console.log("Sending suggestion request:", formData);
-                console.log("API URL:", `${API_BASE_URL}/api/suggestion`);
-
-                const response = await fetch(`${API_BASE_URL}/api/suggestion`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(formData),
-                    mode: "cors",
-                    credentials: "omit",
-                });
-
-                console.log("Response status:", response.status);
-
-                const result = await response.json();
-                console.log("Response data:", result);
-
-                if (response.ok) {
-                    showStatus(status, "✓ Suggestion submitted successfully! Thank you for your feedback.", true);
-                    suggestionForm.reset();
-
-                    setTimeout(() => {
-                        status.style.display = "none";
-                    }, 5000);
-                } else {
-                    throw new Error(result.error || result.details || "Submission failed");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-
-                let errorMessage = error.message;
-                if (error.message.includes("Failed to fetch")) {
-                    errorMessage = "Cannot connect to server. Please check your internet connection or try again later.";
-                } else if (error.message.includes("NetworkError")) {
-                    errorMessage = "Network error. Please check your connection.";
-                }
-
-                showStatus(status, `X ${errorMessage}`, false);
-            } finally {
-                btnText.style.display = "inline";
-                loading.style.display = "none";
-                submitBtn.disabled = false;
-            }
-        });
-
-        async function testAPIConnection() {
-            try {
-                const response = await fetch(`${API_BASE_URL}/health`, {
-                    method: "GET",
-                    mode: "cors",
-                });
-
-                if (response.ok) {
-                    console.log("✓ Backend API is reachable");
-                } else {
-                    console.warn(" Backend API returned non-OK status:", response.status);
-                }
-            } catch (error) {
-                console.error("X Cannot connect to backend API:", error.message);
-                console.log("Make sure to update API_BASE_URL with your Render URL");
-            }
-        }
-
-        setTimeout(testAPIConnection, 1000);
-    });
-</script>
+    </script>
 </Layout>

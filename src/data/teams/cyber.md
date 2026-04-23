@@ -15,12 +15,6 @@ Saul Sanchez, a Cadet Petty Officer 2nd Class.  He has done many things for the 
 
 Saul Sanchez - Lead Developer
 
-Javier Valdez - Trainee Developer
-
-Adrian Tabares - Trainee Developer
-
-Matthew Maldonado - Trainee Developer
-
 ## Description
 
 <blockquote>

@@ -1,19 +1,19 @@
 ---
 import Layout from "../../../../layouts/Layout.astro";
+
+// Style & JS
+import "../../../../style/chain.css";
 ---
 
 <Layout title="Chain Of Command" disableHero >
 <div class="BG555">
     <div class="container">
-        <!-- Hero Section -->
         <div class="section-header">
             <h1 class="section-title">United States Navy</h1>
             <p class="section-subtitle">Chain of Command</p>
         </div>
 
-        <!-- Chain of Command Flow -->
         <div class="chain-flow">
-            <!-- President -->
             <div class="chain-item">
                 <div class="person-card">
                     <div class="person-image">
@@ -28,7 +28,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Vice President -->
             <div class="chain-item">
                 <div class="person-card reverse">
                     <div class="person-info">
@@ -43,7 +42,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Speaker of the House -->
             <div class="chain-item">
                 <div class="person-card">
                     <div class="person-image">
@@ -58,7 +56,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Secretary of State -->
             <div class="chain-item">
                 <div class="person-card reverse">
                     <div class="person-info">
@@ -73,7 +70,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Secretary of Defense -->
             <div class="chain-item">
                 <div class="person-card">
                     <div class="person-image">
@@ -88,7 +84,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Secretary of Navy -->
             <div class="chain-item">
                 <div class="person-card reverse">
                     <div class="person-info">
@@ -103,7 +98,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Chief of Naval Operations -->
             <div class="chain-item">
                 <div class="person-card">
                     <div class="person-image">
@@ -118,7 +112,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Master Chief Petty Officer of the Navy -->
             <div class="chain-item">
                 <div class="person-card reverse">
                     <div class="person-info">
@@ -133,7 +126,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Naval Education and Training Commander -->
             <div class="chain-item">
                 <div class="person-card">
                     <div class="person-image">
@@ -148,7 +140,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Naval Service Training Commander -->
             <div class="chain-item">
                 <div class="person-card reverse">
                     <div class="person-info">
@@ -163,7 +154,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Director of NJROTC -->
             <div class="chain-item">
                 <div class="person-card">
                     <div class="person-image">
@@ -178,7 +168,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Area 22 Service Manager -->
             <div class="chain-item">
                 <div class="person-card reverse">
                     <div class="person-info">
@@ -193,16 +182,15 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Naval Science Instructor -->
             <div class="chain-item">
                 <div class="person-card">
                     <div class="person-image">
-                        <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/People/Chief_Smile.jpg" alt="Chief Killian" />
+                        <img src="/NA.png" alt="n/a" />
                     </div>
                     <div class="person-info">
                         <h3 class="person-rank">Naval Science Instructor</h3>
-                        <h2 class="person-name">Chief Killian</h2>
-                        <p class="person-bio">This is our naval Science Instructor.</p>
+                        <h2 class="person-name">N/A</h2>
+                        <p class="person-bio">N/A</p>
                     </div>
                 </div>
                 <div class="chain-arrow">↓</div>
@@ -211,7 +199,7 @@ import Layout from "../../../../layouts/Layout.astro";
             <div class="chain-item">
                 <div class="person-card">
                     <div class="person-image">
-                        <img src="" alt="Petty Officer Lowry" />
+                        <img src="/NA.png" alt="Petty Officer Lowry" />
                     </div>
                     <div class="person-info">
                         <h3 class="person-rank">Naval Science Instructor</h3>
@@ -224,7 +212,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Unit Cadet Commanding Officer -->
             <div class="chain-item">
                 <div class="person-card reverse">
                     <div class="person-info">
@@ -239,7 +226,6 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Unit Cadet Executive Officer -->
             <div class="chain-item">
                 <div class="person-card">
                     <div class="person-image">
@@ -254,244 +240,20 @@ import Layout from "../../../../layouts/Layout.astro";
                 <div class="chain-arrow">↓</div>
             </div>
 
-            <!-- Senior Enlisted Advisor -->
             <div class="chain-item">
                 <div class="person-card reverse">
                     <div class="person-info">
                         <h3 class="person-rank">Senior Enlisted Advisor (SEL)</h3>
-                        <h2 class="person-name">Cadet Chief Pena</h2>
-                        <p class="person-bio">He Deals With dissatisfied Cadets, Cadets that have complaint about the unit, Investigate and report on all complaints and/or suggestions</p>
+                        <h2 class="person-name">Cadet Senior Chief Basurto</h2>
+                        <p class="person-bio">She Deals With dissatisfied Cadets, Cadets that have complaint about the unit, Investigate and report on all complaints and/or suggestions</p>
                     </div>
                     <div class="person-image">
-                        <img src="https://raw.githubusercontent.com/Parlier-NJROTC/Assets/main/People/20250523_194032.jpg" alt="Cadet Chief Pena" />
+                        <img src="/NA.png" alt="Cadet Senior Chief Basurto" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <style>
-        .BG555 {
-            background: #000000;
-            color: #fafaf5;
-            position: relative;
-            z-index: 1;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-        
-        .BG555::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
-            z-index: -1;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 6rem 2rem;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        
-        .section-title {
-            font-family: "Montserrat", sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: #fafaf5;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: #e6b220;
-            border-radius: 2px;
-        }
-        
-        .section-subtitle {
-            font-size: 2rem;
-            color: #e6b220;
-            font-weight: 600;
-            margin-top: 0rem;
-        }
-        
-        .chain-flow {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        
-        .chain-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-        
-        .person-card {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 2rem;
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(2, 60, 113, 0.7);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            transition: all 0.4s ease;
-            width: 100%;
-            max-width: 900px;
-        }
-        
-        .person-card.reverse {
-            grid-template-columns: 2fr 1fr;
-            direction: rtl;
-        }
-        
-        .person-card.reverse > * {
-            direction: ltr;
-        }
-        
-        .person-card:hover {
-            border-color: rgba(230, 178, 32, 0.6);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-            transform: translateY(-5px);
-            background: rgba(10, 10, 15, 0.8);
-        }
-        
-        .person-image {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .person-image img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 3px solid #e6b220;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-        }
-        
-        .person-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .person-rank {
-            color: #e6b220;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .person-name {
-            color: #fafaf5;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-        
-        .person-bio {
-            color: rgba(250, 250, 245, 0.9);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin: 0;
-        }
-        
-        .chain-arrow {
-            color: #e6b220;
-            font-size: 2rem;
-            font-weight: bold;
-            text-align: center;
-            padding: 0.5rem;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 3rem 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-            
-            .section-subtitle {
-                font-size: 1.5rem;
-            }
-            
-            .person-card,
-            .person-card.reverse {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                text-align: center;
-                direction: ltr;
-            }
-            
-            .person-image img {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .person-name {
-                font-size: 1.5rem;
-            }
-            
-            .person-rank {
-                font-size: 1rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 2rem 1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .person-card {
-                padding: 1.5rem;
-            }
-            
-            .person-image img {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .person-name {
-                font-size: 1.3rem;
-            }
-            
-            .person-bio {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+</div>
 </div>
 </Layout>

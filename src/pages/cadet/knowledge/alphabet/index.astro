@@ -1,20 +1,20 @@
 ---
 import Layout from "../../../../layouts/Layout.astro";
+
+// Style & JS
+import "../../../../style/abc.css";
 ---
 
 <Layout title="Military Alphabet" disableHero>
 <div class="BG555">
     <div class="container">
-        <!-- Hero Section -->
         <div class="section-header">
             <h1 class="section-title">United States Navy</h1>
             <p class="section-subtitle">Phonetic Alphabet</p>
         </div>
 
-        <!-- Alphabet Grid -->
         <div class="alphabet-section">
             <div class="alphabet-grid">
-                <!-- A-G -->
                 <div class="alphabet-card">
                     <div class="letter-header">
                         <span class="letter">A</span>
@@ -126,8 +126,6 @@ import Layout from "../../../../layouts/Layout.astro";
                         <img src="/flags/g-flag.png" alt="Golf Flag">
                     </div>
                 </div>
-
-                <!-- H-N -->
                 <div class="alphabet-card">
                     <div class="letter-header">
                         <span class="letter">H</span>
@@ -240,7 +238,6 @@ import Layout from "../../../../layouts/Layout.astro";
                     </div>
                 </div>
 
-                <!-- O-U -->
                 <div class="alphabet-card">
                     <div class="letter-header">
                         <span class="letter">O</span>
@@ -353,7 +350,6 @@ import Layout from "../../../../layouts/Layout.astro";
                     </div>
                 </div>
 
-                <!-- V-Z -->
                 <div class="alphabet-card">
                     <div class="letter-header">
                         <span class="letter">V</span>
@@ -437,222 +433,6 @@ import Layout from "../../../../layouts/Layout.astro";
         </div>
     </div>
 
-    <style>
-        .BG555 {
-            background: #000000;
-            color: #fafaf5;
-            position: relative;
-            z-index: 1;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-        
-        .BG555::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgb(2 60 113 / 40%) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgb(2 60 113 / 40%) 0%, transparent 50%);
-            z-index: -1;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        
-        .section-title {
-            font-family: "Montserrat", sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: #fafaf5;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: #e6b220;
-            border-radius: 2px;
-        }
-        
-        .section-subtitle {
-            font-size: 2rem;
-            color: #e6b220;
-            font-weight: 600;
-            margin-top: 0rem;
-        }
-        
-        .alphabet-section {
-            margin-top: 3rem;
-        }
-        
-        .alphabet-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .alphabet-card {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(2, 60, 113, 0.7);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-        }
-        
-        .alphabet-card:hover {
-            border-color: rgba(230, 178, 32, 0.6);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-            background: rgba(10, 10, 15, 0.8);
-            transform: translateY(-5px);
-        }
-        
-        .letter-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .letter {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #e6b220;
-            line-height: 1;
-        }
-        
-        .play-btn {
-            background: rgba(2, 60, 113, 0.3);
-            border: 1px solid rgba(2, 60, 113, 0.5);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .play-btn:hover {
-            background: rgba(230, 178, 32, 0.2);
-            border-color: rgba(230, 178, 32, 0.6);
-            transform: scale(1.1);
-        }
-        
-        .word {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fafaf5;
-            margin-bottom: 0.5rem;
-        }
-        
-        .pronunciation {
-            font-size: 0.95rem;
-            color: rgba(250, 250, 245, 0.8);
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-        
-        .flag img {
-            width: 60px;
-            height: 50px;
-            object-fit: contain;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        
-        .alphabet-card:hover .flag img {
-            transform: scale(1.2);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 3rem 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-            
-            .section-subtitle {
-                font-size: 1.5rem;
-            }
-            
-            .alphabet-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 1rem;
-            }
-            
-            .alphabet-card {
-                padding: 1.25rem;
-            }
-            
-            .letter {
-                font-size: 2rem;
-            }
-            
-            .word {
-                font-size: 1.1rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 2rem 1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .alphabet-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-            }
-            
-            .alphabet-card {
-                padding: 1rem;
-            }
-            
-            .letter {
-                font-size: 1.8rem;
-            }
-            
-            .play-btn {
-                width: 35px;
-                height: 35px;
-            }
-            
-            .flag img {
-                width: 50px;
-                height: 40px;
-            }
-        }
-    </style>
 
     <script lang="js">
         const synth = window.speechSynthesis;

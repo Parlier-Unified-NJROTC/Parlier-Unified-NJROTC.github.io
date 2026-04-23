@@ -5,6 +5,9 @@ interface Props {
   numberR: string;
 }
 const { rlink, namelink, numberR } = Astro.props;
+
+// Style & JS
+import "../style/box.css";
 ---
 
 <div class="ribbon-option" id="ribbon-option">
@@ -31,86 +34,3 @@ const { rlink, namelink, numberR } = Astro.props;
     <option value="star-4gold">Quadruple Gold</option>
   </select>
 </div>
-
-<style>
-  body * {
-    color: #ffffff;
-    text-align: center;
-    font-size: 15px;
-  }
-  .ribbon-option {
-    transition: 0.3s ease;
-    border: 2px solid none;
-  }
-  option{
-    color: #000;
-  }
-  .ribbon-option:has(.checkSwitch:checked) {
-    background: rgba(63, 63, 63, 0.404);
-    border: 2px solid #ffffff;
-  }
-  .ribbonSelect {
-    background: none;
-    border-radius: 25px;
-  }
-  .select-awards {
-    margin-top: 5px;
-    border: 1px rgba(0, 0, 0, 0.4) solid;
-  }
-  .ribbon-selection {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -10px;
-    width: 100%;
-    margin: 0;
-    height: 100vw;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-
-    background-color: var(--body-color);
-  }
-  .ribbon-option {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: calc(33.333% + 80px);
-    margin: 10px;
-    padding: 10px;
-    background-color: none;
-    color: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-  }
-  label {
-      height: 60px;
-      display: flex;
-      align-items: center;
-  }
-  @media (orientation: portrait) {
-    .ribbon-option {
-      width: 39%;
-    }
-  }
-  .ribbon-option img {
-    width: 100%;
-    min-width: 120px;
-  }
-  .ribbon-option button {
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 5px;
-  }
-  .ribbon-option:hover {
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  }
-  .ribbon-option input[type="checkbox"] {
-    margin-bottom: 10px;
-    display: none;
-  }
-</style>
