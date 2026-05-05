@@ -6,7 +6,7 @@ img: ../../NA.png
 
 
 ## Public Affairs Officer
-# Jocelyn Renteria
+# Jorge Rios
 <!-- note to self: this renders as a <p> tag -->
 N/A
 
@@ -16,7 +16,7 @@ N/A
 
 N/A - Public Affairs Assistant
 
-<blockquote> The Public Affairs office is the storyteller and voice of our unit. We are responsible for managing the unit's public image and communications, ensuring NJROTC stays promoted and connected to the community. Our mission is to capture every significant moment—from the hard-working drills to the strong bonds of camaraderie—and share that story. I take immense pride in this role because it allows me to show others the positive impact NJROTC has on our school and fellow cadets.
-<cite class="blockquote-attrib">- Jocelyn Renteria</cite>
+<blockquote> Hello, my name is Jorge Rios, I am a freshman at PHS. I didn’t join the NJROTC program, I was put in it. I remember telling my mom that I was going to switch out of the class while she was encouraging me to give it a shot, and I did end up listening to her and giving the program a shot and I ended up really liking it and everything it has to offer.  I plan to stay in the program and keep working hard to rank up and gain more knowledge on it.
+<cite class="blockquote-attrib">- Jorge Rios</cite>
 
 </blockquote>
