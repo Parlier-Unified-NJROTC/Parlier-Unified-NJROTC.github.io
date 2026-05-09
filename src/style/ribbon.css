@@ -85,7 +85,7 @@
                 .ribbon-selection-container {
                     background: rgba(0, 0, 0, 0.7);
                     border-radius: 16px;
-                    overflow: hidden;
+                    overflow: scroll;
                     border: 1px solid rgba(2, 60, 113, 0.7);
                     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
                     flex: 3;
@@ -245,7 +245,7 @@
                     display: flex;
                     justify-content: flex-start;
                     transform: rotate(180deg);
-                    width: 350px;
+                    width: 360px;
                     min-height: 200px;
                     justify-content: center;
                     flex-wrap: wrap;

@@ -42,7 +42,7 @@ import "../../../../style/ribbon.css";
 
                 <div class="content-container">
                     <!-- Ribbon Selection -->
-                    <div class="ribbon-selection-container">
+                    <div class="ribbon-selection-container" >
                         <div class="ribbon-selection-header">
                             <h3 class="ribbon-selection-title">
                                 Select Your Ribbons
@@ -51,7 +51,7 @@ import "../../../../style/ribbon.css";
                                 Click on ribbons to add them to your rack
                             </p>
                         </div>
-                        <div class="ribbon-selection">
+                        <div class="ribbon-selection" style="padding:0px;">
                             <Boxess
                                 numberR="ribbon1"
                                 namelink="Meritorious Achievement Ribbon"
@@ -357,9 +357,9 @@ import "../../../../style/ribbon.css";
                 function addRibbon(ribbonImage, ribbonOption) {
                     const numberR = ribbonOption.querySelector("input").id;
                     const container = document.createElement("div");
-                    container.className = "ribbon-container";
+                    container.className = "ribbon-container2";
                     container.dataset.ribbonId = numberR;
-                    container.style.height = "30px";
+                    container.style.height = "34px";
                     container.style.position = "relative";
 
                     const newRibbonImage = document.createElement("img");
@@ -402,7 +402,7 @@ import "../../../../style/ribbon.css";
                     container.appendChild(starImg);
 
                     const containers = Array.from(
-                        ribbonRack.querySelectorAll(".ribbon-container"),
+                        ribbonRack.querySelectorAll(".ribbon-container2"),
                     );
                     containers.push(container);
 
@@ -470,7 +470,7 @@ import "../../../../style/ribbon.css";
                     .addEventListener("click", async function () {
                         try {
                             const imageContainers = Array.from(
-                                document.querySelectorAll(".ribbon-container"),
+                                document.querySelectorAll(".ribbon-container2"),
                             );
                             const imagePromises = [];
 
