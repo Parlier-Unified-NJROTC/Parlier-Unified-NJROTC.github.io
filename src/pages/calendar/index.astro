@@ -11,15 +11,15 @@ import "../../style/calendar.css";
     <div class="container">
         <div class="content-wrapper">
             <div class="calendar-section">
-               <iframe 
-                    src="/calder/April_2026.pdf"
+                <iframe 
+                    id="calendarFrame"
+                    src=""
                     width="500"
                     height="300"
                     scrolling="no"
                     style="border: solid 1px #777; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.5);overflow-x:hidden;"
                 >
                 </iframe>
-
             </div>
 
             <!-- Announcements Section -->
@@ -39,7 +39,7 @@ import "../../style/calendar.css";
                                 </svg>
                             </div>
                             <div class="announcement-details">
-                                <div class="announcement-text">No current announcements</div>
+                                <div>No current announcements</div>
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,33 @@ import "../../style/calendar.css";
             </div>
         </div>
     </div>
-
-
 </div>
+
+<script lang="js">
+    let currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    let currentMonth = currentDate.getMonth(); 
+    
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    
+    function updateCalendarPDF(year, month) {
+        const monthName = monthNames[month];
+        const pdfPath = `/calder/${monthName}_${year}.pdf`;
+        
+        const iframe = document.getElementById('calendarFrame');
+        iframe.src = pdfPath;
+        
+        document.getElementById('currentMonthYear').textContent = `${monthName} ${year}`;
+        
+
+    }
+    
+    updateCalendarPDF(currentYear, currentMonth);
+    
+
+</script>
+
 </Layout>

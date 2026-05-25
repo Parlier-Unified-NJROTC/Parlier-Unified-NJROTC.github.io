@@ -306,6 +306,14 @@
                     .down444 {
                         display: none;
                     }
+                    .ribbon-selection-container {
+                        overflow: hidden;
+                    }
+                    .ribbon-selection {
+                        padding-left: 0px;
+                        padding-right: 0px;
+                    }
+                    
                 }
 
                 /* Responsive Design */
@@ -318,7 +326,6 @@
                         position: static;
                         transform: none;
                         min-width: auto;
-                        width: 100%;
                         margin-top: 2rem;
                     }
 
@@ -364,9 +371,6 @@
                         font-size: 1.5rem;
                     }
 
-                    .ribbon-rack {
-                        padding: 1.5rem;
-                    }
                 }
 
                 @media (max-width: 480px) {
@@ -380,9 +384,5 @@
 
                     .ribbon-selection {
                         grid-template-columns: 1fr;
-                    }
-
-                    .ribbon-rack {
-                        padding: 1rem;
                     }
                 }

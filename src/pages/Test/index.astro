@@ -1,11 +1,385 @@
-<div class="form-group">
-  <label for="grade">Grade Level *</label>
-  <select id="grade" name="grade" class="form-control" required>
-    <option value="">Select Grade</option>
-    <option value="9">9th Grade</option>
-    <option value="10">10th Grade</option>
-    <option value="11">11th Grade</option>
-    <option value="12">12th Grade</option>
-  </select>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown with Checkmark SVG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
 
+        body {
+            background: linear-gradient(145deg, #0a0f1a 0%, #07121f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        /* Pure Dropdown Container - Only the dropdown code remains */
+        .dropdown-demo {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #fafaf5;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Custom Select Styles with checkmark support */
+        :root {
+            --bg: #0b1b2b;
+            --surface: #111e2b;
+            --surface-2: #0f1a28;
+            --text: #e9f4ff;
+            --muted: #a6c1d9;
+            --accent: #2b9af3;
+            --border: #2a3a50;
+            --dropdowns: #0e1a29;
+        }
+
+        .custom-select {
+            position: relative;
+            width: 100%;
+            user-select: none;
+        }
+        .select-face {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(230, 178, 32, 0.3);
+            color: var(--text);
+            cursor: pointer;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 20px rgba(0, 0, 0, 0.4);
+            min-height: 40px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .select-face .title {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .select-face .arrow {
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #e6b220;
+            transform: translateY(-1px);
+            transition: transform 0.3s ease;
+        }
+        .dropdowns {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            width: 100%;
+            border-radius: 12px;
+            background: rgba(14, 20, 27, 0.92);
+            border: 1px solid rgba(72, 81, 88, 0.8);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            max-height: 260px;
+            overflow: auto;
+            z-index: 99;
+            padding: 6px;
+            display: none;
+        }
+
+        /* Option style: flex row with checkmark SVG aligned */
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text);
+            font-size: 14px;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        /* SVG checkmark styling for selected option */
+        .option .checkmark-svg {
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.15s;
+            flex-shrink: 0;
+        }
+        .option.active .checkmark-svg {
+            opacity: 1;
+        }
+        .option .option-text {
+            flex: 1;
+        }
+
+        .option:hover {
+            background: rgba(21, 101, 187, 0.5);
+        }
+
+        .option.active {
+            background: rgba(21, 101, 187, 0.8);
+        }
+        .dropdowns-header {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent);
+            margin-bottom: 6px;
+        }
+        select.hidden-native {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            width: 0;
+            height: 0;
+        }
+
+        /* Simple heading for demo */
+        .demo-title {
+            text-align: center;
+            color: #e6b220;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    
+        <div class="form-group">
+            <label for="suggestionType">Suggestion Type *</label>
+            <!-- PURE DROPDOWN CODE STARTS HERE -->
+            <div class="custom-select" id="suggestionCustomSelect" aria-label="Select Type">
+                <select class="hidden-native" id="suggestionType" name="type" required>
+                    <option value="">Select Type</option>
+                    <option value="Website Bug" selected>Website Bug</option>
+                    <option value="Website Improvement">Website Improvement</option>
+                    <option value="Event Idea">Event Idea</option>
+                    <option value="Program Suggestion">Program Suggestion</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <button class="select-face" id="suggestionSelectFace" type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="title" id="suggestionSelectedLabel">Website Bug</span>
+                    <span class="arrow" aria-hidden="true"></span>
+                </button>
+
+                <!-- DROPDOWN OPTIONS with SVG CHECKMARK -->
+                <div class="dropdowns" id="suggestiondropdowns" role="listbox" aria-label="Options">
+                    <div class="option" data-value="Website Bug" tabindex="0">
+                        <span class="checkmark-svg">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#e6b220">
+                                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+                            </svg>
+                        </span>
+                        <span class="option-text">Website Bug</span>
+                    </div>
+                    <div class="option" data-value="Website Improvement" tabindex="0">
+                        <span class="checkmark-svg">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#e6b220">
+                                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+                            </svg>
+                        </span>
+                        <span class="option-text">Website Improvement</span>
+                    </div>
+                    <div class="option" data-value="Event Idea" tabindex="0">
+                        <span class="checkmark-svg">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#e6b220">
+                                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+                            </svg>
+                        </span>
+                        <span class="option-text">Event Idea</span>
+                    </div>
+                    <div class="option" data-value="Program Suggestion" tabindex="0">
+                        <span class="checkmark-svg">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#e6b220">
+                                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+                            </svg>
+                        </span>
+                        <span class="option-text">Program Suggestion</span>
+                    </div>
+                    <div class="option" data-value="Other" tabindex="0">
+                        <span class="checkmark-svg">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#e6b220">
+                                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+                            </svg>
+                        </span>
+                        <span class="option-text">Other</span>
+                    </div>
+                </div>
+            </div>
+            <!-- PURE DROPDOWN CODE ENDS HERE -->
+        </div>
+
+    <script lang="js">
+        (function() {
+            const suggestionNative = document.getElementById("suggestionType");
+            const suggestionFace = document.getElementById("suggestionSelectFace");
+            const suggestionDropdown = document.getElementById("suggestiondropdowns");
+            const suggestionArrow = suggestionFace?.querySelector(".arrow");
+            const suggestionSelectedLabel = document.getElementById("suggestionSelectedLabel");
+            const suggestionOptions = Array.from(document.querySelectorAll("#suggestiondropdowns .option"));
+            const suggestionCustomSelect = document.getElementById("suggestionCustomSelect");
+
+            let suggestionOpen = false;
+
+            function addDropdownAnimations(dropdownElement) {
+                let fadeTimeout;
+                function fadeIn() {
+                    clearTimeout(fadeTimeout);
+                    dropdownElement.style.transition = "opacity 0.15s ease-in";
+                    dropdownElement.style.opacity = "1";
+                    dropdownElement.style.display = "block";
+                }
+                function fadeOut() {
+                    dropdownElement.style.transition = "opacity 250ms ease-out";
+                    dropdownElement.style.opacity = "0";
+                    fadeTimeout = setTimeout(() => {
+                        dropdownElement.style.display = "none";
+                        dropdownElement.style.transition = "";
+                    }, 250);
+                }
+                return { fadeIn, fadeOut };
+            }
+
+            const suggestionAnim = suggestionDropdown ? addDropdownAnimations(suggestionDropdown) : null;
+
+            function updateSuggestionActiveFromValue(value) {
+                suggestionOptions.forEach(opt => {
+                    const isActive = opt.dataset.value === value;
+                    if (isActive) {
+                        opt.classList.add("active");
+                        const textSpan = opt.querySelector(".option-text");
+                        if (textSpan) suggestionSelectedLabel.textContent = textSpan.textContent;
+                    } else {
+                        opt.classList.remove("active");
+                    }
+                });
+                if (!value || value === "") suggestionSelectedLabel.textContent = "Select Type";
+            }
+
+            function openSuggestion() {
+                if (suggestionAnim) suggestionAnim.fadeIn();
+                if (suggestionArrow) suggestionArrow.style.transform = "rotate(180deg)";
+                suggestionFace.setAttribute("aria-expanded", "true");
+                suggestionOpen = true;
+            }
+
+            function closeSuggestion() {
+                if (suggestionAnim) suggestionAnim.fadeOut();
+                if (suggestionArrow) suggestionArrow.style.transform = "rotate(0deg)";
+                suggestionFace.setAttribute("aria-expanded", "false");
+                suggestionOpen = false;
+            }
+
+            function toggleSuggestion() {
+                if (suggestionOpen) closeSuggestion();
+                else openSuggestion();
+            }
+
+            if (suggestionFace) {
+                suggestionFace.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    toggleSuggestion();
+                });
+            }
+
+            suggestionOptions.forEach(opt => {
+                opt.addEventListener("click", (e) => {
+                    const value = opt.dataset.value;
+                    if (suggestionNative) suggestionNative.value = value;
+                    updateSuggestionActiveFromValue(value);
+                    closeSuggestion();
+                    if (suggestionNative) {
+                        suggestionNative.dispatchEvent(new Event("change", { bubbles: true }));
+                    }
+                });
+                opt.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        const value = opt.dataset.value;
+                        if (suggestionNative) suggestionNative.value = value;
+                        updateSuggestionActiveFromValue(value);
+                        closeSuggestion();
+                        if (suggestionNative) {
+                            suggestionNative.dispatchEvent(new Event("change", { bubbles: true }));
+                        }
+                    }
+                });
+            });
+
+            document.addEventListener("click", (e) => {
+                if (suggestionCustomSelect && !suggestionCustomSelect.contains(e.target) && suggestionOpen) {
+                    closeSuggestion();
+                }
+            });
+
+            document.addEventListener("keydown", (e) => {
+                if (!suggestionOpen) return;
+                const visibleOptions = suggestionOptions.filter(opt => opt.offsetParent !== null);
+                if (visibleOptions.length === 0) return;
+                
+                let currentIdx = visibleOptions.findIndex(opt => opt.classList.contains("active"));
+                if (currentIdx === -1) currentIdx = 0;
+                
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    const nextIdx = (currentIdx + 1) % visibleOptions.length;
+                    visibleOptions.forEach(o => o.classList.remove("active"));
+                    visibleOptions[nextIdx].classList.add("active");
+                    visibleOptions[nextIdx].focus();
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    const prevIdx = (currentIdx - 1 + visibleOptions.length) % visibleOptions.length;
+                    visibleOptions.forEach(o => o.classList.remove("active"));
+                    visibleOptions[prevIdx].classList.add("active");
+                    visibleOptions[prevIdx].focus();
+                } else if (e.key === "Escape") {
+                    closeSuggestion();
+                } else if (e.key === "Enter") {
+                    const activeOpt = visibleOptions.find(o => o.classList.contains("active"));
+                    if (activeOpt) {
+                        const val = activeOpt.dataset.value;
+                        if (suggestionNative) suggestionNative.value = val;
+                        updateSuggestionActiveFromValue(val);
+                        closeSuggestion();
+                        if (suggestionNative) {
+                            suggestionNative.dispatchEvent(new Event("change", { bubbles: true }));
+                        }
+                    }
+                }
+            });
+
+            const initialVal = suggestionNative ? suggestionNative.value : "Website Bug";
+            updateSuggestionActiveFromValue(initialVal);
+        })();
+    </script>
+</body>
+</html>
