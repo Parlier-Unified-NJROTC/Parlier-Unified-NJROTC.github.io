@@ -11,37 +11,17 @@ import "../../style/calendar.css";
     <div class="container">
         <div class="content-wrapper">
             <div class="calendar-section">
-                <iframe 
-                    id="calendarFrame"
-                    src=""
-                    width="500"
-                    height="300"
-                    scrolling="no"
-                    style="border: solid 1px #777; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.5);overflow-x:hidden;"
-                >
-                </iframe>
-            </div>
-
-            <!-- Announcements Section -->
-            <div class="announcements-section">
-                <div class="section-header">
-                    <h2 class="section-title">Announcements</h2>
-                    <p class="section-subtitle">Stay updated with the latest news</p>
-                </div>
-                
-                <div class="contact-card">
-                    <div class="card-overlay"></div>
-                    <div class="contact-content">
-                        <div class="announcement-item">
-                            <div class="megaphone-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="#e6b220">
-                                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                                </svg>
-                            </div>
-                            <div class="announcement-details">
-                                <div>No current announcements</div>
-                            </div>
-                        </div>
+                <div class="iframe-wrapper" id="iframeWrapper">
+                    <iframe 
+                        id="calendarFrame"
+                        src=""
+                        title="NJROTC Monthly Calendar"
+                        scrolling="auto"
+                        class="calendar-iframe"
+                    >
+                    </iframe>
+                    <div class="click-overlay">
+                        <span class="click-hint">Click to open full PDF</span>
                     </div>
                 </div>
             </div>
@@ -59,21 +39,28 @@ import "../../style/calendar.css";
         "July", "August", "September", "October", "November", "December"
     ];
     
+    let currentPdfPath = "";
+    
     function updateCalendarPDF(year, month) {
         const monthName = monthNames[month];
         const pdfPath = `/calder/${monthName}_${year}.pdf`;
+        currentPdfPath = pdfPath;
         
         const iframe = document.getElementById('calendarFrame');
         iframe.src = pdfPath;
-        
-        document.getElementById('currentMonthYear').textContent = `${monthName} ${year}`;
-        
-
     }
     
     updateCalendarPDF(currentYear, currentMonth);
     
-
+    const iframeWrapper = document.getElementById('iframeWrapper');
+    if (iframeWrapper) {
+        iframeWrapper.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (currentPdfPath) {
+                window.open(currentPdfPath, '_blank');
+            }
+        });
+    }
 </script>
 
 </Layout>

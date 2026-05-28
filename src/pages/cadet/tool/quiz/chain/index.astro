@@ -1,14 +1,19 @@
+---
 
+import Layout from "../../../../../layouts/Layout.astro";
+
+---
+<Layout title="General Orders Quiz" disableHero fancyBackground>
 <div id="settingsPanel" class="settings-panel">
     <h1>US NAVY GENERAL ORDERS</h1>
-    <p>Configure difficulty & start quiz (popup)</p>
+    <p>Configure difficulty & start quiz</p>
     <div class="difficulty-box">
         <label>DIFFICULTY LEVEL</label>
         <input type="range" id="difficultySliderModal" min="1" max="3" step="1" value="1">
         <div class="difficulty-value" id="difficultyLabelModal">EASY MODE</div>
     </div>
     <button id="startQuizBtn" class="start-btn">START QUIZ</button>
-    <div style="margin-top: 20px; font-size: 0.8rem; color: #aaa;">✓ Single press answers - Auto-advance after 10s | 3 focus strikes = auto-close</div>
+    <div style="margin-top: 20px; font-size: 0.8rem; color: #aaa;">Auto-advance after 10s | 3 window exit = auto-close</div>
 </div>
 
 <div id="quizModal" class="quiz-modal">
@@ -36,11 +41,11 @@
 
     <style is:inline>
 
-        body {
+        .BG555 {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         .settings-panel {
