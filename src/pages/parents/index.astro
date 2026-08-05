@@ -1,37 +1,57 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
 
 // Style & JS
 import "../../style/parent.css";
 ---
 
 <Layout title="Parents" disableHero fancyBackground>
-
-<section class="departments">
-    <div class="departments-container">
-        <div class="section-header">
-            <h2 class="section-title">Parents</h2>
-            <p class="section-subtitle">Discover parent resources, schedules, and contact information. We'll add meeting dates, volunteer info, and links to forms. </p>
-        </div>
-        <div class="departments-grid">
-
-                <div class="department-card" >
+    <section class="departments">
+        <div class="departments-container">
+            <div class="section-header">
+                <h2 class="section-title">Parents</h2>
+                <p class="section-subtitle">
+                    Discover parent resources, schedules, and contact
+                    information. We'll add meeting dates, volunteer info, and
+                    links to forms.
+                </p>
+            </div>
+            <div class="departments-grid">
+                <div class="department-card">
                     <a href="/calendar" class="department-link">
                         <div class="card-overlay"></div>
-                        <div class="department-icon" style="background-image: url('/Photo/Front.jpg')">
+                        <div
+                            class="department-icon"
+                            style="background-image: url('/Photo/Front.jpg')"
+                        >
                             <div class="icon-overlay"></div>
                         </div>
                         <div class="department-content">
                             <div class="content-wrapper">
-                                <h3 class="department-name">Calendar & Events</h3>
+                                <h3 class="department-name">
+                                    Calendar & Events
+                                </h3>
                                 <p class="department-description">
-                                View upcoming training days, competitions, and parent meetings. Sync with our public calendar to stay up to date.
+                                    View upcoming training days, competitions,
+                                    and parent meetings. Sync with our public
+                                    calendar to stay up to date.
                                 </p>
                                 <div class="department-footer">
                                     <span class="department-button">
                                         LEARN MORE
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <svg
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M5 12H19M19 12L12 5M19 12L12 19"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"></path>
                                         </svg>
                                     </span>
                                 </div>
@@ -40,24 +60,42 @@ import "../../style/parent.css";
                     </a>
                 </div>
 
-				<!-- Fund -->
-				 <div class="department-card" >
+                <!-- Fund -->
+                <div class="department-card">
                     <a href="/parents/fundraising" class="department-link">
                         <div class="card-overlay"></div>
-                        <div class="department-icon" style="background-image: url('/Photo/IMG_2.jpeg')">
+                        <div
+                            class="department-icon"
+                            style="background-image: url('/Photo/IMG_2.jpeg')"
+                        >
                             <div class="icon-overlay"></div>
                         </div>
                         <div class="department-content">
                             <div class="content-wrapper">
-                                <h3 class="department-name">Fundraising & Donations</h3>
+                                <h3 class="department-name">
+                                    Fundraising & Donations
+                                </h3>
                                 <p class="department-description">
-                                Support the unit through approved fundraisers, volunteering, and donations. See current initiatives and how to help.
+                                    Support the unit through approved
+                                    fundraisers, volunteering, and donations.
+                                    See current initiatives and how to help.
                                 </p>
                                 <div class="department-footer">
                                     <span class="department-button">
                                         LEARN MORE
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <svg
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M5 12H19M19 12L12 5M19 12L12 19"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"></path>
                                         </svg>
                                     </span>
                                 </div>
@@ -65,7 +103,7 @@ import "../../style/parent.css";
                         </div>
                     </a>
                 </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 </Layout>
