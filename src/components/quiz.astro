@@ -1,0 +1,839 @@
+---
+// components/quiz.astro
+export interface Props {
+  questionBank?: {
+    easy: any[];
+    medium: any[];
+    hard: any[];
+  };
+  QUIZ: string;
+}
+const {
+    QUIZ,
+} = Astro.props;
+
+const { questionBank } = Astro.props;
+---
+
+<div id="settingsPanel" class="settings-panel">
+    <h1>{QUIZ} ORDERS</h1>
+    <p>Configure difficulty & start quiz</p>
+    <div class="difficulty-box">
+        <label>DIFFICULTY LEVEL</label>
+        <input type="range" id="difficultySliderModal" min="1" max="3" step="1" value="1">
+        <div class="difficulty-value" id="difficultyLabelModal">EASY MODE</div>
+    </div>
+    <button id="startQuizBtn" class="start-btn">START QUIZ</button>
+</div>
+
+<div id="quizModal" class="quiz-modal">
+    <div class="quiz-modal-content">
+        <button id="closeModalBtn" class="close-modal-btn" aria-label="Close">×</button>
+        <div class="quiz-header">
+            <h2>Quiz</h2>
+        </div>
+        <div class="stats-row">
+            <div class="score-board">Correct: <span id="modalScore">0</span> pts</div>
+        </div>
+        <div class="question-area">
+            <div class="question-text" id="modalQuestionText">Loading general orders...</div>
+            <div class="answers-grid" id="modalAnswersContainer"></div>
+            <div class="feedback-area">
+                <div class="feedback-message" id="modalFeedback">Select an answer</div>
+                <div class="timer-info" id="modalTimerInfo">Next in --s</div>
+            </div>
+            <div style="margin-top: 12px; text-align: center;">
+            </div>
+        </div>
+        <div id="modalTerminationMsg" style="padding: 0 1.5rem 1.5rem;"></div>
+    </div>
+</div>
+
+<!-- Pass the questionBank data to JavaScript via a data attribute -->
+<script define:vars={{ questionBank }}>
+    // This script runs in the browser and has access to the questionBank prop
+    const QUESTION_BANK = questionBank || { easy: [], medium: [], hard: [] };
+    
+    // Store it globally so the main script can access it
+    window.__QUESTION_BANK = QUESTION_BANK;
+</script>
+
+<style is:inline>
+    .BG555 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .settings-panel {
+        max-width: 550px;
+        width: 100%;
+        background: rgba(8, 12, 25, 0.95);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(230, 178, 32, 0.5);
+        border-radius: 15px;
+        box-shadow: 0 25px 40px rgba(0,0,0,0.6);
+        padding: 2rem 2rem 2.5rem;
+        text-align: center;
+        transition: 0.2s;
+    }
+
+    .settings-panel h1 {
+        font-size: 1.9rem;
+        letter-spacing: 1px;
+        color: #e6b220;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+    }
+
+    .settings-panel p {
+        color: #bbbbdd;
+        margin-bottom: 2rem;
+        font-weight: 500;
+    }
+
+    .difficulty-box {
+        background: #07152a;
+        border-radius: 15px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .difficulty-box label {
+        font-weight: 600;
+        color: #ffdd99;
+        font-size: 1rem;
+    }
+
+    input[type="range"] {
+        width: 240px;
+        height: 6px;
+        -webkit-appearance: none;
+        background: #2c3e66;
+        border-radius: 3px;
+        outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        background: #e6b220;
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        background: #e6b220;
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+    }
+
+    .difficulty-value {
+        background: #000000aa;
+        padding: 6px 18px;
+        border-radius: 15px;
+        font-weight: bold;
+        min-width: 120px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #f5cb5c;
+    }
+
+    .start-btn {
+        background: #e6b220;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 15px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+        color: #0b1a2a;
+        box-shadow: 0 4px 12px black;
+        width: 100%;
+    }
+
+    .start-btn:hover {
+        background: #ffcd4a;
+        transform: scale(1.01);
+    }
+
+    .quiz-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(12px);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.2s ease;
+    }
+
+    .quiz-modal-content {
+        max-width: 950px;
+        width: 90%;
+        background: #0a1120e6;
+        border: 2px solid #e6b220;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px black;
+        overflow: hidden;
+        position: relative;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .quiz-header {
+        background: linear-gradient(135deg, #011a31, #021e3a);
+        padding: 1rem 1.5rem;
+        border-bottom: 2px solid #e6b220;
+        text-align: center;
+    }
+
+    .quiz-header h2 {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        color: #e6b220;
+        font-weight: bold;
+    }
+
+    .stats-row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 0.8rem 1.5rem;
+        background: #030b16cc;
+        gap: 0.8rem;
+        border-bottom: 1px solid #2a3a55;
+    }
+
+    .score-board, .strike-board {
+        background: #000000aa;
+        padding: 6px 16px;
+        border-radius: 15px;
+        font-weight: bold;
+        font-size: 0.95rem;
+    }
+
+    .question-area {
+        padding: 1.5rem 1.5rem 1rem;
+    }
+
+    .question-text {
+        background: #00000066;
+        border-radius: 15px;
+        padding: 1.5rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        text-align: center;
+        border-left: 6px solid #e6b220;
+        margin-bottom: 1.5rem;
+    }
+
+    .answers-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .answer-btn {
+        background: #0f1b2f;
+        border: 2px solid #2a456b;
+        border-radius: 15px;
+        padding: 0.9rem 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-align: center;
+        color: #f0f3ff;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content:center
+    }
+
+    .answer-btn:hover:not(:disabled) {
+        background: #1e2f4a;
+        border-color: #e6b220;
+        transform: scale(1.02);
+    }
+
+    .answer-btn.selected-correct {
+        background: #1f8a4c !important;
+        border-color: #2ecc71 !important;
+        color: white !important;
+    }
+
+    .answer-btn.selected-wrong {
+        background: #a1222a !important;
+        border-color: #e74c3c !important;
+        text-decoration: line-through;
+        color: #ffcccc !important;
+    }
+
+    .answer-btn:disabled {
+        cursor: not-allowed;
+        opacity: 0.8;
+    }
+
+    .feedback-area {
+        background: #030e1acc;
+        border-radius: 15px;
+        padding: 0.7rem 1.2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .feedback-message {
+        color: #d4e6ff;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .timer-info {
+        font-family: monospace;
+        font-weight: bold;
+        color: #e6b220;
+        background: #000000aa;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+    }
+
+    .reset-quiz-btn {
+        background: #2c3e66;
+        margin-top: 8px;
+        padding: 6px 18px;
+        border-radius: 15px;
+        border: none;
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .reset-quiz-btn:hover {
+        background: #3a5a8c;
+        transform: scale(1.02);
+    }
+
+    .close-modal-btn {
+        position: absolute;
+        top: 12px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: #e6b220;
+        font-size: 28px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    .close-modal-btn:hover {
+        color: #ffcd4a;
+        transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 700px) {
+        .answers-grid {
+            grid-template-columns: 1fr;
+        }
+        .question-text {
+            font-size: 1.1rem;
+            padding: 1rem;
+        }
+        .stats-row {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+</style>
+
+<script lang="js">
+    (function() {
+        const QUESTION_BANK = window.__QUESTION_BANK || { easy: [], medium: [], hard: [] };
+        
+        // Log to verify data is loaded
+        console.log('QUESTION_BANK loaded:', QUESTION_BANK);
+        
+        const POINTS_MAP = { 1: 1, 2: 1, 3: 1 };
+
+        let currentDifficulty = 1;
+        let currentQuestionsList = [];
+        let currentQuestionObj = null;
+        let currentScore = 0;
+        let focusStrikeCount = 0;
+        let quizActive = true;
+        let waitingForNext = false;
+        let autoAdvanceTimer = null;
+        let countdownInterval = null;
+        let hasAnsweredCurrent = false;
+        
+        let askedQuestionsPool = [];
+        let originalQuestionsList = [];
+        let quizCompleted = false;
+
+        let modalScoreSpan, modalStrikeSpan, modalQuestionText, modalAnswersContainer, modalFeedback, modalTimerInfo, modalTerminationDiv, modalResetBtn, closeModalBtn, modalElement, statsRowElement, quizHeaderElement;
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function getShuffledQuestion(originalQuestion) {
+            const optionsWithFlags = originalQuestion.options.map((opt, idx) => ({
+                text: opt,
+                isCorrect: idx === originalQuestion.correctIndex
+            }));
+            
+            const shuffledOptionsWithFlags = shuffleArray([...optionsWithFlags]);
+            const shuffledOptions = shuffledOptionsWithFlags.map(item => item.text);
+            const newCorrectIndex = shuffledOptionsWithFlags.findIndex(item => item.isCorrect === true);
+            
+            return {
+                text: originalQuestion.text,
+                options: shuffledOptions,
+                correctIndex: newCorrectIndex
+            };
+        }
+
+        function getDifficultyData(level) {
+            if (level === 1) return { key: "easy", list: QUESTION_BANK.easy || [] };
+            if (level === 2) return { key: "medium", list: QUESTION_BANK.medium || [] };
+            return { key: "hard", list: QUESTION_BANK.hard || [] };
+        }
+        
+        function getNewUnaskedQuestion() {
+            if (!originalQuestionsList.length) return null;
+            
+            const unaskedQuestions = originalQuestionsList.filter(q => !askedQuestionsPool.includes(q));
+            
+            if (unaskedQuestions.length === 0) {
+                return null;
+            }
+            
+            const rand = Math.floor(Math.random() * unaskedQuestions.length);
+            const rawQuestion = unaskedQuestions[rand];
+            askedQuestionsPool.push(rawQuestion);
+            return getShuffledQuestion(rawQuestion);
+        }
+
+        function clearAutoTimers() {
+            if (autoAdvanceTimer) {
+                clearTimeout(autoAdvanceTimer);
+                autoAdvanceTimer = null;
+            }
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+            if (modalTimerInfo) modalTimerInfo.innerText = "";
+            modalTimerInfo.style.opacity = '0';
+        }
+
+        function startAutoAdvance() {
+            clearAutoTimers();
+            let remaining = 5;
+            modalTimerInfo.style.opacity = '1';
+            modalTimerInfo.innerText = `Next in ${remaining}s`;
+            
+            countdownInterval = setInterval(() => {
+                if (!quizActive || !waitingForNext) {
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    return;
+                }
+                remaining--;
+                if (remaining >= 0) {
+                    modalTimerInfo.innerText = `Next in ${remaining}s`;
+                }
+                if (remaining <= 0) {
+                    if (countdownInterval) clearInterval(countdownInterval);
+                }
+            }, 1000);
+            
+            autoAdvanceTimer = setTimeout(() => {
+                if (quizActive && waitingForNext) {
+                    loadFreshQuestion(true);
+                    waitingForNext = false;
+                    hasAnsweredCurrent = false;
+                    modalTimerInfo.innerText = "";
+                    modalTimerInfo.style.opacity = '0';
+                    modalFeedback.innerText = "";
+                }
+                clearAutoTimers();
+            }, 5500);
+        }
+        
+        function showQuizCompletionOverview() {
+            quizCompleted = true;
+            quizActive = false;
+            clearAutoTimers();
+            
+            if (statsRowElement) statsRowElement.style.display = 'none';
+            if (quizHeaderElement) quizHeaderElement.style.display = 'none';
+            
+            const totalQuestions = originalQuestionsList.length;
+            const maxPossibleScore = totalQuestions * POINTS_MAP[currentDifficulty];
+            const percentage = totalQuestions > 0 ? Math.round((currentScore / maxPossibleScore) * 100) : 0;
+            
+            let gradeMessage = "";
+            if (percentage >= 90) gradeMessage = "Outstanding! Mastery achieved!";
+            else if (percentage >= 80) gradeMessage = "Excellent! Well done!";
+            else if (percentage >= 70) gradeMessage = "Good job! Keep studying!";
+            else if (percentage >= 60) gradeMessage = "Passing score. Review and try again!";
+            else gradeMessage = "Needs improvement. Study the orders and try again!";
+            
+            const overviewHTML = `
+                <div style="text-align: center;">
+                    <h3 style="color: #e6b220; margin-bottom: 1rem;">QUIZ COMPLETED</h3>
+                    <p style="font-size: 1.2rem; margin: 0.5rem 0;">Total Questions: <strong>${totalQuestions}</strong></p>
+                    <p style="font-size: 1.2rem; margin: 0.5rem 0;">Correct Answer: <strong>${currentScore} / ${maxPossibleScore}</strong></p>
+                    <p style="font-size: 1.2rem; margin: 0.5rem 0;">Percentage: <strong>${percentage}%</strong></p>
+                    <p style="font-size: 1.1rem; margin: 1rem 0; color: #d4e6ff;">${gradeMessage}</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+                        <button id="completionRestartBtn" class="start-btn" style="background: #2c3e66; padding: 0.6rem 1.5rem; width: auto;">RESTART QUIZ</button>
+                        <button id="completionCloseBtn" class="start-btn" style="background: #e6b220; padding: 0.6rem 1.5rem; width: auto;">CLOSE</button>
+                    </div>
+                </div>
+            `;
+            
+            modalQuestionText.innerText = "";
+            modalAnswersContainer.innerHTML = overviewHTML;
+            modalFeedback.innerText = "";
+            modalTimerInfo.innerText = "";
+            modalTimerInfo.style.opacity = '0';
+            
+            const restartBtn = document.getElementById('completionRestartBtn');
+            const closeBtn = document.getElementById('completionCloseBtn');
+            
+            if (restartBtn) {
+                restartBtn.addEventListener('click', () => {
+                    resetQuizInsideModal();
+                });
+            }
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    closeModal();
+                    document.getElementById('settingsPanel').style.display = 'block';
+                });
+            }
+        }
+
+        function loadFreshQuestion(resetAnswerState = true) {
+            if (!quizActive) return;
+            
+            const newQ = getNewUnaskedQuestion();
+            
+            if (newQ === null) {
+                showQuizCompletionOverview();
+                return;
+            }
+            
+            currentQuestionObj = newQ;
+            
+            if (resetAnswerState) {
+                hasAnsweredCurrent = false;
+                waitingForNext = false;
+                clearAutoTimers();
+                modalTimerInfo.innerText = "";
+                modalTimerInfo.style.opacity = '0';
+            }
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            if (!quizActive) return;
+            if (quizCompleted) return;
+            if (!currentQuestionObj) {
+                loadFreshQuestion();
+                return;
+            }
+            modalQuestionText.innerText = currentQuestionObj.text;
+            modalAnswersContainer.innerHTML = '';
+            
+            currentQuestionObj.options.forEach((opt, idx) => {
+                const btn = document.createElement('div');
+                btn.className = 'answer-btn';
+                btn.innerText = opt;
+                btn.setAttribute('data-index', idx);
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    onAnswer(parseInt(this.getAttribute('data-index')));
+                });
+                if (hasAnsweredCurrent || waitingForNext || !quizActive) {
+                    btn.style.pointerEvents = 'none';
+                }
+                modalAnswersContainer.appendChild(btn);
+            });
+            
+            if (!hasAnsweredCurrent && !waitingForNext) {
+                modalFeedback.innerText = "";
+            }
+        }
+
+        function onAnswer(selectedIdx) {
+            if (!quizActive || hasAnsweredCurrent || waitingForNext || quizCompleted) return;
+            
+            const isCorrect = (selectedIdx === currentQuestionObj.correctIndex);
+            const allBtns = document.querySelectorAll('#modalAnswersContainer .answer-btn');
+            
+            allBtns.forEach((btn, idx) => {
+                btn.style.pointerEvents = 'none';
+                if (idx === currentQuestionObj.correctIndex) {
+                    btn.classList.add('selected-correct');
+                }
+                if (idx === selectedIdx && !isCorrect) {
+                    btn.classList.add('selected-wrong');
+                }
+            });
+            
+            if (isCorrect) {
+                let points = POINTS_MAP[currentDifficulty];
+                currentScore += points;
+                if (modalScoreSpan) modalScoreSpan.innerText = currentScore;
+                modalFeedback.innerText = `CORRECT! +${points} points. Next question in 5 seconds.`;
+            } else {
+                const correctAns = currentQuestionObj.options[currentQuestionObj.correctIndex];
+                modalFeedback.innerText = `WRONG! Correct answer: "${correctAns}". Next in 5 seconds.`;
+            }
+            
+            hasAnsweredCurrent = true;
+            waitingForNext = true;
+            startAutoAdvance();
+        }
+
+        function applyFocusStrike() {
+            if (!quizActive || quizCompleted) return;
+            if (focusStrikeCount >= 3) return;
+            
+            focusStrikeCount++;
+            const remaining = 3 - focusStrikeCount;
+            modalFeedback.innerText = `FOCUS LOST! Question changes immediately. (${remaining} strike(s) left)`;
+            
+            if (waitingForNext) {
+                clearAutoTimers();
+                waitingForNext = false;
+            }
+            
+            if (quizActive && !quizCompleted) {
+                if (currentQuestionObj) {
+                    const originalQ = originalQuestionsList.find(q => q.text === currentQuestionObj.text);
+                    if (originalQ) {
+                        const indexInAsked = askedQuestionsPool.indexOf(originalQ);
+                        if (indexInAsked !== -1) {
+                            askedQuestionsPool.splice(indexInAsked, 1);
+                        }
+                    }
+                }
+                loadFreshQuestion(true);
+                hasAnsweredCurrent = false;
+                waitingForNext = false;
+                modalTimerInfo.innerText = "";
+            }
+            
+            if (focusStrikeCount >= 3) {
+                terminateAndCloseModal();
+            }
+        }
+
+        function terminateAndCloseModal() {
+            if (!quizActive) return;
+            quizActive = false;
+            clearAutoTimers();
+            modalTerminationDiv.innerHTML = `<div style="background:#b91c1ccc; border-radius:15px; padding:12px; text-align:center; margin-top: 10px;">TEST TERMINATED: Maximum focus strikes (3). Closing quiz popup.</div>`;
+            if (modalAnswersContainer) {
+                const btns = modalAnswersContainer.querySelectorAll('.answer-btn');
+                btns.forEach(btn => {
+                    btn.style.pointerEvents = 'none';
+                });
+            }
+            setTimeout(() => {
+                closeModal();
+            }, 1800);
+        }
+
+        function resetQuizInsideModal() {
+            if (!modalElement || modalElement.style.display !== 'flex') return;
+            
+            currentScore = 0;
+            focusStrikeCount = 0;
+            quizActive = true;
+            waitingForNext = false;
+            hasAnsweredCurrent = false;
+            quizCompleted = false;
+            askedQuestionsPool = [];
+            
+            if (statsRowElement) statsRowElement.style.display = 'flex';
+            if (quizHeaderElement) quizHeaderElement.style.display = 'block';
+            
+            clearAutoTimers();
+            if (modalScoreSpan) modalScoreSpan.innerText = "0";
+            if (modalStrikeSpan) modalStrikeSpan.innerText = "0";
+            modalTerminationDiv.innerHTML = "";
+            
+            const diffData = getDifficultyData(currentDifficulty);
+            originalQuestionsList = [...diffData.list];
+            currentQuestionsList = originalQuestionsList;
+            
+            const firstRawQ = originalQuestionsList.length > 0 ? originalQuestionsList[0] : null;
+            if (firstRawQ) {
+                askedQuestionsPool.push(firstRawQ);
+                currentQuestionObj = getShuffledQuestion(firstRawQ);
+            } else {
+                currentQuestionObj = null;
+            }
+            
+            renderQuestion();
+            modalFeedback.innerText = "";
+            modalTimerInfo.innerText = "";
+            modalTimerInfo.style.opacity = '0';
+        }
+
+        function closeModal() {
+            if (!modalElement) return;
+            clearAutoTimers();
+            modalElement.style.display = 'none';
+            window.removeEventListener('blur', blurHandler);
+            document.removeEventListener('visibilitychange', visibilityHandler);
+            const settingsPanel = document.getElementById('settingsPanel');
+            if (settingsPanel) settingsPanel.style.display = 'block';
+            quizActive = false;
+        }
+
+        let blurHandler = function() { 
+            if (modalElement && modalElement.style.display === 'flex' && quizActive && !quizCompleted) applyFocusStrike(); 
+        };
+        
+        let visibilityHandler = function() { 
+            if (document.hidden && modalElement && modalElement.style.display === 'flex' && quizActive && !quizCompleted) applyFocusStrike(); 
+        };
+
+        function openModal() {
+            const settingsSlider = document.getElementById('difficultySliderModal');
+            const diffVal = parseInt(settingsSlider.value);
+            currentDifficulty = diffVal;
+            const diffData = getDifficultyData(currentDifficulty);
+            originalQuestionsList = [...diffData.list];
+            currentQuestionsList = originalQuestionsList;
+            currentScore = 0;
+            focusStrikeCount = 0;
+            quizActive = true;
+            waitingForNext = false;
+            hasAnsweredCurrent = false;
+            quizCompleted = false;
+            askedQuestionsPool = [];
+            
+            if (statsRowElement) statsRowElement.style.display = 'flex';
+            if (quizHeaderElement) quizHeaderElement.style.display = 'block';
+            
+            clearAutoTimers();
+            if (modalScoreSpan) modalScoreSpan.innerText = "0";
+            if (modalStrikeSpan) modalStrikeSpan.innerText = "0";
+            modalTerminationDiv.innerHTML = "";
+            
+            const firstRawQ = originalQuestionsList.length > 0 ? originalQuestionsList[0] : null;
+            if (firstRawQ) {
+                askedQuestionsPool.push(firstRawQ);
+                currentQuestionObj = getShuffledQuestion(firstRawQ);
+            } else {
+                currentQuestionObj = null;
+            }
+            
+            renderQuestion();
+            modalFeedback.innerText = "";
+            modalTimerInfo.innerText = "";
+            modalElement.style.display = 'flex';
+            window.addEventListener('blur', blurHandler);
+            document.addEventListener('visibilitychange', visibilityHandler);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            modalElement = document.getElementById('quizModal');
+            modalScoreSpan = document.getElementById('modalScore');
+            modalStrikeSpan = document.getElementById('modalStrike');
+            modalQuestionText = document.getElementById('modalQuestionText');
+            modalAnswersContainer = document.getElementById('modalAnswersContainer');
+            modalFeedback = document.getElementById('modalFeedback');
+            modalTimerInfo = document.getElementById('modalTimerInfo');
+            modalTerminationDiv = document.getElementById('modalTerminationMsg');
+            modalResetBtn = document.getElementById('modalResetInsideBtn');
+            closeModalBtn = document.getElementById('closeModalBtn');
+            statsRowElement = document.querySelector('.stats-row');
+            quizHeaderElement = document.querySelector('.quiz-header');
+
+            const startBtn = document.getElementById('startQuizBtn');
+            const diffSliderSettings = document.getElementById('difficultySliderModal');
+            const diffLabelSettings = document.getElementById('difficultyLabelModal');
+            
+            function updateSettingsLabel() {
+                const val = parseInt(diffSliderSettings.value);
+                if (val === 1) diffLabelSettings.innerText = "EASY MODE";
+                else if (val === 2) diffLabelSettings.innerText = "MEDIUM MODE";
+                else diffLabelSettings.innerText = "HARD MODE";
+            }
+            
+            diffSliderSettings.addEventListener('input', updateSettingsLabel);
+            updateSettingsLabel();
+            
+            startBtn.addEventListener('click', function() {
+                document.getElementById('settingsPanel').style.display = 'none';
+                openModal();
+            });
+            
+            if (modalResetBtn) {
+                modalResetBtn.addEventListener('click', resetQuizInsideModal);
+            }
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', function() {
+                    closeModal();
+                    document.getElementById('settingsPanel').style.display = 'block';
+                });
+            }
+            
+            const originalBodyOverflow = document.body.style.overflow;
+            const modalObserver = new MutationObserver((mutations) => {
+                mutations.forEach((mut) => {
+                    if (mut.type === 'attributes' && mut.attributeName === 'style') {
+                        if (modalElement && modalElement.style.display === 'flex') {
+                            document.body.style.overflow = 'hidden';
+                        } else {
+                            document.body.style.overflow = originalBodyOverflow || '';
+                        }
+                    }
+                });
+            });
+            if (modalElement) {
+                modalObserver.observe(modalElement, { attributes: true });
+                if (modalElement.style.display === 'flex') document.body.style.overflow = 'hidden';
+                else document.body.style.overflow = originalBodyOverflow || '';
+            }
+        });
+    })();
+</script>

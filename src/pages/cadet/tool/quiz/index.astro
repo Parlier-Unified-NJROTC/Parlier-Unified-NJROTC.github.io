@@ -1,0 +1,44 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+
+// Style & JS
+import "../../../../style/cadet.css";
+---
+
+<Layout title="Cadets" disableHero>
+    <div class="BG555">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="section-header">
+                <h1 class="section-title">Cadet Resources</h1>
+                <p class="section-subtitle">
+                    Ranks, Study, and leadership information
+                </p>
+            </div>
+
+            <!-- Resource Cards -->
+            <div class="resources-section">
+                <div class="card-grid">
+
+                    <a class="res-card" href="/cadet/tool/quiz/orders">
+                        <div class="card-content">
+                            <h3 class="card-title">General Orders</h3>
+                            <p class="card-desc">
+                                Study the rules you follow while being in the NJROTC
+                            </p>
+                        </div>
+                    </a>
+
+                    <a class="res-card" href="/cadet/tool/quiz/chain">
+                        <div class="card-content">
+                            <h3 class="card-title">Chain of Command</h3>
+                            <p class="card-desc">
+                                Study the Leadership 
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>

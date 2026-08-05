@@ -1,0 +1,45 @@
+---
+import Layout from "../../../../../layouts/Layout.astro";
+import Quiz from "../../../../../components/quiz.astro";
+
+const QUESTION_BANK = {
+    easy: [
+        { text: "What is the 1st General Order of a Sentry?", options: ["To take charge of this post and all government property in view.", "To salute all officers and all colors.", "To quit my post only when properly relieved.", "To walk my post in a military manner."], correctIndex: 0 },
+        { text: "What is the 2nd General Order?", options: ["To walk my post in a military manner, keeping always on the alert and observing everything that takes place within sight or hearing.", "To repeat all calls from distant posts.", "To report all violations.", "To give the alarm in case of fire."], correctIndex: 0 },
+        { text: "What is the 3rd General Order?", options: ["To report all violations of orders I am instructed to enforce.", "To quit my post only when properly relieved.", "To salute all officers.", "To talk to no one except in the line of duty."], correctIndex: 0 },
+        { text: "What is the 4th General Order?", options: ["To repeat all calls from posts more distant from the guardhouse than my own.", "To receive and obey orders.", "To call the Officer of the Deck.", "To be especially watchful at night."], correctIndex: 0 },
+        { text: "What is the 5th General Order?", options: ["To quit my post only when properly relieved.", "To take charge of this post.", "To salute all officers.", "To give the alarm in case of fire."], correctIndex: 0 },
+        { text: "What is the 6th General Order?", options: ["To receive, obey, and pass on to the sentry who relieves me all orders from the Commanding Officer, Officer of the Day, and Officers and Petty Officers of the Watch.", "To repeat all calls.", "To challenge all persons.", "To report all violations."], correctIndex: 0 },
+        { text: "What is the 7th General Order?", options: ["To talk to no one except in the line of duty.", "To salute all officers.", "To call the Officer of the Deck.", "To quit my post only when properly relieved."], correctIndex: 0 },
+        { text: "What is the 8th General Order?", options: ["To give the alarm in case of fire or disorder.", "To report all violations.", "To challenge all persons.", "To repeat all calls."], correctIndex: 0 },
+        { text: "What is the 9th General Order?", options: ["To call the Officer of the Deck in any case not covered by instructions.", "To salute all officers.", "To quit my post only when properly relieved.", "To take charge of this post."], correctIndex: 0 },
+        { text: "What is the 10th General Order?", options: ["To salute all officers and all colors and standards not cased.", "To challenge all persons.", "To repeat all calls.", "To report all violations."], correctIndex: 0 },
+        { text: "What is the 11th General Order?", options: ["To be especially watchful at night and during the time for challenging, to challenge all persons on or near my post, and to allow no one to pass without proper authority.", "To give the alarm in case of fire.", "To quit my post only when properly relieved.", "To salute all officers."], correctIndex: 0 }
+    ],
+    medium: [
+        { text: "Complete the 1st General Order: 'To take charge of this post and all ________.'", options: ["government property in view", "assigned equipment", "visible personnel", "authorized materials"], correctIndex: 0 },
+        { text: "Complete the 2nd General Order: 'To walk my post in a military manner, keeping always on the alert and observing everything that takes place ______.'", options: ["within sight or hearing", "during my watch", "within the base perimeter", "under my command"], correctIndex: 0 },
+        { text: "Complete the 3rd General Order: 'To report all _______ of orders I am instructed to enforce.'", options: ["violations", "changes", "updates", "summaries"], correctIndex: 0 },
+        { text: "Fill in the 4th General Order: 'To repeat all calls from posts more distant from the ______ than my own.'", options: ["guardhouse", "command center", "barracks", "armory"], correctIndex: 0 },
+        { text: "The 5th General Order instructs the sentry to:", options: ["Quit my post only when properly relieved.", "Report all violations.", "Challenge all persons.", "Give the alarm in case of fire."], correctIndex: 0 },
+        { text: "The 6th General Order requires the sentry to receive, obey, and pass on orders from:", options: ["CO, OOD, and Officers/Petty Officers of the Watch", "Any superior", "Only the Commanding Officer", "Only the Officer of the Deck"], correctIndex: 0 },
+        { text: "The 7th General Order forbids talking to anyone except:", options: ["In the line of duty", "During inspections", "When relieved", "When questioned by civilians"], correctIndex: 0 },
+        { text: "The 8th General Order instructs the sentry to give the alarm in case of:", options: ["Fire or disorder", "Unauthorized personnel", "Officer inspection", "Equipment malfunction"], correctIndex: 0 },
+        { text: "According to the 9th General Order, when should you call the Officer of the Deck?", options: ["In any case not covered by instructions.", "When a superior officer approaches.", "Every hour.", "Only during nighttime."], correctIndex: 0 },
+        { text: "The 10th General Order requires the sentry to salute:", options: ["All officers and all colors and standards not cased.", "Only the Commanding Officer.", "Only officers in uniform.", "Only colors during ceremonies."], correctIndex: 0 },
+        { text: "The 11th General Order ends with: '…and to allow no one to pass ______.'", options: ["without proper authority", "without identification", "unless in uniform", "after midnight"], correctIndex: 0 }
+    ],
+    hard: [
+        { text: "Scenario: You see someone approaching your post at night. Which General Order requires you to challenge them?", options: ["11th General Order", "7th General Order", "3rd General Order", "1st General Order"], correctIndex: 0 },
+        { text: "Scenario: A fire breaks out near your post. Which General Order applies first?", options: ["8th General Order", "9th General Order", "3rd General Order", "5th General Order"], correctIndex: 0 },
+        { text: "Scenario: You observe a violation of posted rules. Which General Order applies?", options: ["3rd General Order", "1st General Order", "10th General Order", "7th General Order"], correctIndex: 0 },
+        { text: "Scenario: Your relief is late. Which General Order applies?", options: ["5th General Order", "6th General Order", "2nd General Order", "4th General Order"], correctIndex: 0 },
+        { text: "Scenario: You receive new instructions from the Officer of the Day. Which General Order applies?", options: ["6th General Order", "3rd General Order", "10th General Order", "8th General Order"], correctIndex: 0 },
+        { text: "Scenario: You see an officer approaching your post. Which General Order applies?", options: ["10th General Order", "11th General Order", "7th General Order", "4th General Order"], correctIndex: 0 },
+        { text: "Scenario: A civilian attempts to pass your post without authorization. Which General Order applies?", options: ["11th General Order", "1st General Order", "3rd General Order", "9th General Order"], correctIndex: 0 }
+    ]
+};
+---
+<Layout title="General Orders Quiz" disableHero fancyBackground>
+    <Quiz QUIZ="US NAVY GENERAL" questionBank={QUESTION_BANK} />
+</Layout>

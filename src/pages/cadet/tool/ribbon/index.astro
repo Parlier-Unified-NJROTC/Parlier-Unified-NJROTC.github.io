@@ -42,7 +42,7 @@ import "../../../../style/ribbon.css";
 
                 <div class="content-container">
                     <!-- Ribbon Selection -->
-                    <div class="ribbon-selection-container" >
+                    <div class="ribbon-selection-container">
                         <div class="ribbon-selection-header">
                             <h3 class="ribbon-selection-title">
                                 Select Your Ribbons
@@ -235,7 +235,6 @@ import "../../../../style/ribbon.css";
                 </div>
             </div>
 
-
             <!-- DON'T TOUCH MY CODE. NO JOKE IT IS SCARY -->
             <script
                 src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
@@ -395,7 +394,7 @@ import "../../../../style/ribbon.css";
 
                     starImg.onerror = function () {
                         console.warn(`Failed to load star: ${starImg.src}`);
-                        this.src = "/ribbon-stars/star-none.png"; 
+                        this.src = "/ribbon-stars/star-none.png";
                     };
 
                     container.appendChild(newRibbonImage);
@@ -501,7 +500,7 @@ import "../../../../style/ribbon.css";
                                             );
                                         clonedImages.forEach((img) => {
                                             if (!img.complete) {
-                                                img.src = img.src; 
+                                                img.src = img.src;
                                             }
                                         });
                                     },

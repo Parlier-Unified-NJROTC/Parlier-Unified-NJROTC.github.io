@@ -1,75 +1,114 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
 
 // Style & JS
 import "../../style/cadet.css";
 ---
 
 <Layout title="Cadets" disableHero>
-<div class="BG555">
-    <div class="container">
-        <!-- Hero Section -->
-        <div class="section-header">
-            <h1 class="section-title">Cadet Resources</h1>
-            <p class="section-subtitle">Ranks, Study, and leadership information</p>
-        </div>
+    <div class="BG555">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="section-header">
+                <h1 class="section-title">Cadet Resources</h1>
+                <p class="section-subtitle">
+                    Ranks, Study, and leadership information
+                </p>
+            </div>
 
-        <!-- Resource Cards -->
-        <div class="resources-section">
-            <div class="card-grid">
-                <a class="res-card" href="/cadet/tool">
-                    <div class="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#e6b220">
-                            <path d="M21.71 20.29L18.83 17.41A8.93 8.93 0 0 0 20 11a9 9 0 1 0-9 9 8.93 8.93 0 0 0 6.41-2.17l2.88 2.89a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.43zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"/>
-                        </svg>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Tools</h3>
-                        <p class="card-desc">Useful utilities and practice.</p>
-                    </div>
-                </a>
+            <!-- Resource Cards -->
+            <div class="resources-section">
+                <div class="card-grid">
+                    <a class="res-card" href="/cadet/tool">
+                        <div class="card-icon">
+                            <svg
+                                width="40"
+                                height="40"
+                                viewBox="0 0 24 24"
+                                fill="#e6b220"
+                            >
+                                <path
+                                    d="M21.71 20.29L18.83 17.41A8.93 8.93 0 0 0 20 11a9 9 0 1 0-9 9 8.93 8.93 0 0 0 6.41-2.17l2.88 2.89a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.43zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Tools</h3>
+                            <p class="card-desc">
+                                Useful utilities and practice.
+                            </p>
+                        </div>
+                    </a>
 
-                <a class="res-card" href="/cadet/PQS">
-                    <div class="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#e6b220">
-                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                        </svg>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">PQS</h3>
-                        <p class="card-desc">Personal Qualification Standards and tracking resources to help you advance.</p>
-                    </div>
-                </a>
+                    <a class="res-card" href="/cadet/PQS">
+                        <div class="card-icon">
+                            <svg
+                                width="40"
+                                height="40"
+                                viewBox="0 0 24 24"
+                                fill="#e6b220"
+                            >
+                                <path
+                                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">PQS</h3>
+                            <p class="card-desc">
+                                Personal Qualification Standards and tracking
+                                resources to help you advance.
+                            </p>
+                        </div>
+                    </a>
 
-                <a class="res-card" href="/cadet/manuals">
-                    <div class="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#e6b220">
-                            <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
-                        </svg>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Manuals</h3>
-                        <p class="card-desc">Important reference manuals and study materials for standards and procedures.</p>
-                    </div>
-                </a>
-				<!-- Useless for the looks -->
-				<div></div>
+                    <a class="res-card" href="/cadet/manuals">
+                        <div class="card-icon">
+                            <svg
+                                width="40"
+                                height="40"
+                                viewBox="0 0 24 24"
+                                fill="#e6b220"
+                            >
+                                <path
+                                    d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Manuals</h3>
+                            <p class="card-desc">
+                                Important reference manuals and study materials
+                                for standards and procedures.
+                            </p>
+                        </div>
+                    </a>
+                    <!-- Useless for the looks -->
+                    <div></div>
 
-                <a class="res-card" href="/cadet/knowledge">
-                    <div class="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#e6b220">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                        </svg>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Knowledge</h3>
-                        <p class="card-desc">Study guides, flashcards, and knowledge-base articles for competitions and tests.</p>
-                    </div>
-                </a>
+                    <a class="res-card" href="/cadet/knowledge">
+                        <div class="card-icon">
+                            <svg
+                                width="40"
+                                height="40"
+                                viewBox="0 0 24 24"
+                                fill="#e6b220"
+                            >
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Knowledge</h3>
+                            <p class="card-desc">
+                                Study guides, flashcards, and knowledge-base
+                                articles for competitions and tests.
+                            </p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
-
-	</div>
-</div>
-</div>
+    </div>
 </Layout>
