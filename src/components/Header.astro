@@ -1,7 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
-const teams = await getCollection('teams');
-const departments = await getCollection('departments');
+import { getCollection } from "astro:content";
+const teams = await getCollection("teams");
+const departments = await getCollection("departments");
 ---
 
 <header>
@@ -14,35 +14,37 @@ const departments = await getCollection('departments');
       />
     </a>
 
-      <a href="/cadet/help" class="help-center-btn">
-        NJROTC Help Center
-      </a>
+    <a href="/cadet/help" class="help-center-btn"> NJROTC Help Center </a>
 
     <!-- Desktop Navigation -->
     <nav class="desktop-nav">
       <div class="dropdown">
-      <a href="/about">About</a>
-      <div class="dropdown-content">
+        <a href="/about">About</a>
+        <div class="dropdown-content">
           <a href="/about/unit">Unit</a>
           <a href="/about/instructor">Instructors</a>
-      </div>
+        </div>
       </div>
       <div class="dropdown">
         <a href="/departments">Departments</a>
         <div class="dropdown-content">
           {
-          departments.map(department => (
-            <a href={"/departments/"+department.id}>{department.data.name}</a>
-          ))}
+            departments.map((department) => (
+              <a href={"/departments/" + department.id}>
+                {department.data.name}
+              </a>
+            ))
+          }
         </div>
       </div>
       <div class="dropdown">
         <a href="/teams">Teams</a>
         <div class="dropdown-content">
           {
-          teams.map(team => (
-            <a href={"/teams/"+team.id}>{team.data.name}</a>
-          ))}
+            teams.map((team) => (
+              <a href={"/teams/" + team.id}>{team.data.name}</a>
+            ))
+          }
         </div>
       </div>
       <a href="/parents">Parents</a>
@@ -137,8 +139,8 @@ const departments = await getCollection('departments');
     padding: 1.5rem 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     position: relative;
-    
-    z-index: 99999999;
+
+    z-index: 999;
   }
 
   .header-container {
@@ -149,7 +151,7 @@ const departments = await getCollection('departments');
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    z-index: 99999999;
+    z-index: 999;
   }
 
   .logo-link {
@@ -311,7 +313,7 @@ const departments = await getCollection('departments');
   }
 
   .mobile-menu-btn.active span:nth-child(1) {
-        transform: rotate(45deg) translate(8px, 6px);
+    transform: rotate(45deg) translate(8px, 6px);
   }
 
   .mobile-menu-btn.active span:nth-child(2) {
@@ -401,10 +403,10 @@ const departments = await getCollection('departments');
 
   @media (orientaion: landscape) {
     .social-icon img {
-        height: 30px;
+      height: 30px;
     }
     .social-icon {
-        margin: 0px;
+      margin: 0px;
     }
   }
 
@@ -427,7 +429,6 @@ const departments = await getCollection('departments');
   .logo-img {
     margin-left: 15px;
   }
-  
 
   /* Additional responsive adjustments */
   @media only screen and (max-width: 1024px) {
@@ -456,7 +457,6 @@ const departments = await getCollection('departments');
     }
   }
 
-  /* Content styles for demo */
   .content {
     max-width: 1200px;
     margin: 0 auto;
@@ -482,9 +482,9 @@ const departments = await getCollection('departments');
     margin-top: 20px;
     display: none;
   }
-.no-scroll {
-  overflow: hidden;
-}
+  .no-scroll {
+    overflow: hidden;
+  }
 
   @media only screen and (orientation: portrait) {
     .orientation-notice {
@@ -502,7 +502,10 @@ const departments = await getCollection('departments');
     mobileMenuBtn.addEventListener("click", function () {
       mobileMenuBtn.classList.toggle("active");
       mobileMenu.classList.toggle("active");
-      body.classList.toggle("no-scroll", mobileMenu.classList.contains("active"));
+      body.classList.toggle(
+        "no-scroll",
+        mobileMenu.classList.contains("active"),
+      );
     });
 
     mobileDropdowns.forEach((dropdown) => {
@@ -543,10 +546,10 @@ const departments = await getCollection('departments');
       }
     });
   });
-  document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth' // Optional: adds smooth scrolling
+  document.querySelector(".mobile-menu-btn").addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   });
-});
 </script>
