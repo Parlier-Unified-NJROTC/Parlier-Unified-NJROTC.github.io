@@ -1,5 +1,14 @@
 ---
 // components/quiz.astro
+
+
+// STYLE IMPORT
+
+import "../style/quiz.css";
+
+
+// PROPS
+
 export interface Props {
   questionBank?: {
     easy: any[];
@@ -15,6 +24,10 @@ const {
 const { questionBank } = Astro.props;
 ---
 
+<!-- 
+     SETTINGS PANEL (shown before quiz starts)
+     - Title, difficulty slider, START QUIZ button
+      -->
 <div id="settingsPanel" class="settings-panel">
     <h1>{QUIZ} ORDERS</h1>
     <p>Configure difficulty & start quiz</p>
@@ -26,15 +39,27 @@ const { questionBank } = Astro.props;
     <button id="startQuizBtn" class="start-btn">START QUIZ</button>
 </div>
 
+<!-- 
+     QUIZ MODAL (fullscreen overlay)
+     Contains: header, stats, question, answers grid, feedback,
+               termination message area
+      -->
 <div id="quizModal" class="quiz-modal">
     <div class="quiz-modal-content">
+        <!-- Close button (×) -->
         <button id="closeModalBtn" class="close-modal-btn" aria-label="Close">×</button>
+
+        <!-- Quiz header -->
         <div class="quiz-header">
             <h2>Quiz</h2>
         </div>
+
+        <!-- Score / stats bar -->
         <div class="stats-row">
             <div class="score-board">Correct: <span id="modalScore">0</span> pts</div>
         </div>
+
+        <!-- Question + answers + feedback -->
         <div class="question-area">
             <div class="question-text" id="modalQuestionText">Loading general orders...</div>
             <div class="answers-grid" id="modalAnswersContainer"></div>
@@ -45,360 +70,72 @@ const { questionBank } = Astro.props;
             <div style="margin-top: 12px; text-align: center;">
             </div>
         </div>
+
+        <!-- Termination message area (3 focus strikes) -->
         <div id="modalTerminationMsg" style="padding: 0 1.5rem 1.5rem;"></div>
     </div>
 </div>
 
-<!-- Pass the questionBank data to JavaScript via a data attribute -->
+<!-- 
+     QUESTION BANK BRIDGE
+     Serializes the Astro `questionBank` prop into a global
+     so the client-side script can read it.
+      -->
 <script define:vars={{ questionBank }}>
-    // This script runs in the browser and has access to the questionBank prop
     const QUESTION_BANK = questionBank || { easy: [], medium: [], hard: [] };
-    
-    // Store it globally so the main script can access it
     window.__QUESTION_BANK = QUESTION_BANK;
 </script>
 
-<style is:inline>
-    .BG555 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem;
-    }
-
-    .settings-panel {
-        max-width: 550px;
-        width: 100%;
-        background: rgba(8, 12, 25, 0.95);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(230, 178, 32, 0.5);
-        border-radius: 15px;
-        box-shadow: 0 25px 40px rgba(0,0,0,0.6);
-        padding: 2rem 2rem 2.5rem;
-        text-align: center;
-        transition: 0.2s;
-    }
-
-    .settings-panel h1 {
-        font-size: 1.9rem;
-        letter-spacing: 1px;
-        color: #e6b220;
-        text-transform: uppercase;
-        margin-bottom: 0.5rem;
-    }
-
-    .settings-panel p {
-        color: #bbbbdd;
-        margin-bottom: 2rem;
-        font-weight: 500;
-    }
-
-    .difficulty-box {
-        background: #07152a;
-        border-radius: 15px;
-        padding: 1rem 1.5rem;
-        margin-bottom: 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-
-    .difficulty-box label {
-        font-weight: 600;
-        color: #ffdd99;
-        font-size: 1rem;
-    }
-
-    input[type="range"] {
-        width: 240px;
-        height: 6px;
-        -webkit-appearance: none;
-        background: #2c3e66;
-        border-radius: 3px;
-        outline: none;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 18px;
-        height: 18px;
-        background: #e6b220;
-        border-radius: 50%;
-        cursor: pointer;
-        border: none;
-        box-shadow: 0 0 4px rgba(0,0,0,0.5);
-    }
-
-    input[type="range"]::-moz-range-thumb {
-        width: 18px;
-        height: 18px;
-        background: #e6b220;
-        border-radius: 50%;
-        cursor: pointer;
-        border: none;
-    }
-
-    .difficulty-value {
-        background: #000000aa;
-        padding: 6px 18px;
-        border-radius: 15px;
-        font-weight: bold;
-        min-width: 120px;
-        text-align: center;
-        font-size: 0.9rem;
-        color: #f5cb5c;
-    }
-
-    .start-btn {
-        background: #e6b220;
-        border: none;
-        padding: 14px 32px;
-        border-radius: 15px;
-        font-size: 1.2rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.2s;
-        color: #0b1a2a;
-        box-shadow: 0 4px 12px black;
-        width: 100%;
-    }
-
-    .start-btn:hover {
-        background: #ffcd4a;
-        transform: scale(1.01);
-    }
-
-    .quiz-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(12px);
-        z-index: 2000;
-        justify-content: center;
-        align-items: center;
-        animation: fadeIn 0.2s ease;
-    }
-
-    .quiz-modal-content {
-        max-width: 950px;
-        width: 90%;
-        background: #0a1120e6;
-        border: 2px solid #e6b220;
-        border-radius: 15px;
-        box-shadow: 0 20px 40px black;
-        overflow: hidden;
-        position: relative;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    .quiz-header {
-        background: linear-gradient(135deg, #011a31, #021e3a);
-        padding: 1rem 1.5rem;
-        border-bottom: 2px solid #e6b220;
-        text-align: center;
-    }
-
-    .quiz-header h2 {
-        font-size: 1.6rem;
-        letter-spacing: 1px;
-        color: #e6b220;
-        font-weight: bold;
-    }
-
-    .stats-row {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        padding: 0.8rem 1.5rem;
-        background: #030b16cc;
-        gap: 0.8rem;
-        border-bottom: 1px solid #2a3a55;
-    }
-
-    .score-board, .strike-board {
-        background: #000000aa;
-        padding: 6px 16px;
-        border-radius: 15px;
-        font-weight: bold;
-        font-size: 0.95rem;
-    }
-
-    .question-area {
-        padding: 1.5rem 1.5rem 1rem;
-    }
-
-    .question-text {
-        background: #00000066;
-        border-radius: 15px;
-        padding: 1.5rem;
-        font-size: 1.4rem;
-        font-weight: 600;
-        text-align: center;
-        border-left: 6px solid #e6b220;
-        margin-bottom: 1.5rem;
-    }
-
-    .answers-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .answer-btn {
-        background: #0f1b2f;
-        border: 2px solid #2a456b;
-        border-radius: 15px;
-        padding: 0.9rem 0.5rem;
-        font-size: 0.95rem;
-        font-weight: 500;
-        text-align: center;
-        color: #f0f3ff;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        display: flex;
-        align-items: center;
-        justify-content:center
-    }
-
-    .answer-btn:hover:not(:disabled) {
-        background: #1e2f4a;
-        border-color: #e6b220;
-        transform: scale(1.02);
-    }
-
-    .answer-btn.selected-correct {
-        background: #1f8a4c !important;
-        border-color: #2ecc71 !important;
-        color: white !important;
-    }
-
-    .answer-btn.selected-wrong {
-        background: #a1222a !important;
-        border-color: #e74c3c !important;
-        text-decoration: line-through;
-        color: #ffcccc !important;
-    }
-
-    .answer-btn:disabled {
-        cursor: not-allowed;
-        opacity: 0.8;
-    }
-
-    .feedback-area {
-        background: #030e1acc;
-        border-radius: 15px;
-        padding: 0.7rem 1.2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .feedback-message {
-        color: #d4e6ff;
-        font-weight: 500;
-        font-size: 0.95rem;
-    }
-
-    .timer-info {
-        font-family: monospace;
-        font-weight: bold;
-        color: #e6b220;
-        background: #000000aa;
-        padding: 5px 12px;
-        border-radius: 15px;
-        font-size: 0.9rem;
-    }
-
-    .reset-quiz-btn {
-        background: #2c3e66;
-        margin-top: 8px;
-        padding: 6px 18px;
-        border-radius: 15px;
-        border: none;
-        color: white;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .reset-quiz-btn:hover {
-        background: #3a5a8c;
-        transform: scale(1.02);
-    }
-
-    .close-modal-btn {
-        position: absolute;
-        top: 12px;
-        right: 20px;
-        background: none;
-        border: none;
-        color: #e6b220;
-        font-size: 28px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: 0.2s;
-    }
-
-    .close-modal-btn:hover {
-        color: #ffcd4a;
-        transform: scale(1.1);
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
-    }
-
-    @media (max-width: 700px) {
-        .answers-grid {
-            grid-template-columns: 1fr;
-        }
-        .question-text {
-            font-size: 1.1rem;
-            padding: 1rem;
-        }
-        .stats-row {
-            flex-direction: column;
-            align-items: stretch;
-        }
-    }
-</style>
-
 <script lang="js">
     (function() {
+
+        // 1. DATA + CONSTANTS
+        
         const QUESTION_BANK = window.__QUESTION_BANK || { easy: [], medium: [], hard: [] };
         
-        // Log to verify data is loaded
         console.log('QUESTION_BANK loaded:', QUESTION_BANK);
         
         const POINTS_MAP = { 1: 1, 2: 1, 3: 1 };
 
-        let currentDifficulty = 1;
-        let currentQuestionsList = [];
-        let currentQuestionObj = null;
-        let currentScore = 0;
-        let focusStrikeCount = 0;
-        let quizActive = true;
-        let waitingForNext = false;
-        let autoAdvanceTimer = null;
-        let countdownInterval = null;
-        let hasAnsweredCurrent = false;
+        // 2. STATE VARIABLES
         
-        let askedQuestionsPool = [];
-        let originalQuestionsList = [];
-        let quizCompleted = false;
+        let currentDifficulty = 1;          // 1=easy, 2=medium, 3=hard
+        let currentQuestionsList = [];      // active difficulty list
+        let currentQuestionObj = null;      // currently displayed question
+        let currentScore = 0;               // running score
+        let focusStrikeCount = 0;           // tab-blur strikes (max 3)
+        let quizActive = true;              // quiz is running
+        let waitingForNext = false;         // showing feedback, waiting for advance
+        let autoAdvanceTimer = null;        // 5s advance timer
+        let countdownInterval = null;       // countdown ticker
+        let hasAnsweredCurrent = false;     // current Q already answered
+        
+        let askedQuestionsPool = [];        // questions already served
+        let originalQuestionsList = [];     // raw list for current difficulty
+        let quizCompleted = false;          // finished overview state
 
-        let modalScoreSpan, modalStrikeSpan, modalQuestionText, modalAnswersContainer, modalFeedback, modalTimerInfo, modalTerminationDiv, modalResetBtn, closeModalBtn, modalElement, statsRowElement, quizHeaderElement;
+        let answerHistory = [];             // every answered Q for the review
 
+        
+        // 3. DOM REFERENCES (assigned in DOMContentLoaded)
+        
+        let modalScoreSpan, modalStrikeSpan, modalQuestionText, modalAnswersContainer,
+            modalFeedback, modalTimerInfo, modalTerminationDiv, modalResetBtn,
+            closeModalBtn, modalElement, statsRowElement, quizHeaderElement;
+
+        // 4. UTILITY HELPERS
+
+        // Escape user-facing text before injecting into innerHTML
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        // Fisher-Yates shuffle (in place)
         function shuffleArray(arr) {
             for (let i = arr.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -407,6 +144,7 @@ const { questionBank } = Astro.props;
             return arr;
         }
 
+        // Shuffle a question's options while tracking the correct index
         function getShuffledQuestion(originalQuestion) {
             const optionsWithFlags = originalQuestion.options.map((opt, idx) => ({
                 text: opt,
@@ -424,12 +162,14 @@ const { questionBank } = Astro.props;
             };
         }
 
+        // Resolve the difficulty key + list from QUESTION_BANK
         function getDifficultyData(level) {
             if (level === 1) return { key: "easy", list: QUESTION_BANK.easy || [] };
             if (level === 2) return { key: "medium", list: QUESTION_BANK.medium || [] };
             return { key: "hard", list: QUESTION_BANK.hard || [] };
         }
         
+        // Pick a random unasked question, mark it asked, return shuffled copy
         function getNewUnaskedQuestion() {
             if (!originalQuestionsList.length) return null;
             
@@ -445,6 +185,9 @@ const { questionBank } = Astro.props;
             return getShuffledQuestion(rawQuestion);
         }
 
+        
+        // 5. TIMER MANAGEMENT
+        
         function clearAutoTimers() {
             if (autoAdvanceTimer) {
                 clearTimeout(autoAdvanceTimer);
@@ -455,9 +198,10 @@ const { questionBank } = Astro.props;
                 countdownInterval = null;
             }
             if (modalTimerInfo) modalTimerInfo.innerText = "";
-            modalTimerInfo.style.opacity = '0';
+            if (modalTimerInfo) modalTimerInfo.style.opacity = '0';
         }
 
+        // Start 5-second countdown + auto-advance to next question
         function startAutoAdvance() {
             clearAutoTimers();
             let remaining = 5;
@@ -490,6 +234,37 @@ const { questionBank } = Astro.props;
                 clearAutoTimers();
             }, 5500);
         }
+
+        
+        // 6. LAYOUT HELPERS (grid + wrapper stacking)
+        
+
+        // Restore 2-column layout for the answers grid
+        function restoreAnswersGrid() {
+            const gridAnswers = document.querySelector('.answers-grid');
+            if (gridAnswers) {
+                gridAnswers.style.gridTemplateColumns = '';
+            }
+        }
+
+        // Raise the .BG555 wrapper so quiz stacks above page content
+        function raiseBgWrapper() {
+            const bgWrapper = document.querySelector('.BG555');
+            if (bgWrapper) {
+                bgWrapper.classList.add('quiz-active');
+            }
+        }
+
+        // Drop the forward stacking when quiz closes
+        function lowerBgWrapper() {
+            const bgWrapper = document.querySelector('.BG555');
+            if (bgWrapper) {
+                bgWrapper.classList.remove('quiz-active');
+            }
+        }
+
+        // 7. COMPLETION OVERVIEW
+        // Renders final score, grade, and per-question review
         
         function showQuizCompletionOverview() {
             quizCompleted = true;
@@ -499,28 +274,110 @@ const { questionBank } = Astro.props;
             if (statsRowElement) statsRowElement.style.display = 'none';
             if (quizHeaderElement) quizHeaderElement.style.display = 'none';
             
+            // Collapse grid to single column for overview
+            const gridAnswers = document.querySelector('.answers-grid');
+            if (gridAnswers) {
+                gridAnswers.style.gridTemplateColumns = '1fr';
+            }
+            
+            // ---- Compute score + grade ----
             const totalQuestions = originalQuestionsList.length;
             const maxPossibleScore = totalQuestions * POINTS_MAP[currentDifficulty];
             const percentage = totalQuestions > 0 ? Math.round((currentScore / maxPossibleScore) * 100) : 0;
+            const totalAnswered = answerHistory.length;
+            const totalWrong = answerHistory.filter(a => !a.isCorrect).length;
             
             let gradeMessage = "";
-            if (percentage >= 90) gradeMessage = "Outstanding! Mastery achieved!";
-            else if (percentage >= 80) gradeMessage = "Excellent! Well done!";
-            else if (percentage >= 70) gradeMessage = "Good job! Keep studying!";
-            else if (percentage >= 60) gradeMessage = "Passing score. Review and try again!";
-            else gradeMessage = "Needs improvement. Study the orders and try again!";
+            let gradeColor = "#e6b220";
             
-            const overviewHTML = `
-                <div style="text-align: center;">
-                    <h3 style="color: #e6b220; margin-bottom: 1rem;">QUIZ COMPLETED</h3>
-                    <p style="font-size: 1.2rem; margin: 0.5rem 0;">Total Questions: <strong>${totalQuestions}</strong></p>
-                    <p style="font-size: 1.2rem; margin: 0.5rem 0;">Correct Answer: <strong>${currentScore} / ${maxPossibleScore}</strong></p>
-                    <p style="font-size: 1.2rem; margin: 0.5rem 0;">Percentage: <strong>${percentage}%</strong></p>
-                    <p style="font-size: 1.1rem; margin: 1rem 0; color: #d4e6ff;">${gradeMessage}</p>
-                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
-                        <button id="completionRestartBtn" class="start-btn" style="background: #2c3e66; padding: 0.6rem 1.5rem; width: auto;">RESTART QUIZ</button>
-                        <button id="completionCloseBtn" class="start-btn" style="background: #e6b220; padding: 0.6rem 1.5rem; width: auto;">CLOSE</button>
+            if (percentage >= 100) {
+                gradeMessage = "Outstanding! Mastery achieved!";
+                gradeColor = "#2ecc71";
+            } else if (percentage >= 80) {
+                gradeMessage = "Excellent! Well done!";
+                gradeColor = "#2ecc71";
+            } else if (percentage >= 70) {
+                gradeMessage = "Good job! Keep studying!";
+                gradeColor = "#e6b220";
+            } else if (percentage >= 60) {
+                gradeMessage = "Passing score. Review and try again!";
+                gradeColor = "#f39c12";
+            } else {
+                gradeMessage = "Needs improvement. Study the orders and try again!";
+                gradeColor = "#e74c3c";
+            }
+            
+            // ---- Build per-question review list ----
+            let reviewHTML = "";
+            if (answerHistory.length > 0) {
+                const items = answerHistory.map((entry, i) => {
+                    const itemClass = entry.isCorrect ? 'correct' : 'wrong';
+                    const selectedClass = entry.isCorrect ? 'correct-text' : 'wrong-text';
+                    const selectedLabel = entry.selectedText;
+                    const correctLabel = entry.options[entry.correctIndex];
+                    
+                    return `
+                        <div class="review-item ${itemClass}">
+                            <div class="review-question">
+                                <span class="review-number">${i + 1}.</span>${escapeHtml(entry.text)}
+                            </div>
+                            <div class="review-answers">
+                                <div class="review-answer-row">
+                                    <span class="review-answer-label">Your answer:</span>
+                                    <span class="review-answer-text ${selectedClass}">${escapeHtml(selectedLabel)}</span>
+                                </div>
+                                ${!entry.isCorrect ? `
+                                <div class="review-answer-row">
+                                    <span class="review-answer-label">Correct answer:</span>
+                                    <span class="review-answer-text correct-text">${escapeHtml(correctLabel)}</span>
+                                </div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                reviewHTML = `
+                    <div class="review-section">
+                        <div class="review-title">Answer Review (${totalWrong} incorrect of ${totalAnswered})</div>
+                        <div class="review-list">
+                            ${items}
+                        </div>
                     </div>
+                `;
+            }
+            
+            // ---- Assemble overview ----
+            const overviewHTML = `
+                <div class="completion-overview">
+                    <h3 class="completion-title">QUIZ COMPLETED</h3>
+                    
+                    <div class="completion-stats">
+                        <div class="stat-card">
+                            <span class="stat-value">${totalQuestions}</span>
+                            <span class="stat-label">Total Questions</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value">${currentScore}</span>
+                            <span class="stat-label">Correct Answers</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" style="color: ${gradeColor}">${percentage}%</span>
+                            <span class="stat-label">Score</span>
+                        </div>
+                    </div>
+                    
+                    <div class="completion-bar-wrapper">
+                        <div class="completion-bar" style="width: ${percentage}%; background: ${gradeColor};"></div>
+                    </div>
+                    
+                    <p class="completion-message" style="color: ${gradeColor}">${gradeMessage}</p>
+                    
+                    <div class="completion-actions">
+                        <button id="completionRestartBtn" class="completion-btn restart-btn">RESTART QUIZ</button>
+                        <button id="completionCloseBtn" class="completion-btn close-btn">CLOSE</button>
+                    </div>
+                    
+                    ${reviewHTML}
                 </div>
             `;
             
@@ -530,6 +387,7 @@ const { questionBank } = Astro.props;
             modalTimerInfo.innerText = "";
             modalTimerInfo.style.opacity = '0';
             
+            // ---- Wire overview buttons ----
             const restartBtn = document.getElementById('completionRestartBtn');
             const closeBtn = document.getElementById('completionCloseBtn');
             
@@ -541,11 +399,15 @@ const { questionBank } = Astro.props;
             if (closeBtn) {
                 closeBtn.addEventListener('click', () => {
                     closeModal();
-                    document.getElementById('settingsPanel').style.display = 'block';
+                    const settingsPanel = document.getElementById('settingsPanel');
+                    if (settingsPanel) settingsPanel.style.display = 'block';
                 });
             }
         }
+        
+        // 8. QUESTION FLOW
 
+        // Load next unasked question (or show overview if exhausted)
         function loadFreshQuestion(resetAnswerState = true) {
             if (!quizActive) return;
             
@@ -568,6 +430,7 @@ const { questionBank } = Astro.props;
             renderQuestion();
         }
 
+        // Paint the current question + answer buttons
         function renderQuestion() {
             if (!quizActive) return;
             if (quizCompleted) return;
@@ -598,12 +461,14 @@ const { questionBank } = Astro.props;
             }
         }
 
+        // Handle an answer click: score, highlight, record, schedule next
         function onAnswer(selectedIdx) {
             if (!quizActive || hasAnsweredCurrent || waitingForNext || quizCompleted) return;
             
             const isCorrect = (selectedIdx === currentQuestionObj.correctIndex);
             const allBtns = document.querySelectorAll('#modalAnswersContainer .answer-btn');
             
+            // Highlight correct + wrong choices
             allBtns.forEach((btn, idx) => {
                 btn.style.pointerEvents = 'none';
                 if (idx === currentQuestionObj.correctIndex) {
@@ -614,6 +479,17 @@ const { questionBank } = Astro.props;
                 }
             });
             
+            // Record into history for the overview review
+            answerHistory.push({
+                text: currentQuestionObj.text,
+                options: [...currentQuestionObj.options],
+                correctIndex: currentQuestionObj.correctIndex,
+                selectedIndex: selectedIdx,
+                selectedText: currentQuestionObj.options[selectedIdx],
+                isCorrect: isCorrect
+            });
+            
+            // Feedback + scoring
             if (isCorrect) {
                 let points = POINTS_MAP[currentDifficulty];
                 currentScore += points;
@@ -629,6 +505,8 @@ const { questionBank } = Astro.props;
             startAutoAdvance();
         }
 
+        // 9. FOCUS-STRIKE SYSTEM (tab blur / visibility change)
+        
         function applyFocusStrike() {
             if (!quizActive || quizCompleted) return;
             if (focusStrikeCount >= 3) return;
@@ -643,6 +521,7 @@ const { questionBank } = Astro.props;
             }
             
             if (quizActive && !quizCompleted) {
+                // Return the current question to the pool
                 if (currentQuestionObj) {
                     const originalQ = originalQuestionsList.find(q => q.text === currentQuestionObj.text);
                     if (originalQ) {
@@ -658,11 +537,13 @@ const { questionBank } = Astro.props;
                 modalTimerInfo.innerText = "";
             }
             
+            // 3rd strike ends the quiz
             if (focusStrikeCount >= 3) {
                 terminateAndCloseModal();
             }
         }
 
+        // Hard-terminate: show message, disable buttons, close after 1.8s
         function terminateAndCloseModal() {
             if (!quizActive) return;
             quizActive = false;
@@ -678,7 +559,9 @@ const { questionBank } = Astro.props;
                 closeModal();
             }, 1800);
         }
+        // 10. LIFECYCLE (open / reset / close)
 
+        // Restart quiz from the overview without closing modal
         function resetQuizInsideModal() {
             if (!modalElement || modalElement.style.display !== 'flex') return;
             
@@ -689,6 +572,7 @@ const { questionBank } = Astro.props;
             hasAnsweredCurrent = false;
             quizCompleted = false;
             askedQuestionsPool = [];
+            answerHistory = [];
             
             if (statsRowElement) statsRowElement.style.display = 'flex';
             if (quizHeaderElement) quizHeaderElement.style.display = 'block';
@@ -702,13 +586,8 @@ const { questionBank } = Astro.props;
             originalQuestionsList = [...diffData.list];
             currentQuestionsList = originalQuestionsList;
             
-            const firstRawQ = originalQuestionsList.length > 0 ? originalQuestionsList[0] : null;
-            if (firstRawQ) {
-                askedQuestionsPool.push(firstRawQ);
-                currentQuestionObj = getShuffledQuestion(firstRawQ);
-            } else {
-                currentQuestionObj = null;
-            }
+            restoreAnswersGrid();
+            raiseBgWrapper();
             
             renderQuestion();
             modalFeedback.innerText = "";
@@ -716,9 +595,12 @@ const { questionBank } = Astro.props;
             modalTimerInfo.style.opacity = '0';
         }
 
+        // Close modal, restore layout, show settings panel
         function closeModal() {
             if (!modalElement) return;
             clearAutoTimers();
+            restoreAnswersGrid();
+            lowerBgWrapper();
             modalElement.style.display = 'none';
             window.removeEventListener('blur', blurHandler);
             document.removeEventListener('visibilitychange', visibilityHandler);
@@ -727,6 +609,7 @@ const { questionBank } = Astro.props;
             quizActive = false;
         }
 
+        // Focus-strike triggers
         let blurHandler = function() { 
             if (modalElement && modalElement.style.display === 'flex' && quizActive && !quizCompleted) applyFocusStrike(); 
         };
@@ -735,6 +618,7 @@ const { questionBank } = Astro.props;
             if (document.hidden && modalElement && modalElement.style.display === 'flex' && quizActive && !quizCompleted) applyFocusStrike(); 
         };
 
+        // Start a fresh quiz from the settings panel
         function openModal() {
             const settingsSlider = document.getElementById('difficultySliderModal');
             const diffVal = parseInt(settingsSlider.value);
@@ -749,6 +633,7 @@ const { questionBank } = Astro.props;
             hasAnsweredCurrent = false;
             quizCompleted = false;
             askedQuestionsPool = [];
+            answerHistory = [];
             
             if (statsRowElement) statsRowElement.style.display = 'flex';
             if (quizHeaderElement) quizHeaderElement.style.display = 'block';
@@ -758,13 +643,10 @@ const { questionBank } = Astro.props;
             if (modalStrikeSpan) modalStrikeSpan.innerText = "0";
             modalTerminationDiv.innerHTML = "";
             
-            const firstRawQ = originalQuestionsList.length > 0 ? originalQuestionsList[0] : null;
-            if (firstRawQ) {
-                askedQuestionsPool.push(firstRawQ);
-                currentQuestionObj = getShuffledQuestion(firstRawQ);
-            } else {
-                currentQuestionObj = null;
-            }
+            currentQuestionObj = getNewUnaskedQuestion();
+            
+            restoreAnswersGrid();
+            raiseBgWrapper();
             
             renderQuestion();
             modalFeedback.innerText = "";
@@ -773,8 +655,9 @@ const { questionBank } = Astro.props;
             window.addEventListener('blur', blurHandler);
             document.addEventListener('visibilitychange', visibilityHandler);
         }
-
+        // 11. BOOTSTRAP (DOMContentLoaded)
         document.addEventListener('DOMContentLoaded', function() {
+            // Cache DOM refs
             modalElement = document.getElementById('quizModal');
             modalScoreSpan = document.getElementById('modalScore');
             modalStrikeSpan = document.getElementById('modalStrike');
@@ -792,6 +675,7 @@ const { questionBank } = Astro.props;
             const diffSliderSettings = document.getElementById('difficultySliderModal');
             const diffLabelSettings = document.getElementById('difficultyLabelModal');
             
+            // Difficulty label updater
             function updateSettingsLabel() {
                 const val = parseInt(diffSliderSettings.value);
                 if (val === 1) diffLabelSettings.innerText = "EASY MODE";
@@ -802,6 +686,7 @@ const { questionBank } = Astro.props;
             diffSliderSettings.addEventListener('input', updateSettingsLabel);
             updateSettingsLabel();
             
+            // START button → hide settings, open quiz
             startBtn.addEventListener('click', function() {
                 document.getElementById('settingsPanel').style.display = 'none';
                 openModal();
@@ -817,6 +702,7 @@ const { questionBank } = Astro.props;
                 });
             }
             
+            // Lock/unlock body scroll based on modal visibility
             const originalBodyOverflow = document.body.style.overflow;
             const modalObserver = new MutationObserver((mutations) => {
                 mutations.forEach((mut) => {

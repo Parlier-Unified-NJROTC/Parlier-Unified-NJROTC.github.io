@@ -142,6 +142,7 @@ declare module 'astro:content' {
   data: any;
   rendered?: RenderedContent;
   filePath?: string;
+  digest?: string | number;
 }>;
 "teams": Record<string, {
   id: string;
@@ -150,6 +151,7 @@ declare module 'astro:content' {
   data: any;
   rendered?: RenderedContent;
   filePath?: string;
+  digest?: string | number;
 }>;
 
 	};
